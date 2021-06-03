@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <!-- .col -->
+        <div class="col-md-12 col-lg-8 col-sm-12">
+            <div class="card white-box p-0">
+                <div class="card-body">
+                    <h3 class="box-title mb-0">les types d'accident</h3>
+                    <hr>
+                </div>
+                <div class="comment-widgets">
+                    <!-- Comment Row -->
+                    {% for typeAccident in listTypeAccident %}
+                    <div class="d-flex flex-row comment-row p-3 mt-0">
+                        <div class="comment-text ps-2 ps-md-3 w-100">
+                            <h5 class="font-medium">{{typeAccident.nom}}</h5>
+                            <span class="mb-3 d-block">{{typeAccident.description}}</span>
+                           <!-- <div class="comment-footer d-md-flex align-items-center">
+                                <span class="badge bg-primary rounded">Pending</span>
+
+                                <div class="text-muted fs-2 ms-auto mt-2 mt-md-0">April 14, 2021</div>
+                            </div> -->
+                        </div>
+                        <hr>
+                    </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends  'base.html' %}
+
+{% block content%}
+  <div class="row">
+      {% load bootstrap4 %}
+      {% bootstrap_css %}
+      {% bootstrap_javascript jquery='full' %}
+        <div class="col-md-12">
+            <div class="white-box">
+                <h3 class="h3">Liste des accidents</h3>
+                <hr>
+                {% for accident in listAccident %}
+                <div class="card text-center">
+                  <div class="card-header">
+                      Accident n°{{accident.numero_accident}}
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{accident.lieu_accident}}</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Detail</a>
+                  </div>
+                  <div class="card-footer text-muted">
+                    {{accident.etabli_par}}
+                  </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+  </div>
+{% endblock%}

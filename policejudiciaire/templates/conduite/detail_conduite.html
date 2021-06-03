@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Detail</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'policejudiciaire/css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <p>Objet: {{pv.objet}}</p>
+                <hr>
+                <p>Affaire: {{pv.affaire}}</p>
+                <hr>
+                <p>Incrimination: {{pv.incrimination}}</p>
+                <hr>
+                <a href="{% url 'judiciaire:update_conduite' pv_id=pv.id %}" class="btn btn-info"> Modifier </a>
+                <a href="{% url 'judiciaire:delete_conduite' pv_id=pv.id %}" class="btn btn-danger"> Supprimer</a>
+            </div>
+            <div class="col-md-6">
+                {{pv.description|safe}}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

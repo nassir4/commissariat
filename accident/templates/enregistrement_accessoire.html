@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box row">
+                <h3 class="box-title">Accesoires Reglementaire</h3>
+                <hr>
+                 {% load crispy_forms_tags %}
+                 {% load bootstrap4 %}
+                {% bootstrap_css %}
+                {% bootstrap_javascript jquery='full' %}
+                <div class="col-md-6">
+                    <h6 class="text-black-50">Eclairage</h6>
+                    <hr>
+                    <form class="form " action="" method="post">
+                        {% csrf_token %}
+                        {{form_eclairage|crispy}}
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </form>
+                    <hr>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-black-50">Essuie Glace</h6>
+                    <hr>
+                    <form class="form " action="" method="post">
+                        {% csrf_token %}
+                        {{form_essuie_glace|crispy}}
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </form>
+                    <hr>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-black-50">Rétroviseur</h6>
+                    <hr>
+                    <form class="form " action="" method="post">
+                        {% csrf_token %}
+                        {{form_retroviseur|crispy}}
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </form>
+                    <hr>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-black-50">Indicateur de Vitesse</h6>
+                    <hr>
+                    <form class="form " action="" method="post">
+                        {% csrf_token %}
+                        {{form_vitesse|crispy}}
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </form>
+                    <hr>
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-black-50">Indicateur de Direction</h6>
+                    <hr>
+                    <form class="form " action="" method="post">
+                        {% csrf_token %}
+                        {{form_direction|crispy}}
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </form>
+                    <hr>
+                </div>
+                 <div class="col-md-6">
+                    <h6 class="text-black-50">Avertisseur</h6>
+                    <hr>
+                    <form class="form " action="" method="post">
+                        {% csrf_token %}
+                        {{form_avertisseur|crispy}}
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </form>
+                    <hr>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

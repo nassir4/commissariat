@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Saisine</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'policejudiciaire/css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2 class="h2">PV Saisine</h2>
+        <hr>
+            <div class="row">
+            <div class="col-md-3">
+                <a href="{% url 'judiciaire:saisine_save' %}" class="btn btn-lg btn-secondary"> Ajouter un PV</a>
+            </div>
+            <div class="col-md-9">
+                {% for saisine in listSaisine %}
+                    <div class="card">
+                      <h5 class="card-header">Objet: {{saisine.objet}}</h5>
+                      <div class="card-body">
+                        <h5 class="card-title">Affaire: {{saisine.affaire}} </h5>
+                        <p class="card-text">Incrimination: {{saisine.incrimination}}</p>
+                        <a href="{% url 'judiciaire:detail_saisine' pv_id=saisine.id %}" class="btn btn-primary">Détail</a>
+                      </div>
+                    </div>
+                    <br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+</body>
+</html>

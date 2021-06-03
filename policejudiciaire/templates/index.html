@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'policejudiciaire/css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="h1"> Police judiciaire</h1>
+        <hr>
+        <center>
+            <div class="col-md-12">
+                <a href="{% url 'judiciaire:saisine'%}" class="btn btn-lg btn-secondary" > PV Saisine</a>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <a href="{% url 'judiciaire:interrogatoire'%}" class="btn btn-lg btn-secondary"> PV Interrogatoire</a>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <a href="{% url 'judiciaire:audition'%}" class="btn btn-lg btn-secondary"> PV Audition</a>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <a href="{% url 'judiciaire:cloture'%}" class="btn btn-lg btn-secondary"> PV Clôture et transmission</a>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <a href="{% url 'judiciaire:mission'%}" class="btn btn-lg btn-secondary"> PV Mission à agent </a>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <a href="{% url 'judiciaire:notification'%}" class="btn btn-lg btn-secondary"> PV Notification à garde à vue</a>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <a href="{% url 'judiciaire:requisition'%}" class="btn btn-lg btn-secondary"> PV Requisition</a>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <a href="{% url 'judiciaire:conduite'%}" class="btn btn-lg btn-secondary"> PV Conduite</a>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <a href="{% url 'judiciaire:confrontation'%}" class="btn btn-lg btn-secondary"> PV Confrontation</a>
+            </div>
+            <br>
+        </center>
+    </div>
+
+</body>
+</html>
