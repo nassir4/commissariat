@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from accident.forms import TypeAccidentForm, AccidentForm, VehiculeForm, EclairageForm, EssuieGlaceForm, \
     RetroviseurForm, IndicateurVitesseForm, IndicateurDirectionForm, AvertisseurForm, ConducteurForm, VictimeForm, \
     TemoinForm, EtatDesLieuxForm, DeclarationForm
-from accident.models import TypeAccident, Accident, EssuieGlace
+from accident.models import TypeAccident, Accident, EssuieGlace, Vehicule, Conducteur
 
 
 def index (request):
@@ -72,7 +72,7 @@ def saveAccident(request):
         form =AccidentForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('accident:accident')
+            return redirect('accident:accident_materiel')
     else:
         form = AccidentForm
     return render(request, 'enregistrement_accident.html',{'form':form})
@@ -99,9 +99,11 @@ def saveVehicule(request):
     form = VehiculeForm
     if request.method == 'POST':
         form =VehiculeForm(request.POST)
+        print("---------------------------------------")
         if form.is_valid():
             form.save()
-            return redirect('accident:vehicule')
+            print("je suis laaaaaaaaaaaaaaaaaaaaaa")
+            return redirect('accident:accident_materiel')
     else:
         form = VehiculeForm
     return render(request, 'enregistrement_vehicule.html',{'form':form})
@@ -200,3 +202,19 @@ def saveDeclaration(request):
     else:
         form = DeclarationForm
     return render(request, 'enregistrement_declaration.html', {'form': form})
+# Fin Conducteur
+# Vue Accident Corporel
+def accidentMateriel(request):
+    accident = Accident.objects.last()
+    listVehicule=Vehicule.objects.filter(accident=accident)
+    vehicule1 = listVehicule[0]
+    conducteur1=Conducteur.objects.get(vehicule=vehicule1)
+
+    #conducteur2=Conducteur.objects.filter(vehicule=listVehicule[1])
+    context = {
+        'accident':accident,
+        'vehicule1':vehicule1,
+        'conducteur1':conducteur1,
+       # 'conducteur':conducteur2,
+    }
+    return  render(request,'accident_materiel.html',context)

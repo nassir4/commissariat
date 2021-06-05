@@ -33,7 +33,9 @@ urlpatterns = [
     #FIN URL VICTIME
     path('temoin/enregistrement', views.saveTemoin, name='temoin_save'),
     path('etat_des_lieux/enregistrement',views.saveEtat, name='etat_save'),
-    path('declaration/enregistrement',views.saveDeclaration,name='declaration_save')
+    path('declaration/enregistrement',views.saveDeclaration,name='declaration_save'),
+    #URL ACCIDENT MATERIEL
+    path('accident_materiel',views.accidentMateriel, name='accident_materiel')
 
 
 ]

@@ -17,7 +17,7 @@ class AccidentForm(ModelForm):
             fields= '__all__'
 
         date_accident = DateField(
-            widget=DatePickerInput(format='%m/%d/%Y'),
+            widget=DatePickerInput(format='%d/%m/%Y'),
 
         )
         heure_accident = TimeField(
@@ -63,15 +63,15 @@ class VehiculeForm(ModelForm):
         fields = '__all__'
 
     date_mise_circulation = DateField(
-        widget=DatePickerInput(format='%m/%d/%Y'),
+        widget=DatePickerInput(format='%d/%m/%Y'),
 
     )
     derniere_visite_technique = DateField(
-        widget=DatePickerInput(format='%m/%d/%Y'),
+        widget=DatePickerInput(format='%d/%m/%Y'),
 
     )
     def __init__(self,*args,**kwargs):
-        super().__init__(*args,**kwargs)
+        super().__init__(*args, *kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Row(
@@ -79,9 +79,9 @@ class VehiculeForm(ModelForm):
                 Column('numero', css_class='form-group col-md-3 mb-0'),
                 Column('genre', css_class='form-group col-md-3 mb-0'),
                 Column('marque', css_class='form-group col-md-3 mb-0'),
-                Column('puisssance', css_class='form-group col-md-3 mb-0'),
                 css_class='form-row'
             ),
+            'puissance',
             Row(
                 Column('charge_total', css_class='form-group col-md-3 mb-0'),
                 Column('dimension', css_class='form-group col-md-3 mb-0'),
@@ -102,6 +102,7 @@ class VehiculeForm(ModelForm):
                 Column('degats_materiels', css_class='form-group col-md-4 mb-0'),
                 css_class='form-row'
             ),
+
             'position_levier_vitesse',
             'presence_poste_radio',
 
