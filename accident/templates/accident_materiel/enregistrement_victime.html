@@ -3,15 +3,17 @@
     <div class="row">
         <div class="col-md-12">
             <div class="white-box">
-                <h3 class="box-title">Formulaire d'enregistrement</h3>
+                <a href="{% url 'accident:temoin_materiel_save'%}" class="btn btn-lg btn-secondary"> Voulez-vous ajouter un autre Temoin</a>
+                <br>
+                <h3>Vitime</h3>
+                <hr>
                  {% load crispy_forms_tags %}
                  {% load bootstrap4 %}
                 {% bootstrap_css %}
                 {% bootstrap_javascript jquery='full' %}
-                <form class="form " action="" method="post">
-                    {% csrf_token %}
-                    {{form|crispy}}
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                {% csrf_token %}
+                {% crispy form %}
+
                 </form>
             </div>
         </div>

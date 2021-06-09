@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                 <a href="{% url 'accident:vehicule_materiel_save'%}" class="btn btn-lg btn-secondary"> Voulez-vous ajouter un autre vehicule</a>
+                <br>
+                <h3 >Temoin</h3>
+                <hr>
+                 {% load crispy_forms_tags %}
+                 {% load bootstrap4 %}
+                {% bootstrap_css %}
+                {% bootstrap_javascript jquery='full' %}
+                {% csrf_token %}
+                {% crispy form %}
+                <br>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

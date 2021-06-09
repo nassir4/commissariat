@@ -4,13 +4,17 @@ from crispy_forms.layout import Layout, Row, Column, Submit
 from django.forms import ModelForm, DateField, TimeField
 
 from accident.models import TypeAccident, Accident, Vehicule, Eclairage, Avertisseur, IndicateurDirection, \
-    IndicateurVitesse, EssuieGlace, Retroviseur, Conducteur, Victime, Temoin, EtatDesLieux, Declaration
+    IndicateurVitesse, EssuieGlace, Retroviseur, Conducteur, Victime, Temoin, EtatDesLieux, Declaration, Proprietaire, \
+    Permis, Assurance
 
 
 class TypeAccidentForm(ModelForm):
     class Meta:
         model = TypeAccident
         fields=["nom", "description"]
+############################################################################################################################
+##################################################### Accident Corporel ####################################################
+############################################################################################################################
 class AccidentForm(ModelForm):
         class Meta:
             model = Accident
@@ -135,7 +139,7 @@ class RetroviseurForm(ModelForm):
 class ConducteurForm(ModelForm):
     class Meta:
         model = Conducteur
-        fields = '__all__'
+        fields = ['nom_prenom','date_naissance','lieu_naissance','filiation','domicile','profession','telephone','comportement']
 
     date_naissance = DateField(
         widget=DatePickerInput(format='%m/%d/%Y'),
@@ -146,7 +150,6 @@ class ConducteurForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            'vehicule',
             Row(
                 Column('nom_prenom', css_class='form-group col-md-3 mb-0'),
                 Column('date_naissance', css_class='form-group col-md-3 mb-0'),
@@ -161,19 +164,17 @@ class ConducteurForm(ModelForm):
                 Column('comportement', css_class='form-group col-md-3 mb-0'),
                 css_class='form-row'
             ),
-            Submit('submit', 'Enregistrer')
 
         )
 class VictimeForm(ModelForm):
     class Meta:
         model=Victime
-        fields='__all__'
+        fields=['nom_prenom','filiation_complete','adresse','position_moment_accident','nature_des_blessures']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper=FormHelper()
         self.helper.layout = Layout(
-            'accident',
             Row(
                 Column('nom_prenom', css_class='form-group col-md-6 mb-0'),
                 Column('filiation_complete', css_class='form-group col-md-6 mb-0'),
@@ -191,13 +192,12 @@ class VictimeForm(ModelForm):
 class TemoinForm(ModelForm):
     class Meta:
         model=Temoin
-        fields='__all__'
+        fields=['nom_prenom','profession','adresse','position_moment_accident']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper=FormHelper()
         self.helper.layout = Layout(
-            'accident',
             Row(
                 Column('nom_prenom', css_class='form-group col-md-6 mb-0'),
                 Column('profession', css_class='form-group col-md-6 mb-0'),
@@ -213,13 +213,12 @@ class TemoinForm(ModelForm):
 class EtatDesLieuxForm(ModelForm):
     class Meta:
         model=EtatDesLieux
-        fields='__all__'
+        fields=['visibilite','chaussee','largeur','eclairage','tracesFreinage','tracesSang','tracePneu','PassagePieton','condition_atmospherique']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper=FormHelper()
         self.helper.layout=Layout(
-            'accident',
             Row(
                 Column('visibilite', css_class='form-group col-md-3 mb-0'),
                 Column('chaussee', css_class='form-group col-md-3 mb-0'),
@@ -237,6 +236,141 @@ class EtatDesLieuxForm(ModelForm):
             'condition_atmospherique',
             Submit('submit','Enregistrer')
         )
+
+class ProprietaireForm(ModelForm):
+    class Meta:
+        model = Proprietaire
+        fields = ['nom_prenom','domicile']
+
+class PermisForm(ModelForm):
+    class Meta:
+        model = Permis
+        fields = ['numero','delivre_par','delivre_le','lieu']
+
+    delivre_le = DateField(
+        widget=DatePickerInput(format='%d/%m/%Y'),
+
+    )
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Row(
+                Column('numero', css_class='form-group col-md-6 mb-0'),
+                Column('delivre_par', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('delivre_le', css_class='form-group col-md-6 mb-0'),
+                Column('lieu', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+        )
+class AssuranceForm(ModelForm):
+    class Meta:
+        model = Assurance
+        fields= ['numero_police','nom','date_debut','date_expiration']
+
+    date_debut = DateField(
+        widget=DatePickerInput(format='%d/%m/%Y'),
+
+    )
+    date_expiration = DateField(
+        widget=DatePickerInput(format='%d/%m/%Y'),
+
+    )
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Row(
+                Column('numero_police', css_class='form-group col-md-6 mb-0'),
+                Column('nom', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+            Row(
+                Column('date_debut', css_class='form-group col-md-6 mb-0'),
+                Column('date_expiration', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+
+        )
+
+###########################################################################################################################
+#################################################### Fin Accident Corporel ################################################
+###########################################################################################################################
+
+###########################################################################################################################
+################################################### Accident Materiel #####################################################
+###########################################################################################################################
+
+class AccidentMaterielForm(ModelForm):
+    class Meta:
+        model = Accident
+        fields = ['numero_accident','date_accident','heure_accident',
+                    'lieu_accident','etabli_par','assiste_de','autres_dommages']
+
+    date_accident = DateField(
+        widget=DatePickerInput(format='%d/%m/%Y'),
+
+    )
+    heure_accident = TimeField(
+        widget=TimePickerInput()
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, *kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+        Row(
+            Column('numero_accident', css_class='form-group col-md-4 mb-0'),
+            Column('date_accident', css_class='form-group col-md-4 mb-0'),
+            Column('heure_accident', css_class='form-group col-md-4 mb-0'),
+            css_class='form-row'
+        ),
+
+        Row(
+            Column('lieu_accident', css_class='form-group col-md-4 mb-0'),
+            Column('etabli_par', css_class='form-group col-md-4 mb-0'),
+            Column('assiste_de', css_class='form-group col-md-4 mb-0'),
+            css_class='form-row'
+        ),
+        'autres_dommages',
+        Submit('submit', 'Enregister')
+    )
+class VehiculeMaterielForm(ModelForm):
+    class Meta:
+        model = Vehicule
+        fields = ['numero','genre','marque','date_mise_circulation','derniere_visite_technique']
+
+    date_mise_circulation = DateField(
+        widget=DatePickerInput(format='%d/%m/%Y'),
+
+    )
+    derniere_visite_technique = DateField(
+        widget=DatePickerInput(format='%d/%m/%Y'),
+
+    )
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args, *kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Row(
+                Column('numero', css_class='form-group col-md-4 mb-0'),
+                Column('genre', css_class='form-group col-md-4 mb-0'),
+                Column('marque', css_class='form-group col-md-4 mb-0'),
+
+                css_class='form-row'
+            ),
+
+            Row(
+                Column('date_mise_circulation', css_class='form-group col-md-6 mb-0'),
+                Column('derniere_visite_technique', css_class='form-group col-md-6 mb-0'),
+                css_class='form-row'
+            ),
+        )
+
+
 class DeclarationForm(ModelForm):
     class Meta:
         model=Declaration
@@ -246,12 +380,11 @@ class DeclarationForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout=Layout(
-            'conducteur',
             Row(
                 Column('declaration', css_class='form-group col-md-6 mb-0'),
                 Column('infraction', css_class='form-group col-md-6 mb-0'),
                 css_class='form-row'
             ),
-            Submit('submit', 'Enregistrer')
+            Submit('submit', 'Enregister')
 
         )

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                <h6 class="text-black-50">Vitime</h6>
+                <hr>
+                 {% load crispy_forms_tags %}
+                 {% load bootstrap4 %}
+                {% bootstrap_css %}
+                {% bootstrap_javascript jquery='full' %}
+                {% csrf_token %}
+                {% crispy form %}
+                <br>
+                <a class="btn btn-dark align-middle" href="{% url 'accident:temoin_save'%}">Passer </a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

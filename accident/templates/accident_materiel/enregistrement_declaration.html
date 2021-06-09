@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                <h6 class="text-black-50">Declaration</h6>
+                <hr>
+                {% load crispy_forms_tags %}
+                {% load bootstrap4 %}
+                {% bootstrap_css %}
+                {% bootstrap_javascript jquery='full' %}
+                {% csrf_token %}
+                {% crispy form %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

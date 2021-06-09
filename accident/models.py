@@ -29,13 +29,13 @@ class Accident(models.Model):
     date_accident = models.DateField("Date", auto_now_add=False)
     heure_accident = models.TimeField("Heure", auto_now_add=False)
     lieu_accident = models.CharField("Lieu", max_length=255)
-    type_accident = models.ForeignKey(TypeAccident, on_delete=models.CASCADE)
+    type_accident = models.ForeignKey(TypeAccident, on_delete=models.CASCADE ,blank=True,null=True)
     etabli_par = models.ForeignKey(User, on_delete=models.CASCADE, related_name="accident_etablie")
     assiste_de = models.ManyToManyField(User)
     mesures_prises = models.TextField("Mesures Prises", null=True, blank=True)
     circonstances = models.TextField("Circonstances", null=True, blank=True)
-    infractions_relevees = models.TextField("Infractions Relevees")
-    derniere_mesures_prises = models.TextField("Derniere Mesures Prises")
+    infractions_relevees = models.TextField("Infractions Relevees", null=True, blank=True)
+    derniere_mesures_prises = models.TextField("Derniere Mesures Prises", null=True, blank=True)
     autres_dommages = models.TextField("Autres dommages causes par l'accident", null=True, blank=True)
 
     def __str__(self):
@@ -47,7 +47,7 @@ class Vehicule(models.Model):
     numero = models.CharField("Numero", max_length=200)
     genre = models.CharField("Genre", max_length=255)
     marque = models.CharField("Marque", max_length=255)
-    puissance = models.CharField("Puissance", max_length=255,blank=True )
+    puissance = models.CharField("Puissance", max_length=255,blank=True)
     charge_total = models.CharField("Charge Total", max_length=255,blank=True)
     dimension = models.CharField("Dimension", max_length=255,blank=True)
     date_mise_circulation = models.DateField("Date de mise en circulation", auto_now_add=False)
@@ -61,7 +61,7 @@ class Vehicule(models.Model):
     position_levier_vitesse = models.TextField("Position du levier de changement de vitesse",blank=True)
     presence_poste_radio = models.BooleanField("Presence d'un poste radio", default=True,blank=True)
     degats_materiels = models.TextField("Degats materiels", blank=True)
-    accident = models.ForeignKey(Accident, on_delete=models.CASCADE)
+    accident = models.ForeignKey(Accident, on_delete=models.CASCADE ,blank=True,null=True)
 
     def __str__(self):
         return f'{self.numero}-{self.marque}'
@@ -69,7 +69,7 @@ class Vehicule(models.Model):
 
 # models eclairage
 class Eclairage(models.Model):
-    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE)
+    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE,blank=True,null=True)
     existance = models.BooleanField("Existance", default=True)
     fonctionel = models.BooleanField("Fonctionel", default=True)
     position = models.BooleanField("Position", default=True)
@@ -80,7 +80,7 @@ class Eclairage(models.Model):
 
 # models avertisseur
 class Avertisseur(models.Model):
-    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE)
+    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE,blank=True,null=True)
     existance = models.BooleanField("Existance", default=True)
     fonctionel = models.BooleanField("Fonctionel", default=True)
     position = models.BooleanField("Position", default=True)
@@ -91,7 +91,7 @@ class Avertisseur(models.Model):
 
 # models Indicateur de direction
 class IndicateurDirection(models.Model):
-    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE)
+    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE,blank=True,null=True)
     existance = models.BooleanField("Existance", default=True)
     fonctionel = models.BooleanField("Fonctionel", default=True)
     position = models.BooleanField("Position", default=True)
@@ -102,7 +102,7 @@ class IndicateurDirection(models.Model):
 
 # models indicateur de vitesse
 class IndicateurVitesse(models.Model):
-    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE)
+    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE,blank=True,null=True)
     existance = models.BooleanField("Existance", default=True)
     fonctionel = models.BooleanField("Fonctionel", default=True)
     position = models.BooleanField("Position", default=True)
@@ -113,7 +113,7 @@ class IndicateurVitesse(models.Model):
 
 # models essuie glace
 class EssuieGlace(models.Model):
-    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE)
+    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE,blank=True,null=True)
     existance = models.BooleanField("Existance", default=True)
     fonctionel = models.BooleanField("Fonctionel", default=True)
     position = models.BooleanField("Position", default=True)
@@ -124,7 +124,7 @@ class EssuieGlace(models.Model):
 
 # models indicateur de vitesse
 class Retroviseur(models.Model):
-    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE)
+    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE,blank=True,null=True)
     existance = models.BooleanField("Existance", default=True)
     fonctionel = models.BooleanField("Fonctionel", default=True)
     position = models.BooleanField("Position", default=True)
@@ -136,14 +136,14 @@ class Retroviseur(models.Model):
 # models Conducteur
 class Conducteur(models.Model):
     nom_prenom = models.CharField("Nom & Prenom", max_length=255)
-    date_naissance = models.DateField("Date de naissance", blank=True, auto_now_add=False)
+    date_naissance = models.DateField("Date de naissance", blank=True, null=True, auto_now_add=False)
     lieu_naissance = models.CharField("Lieu de naissance",blank=True, max_length=255)
     filiation = models.CharField("Filiation",blank=True, max_length=255)
     profession = models.CharField("Profession", max_length=255)
     domicile = models.CharField("Domicile",blank=True, max_length=255)
     telephone = models.CharField("Telephone",blank=True, max_length=15)
     comportement = models.CharField("Comportement",blank=True, max_length=200)
-    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE)
+    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE,blank=True,null=True)
 
     def __str__(self):
         return self.nom_prenom
@@ -153,7 +153,7 @@ class Conducteur(models.Model):
 class Proprietaire(models.Model):
     nom_prenom = models.CharField("Nom & Prenom", max_length=255)
     domicile = models.CharField("Domicile", max_length=255)
-    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE)
+    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE,blank=True,null=True)
 
     def __str__(self):
         return self.nom_prenom
@@ -165,7 +165,7 @@ class Permis(models.Model):
     delivre_par = models.CharField("Delivre par", max_length=200)
     delivre_le = models.DateField("Delivre le", auto_now_add=False)
     lieu = models.CharField("Lieu", max_length=255)
-    conducteur = models.OneToOneField(Conducteur, on_delete=models.CASCADE)
+    conducteur = models.OneToOneField(Conducteur, on_delete=models.CASCADE,blank=True,null=True)
 
     def __str__(self):
         return f'Permis => {self.conducteur.nom_prenom}'
@@ -177,7 +177,7 @@ class Assurance(models.Model):
     numero_police = models.CharField("Numero police", max_length=200)
     date_debut = models.DateField("Date debut", auto_now_add=False)
     date_expiration = models.DateField("Date d'expiration", auto_now_add=False)
-    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE)
+    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE,blank=True,null=True)
 
     def __str__(self):
         return f'Assurance => {self.vehicule.numero}'
@@ -185,7 +185,7 @@ class Assurance(models.Model):
 
 # models vignette
 class Vignette(models.Model):
-    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE)
+    vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE,blank=True,null=True)
     pass
 
 
@@ -196,7 +196,7 @@ class Victime(models.Model):
     adresse = models.CharField("Adresse", max_length=255)
     nature_des_blessures = models.TextField("Nature des blessures")
     position_moment_accident = models.CharField("Position au moment de l'accident", max_length=255)
-    accident = models.ForeignKey(Accident, on_delete=models.CASCADE)
+    accident = models.ForeignKey(Accident, on_delete=models.CASCADE,blank=True,null=True)
 
     def __str__(self):
         return self.nom_prenom
@@ -208,7 +208,7 @@ class Temoin(models.Model):
     profession = models.CharField("Profession", max_length=255)
     adresse = models.CharField("Adresse", max_length=255)
     position_moment_accident = models.CharField("Position au moment de l'accident", max_length=255)
-    accident = models.ForeignKey(Accident, on_delete=models.CASCADE)
+    accident = models.ForeignKey(Accident, on_delete=models.CASCADE,blank=True,null=True)
 
     def __str__(self):
         return self.nom_prenom
@@ -225,7 +225,7 @@ class EtatDesLieux(models.Model):
     tracePneu = models.CharField("Traces de pneus", max_length=255)
     PassagePieton = models.CharField("Passage pieton", max_length=255)
     condition_atmospherique = models.TextField("Conditions atmospheriques")
-    accident = models.OneToOneField(Accident, on_delete=models.CASCADE)
+    accident = models.OneToOneField(Accident, on_delete=models.CASCADE,blank=True,null=True)
 
     def __str__(self):
         return f'Etat des lieux numero: {self.id}'
@@ -239,7 +239,7 @@ class EtatDesLieux(models.Model):
 
 # modls declaration
 class Declaration(models.Model):
-    conducteur = models.OneToOneField(Conducteur, on_delete=models.CASCADE)
+    conducteur = models.OneToOneField(Conducteur, on_delete=models.CASCADE,blank=True,null=True)
     declaration = models.TextField("Declaration")
     infraction = models.TextField("Infraction", null=True, blank=True)
 

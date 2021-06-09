@@ -1,20 +1,21 @@
 {% extends 'base.html' %}
+
 {% block content %}
     <div class="row">
         <div class="col-md-12">
             <div class="white-box">
-                <h6 class="text-black-50">Temoin</h6>
+                <h6 class="text-black-50">Conducteur</h6>
                 <hr>
-                 {% load crispy_forms_tags %}
-                 {% load bootstrap4 %}
+                {% load crispy_forms_tags %}
+                {% load crispy_forms_field %}
+                {% load bootstrap4 %}
                 {% bootstrap_css %}
                 {% bootstrap_javascript jquery='full' %}
-                {% csrf_token %}
                 {% crispy form %}
-
-                </form>
+                {{form.media}}
             </div>
         </div>
     </div>
+
 
 {% endblock %}

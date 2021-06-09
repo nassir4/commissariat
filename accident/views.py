@@ -2,10 +2,13 @@ from django.http import Http404
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from accident import forms
 from accident.forms import TypeAccidentForm, AccidentForm, VehiculeForm, EclairageForm, EssuieGlaceForm, \
     RetroviseurForm, IndicateurVitesseForm, IndicateurDirectionForm, AvertisseurForm, ConducteurForm, VictimeForm, \
-    TemoinForm, EtatDesLieuxForm, DeclarationForm
-from accident.models import TypeAccident, Accident, EssuieGlace, Vehicule, Conducteur
+    TemoinForm, EtatDesLieuxForm, DeclarationForm, PermisForm, ProprietaireForm, AccidentMaterielForm, \
+    VehiculeMaterielForm, AssuranceForm
+from accident.models import TypeAccident, Accident, EssuieGlace, Vehicule, Conducteur, Permis
+from accident.multiple_forms import MultipleFormsView
 
 
 def index (request):
@@ -52,6 +55,10 @@ def delete(request,type_id):
     typeAccident.delete()
     return redirect('accident:type_accident')
 ### Fin Type Accident ####
+
+###########################################################################################################
+############################################## ACCIDENT CORPOREL ##########################################
+###########################################################################################################
 ### Accident ###
 def accident(request):
     listaccident = Accident.objects.all
@@ -66,155 +73,155 @@ def detailAccident(request, accident_id):
         raise Http404("Question does not exist")
     return render(request, 'detail_accident.html', {'accident': accident})
 
-def saveAccident(request):
-    form = AccidentForm
-    if request.method == 'POST':
-        form =AccidentForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('accident:accident_materiel')
-    else:
-        form = AccidentForm
-    return render(request, 'enregistrement_accident.html',{'form':form})
-def updateAccident(request,type_id):
-    try:
-        accident = Accident.objects.get(pk=type_id)
-    except Accident.DoesNotExist:
-        return redirect('accident:detail_accident')
-    form = AccidentForm(request.POST or None, instance=typeAccident)
-    if form.is_valid():
-        form.save()
-        return redirect('accident:accident')
-    context = {
-        'form': form,
-    }
-    return render(request, 'enregistrement_accident.html',context)
-def deleteAccident(request,type_id):
-    accident = Accident.objects.get(pk=type_id)
-    accident.delete()
-    return redirect('accident:accident')
-### Fin Accident ####
-### Vehicule
-def saveVehicule(request):
-    form = VehiculeForm
-    if request.method == 'POST':
-        form =VehiculeForm(request.POST)
-        print("---------------------------------------")
-        if form.is_valid():
-            form.save()
-            print("je suis laaaaaaaaaaaaaaaaaaaaaa")
-            return redirect('accident:accident_materiel')
-    else:
-        form = VehiculeForm
-    return render(request, 'enregistrement_vehicule.html',{'form':form})
-### Fin vehicule
-def saveAccessoire(request):
-    if request.method == 'POST':
-        form_eclairage =EclairageForm(request.POST)
-        if form_eclairage.is_valid():
-            form_eclairage.save()
-            return redirect('accident:vehicule')
-        form_essuie_glace = EssuieGlaceForm(request.POST)
-        if form_essuie_glace.is_valid():
-            form_essuie_glace.save()
-            return redirect('accident:vehicule')
-        form_retroviseur = RetroviseurForm(request.POST)
-        if form_retroviseur.is_valid():
-            form_retroviseur.save()
-            return redirect('accident:vehicule')
-        form_vitesse = IndicateurVitesseForm(request.POST)
-        if form_vitesse.is_valid():
-            form_vitesse.save()
-            return redirect('accident:vehicule')
-        form_direction = IndicateurDirectionForm(request.POST)
-        if form_direction.is_valid():
-            form_direction.save()
-            return redirect('accident:vehicule')
-        form_avertisseur = AvertisseurForm(request.POST)
-        if form_avertisseur.is_valid():
-            form_avertisseur.save()
-            return redirect('accident:vehicule')
-    else:
-        form_eclairage = EclairageForm
-        form_essuie_glace = EssuieGlaceForm
-        form_retroviseur = RetroviseurForm
-        form_vitesse = IndicateurVitesseForm
-        form_direction = IndicateurDirectionForm
-        form_avertisseur = AvertisseurForm
-    return render(request, 'enregistrement_accessoire.html',{
-        'form_eclairage':form_eclairage,
-        'form_essuie_glace':form_essuie_glace,
-        'form_retroviseur':form_retroviseur,
-        'form_vitesse':form_vitesse,
-        'form_direction':form_direction,
-        'form_avertisseur':form_avertisseur,
-    })
-##Fin Accessoires
-## Conducteur
-def saveConducteur(request):
-    if request.method == 'POST':
-        form = ConducteurForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('accident:conducteur')
-    else:
-        form = ConducteurForm
-    return render(request, 'enregistrement_conducteur.html', {'form': form})
-## Fin Conducteur
-## Victime
-def saveVictime(request):
-    if request.method == 'POST':
-        form = VictimeForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('accident:conducteur')
-    else:
-        form = VictimeForm
-    return render(request, 'enregistrement_victime.html', {'form': form})
-#Fin Victime
-# Temoin
-def saveTemoin(request):
-    if request.method == 'POST':
-        form =TemoinForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('accident:conducteur')
-    else:
-        form = TemoinForm
-    return render(request, 'enregistrement_temoin.html', {'form': form})
-# Etat des lieux
-def saveEtat(request):
-    if request.method == 'POST':
-        form =EtatDesLieuxForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('accident:conducteur')
-    else:
-        form = EtatDesLieuxForm
-    return render(request, 'enregistrement_etat.html', {'form': form})
-# Conducteur
-def saveDeclaration(request):
-    if request.method == 'POST':
-        form =DeclarationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('accident:conducteur')
-    else:
-        form = DeclarationForm
-    return render(request, 'enregistrement_declaration.html', {'form': form})
-# Fin Conducteur
+##########################################################################################################################
+############################################ FIN ACCIDENT CORPOREL #######################################################
+##########################################################################################################################
+
+
+##########################################################################################################################
+############################################ ACCIDENT MATERIEL ###########################################################
+##########################################################################################################################
+
 # Vue Accident Corporel
 def accidentMateriel(request):
     accident = Accident.objects.last()
     listVehicule=Vehicule.objects.filter(accident=accident)
     vehicule1 = listVehicule[0]
     conducteur1=Conducteur.objects.get(vehicule=vehicule1)
+    permis=Permis.objects.get(conducteur=conducteur1)
 
     #conducteur2=Conducteur.objects.filter(vehicule=listVehicule[1])
     context = {
         'accident':accident,
         'vehicule1':vehicule1,
         'conducteur1':conducteur1,
+        'permis':permis
        # 'conducteur':conducteur2,
     }
     return  render(request,'accident_materiel.html',context)
+#Fin Vue Accident Materiel
+def saveAccidentMateriel(request):
+    typeAccident=TypeAccident.objects.get(nom='Accident Materiel')
+    if request.method == 'POST':
+        form =AccidentMaterielForm(request.POST)
+        if form.is_valid():
+            accident = form.save(commit=False)
+            accident.type_accident=typeAccident
+            accident.save()
+            return redirect('accident:vehicule_materiel_save')
+    else:
+        form = AccidentMaterielForm
+    return render(request, 'accident_materiel/enregistrement_accident.html', {'form': form})
+
+def vehiculeMatertielSave(request):
+    accident = Accident.objects.last()
+    if request.method == 'POST':
+        vehicule_form = VehiculeMaterielForm(request.POST)
+        assurance_form = AssuranceForm(request.POST)
+        proprietaire_form = ProprietaireForm(request.POST)
+        conducteur_form = ConducteurForm(request.POST)
+        permis_form = PermisForm(request.POST)
+        if (vehicule_form.is_valid() and assurance_form.is_valid() and proprietaire_form.is_valid()
+                and conducteur_form.is_valid() and permis_form.is_valid()):
+            vehicule = vehicule_form.save(commit=False)
+            vehicule.accident = accident
+            ve = vehicule.save()
+            assurance = assurance_form.save(commit=False)
+            assurance.vehicule= ve
+            assurance.save()
+            proprietaire = proprietaire_form.save(commit=False)
+            proprietaire.vehicule =ve
+            proprietaire.save()
+            conducteur = conducteur_form.save(commit=False)
+            conducteur.vehicule=ve
+            con=conducteur.save()
+            permis =permis_form.save(commit=False)
+            permis.conducteur=con
+            permis.save()
+            return redirect('accident:temoin_materiel_save')
+    else:
+        vehicule_form = VehiculeMaterielForm
+        assurance_form = AssuranceForm
+        proprietaire_form = ProprietaireForm
+        conducteur_form = ConducteurForm
+        permis_form = PermisForm
+
+    return render(request, 'accident_materiel/enregistrement.html', {'vehicule_form': vehicule_form,
+                                                                                'assurance_form': assurance_form,
+                                                                                'proprietaire_form': proprietaire_form,
+                                                                                'conducteur_form': conducteur_form,
+                                                                                'permis_form': permis_form,
+                                                                                })
+def temoinMaterielSave(request):
+    accident=Accident.objects.last()
+    if request.method == 'POST':
+        form =TemoinForm(request.POST)
+        if form.is_valid():
+            temoin = form.save(commit=False)
+            temoin.accident=accident
+            temoin.save()
+            return redirect('accident:temoin_materiel_save')
+    else:
+        form = TemoinForm
+    return render(request, 'accident_materiel/enregistrement_temoin.html', {'form': form})
+def temoinEndSave(request):
+    accident = Accident.objects.last()
+    if request.method == 'POST':
+        form = TemoinForm(request.POST)
+        if form.is_valid():
+            temoin = form.save(commit=False)
+            temoin.accident = accident
+            temoin.save()
+            return redirect('accident:victime_materiel_save')
+    else:
+        form = TemoinForm
+    return render(request, 'accident_materiel/enregistrement_temoin.html', {'form': form})
+def victimeMaterielSave(request):
+    accident = Accident.objects.last()
+    if request.method == 'POST':
+        form = VictimeForm(request.POST)
+        if form.is_valid():
+            victime = form.save(commit=False)
+            victime.accident = accident
+            victime.save()
+            return redirect('accident:etat_materiel_save')
+    else:
+        form = VictimeForm
+    return render(request, 'accident_materiel/enregistrement_victime.html', {'form': form})
+
+def victimeEndSave(request):
+    accident = Accident.objects.last()
+    if request.method == 'POST':
+        form = VictimeForm(request.POST)
+        if form.is_valid():
+            victime = form.save(commit=False)
+            victime.accident = accident
+            victime.save()
+            return redirect('accident:accident_materiel_save')
+    else:
+        form = VictimeForm
+    return render(request, 'accident_materiel/enregistrement_temoin.html', {'form': form})
+def etatSave(request):
+    accident = Accident.objects.last()
+    if request.method == 'POST':
+        form = EtatDesLieuxForm(request.POST)
+        if form.is_valid():
+            etat = form.save(commit=False)
+            etat.accident = accident
+            etat.save()
+            return redirect('accident:declaration_materiel_save')
+    else:
+        form = EtatDesLieuxForm
+    return render(request, 'accident_materiel/enregistrement_etat.html', {'form': form})
+def declarationSave(request):
+    accident = Accident.objects.last()
+    if request.method == 'POST':
+        form = DeclarationForm(request.POST)
+        if form.is_valid():
+            declaration = form.save(commit=False)
+            declaration.accident = accident
+            declaration.save()
+            return redirect('/')
+    else:
+        form = DeclarationForm
+    return render(request, 'accident_materiel/enregistrement_declaration.html', {'form': form})
