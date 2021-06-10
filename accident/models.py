@@ -180,7 +180,7 @@ class Assurance(models.Model):
     vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE,blank=True,null=True)
 
     def __str__(self):
-        return f'Assurance => {self.vehicule.numero}'
+        return f'Assurance => {self.vehicule}'
 
 
 # models vignette
