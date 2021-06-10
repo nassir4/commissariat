@@ -1,7 +1,25 @@
-{% extends  'base.html' %}
-{% load bootstrap4 %}
-{% bootstrap_css %}
-{% bootstrap_javascript jquery='full' %}
-{% block content%}
-  ffoewp
-{% endblock%}
+{% extends 'base.html'%}
+{% block content %}
+     <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                <h3> {{accident.type_accident}} </h3>
+                <hr>
+                <p class="text">Survenu le {{accident.date_accident}} à  {{accident.heure_accident}}</p>
+                <p class="text">Lieu: {{accident.lieu_accident}}</p>
+                <p class="text">Etabli par: l'Agent de Police: {{accident.etabli_par}}</p>
+                <hr>
+                <h3> Vehicules et parties en cause</h3>
+                {% if vehicule1 %}
+                <h5>1°)VEHICULE</h5>
+                <p class="text">Numero:{{vehicule1.numero}}    genre: {{vehicule1.genre}}     marque:{{vehicule1.marque}}</p>
+                <p class="text">Date de premiere mise en circulation: {{vehicule1.date_mise_circulation}}</p>
+                <p class="text">Derniere visite technique:  {{vehicule1.derniere_visite_technique}}</p>
+                <p>Conducteur: {{conducteur1.nom_prenom}}      Profession: {{conducteur1.profession}}</p>
+                <p>PC n°: {{permis.numero}}    Deliver par: {{permis.delivre_par}}  le {{permis.delivre_le}}</p>
+                <p>Domicile:   {{conducteur1.domicile}}              Tel: {{conducteur1.telephone}}</p>
+                {% endif %}
+            </div>
+        </div>
+     </div>
+{% endblock %}

@@ -4,7 +4,7 @@ from accident import views
 
 app_name = 'accident'
 urlpatterns = [
-    path('',views.index),
+
 #############################################################################################################################
 ################################### URL ACCIDENT MATERIEL ###################################################################
 #############################################################################################################################
@@ -19,6 +19,7 @@ urlpatterns = [
     path('materiel/victime',views.victimeMaterielSave,name='victime_materiel_save'),
     path('materiel/victime/fin',views.victimeEndSave,name='victime_end_save'),
     path('materiel/etat/',views.etatSave,name='etat_materiel_save'),
-    path('materiel/declaration/', views.declarationSave, name='declaration_materiel_save')
+    path('materiel/declaration/', views.declarationSave, name='declaration_materiel_save'),
+    path('liste_accident/', views.accident,name='list_accident')
 
 ]

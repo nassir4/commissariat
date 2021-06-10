@@ -11,7 +11,8 @@ from accident.models import TypeAccident, Accident, EssuieGlace, Vehicule, Condu
 
 
 def index (request):
-    return render(request,'index.html')
+    listAccident = Accident.objects.all
+    return render(request,'index.html',{'listAccident':listAccident})
 ### Type Accident ###
 def typeAccident(request):
     listTypeAccident = TypeAccident.objects.all
