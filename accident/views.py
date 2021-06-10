@@ -8,7 +8,6 @@ from accident.forms import TypeAccidentForm, AccidentForm, VehiculeForm, Eclaira
     TemoinForm, EtatDesLieuxForm, DeclarationForm, PermisForm, ProprietaireForm, AccidentMaterielForm, \
     VehiculeMaterielForm, AssuranceForm
 from accident.models import TypeAccident, Accident, EssuieGlace, Vehicule, Conducteur, Permis
-from accident.multiple_forms import MultipleFormsView
 
 
 def index (request):
