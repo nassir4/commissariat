@@ -5,73 +5,131 @@
             <div class="white-box">
                 <h3> {{accident.type_accident}} </h3>
                 <hr>
-                <p class="text">Survenu le {{accident.date_accident}} à  {{accident.heure_accident}}</p>
-                <p class="text">Lieu: {{accident.lieu_accident}}</p>
-                <p class="text">Etabli par: l'Agent de Police: {{accident.etabli_par}}</p>
+                <div class="row">
+                    <p class="col-md-3">Survenu le {{accident.date_accident}} à  {{accident.heure_accident}}</p>
+                    <p class="col-md-3">Lieu: {{accident.lieu_accident}}</p>
+                    <p class="col-md-3">Etabli par: l'Agent de Police: {{accident.etabli_par}}</p>
+                </div>
                 <a href="{% url 'accident:update_accident' accident_id=accident.id %}" class="btn btn-outline-primary">Modifier</a>
+                <a href="{% url 'accident:delete_accident' accident_id=accident.id %}" class="btn btn-outline-danger">Supprimer</a>
                 <hr>
-                <h3> Vehicules et parties en cause</h3>
+                <h3> Vehicules</h3>
 
-                <h5>VEHICULE</h5>
                 {% for vehicule in listVehicule %}
-                    <p> {{vehicule.numero}}</p>
+                    <div class="row">
+                        <p class="col-md-3">Numero: {{vehicule.numero}}</p>
+                        <p class="col-md-3">Genre: {{vehicule.genre}}</p>
+                        <p class="col-md-2">Marque: {{vehicule.marque}}</p>
+                        <p class="col-md-4">Date de mise en circulation le {{vehicule.date_mise_circulation}}</p>
+                        <p class="col-md-4">Derniere visite technique le {{vehicule.derniere_visite_technique}}</p>
+                    </div>
                     <a href="{% url 'accident:update_vehicule' vehicule_id=vehicule.id%}" class="btn btn-outline-primary">Modifier</a>
+                    <a href="{% url 'accident:delete_vehicule' vehicule_id=vehicule.id%}" class="btn btn-outline-danger">Supprimer</a>
+
                 {% endfor%}
                 <hr>
-                <h5>Proprietaire</h5>
                 {% for proprietaire in listProprietaire %}
-                    <p> {{proprietaire.nom_prenom}}</p>
-                    <a href="{% url 'accident:update_proprietaire' id=proprietaire.id%}" class="btn btn-outline-primary">Modifier</a>
+                <h5>Proprietaire du vehicule {{proprietaire.vehicule}}</h5>
+                <div class="row">
+                    <p class="col-md-3">Prenom et nom:  {{proprietaire.nom_prenom}}</p>
+                    <p class="col-md-3">Domicile: {{proprietaire.domicile}}</p>
+                </div>
+                <a href="{% url 'accident:update_proprietaire' id=proprietaire.id%}" class="btn btn-outline-primary">Modifier</a>
+                <a href="{% url 'accident:delete_proprietaire' id=proprietaire.id %}" class="btn btn-outline-primary">Supprimer</a>
                 {% endfor%}
                 <hr>
-                <h3>Conducteurs</h3>
                 {% for conducteur in listConducteur %}
-                <p> {{conducteur.nom_prenom}}</p>
-                 <a href="{% url 'accident:update_conducteur' conducteur_id=conducteur.id%}" class="btn btn-outline-primary">Modifier</a>
+                <h3>Conducteurs du vehicule {{conducteur.vehicule}}</h3>
+                <div class="row">
+                    <p class="col-md-3">Prenom et nom:   {{conducteur.nom_prenom}}</p>
+                    <p class="col-md-3">Domicile: {{conducteur.domicile}}</p>
+                    <p class="col-md-3">Date et lieu de naissance :{{conducteur.date_naissance}} à {{conducteur.lieu_naissance}}</p>
+                </div>
+                <a href="{% url 'accident:update_conducteur' conducteur_id=conducteur.id%}" class="btn btn-outline-primary">Modifier</a>
+                <a href="{% url 'accident:delete_conducteur' conducteur_id=conducteur.id%}" class="btn btn-outline-danger">Supprimer</a>
                 {% endfor%}
                 <hr>
-                <h3>Assurance</h3>
                 {% for assurance in listAssurance %}
-                    <p>{{assurance.numero_police}}</p>
-                    <a href="{% url 'accident:update_assurance' id=assurance.id%}" class="btn btn-outline-primary">Modifier</a>
+                <h3>Assurance du vehicule {{assurance.vehicule}}</h3>
+                <div class="row">
+                    <p class="col-md-3"> Nom: {{assurance.nom}}</p>
+                    <p class="col-md-3">Numero Police: {{assurance.numero_police}}</p>
+                    <p class="col-md-3">Date debut: {{assurance.date_debut}}</p>
+                    <p class="col-md-3">Date d'expiration: {{assurance.date_expiration}}</p>
+                </div>
+                <a href="{% url 'accident:update_assurance' id=assurance.id%}" class="btn btn-outline-primary">Modifier</a>
+                <a href="{% url 'accident:delete_assurance' id=assurance.id%}" class="btn btn-outline-danger">Supprimer</a>
                 {% endfor%}
                 <hr>
-                <h3>Permis</h3>
                 {% if listPermis %}
                     {% for permis in listPermis %}
-                        <p>{{permis.numero}} => {{permis.conducteur}}</p>
+                        <h3>Permis du conducteur {{permis.conducteur}}</h3>
+                        <div class="row">
+                            <p class="col-md-3">Numero: {{permis.numero}}</p>
+                            <p class="col-md-3">Délivré par: {{permis.delivre_par}}</p>
+                            <p class="col-md-3">Délivré le: {{permis.delivre_le}}</p>
+                            <p class="col-md-3">Lieu: {{permis.lieu}}
+                        </div>
                         <a href="{% url 'accident:update_permis' id=permis.id%}" class="btn btn-outline-primary">Modifier</a>
+                        <a href="{% url 'accident:delete_permis' id=permis.id%}" class="btn btn-outline-danger">Supprimer</a>
                     {% endfor%}
                 {% endif%}
                 <hr>
                 <h3>Victimes</h3>
                 {% if listVictime %}
                     {% for victime in listVictime%}
-                        <p>{{victime.nom_prenom}}</p>
-                   <a href="{% url 'accident:update_victime' id=victime.id%}" class="btn btn-outline-primary">Modifier</a>
+                        <div class="row">
+                            <p class="col-md-3">Prenom et nom: {{victime.nom_prenom}}</p>
+                            <p class="col-md-3">Adresse: {{victime.adresse}}</p>
+                            <p class="col-md-3">Position au moment de l'accident: {{victime.position_moment_accident}}</p>
+                            <p class="col-md-3">Nature des blessures: {{victime.nature_des_blessures}}</p>
+                        </div>
+                        <a href="{% url 'accident:update_victime' id=victime.id%}" class="btn btn-outline-primary">Modifier</a>
+                        <a href="{% url 'accident:delete_victime' id=victime.id%}" class="btn btn-outline-danger">Supprimer</a>
+                        <hr>
                     {% endfor%}
                 {% endif%}
-                <hr>
                 <h3>Temoins</h3>
                 {% if listTemoin %}
                     {% for temoin in listTemoin %}
-                        <p>{{temoin.nom_prenom}}</p>
-                     <a href="{% url 'accident:update_temoin' id=temoin.id%}" class="btn btn-outline-primary">Modifier</a>
+                       <div class="row">
+                            <p class="col-md-3">Prenom et nom: {{temoin.nom_prenom}}</p>
+                            <p class="col-md-3">Adresse: {{temoin.adresse}}</p>
+                            <p class="col-md-3">Position au moment de l'accident: {{temoin.position_moment_accident}}</p>
+                            <p class="col-md-3">Profession: {{temoin.profession}}</p>
+                        </div>
+                        <a href="{% url 'accident:update_temoin' id=temoin.id%}" class="btn btn-outline-primary">Modifier</a>
+                        <a href="{% url 'accident:delete_temoin' id=temoin.id%}" class="btn btn-outline-danger">Supprimer</a>
                     {% endfor%}
                 {% endif%}
                 <hr>
                 <h3>Etat des Lieux</h3>
                 {% if etatDesLieux %}
-                    <p>{{etatDesLieux.visibilite}}</p>
+                    <div class="row">
+                        <p class="col-md-3">Visibilite: {{etatDesLieux.visibilite}}</p>
+                        <p class="col-md-3">Chaussée: {{etatDesLieux.chaussee}}</p>
+                        <p class="col-md-3">Largeur: {{etatDesLieux.largeur}}</p>
+                        <p class="col-md-3">Eclairage:{{etatDesLieux.eclairage}}</p>
+                        <p class="col-md-3">Traces Freinages: {{etatDesLieux.tracesFreinage}}</p>
+                        <p class="col-md-3">Trace Pneu: {{etatDesLieux.tracePneu}}</p>
+                        <p class="col-md-3">Traces Sang: {{etatDesLieux.tracesSang}}</p>
+                        <p class="col-md-3">Passage Pieton: {{etatDesLieux.passagePieton}}</p>
+                        <p class="col-md-3">Conditions atmospheriques: {{etatDesLieux.conditions_atmospherique}}</p>
+                    </div>
                     <a href="{% url 'accident:update_etat_des_lieux' id=etatDesLieux.id%}" class="btn btn-outline-primary">Modifier</a>
+                    <a href="{% url 'accident:delete_etat_des_lieux' id=etatDesLieux.id%}" class="btn btn-outline-danger">Supprimer</a>
+
                 {% endif %}
                 <hr>
-                <h3>Declaration</h3>
                 {% if listDeclaration %}
                     {% for declaration in listDeclaration %}
-                        <p>{{declaration.conducteur}}</p>
+                        <h3>Declaration du conducteur du vehicule {{declaration.conducteur.vehicule}}</h3>
+                        <p>Declaration: {{declaration.declaration}}</p>
+                        <p>Infraction: {{declaration.infraction}}</p>
                         <a href="{% url 'accident:update_declaration' id=declaration.id%}" class="btn btn-outline-primary">Modifier</a>
-                    {% endfor %}
+                        <a href="{% url 'accident:delete_declaration' id=declaration.id%}" class="btn btn-outline-danger">Supprimer</a>
+
+                {% endfor %}
                 {% endif %}
             </div>
         </div>

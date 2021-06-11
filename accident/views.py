@@ -71,7 +71,6 @@ def detailAccident(request, accident_id):
     try:
         accident = Accident.objects.get(pk=accident_id)
         listVehicule = Vehicule.objects.filter(accident=accident)
-        i=0
         listConducteur=[]
         listAssurance=[]
         listPermis=[]
@@ -284,7 +283,7 @@ def deleteDeclaraton(id):
     declaration = Declaration.objects.get(pk=id)
     declaration.delete()
     return redirect('accident:list_accident')
-def deletetemoin(id):
+def deleteTemoin(id):
     temoin = Temoin.objects.get(pk=id)
     temoin.delete()
     return redirect('accident:list_accident')
