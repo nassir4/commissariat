@@ -17,9 +17,6 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'plugins/images/favicon.png' %}">
     <!-- Custom CSS -->
-    <link href="{% static 'plugins/bower_components/chartist/dist/chartist.min.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css' %}">
-    <!-- Custom CSS -->
     <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
     {% block stylesheet %}{% endblock %}
 </head>
@@ -135,6 +132,14 @@
                                 <span class="hide-menu">Pv</span>
                             </a>
                         </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'accident:list_accident'%}"
+                                aria-expanded="false">
+                                <i class="fas fa-cogs" aria-hidden="true"></i>
+                                <span class="hide-menu">Liste accident</span>
+                            </a>
+                        </li>
+
                     </ul>
 
                 </nav>
@@ -178,6 +183,9 @@
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
+                {% load bootstrap4 %}
+                {% bootstrap_css %}
+                {% bootstrap_javascript jquery='full' %}
                 {% block content %}{% endblock %}
 
             </div>
