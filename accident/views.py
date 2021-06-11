@@ -248,6 +248,46 @@ def modifierDeclaration(request,id):
     }
     return render(request, 'accident_materiel/enregistrement_declaration.html', context)
 
+def deleteAccident(id):
+    accident = Accident.objects.get(pk=id)
+    accident.delete()
+    return redirect('accident:list_accident')
+def deleteVehicule(id):
+    vehicule = Vehicule.objects.get(pk=id)
+    vehicule.delete()
+    return redirect('accident:list_accident')
+def deleteConducteur(id):
+    conducteur = Conducteur.objects.get(pk=id)
+    conducteur.delete()
+    return redirect('accident:list_accident')
+def deletePermis(id):
+    permis = Permis.objects.get(pk=id)
+    permis.delete()
+    return redirect('accident:list_accident')
+def deletePropprietaire(id):
+    proprietaire = Proprietaire.objects.get(pk=id)
+    proprietaire.delete()
+    return redirect('accident:list_accident')
+def deleteAssurance(id):
+    assurance = Assurance.objects.get(pk=id)
+    assurance.delete()
+    return redirect('accident:list_accident')
+def deleteVictime(id):
+    victime = Victime.objects.get(pk=id)
+    victime.delete()
+    return redirect('accident:list_accident')
+def deleteEtatDesLieux(id):
+    etatDesLieux = EtatDesLieux.objects.get(pk=id)
+    etatDesLieux.delete()
+    return redirect('accident:list_accident')
+def deleteDeclaraton(id):
+    declaration = Declaration.objects.get(pk=id)
+    declaration.delete()
+    return redirect('accident:list_accident')
+def deletetemoin(id):
+    temoin = Temoin.objects.get(pk=id)
+    temoin.delete()
+    return redirect('accident:list_accident')
 ##########################################################################################################################
 ############################################ FIN ACCIDENT CORPOREL #######################################################
 ##########################################################################################################################

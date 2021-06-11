@@ -33,4 +33,16 @@ urlpatterns = [
     path('update/etat_des_lieux/<int:id>', views.modifierEtatDesLieux, name='update_etat_des_lieux'),
     path('update/Declaration/<int:id>', views.modifierDeclaration, name='update_declaration'),
 
+    #####ULR Suppression
+    path('delete/<int:accident_id>', views.deleteAccident, name='delete_accident'),
+    path('delete/vehicule/<int:vehicule_id>', views.deleteVehicule, name='delete_vehicule'),
+    path('delete/conducteur/<int:conducteur_id>', views.deleteConducteur, name='delete_conducteur'),
+    path('delete/proprietaire/<int:id>', views.deletePropprietaire, name='delete_proprietaire'),
+    path('delete/permis/<int:id>', views.deletePermis, name='delete_permis'),
+    path('delete/assurance/<int:id>', views.deleteAssurance, name='delete_assurance'),
+    path('delete/victime/<int:id>', views.deleteVictime, name='delete_victime'),
+    path('delete/temoin/<int:id>', views.deleteTemoin, name='delete_temoin'),
+    path('delete/etat_des_lieux/<int:id>', views.deleteEtatDesLieux, name='delete_etat_des_lieux'),
+    path('delete/Declaration/<int:id>', views.deleteDeclaraton, name='delete_declaration'),
+
 ]
