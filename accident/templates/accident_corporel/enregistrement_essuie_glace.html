@@ -3,20 +3,17 @@
     <div class="row">
         <div class="col-md-12">
             <div class="white-box">
-                <h6 class="text-black-50">Declaration</h6>
-                <hr>
+                <h3 class="box-title">Essuie Glace</h3>
                 {% load crispy_forms_tags %}
                 {% load bootstrap4 %}
                 {% bootstrap_css %}
                 {% bootstrap_javascript jquery='full' %}
-               <form action="" method="post">
+                <form class="form " action="" method="post">
                     {% csrf_token %}
-                    {{ form|crispy }}
-                    {{form.media}}
+                    {{form|crispy}}
                     <button type="submit" class="btn btn-primary">Enregistrer</button>
                 </form>
             </div>
         </div>
     </div>
-
 {% endblock %}
