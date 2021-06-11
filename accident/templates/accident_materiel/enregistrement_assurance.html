@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
+
 {% block content %}
     <div class="row">
         <div class="col-md-12">
             <div class="white-box">
-                 <a href="{% url 'accident:vehicule_materiel_save'%}" class="btn btn-lg btn-secondary"> Voulez-vous ajouter un autre vehicule</a>
-                <br>
-                <h3 >Temoin</h3>
+                <h6 class="text-black-50">Conducteur</h6>
                 <hr>
-                 {% load crispy_forms_tags %}
-                 {% load bootstrap4 %}
+                {% load crispy_forms_tags %}
+                {% load crispy_forms_field %}
+                {% load bootstrap4 %}
                 {% bootstrap_css %}
                 {% bootstrap_javascript jquery='full' %}
                 <form action="" method="post">
@@ -17,9 +17,9 @@
                     {{form.media}}
                     <button type="submit" class="btn btn-primary">Enregistrer</button>
                 </form>
-                <br>
             </div>
         </div>
     </div>
+
 
 {% endblock %}

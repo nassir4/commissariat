@@ -168,7 +168,7 @@ class Permis(models.Model):
     conducteur = models.OneToOneField(Conducteur, on_delete=models.CASCADE,blank=True,null=True)
 
     def __str__(self):
-        return f'Permis => {self.conducteur.nom_prenom}'
+        return f'Permis => {self.conducteur}'
 
 
 # models assurance
@@ -180,7 +180,7 @@ class Assurance(models.Model):
     vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE,blank=True,null=True)
 
     def __str__(self):
-        return f'Assurance => {self.vehicule.numero}'
+        return f'Assurance => {self.vehicule}'
 
 
 # models vignette
@@ -244,4 +244,4 @@ class Declaration(models.Model):
     infraction = models.TextField("Infraction", null=True, blank=True)
 
     def __str__(self):
-        return self.conducteur
+        return f'Declaration => {self.conducteur}'

@@ -7,12 +7,13 @@ from accident.forms import TypeAccidentForm, AccidentForm, VehiculeForm, Eclaira
     RetroviseurForm, IndicateurVitesseForm, IndicateurDirectionForm, AvertisseurForm, ConducteurForm, VictimeForm, \
     TemoinForm, EtatDesLieuxForm, DeclarationForm, PermisForm, ProprietaireForm, AccidentMaterielForm, \
     VehiculeMaterielForm, AssuranceForm
-from accident.models import TypeAccident, Accident, EssuieGlace, Vehicule, Conducteur, Permis
-from accident.multiple_forms import MultipleFormsView
+from accident.models import TypeAccident, Accident, EssuieGlace, Vehicule, Conducteur, Permis, Assurance, Victime, \
+    Temoin, EtatDesLieux, Declaration, Proprietaire
 
 
 def index (request):
-    return render(request,'index.html')
+    listAccident = Accident.objects.all
+    return render(request,'index.html',{'listAccident':listAccident})
 ### Type Accident ###
 def typeAccident(request):
     listTypeAccident = TypeAccident.objects.all
@@ -69,9 +70,183 @@ def accident(request):
 def detailAccident(request, accident_id):
     try:
         accident = Accident.objects.get(pk=accident_id)
+        listVehicule = Vehicule.objects.filter(accident=accident)
+        i=0
+        listConducteur=[]
+        listAssurance=[]
+        listPermis=[]
+        listTemoin=Temoin.objects.filter(accident=accident)
+        listVictime= Victime.objects.filter(accident=accident)
+        etatDesLieux=EtatDesLieux.objects.get(accident=accident)
+        listDeclaration=[]
+        listProprietaire=[]
+        for vehicule in listVehicule:
+            listConducteur.append(Conducteur.objects.get(vehicule=vehicule))
+        for vehicule in listVehicule:
+            listAssurance.append(Assurance.objects.get(vehicule=vehicule))
+        for conducteur in listConducteur:
+            listPermis.append(Permis.objects.get(conducteur=conducteur))
+        for conducteur in listConducteur:
+            listDeclaration.append(Declaration.objects.get(conducteur=conducteur))
+        for vehicule in listVehicule:
+            listProprietaire.append(Proprietaire.objects.get(vehicule=vehicule))
+        context = {
+            'listProprietaire':listProprietaire,
+            'listDeclaration':listDeclaration,
+            'listTemoin':listTemoin,
+            'listVictime':listVictime,
+            'listPermis':listPermis,
+            'listAssurance':listAssurance,
+            'listConducteur':listConducteur,
+            'accident': accident,
+            'listVehicule':listVehicule,
+            'etatDesLieux':etatDesLieux
+        }
     except Accident.DoesNotExist:
         raise Http404("Question does not exist")
-    return render(request, 'detail_accident.html', {'accident': accident})
+    return render(request, 'detail_accident.html', context)
+def modifierAccident(request,accident_id):
+    try:
+        accident = Accident.objects.get(pk=accident_id)
+    except Accident.DoesNotExist:
+        return redirect('accident:detail_accident')
+    form = AccidentMaterielForm(request.POST or None, instance=accident)
+    print(form)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:list_accident')
+    context = {
+        'form': form,
+    }
+    return render(request, 'accident_materiel/enregistrement_accident.html', context)
+
+def modifierVehicule(request,vehicule_id):
+    try:
+        vehicule = Vehicule.objects.get(pk=vehicule_id)
+    except Vehicule.DoesNotExist:
+        return redirect('accident:detail_accident')
+    form = VehiculeMaterielForm(request.POST or None, instance=vehicule)
+    print(form)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:list_accident')
+    context = {
+        'form': form,
+    }
+    return render(request, 'accident_materiel/enregistrement_vehicule.html', context)
+
+
+def modifierConducteur(request,conducteur_id):
+    try:
+        conducteur = Conducteur.objects.get(pk=conducteur_id)
+    except Conducteur.DoesNotExist:
+        return redirect('accident:detail_accident')
+    form = ConducteurForm(request.POST or None, instance=conducteur)
+    print(form)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:list_accident')
+    context = {
+        'form': form,
+    }
+    return render(request, 'accident_materiel/enregistrement_conducteur.html', context)
+
+def modifierAssurance(request,id):
+    try:
+        assurance = Assurance.objects.get(pk=id)
+    except Assurance.DoesNotExist:
+        return redirect('accident:detail_accident')
+    form = AssuranceForm(request.POST or None, instance=assurance)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:list_accident')
+    context = {
+        'form': form,
+    }
+    return render(request, 'accident_materiel/enregistrement_assurance.html', context)
+
+def modifierPermis(request,id):
+    try:
+      permis = Permis.objects.get(pk=id)
+    except Permis.DoesNotExist:
+        return redirect('accident:detail_accident')
+    form = PermisForm(request.POST or None, instance=permis)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:list_accident')
+    context = {
+        'form': form,
+    }
+    return render(request, 'accident_materiel/enregistrement_permis.html', context)
+
+def modifierProprietaire(request,id):
+    try:
+        proprietaire = Proprietaire.objects.get(pk=id)
+    except Proprietaire.DoesNotExist:
+        return redirect('accident:detail_accident')
+    form = ProprietaireForm(request.POST or None, instance=proprietaire)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:list_accident')
+    context = {
+        'form': form,
+    }
+    return render(request, 'accident_materiel/enregistrement_proprietaire.html', context)
+
+def modifierVictime(request,id):
+    try:
+        victime = Victime.objects.get(pk=id)
+    except Victime.DoesNotExist:
+        return redirect('accident:detail_accident')
+    form = VictimeForm(request.POST or None, instance=victime)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:list_accident')
+    context = {
+        'form': form,
+    }
+    return render(request, 'accident_materiel/enregistrement_victime.html', context)
+
+def modifierTemoin(request,id):
+    try:
+        temoin = Temoin.objects.get(pk=id)
+    except Temoin.DoesNotExist:
+        return redirect('accident:detail_accident')
+    form = TemoinForm(request.POST or None, instance=temoin)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:list_accident')
+    context = {
+        'form': form,
+    }
+    return render(request, 'accident_materiel/enregistrement_temoin.html', context)
+def modifierEtatDesLieux(request,id):
+    try:
+        etatDesLieux = EtatDesLieux.objects.get(pk=id)
+    except EtatDesLieux.DoesNotExist:
+        return redirect('accident:detail_accident')
+    form = EtatDesLieuxForm(request.POST or None, instance=etatDesLieux)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:list_accident')
+    context = {
+        'form': form,
+    }
+    return render(request, 'accident_materiel/enregistrement_etat.html', context)
+
+def modifierDeclaration(request,id):
+    try:
+        declaration = Declaration.objects.get(pk=id)
+    except Declaration.DoesNotExist:
+        return redirect('accident:detail_accident')
+    form =DeclarationForm(request.POST or None, instance=declaration)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:list_accident')
+    context = {
+        'form': form,
+    }
+    return render(request, 'accident_materiel/enregistrement_declaration.html', context)
 
 ##########################################################################################################################
 ############################################ FIN ACCIDENT CORPOREL #######################################################
@@ -98,7 +273,7 @@ def accidentMateriel(request):
         'permis':permis
        # 'conducteur':conducteur2,
     }
-    return  render(request,'accident_materiel.html',context)
+    return  render(request,'accident.html',context)
 #Fin Vue Accident Materiel
 def saveAccidentMateriel(request):
     typeAccident=TypeAccident.objects.get(nom='Accident Materiel')
@@ -214,12 +389,10 @@ def etatSave(request):
         form = EtatDesLieuxForm
     return render(request, 'accident_materiel/enregistrement_etat.html', {'form': form})
 def declarationSave(request):
-    accident = Accident.objects.last()
     if request.method == 'POST':
         form = DeclarationForm(request.POST)
         if form.is_valid():
             declaration = form.save(commit=False)
-            declaration.accident = accident
             declaration.save()
             return redirect('/')
     else:

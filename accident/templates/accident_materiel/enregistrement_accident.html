@@ -7,13 +7,15 @@
                 <h6 class="text-black-50">Accident</h6>
                 <hr>
                 {% load crispy_forms_tags %}
-                {% load crispy_forms_field %}
                 {% load bootstrap4 %}
                 {% bootstrap_css %}
                 {% bootstrap_javascript jquery='full' %}
-                {% csrf_token %}
-                {% crispy form %}
-                {{form.media}}
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    {{form.media}}
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </form>
             </div>
         </div>
     </div>
