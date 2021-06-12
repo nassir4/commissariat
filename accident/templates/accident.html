@@ -7,18 +7,19 @@
                 <hr>
                 <div class="row">
                 {% for accident in listAccident %}
-
-                    <div class="card text-center col-md-6">
-                        <div class="card-header">
-                            {{accident.type_accident}}
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">{{accident.numero_accident}} à {{accident.lieu_accident}}</h5>
-                            <p class="card-text">Survenu le {{accident.date_accident}} à  {{accident.heure_accident}}</p>
-                            <a href="{% url 'accident:detail_accident' accident_id=accident.id%}" class="btn btn-primary">Voir plus</a>
-                        </div>
-                        <div class="card-footer text-muted">
-                            Etabli par: l'Agent de Police: {{accident.etabli_par}}
+                    <div class="col-md-6">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">{{accident.type_accident}}</h6>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">{{accident.numero_accident}} à {{accident.lieu_accident}}</h5>
+                                <p class="card-text">Survenu le {{accident.date_accident}} à  {{accident.heure_accident}}</p>
+                                <a href="{% url 'accident:detail_accident' accident_id=accident.id%}" class="btn btn-primary">Voir plus</a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                Etabli par: l'Agent de Police: {{accident.etabli_par}}
+                            </div>
                         </div>
                     </div>
 

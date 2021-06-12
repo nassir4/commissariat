@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Blank</title>
+    <title>Commissariat Central de Kaolack</title>
     {% load static %}
     <!-- Custom fonts for this template-->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css'%}" rel="stylesheet" type="text/css">
@@ -53,7 +53,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
              <li class="nav-item active">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url 'accident:accident_corporel_save'%}">
                     <i class="fas fa-fw fa-ambulance"></i>
                     <span>Accident Corporel</span></a>
             </li>
@@ -142,14 +142,13 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid ">
+                <div class="container-fluid bg-white">
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Section accident</h1>
+                    <hr>
                     <div class="col-md-12">
-                        <div class="white-box">
-                            {% block content%}{%endblock%}
-                        </div>
+                        {% block content%}{%endblock%}
                     </div>
 
                 </div>

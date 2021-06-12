@@ -58,7 +58,7 @@
         <div class="white-box row">
             <h3 class="box-title">Accident Materiel</h3>
             <hr>
-            <form id="regForm" action="{% url 'accident:vehicule_materiel_save'%}" method="post">
+            <form id="regForm" action="{% url 'accident:vehicule_corporel_save'%}" method="post">
                 {% load crispy_forms_tags %}
                 {% load crispy_forms_field %}
                 {% load bootstrap4 %}
@@ -72,7 +72,42 @@
                     {{vehicule_form |crispy }}
                     {{vehicule_form.media}}
                 </div>
-
+                <div class="tab">
+                     <h3>Accesoires Reglementaire</h3>
+                     <hr>
+                     <div class="row">
+                         <div class="col-md-4">
+                             <h6>Eclairage</h6>
+                            {% csrf_token %}
+                            {{eclairage_form |crispy }}
+                            {{eclairage_form.media}}
+                         </div>
+                         <div class="col-md-4">
+                             <h6>Essuie Glace</h6>
+                            {% csrf_token %}
+                            {{essuieGlace_form |crispy }}
+                            {{essuieGlace_form.media}}
+                         </div>
+                         <div class="col-md-4">
+                             <h6>Indicateur Vitesse</h6>
+                            {% csrf_token %}
+                            {{vitesse_form |crispy }}
+                            {{vitesse_form.media}}
+                         </div>
+                         <div class="col-md-4">
+                             <h6>Indicateur Direction</h6>
+                            {% csrf_token %}
+                            {{direction_form|crispy }}
+                            {{direction_form.media}}
+                         </div>
+                         <div class="col-md-4">
+                             <h6>Avertisseur</h6>
+                            {% csrf_token %}
+                            {{avertisseur_form |crispy }}
+                            {{avertisseur_form.media}}
+                         </div>
+                    </div>
+                </div>
                 <div class="tab">
                     <h3>Assurance</h3>
                     <hr>
@@ -113,6 +148,7 @@
 
                 <!-- Circles which indicates the steps of the form: -->
                 <div style="text-align:center;margin-top:40px;">
+                    <span class="step"></span>
                     <span class="step"></span>
                     <span class="step"></span>
                     <span class="step"></span>
