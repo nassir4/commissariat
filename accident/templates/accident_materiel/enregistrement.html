@@ -53,11 +53,8 @@
     </style>
 {% endblock %}
 {% block content %}
-<div class="row" xmlns="http://www.w3.org/1999/html">
-    <div class="col-md-12">
-        <div class="white-box row">
-            <h3 class="box-title">Accident Materiel</h3>
-            <hr>
+<div class= xmlns="http://www.w3.org/1999/html">
+
             <form id="regForm" action="{% url 'accident:vehicule_materiel_save'%}" method="post">
                 {% load crispy_forms_tags %}
                 {% load crispy_forms_field %}
@@ -121,9 +118,6 @@
                 </div>
             </form>
         </div>
-
-    </div>
-</div>
 
 {% endblock %}
 {% block javascript %}

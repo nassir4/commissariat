@@ -1,25 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Saisine</title>
-</head>
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'policejudiciaire/css/bootstrap.min.css' %}">
-</head>
-<body>
-    <div class="container">
-        <h2 class="h2">PV Saisine</h2>
-        <hr>
-            <div class="row">
+    {% extends 'base.html'%}
+    {% block content%}
+    <div class="row">
             <div class="col-md-3">
                 <a href="{% url 'judiciaire:saisine_save' %}" class="btn btn-lg btn-secondary"> Ajouter un PV</a>
             </div>
@@ -36,9 +17,5 @@
                     <br>
                 {% endfor %}
             </div>
-        </div>
     </div>
-</body>
-</html>
-</body>
-</html>
+    {% endblock %}

@@ -118,7 +118,6 @@
                     </div>
                     <a href="{% url 'accident:update_etat_des_lieux' id=etatDesLieux.id%}" class="btn btn-outline-primary">Modifier</a>
                     <a href="{% url 'accident:delete_etat_des_lieux' id=etatDesLieux.id%}" class="btn btn-outline-danger">Supprimer</a>
-
                 {% endif %}
                 <hr>
                 {% if listDeclaration %}
@@ -128,8 +127,7 @@
                         <p>Infraction: {{declaration.infraction}}</p>
                         <a href="{% url 'accident:update_declaration' id=declaration.id%}" class="btn btn-outline-primary">Modifier</a>
                         <a href="{% url 'accident:delete_declaration' id=declaration.id%}" class="btn btn-outline-danger">Supprimer</a>
-
-                {% endfor %}
+                    {% endfor %}
                 {% endif %}
             </div>
         </div>
