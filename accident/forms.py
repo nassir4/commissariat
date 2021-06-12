@@ -18,7 +18,7 @@ class TypeAccidentForm(ModelForm):
 class AccidentForm(ModelForm):
         class Meta:
             model = Accident
-            fields= '__all__'
+            fields= ['numero_accident','lieu_accident','date_accident','heure_accident','etabli_par','assiste_de','circonstances','infractions_relevees','mesures_prises','derniere_mesures_prises','autres_dommages']
 
         date_accident = DateField(
             widget=DatePickerInput(format='%d/%m/%Y'),
@@ -31,7 +31,8 @@ class AccidentForm(ModelForm):
 class VehiculeForm(ModelForm):
     class Meta:
         model = Vehicule
-        fields = '__all__'
+        fields = ['numero','genre','marque','date_mise_circulation','derniere_visite_technique','dimension','charge_total','puissance','etat_general'
+                  ,'kilometrage','etat_parebrise','degats_materiels','etat_pneus_avant','etat_pneus_arriere','valeur_systeme_freinage','position_levier_vitesse','presence_poste_radio']
 
     date_mise_circulation = DateField(
         widget=DatePickerInput(format='%d/%m/%Y'),
@@ -45,34 +46,34 @@ class VehiculeForm(ModelForm):
 class EclairageForm(ModelForm):
     class Meta:
         model = Eclairage
-        fields = '__all__'
+        fields = ['existance','fonctionel','position']
 class AvertisseurForm(ModelForm):
     class Meta:
         model = Avertisseur
-        fields = '__all__'
+        fields = ['existance','fonctionel','position']
 class IndicateurDirectionForm(ModelForm):
     class Meta:
         model = IndicateurDirection
-        fields = '__all__'
+        fields = ['existance','fonctionel','position']
 class IndicateurVitesseForm(ModelForm):
     class Meta:
         model = IndicateurVitesse
-        fields = '__all__'
+        fields = ['existance','fonctionel','position']
 class EssuieGlaceForm(ModelForm):
     class Meta:
         model = EssuieGlace
-        fields = '__all__'
+        fields = ['existance','fonctionel','position']
 class RetroviseurForm(ModelForm):
     class Meta:
         model = Retroviseur
-        fields = '__all__'
+        fields = ['existance','fonctionel','position']
 class ConducteurForm(ModelForm):
     class Meta:
         model = Conducteur
         fields = ['nom_prenom','date_naissance','lieu_naissance','filiation','domicile','profession','telephone','comportement']
 
     date_naissance = DateField(
-        widget=DatePickerInput(format='%m/%d/%Y'),
+        widget=DatePickerInput(format='%d/%m/%Y'),
 
     )
 class VictimeForm(ModelForm):

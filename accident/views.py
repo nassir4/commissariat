@@ -85,8 +85,9 @@ def detailAccident(request, accident_id):
             listAssurance.append(Assurance.objects.get(vehicule=vehicule))
         for conducteur in listConducteur:
             listPermis.append(Permis.objects.get(conducteur=conducteur))
-        for conducteur in listConducteur:
-            listDeclaration.append(Declaration.objects.get(conducteur=conducteur))
+        if accident.type_accident == 'Accident Materiel':
+            for conducteur in listConducteur:
+                listDeclaration.append(Declaration.objects.get(conducteur=conducteur))
         for vehicule in listVehicule:
             listProprietaire.append(Proprietaire.objects.get(vehicule=vehicule))
         context = {
@@ -109,7 +110,7 @@ def modifierAccident(request,accident_id):
         accident = Accident.objects.get(pk=accident_id)
     except Accident.DoesNotExist:
         return redirect('accident:detail_accident')
-    form = AccidentMaterielForm(request.POST or None, instance=accident)
+    form = AccidentForm(request.POST or None, instance=accident)
     print(form)
     if form.is_valid():
         form.save()
@@ -124,7 +125,7 @@ def modifierVehicule(request,vehicule_id):
         vehicule = Vehicule.objects.get(pk=vehicule_id)
     except Vehicule.DoesNotExist:
         return redirect('accident:detail_accident')
-    form = VehiculeMaterielForm(request.POST or None, instance=vehicule)
+    form = VehiculeForm(request.POST or None, instance=vehicule)
     print(form)
     if form.is_valid():
         form.save()
@@ -339,7 +340,8 @@ def vehiculeMatertielSave(request):
                 and conducteur_form.is_valid() and permis_form.is_valid()):
             vehicule = vehicule_form.save(commit=False)
             vehicule.accident = accident
-            ve = vehicule.save()
+            vehicule.save()
+            ve = Vehicule.objects.last()
             assurance = assurance_form.save(commit=False)
             assurance.vehicule= ve
             assurance.save()
@@ -348,7 +350,8 @@ def vehiculeMatertielSave(request):
             proprietaire.save()
             conducteur = conducteur_form.save(commit=False)
             conducteur.vehicule=ve
-            con=conducteur.save()
+            conducteur.save()
+            con = Conducteur.objects.last()
             permis =permis_form.save(commit=False)
             permis.conducteur=con
             permis.save()
@@ -366,6 +369,96 @@ def vehiculeMatertielSave(request):
                                                                                 'conducteur_form': conducteur_form,
                                                                                 'permis_form': permis_form,
                                                                                 })
+def vehiculeCorporelSave(request):
+    accident = Accident.objects.last()
+    if request.method == 'POST':
+        vehicule_form = VehiculeForm(request.POST)
+        assurance_form = AssuranceForm(request.POST)
+        proprietaire_form = ProprietaireForm(request.POST)
+        conducteur_form = ConducteurForm(request.POST)
+        permis_form = PermisForm(request.POST)
+        eclairage_form = EclairageForm(request.POST)
+        vitesse_form=IndicateurVitesseForm(request.POST)
+        direction_form =IndicateurDirectionForm(request.POST)
+        essuieGlace_form=EssuieGlaceForm(request.POST)
+        avertisseur_form=AvertisseurForm(request.POST)
+
+        if (vehicule_form.is_valid() and assurance_form.is_valid() and proprietaire_form.is_valid()
+                and conducteur_form.is_valid() and permis_form.is_valid() and eclairage_form.is_valid() and
+                vitesse_form.is_valid() and direction_form.is_valid() and essuieGlace_form.is_valid() and
+                avertisseur_form.is_valid):
+            vehicule = vehicule_form.save(commit=False)
+            vehicule.accident = accident
+            vehicule.save()
+            ve = Vehicule.objects.last()
+            eclairage= eclairage_form.save(commit=False)
+            eclairage.vehicule=ve
+            eclairage.save()
+            essuieGlace = essuieGlace_form.save(commit=False)
+            essuieGlace.vehicule = ve
+            essuieGlace.save()
+            direction = direction_form.save(commit=False)
+            direction.vehicule = ve
+            direction.save()
+            avertiseur = avertisseur_form.save(commit=False)
+            avertiseur.vehicule = ve
+            avertiseur.save()
+            vitesse = vitesse_form.save(commit=False)
+            vitesse.vehicule = ve
+            vitesse.save()
+            assurance = assurance_form.save(commit=False)
+            assurance.vehicule= ve
+            assurance.save()
+            proprietaire = proprietaire_form.save(commit=False)
+            proprietaire.vehicule =ve
+            proprietaire.save()
+            conducteur = conducteur_form.save(commit=False)
+            conducteur.vehicule=ve
+            conducteur.save()
+            con = Conducteur.objects.last()
+            permis =permis_form.save(commit=False)
+            permis.conducteur=con
+            permis.save()
+            return redirect('accident:temoin_materiel_save')
+    else:
+        vehicule_form = VehiculeForm
+        assurance_form = AssuranceForm
+        proprietaire_form = ProprietaireForm
+        conducteur_form = ConducteurForm
+        permis_form = PermisForm
+        eclairage_form = EclairageForm
+        vitesse_form = IndicateurVitesseForm
+        direction_form = IndicateurDirectionForm
+        essuieGlace_form = EssuieGlaceForm
+        avertisseur_form = AvertisseurForm
+    context = {
+        'vehicule_form': vehicule_form,
+        'assurance_form': assurance_form,
+        'proprietaire_form': proprietaire_form,
+        'conducteur_form': conducteur_form,
+        'permis_form': permis_form,
+        'eclairage_form':eclairage_form,
+        'vitesse_form':vitesse_form,
+        'direction_form':direction_form,
+        'essuieGlace_form':essuieGlace_form,
+        'avertisseur_form':avertisseur_form,
+    }
+    return render(request, 'accident_corporel/enregistrement.html', context)
+
+def saveAccidentCorporel(request):
+    typeAccident=TypeAccident.objects.get(nom='Accident Corporel')
+    if request.method == 'POST':
+        form =AccidentForm(request.POST)
+        if form.is_valid():
+            accident = form.save(commit=False)
+            accident.type_accident=typeAccident
+            accident.save()
+            return redirect('accident:vehicule_corporel_save')
+    else:
+        form = AccidentForm
+    return render(request, 'accident_corporel/enregistrement_accident.html', {'form': form})
+
+
 def temoinMaterielSave(request):
     accident=Accident.objects.last()
     if request.method == 'POST':
@@ -373,18 +466,6 @@ def temoinMaterielSave(request):
         if form.is_valid():
             temoin = form.save(commit=False)
             temoin.accident=accident
-            temoin.save()
-            return redirect('accident:temoin_materiel_save')
-    else:
-        form = TemoinForm
-    return render(request, 'accident_materiel/enregistrement_temoin.html', {'form': form})
-def temoinEndSave(request):
-    accident = Accident.objects.last()
-    if request.method == 'POST':
-        form = TemoinForm(request.POST)
-        if form.is_valid():
-            temoin = form.save(commit=False)
-            temoin.accident = accident
             temoin.save()
             return redirect('accident:victime_materiel_save')
     else:
@@ -423,7 +504,10 @@ def etatSave(request):
             etat = form.save(commit=False)
             etat.accident = accident
             etat.save()
-            return redirect('accident:declaration_materiel_save')
+            if accident.type_accident.nom =="Accident Materiel":
+                return redirect('accident:declaration_materiel_save')
+            else:
+                return redirect('accident:list_accident')
     else:
         form = EtatDesLieuxForm
     return render(request, 'accident_materiel/enregistrement_etat.html', {'form': form})
@@ -433,7 +517,7 @@ def declarationSave(request):
         if form.is_valid():
             declaration = form.save(commit=False)
             declaration.save()
-            return redirect('/')
+            return redirect('accident:list_accident')
     else:
         form = DeclarationForm
     return render(request, 'accident_materiel/enregistrement_declaration.html', {'form': form})

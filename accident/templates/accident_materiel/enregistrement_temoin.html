@@ -1,25 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="row">
         <div class="col-md-12">
             <div class="white-box">
-                 <a href="{% url 'accident:vehicule_materiel_save'%}" class="btn btn-lg btn-secondary"> Voulez-vous ajouter un autre vehicule</a>
-                <br>
-                <h3 >Temoin</h3>
-                <hr>
-                 {% load crispy_forms_tags %}
-                 {% load bootstrap4 %}
+                {% load crispy_forms_tags %}
+                {% load bootstrap4 %}
                 {% bootstrap_css %}
                 {% bootstrap_javascript jquery='full' %}
-                <form action="" method="post">
-                    {% csrf_token %}
-                    {{ form|crispy }}
-                    {{form.media}}
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
-                </form>
-                <br>
+                <!-- Basic Card Example -->
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Enregistrement Temoin</h6>
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            {{form.media}}
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-
 {% endblock %}

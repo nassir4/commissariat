@@ -2,7 +2,6 @@
 {% block content %}
      <div class="row">
         <div class="col-md-12">
-            <div class="white-box">
                 <h3> {{accident.type_accident}} </h3>
                 <hr>
                 <div class="row">
@@ -10,8 +9,18 @@
                     <p class="col-md-3">Lieu: {{accident.lieu_accident}}</p>
                     <p class="col-md-3">Etabli par: l'Agent de Police: {{accident.etabli_par}}</p>
                 </div>
-                <a href="{% url 'accident:update_accident' accident_id=accident.id %}" class="btn btn-outline-primary">Modifier</a>
-                <a href="{% url 'accident:delete_accident' accident_id=accident.id %}" class="btn btn-outline-danger">Supprimer</a>
+                <a href="{% url 'accident:update_accident' accident_id=accident.id %}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-edit"></i>
+                    </span>
+                    <span class="text">Modifier</span>
+                </a>
+                <a href="{% url 'accident:delete_accident' accident_id=accident.id %}" class="btn btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-trash"></i>
+                    </span>
+                    <span class="text">Supprimer</span>
+                </a>
                 <hr>
                 <h3> Vehicules</h3>
 
@@ -23,8 +32,18 @@
                         <p class="col-md-4">Date de mise en circulation le {{vehicule.date_mise_circulation}}</p>
                         <p class="col-md-4">Derniere visite technique le {{vehicule.derniere_visite_technique}}</p>
                     </div>
-                    <a href="{% url 'accident:update_vehicule' vehicule_id=vehicule.id%}" class="btn btn-outline-primary">Modifier</a>
-                    <a href="{% url 'accident:delete_vehicule' vehicule_id=vehicule.id%}" class="btn btn-outline-danger">Supprimer</a>
+                    <a href="{% url 'accident:update_vehicule' vehicule_id=vehicule.id%}" class="btn btn-secondary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Modifier</span>
+                    </a>
+                    <a href="{% url 'accident:delete_vehicule' vehicule_id=vehicule.id%}" class="btn btn-danger btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                        <span class="text">Supprimer</span>
+                    </a>
 
                 {% endfor%}
                 <hr>
@@ -34,8 +53,18 @@
                     <p class="col-md-3">Prenom et nom:  {{proprietaire.nom_prenom}}</p>
                     <p class="col-md-3">Domicile: {{proprietaire.domicile}}</p>
                 </div>
-                <a href="{% url 'accident:update_proprietaire' id=proprietaire.id%}" class="btn btn-outline-primary">Modifier</a>
-                <a href="{% url 'accident:delete_proprietaire' id=proprietaire.id %}" class="btn btn-outline-primary">Supprimer</a>
+                <a href="{% url 'accident:update_proprietaire' id=proprietaire.id%}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-edit"></i>
+                    </span>
+                    <span class="text">Modifier</span>
+                </a>
+                <a href="{% url 'accident:delete_proprietaire' id=proprietaire.id %}" class="btn btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-trash"></i>
+                    </span>
+                    <span class="text">Supprimer</span>
+                </a>
                 {% endfor%}
                 <hr>
                 {% for conducteur in listConducteur %}
@@ -45,8 +74,18 @@
                     <p class="col-md-3">Domicile: {{conducteur.domicile}}</p>
                     <p class="col-md-3">Date et lieu de naissance :{{conducteur.date_naissance}} à {{conducteur.lieu_naissance}}</p>
                 </div>
-                <a href="{% url 'accident:update_conducteur' conducteur_id=conducteur.id%}" class="btn btn-outline-primary">Modifier</a>
-                <a href="{% url 'accident:delete_conducteur' conducteur_id=conducteur.id%}" class="btn btn-outline-danger">Supprimer</a>
+                <a href="{% url 'accident:update_conducteur' conducteur_id=conducteur.id%}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-edit"></i>
+                    </span>
+                    <span class="text">Modifier</span>
+                </a>
+                <a href="{% url 'accident:delete_conducteur' conducteur_id=conducteur.id%}" class="btn btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-trash"></i>
+                    </span>
+                    <span class="text">Supprimer</span>
+                </a>
                 {% endfor%}
                 <hr>
                 {% for assurance in listAssurance %}
@@ -57,8 +96,18 @@
                     <p class="col-md-3">Date debut: {{assurance.date_debut}}</p>
                     <p class="col-md-3">Date d'expiration: {{assurance.date_expiration}}</p>
                 </div>
-                <a href="{% url 'accident:update_assurance' id=assurance.id%}" class="btn btn-outline-primary">Modifier</a>
-                <a href="{% url 'accident:delete_assurance' id=assurance.id%}" class="btn btn-outline-danger">Supprimer</a>
+                <a href="{% url 'accident:update_assurance' id=assurance.id%}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-edit"></i>
+                    </span>
+                    <span class="text">Modifier</span>
+                </a>
+                <a href="{% url 'accident:delete_assurance' id=assurance.id%}" class="btn btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-trash"></i>
+                    </span>
+                    <span class="text">Supprimer</span>
+                </a>
                 {% endfor%}
                 <hr>
                 {% if listPermis %}
@@ -70,8 +119,18 @@
                             <p class="col-md-3">Délivré le: {{permis.delivre_le}}</p>
                             <p class="col-md-3">Lieu: {{permis.lieu}}
                         </div>
-                        <a href="{% url 'accident:update_permis' id=permis.id%}" class="btn btn-outline-primary">Modifier</a>
-                        <a href="{% url 'accident:delete_permis' id=permis.id%}" class="btn btn-outline-danger">Supprimer</a>
+                        <a href="{% url 'accident:update_permis' id=permis.id%}" class="btn btn-secondary btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-edit"></i>
+                            </span>
+                            <span class="text">Modifier</span>
+                        </a>
+                        <a href="{% url 'accident:delete_permis' id=permis.id%}" class="btn btn-danger btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                            <span class="text">Supprimer</span>
+                        </a>
                     {% endfor%}
                 {% endif%}
                 <hr>
@@ -84,8 +143,18 @@
                             <p class="col-md-3">Position au moment de l'accident: {{victime.position_moment_accident}}</p>
                             <p class="col-md-3">Nature des blessures: {{victime.nature_des_blessures}}</p>
                         </div>
-                        <a href="{% url 'accident:update_victime' id=victime.id%}" class="btn btn-outline-primary">Modifier</a>
-                        <a href="{% url 'accident:delete_victime' id=victime.id%}" class="btn btn-outline-danger">Supprimer</a>
+                        <a href="{% url 'accident:update_victime' id=victime.id%}" class="btn btn-secondary btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-edit"></i>
+                            </span>
+                            <span class="text">Modifier</span>
+                        </a>
+                        <a href="{% url 'accident:delete_victime' id=victime.id%}" class="btn btn-danger btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                            <span class="text">Supprimer</span>
+                        </a>
                         <hr>
                     {% endfor%}
                 {% endif%}
@@ -98,8 +167,18 @@
                             <p class="col-md-3">Position au moment de l'accident: {{temoin.position_moment_accident}}</p>
                             <p class="col-md-3">Profession: {{temoin.profession}}</p>
                         </div>
-                        <a href="{% url 'accident:update_temoin' id=temoin.id%}" class="btn btn-outline-primary">Modifier</a>
-                        <a href="{% url 'accident:delete_temoin' id=temoin.id%}" class="btn btn-outline-danger">Supprimer</a>
+                        <a href="{% url 'accident:update_temoin' id=temoin.id%}" class="btn btn-secondary btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-edit"></i>
+                            </span>
+                            <span class="text">Modifier</span>
+                        </a>
+                        <a href="{% url 'accident:delete_temoin' id=temoin.id%}" class="btn btn-danger btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                            <span class="text">Supprimer</span>
+                        </a>
                     {% endfor%}
                 {% endif%}
                 <hr>
@@ -116,8 +195,18 @@
                         <p class="col-md-3">Passage Pieton: {{etatDesLieux.passagePieton}}</p>
                         <p class="col-md-3">Conditions atmospheriques: {{etatDesLieux.conditions_atmospherique}}</p>
                     </div>
-                    <a href="{% url 'accident:update_etat_des_lieux' id=etatDesLieux.id%}" class="btn btn-outline-primary">Modifier</a>
-                    <a href="{% url 'accident:delete_etat_des_lieux' id=etatDesLieux.id%}" class="btn btn-outline-danger">Supprimer</a>
+                    <a href="{% url 'accident:update_etat_des_lieux' id=etatDesLieux.id%}" class="btn btn-secondary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Modifier</span>
+                    </a>
+                    <a href="{% url 'accident:delete_etat_des_lieux' id=etatDesLieux.id%}" class="btn btn-danger btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                        <span class="text">Supprimer</span>
+                    </a>
                 {% endif %}
                 <hr>
                 {% if listDeclaration %}
@@ -125,11 +214,20 @@
                         <h3>Declaration du conducteur du vehicule {{declaration.conducteur.vehicule}}</h3>
                         <p>Declaration: {{declaration.declaration}}</p>
                         <p>Infraction: {{declaration.infraction}}</p>
-                        <a href="{% url 'accident:update_declaration' id=declaration.id%}" class="btn btn-outline-primary">Modifier</a>
-                        <a href="{% url 'accident:delete_declaration' id=declaration.id%}" class="btn btn-outline-danger">Supprimer</a>
+                        <a href="{% url 'accident:update_declaration' id=declaration.id%}" class="btn btn-secondary btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-edit"></i>
+                            </span>
+                            <span class="text">Modifier</span>
+                        </a>
+                        <a href="{% url 'accident:delete_declaration' id=declaration.id%}" class="btn btn-danger btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                            <span class="text">Supprimer</span>
+                        </a>
                     {% endfor %}
                 {% endif %}
             </div>
         </div>
-     </div>
 {% endblock %}
