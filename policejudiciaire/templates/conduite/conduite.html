@@ -1,42 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Saisine</title>
-</head>
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'policejudiciaire/css/bootstrap.min.css' %}">
-</head>
-<body>
-    <div class="container">
-            <div class="row">
-            <div class="col-md-3">
-                <a href="{% url 'judiciaire:save_conduite' %}" class="btn btn-lg btn-secondary"> Ajouter un PV</a>
-            </div>
-            <div class="col-md-9">
-                {% for conduite in listConduite %}
-                    <div class="card">
-                      <h5 class="card-header">Objet: {{conduite.objet}}</h5>
-                      <div class="card-body">
-                        <h5 class="card-title">Affaire: {{conduite.affaire}} </h5>
-                        <p class="card-text">Incrimination: {{conduite.incrimination}}</p>
-                        <a href="{% url 'judiciaire:detail_conduite' pv_id=conduite.id %}" class="btn btn-primary">Détail</a>
-                      </div>
-                    </div>
-                    <br>
-                {% endfor %}
+{% extends 'base_judiciaire.html'%}
+{% block content%}
+<div class="row">
+    <div class="col-md-3">
+        <a href="{% url 'judiciaire:save_conduite' %}" class="btn btn-lg btn-secondary"> Ajouter un PV</a>
+    </div>
+    <div class="col-md-9">
+        {% for conduite in listConduite %}
+        <div class="card">
+            <h5 class="card-header">Objet: {{conduite.objet}}</h5>
+            <div class="card-body">
+                <h5 class="card-title">Affaire: {{conduite.affaire}} </h5>
+                <p class="card-text">Incrimination: {{conduite.incrimination}}</p>
+                <a href="{% url 'judiciaire:detail_conduite' pv_id=conduite.id %}" class="btn btn-primary">Détail</a>
             </div>
         </div>
+        <br>
+        {% endfor %}
     </div>
-</body>
-</html>
-</body>
-</html>
+</div>
+{% endblock %}

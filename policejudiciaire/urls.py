@@ -75,5 +75,5 @@ urlpatterns = [
  path('cloture/delete/<int:pv_id>/',views.deleteCloture,name='delete_cloture'),
  path('cloture/update/<int:pv_id>/',views.updateCloture,name='update_cloture'),
  #FIN URL CLOTURE
-
+ path('listPv/',views.listPv, name='listPv'),
 ]

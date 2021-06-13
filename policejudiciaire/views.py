@@ -385,3 +385,7 @@ def deleteNotification(request,pv_id):
     return redirect('judiciaire:notification')
 
 """ Fin Notifification à Garde à vue"""
+
+def listPv(request):
+    listPV =PV.objects.all
+    return render(request,'accueil.html',{'listPV':listPV})

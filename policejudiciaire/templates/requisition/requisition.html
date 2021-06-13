@@ -1,41 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Saisine</title>
-</head>
-<body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'policejudiciaire/css/bootstrap.min.css' %}">
-</head>
-<body>
-    <div class="container">
-            <div class="row">
-            <div class="col-md-3">
-                <a href="{% url 'judiciaire:save_requisition' %}" class="btn btn-lg btn-secondary"> Ajouter un PV</a>
-            </div>
-            <div class="col-md-9">
-                {% for requisition in listRequisition %}
-                    <div class="card">
-                      <h5 class="card-header">Objet: {{requisition.objet}}</h5>
-                      <div class="card-body">
-                        <h5 class="card-title">Affaire: {{requisition.reference}} </h5>
-                        <a href="{% url 'judiciaire:detail_requisition' pv_id=requisition.id %}" class="btn btn-primary">Détail</a>
-                      </div>
-                    </div>
-                    <br>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</body>
-</html>
-</body>
-</html>
+{% extends 'base_judiciaire.html'%}
+{%block content%}
+ <div class="row">
+     <div class="col-md-3">
+         <a href="{% url 'judiciaire:save_requisition' %}" class="btn btn-lg btn-secondary"> Ajouter un PV</a>
+     </div>
+     <div class="col-md-9">
+         {% for requisition in listRequisition %}
+         <div class="card">
+             <h5 class="card-header">Objet: {{requisition.objet}}</h5>
+             <div class="card-body">
+                 <h5 class="card-title">Affaire: {{requisition.reference}} </h5>
+                 <a href="{% url 'judiciaire:detail_requisition' pv_id=requisition.id %}" class="btn btn-primary">Détail</a>
+             </div>
+         </div>
+         <br>
+         {% endfor %}
+     </div>
+ </div>
+ {% endblock %}
