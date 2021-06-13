@@ -1,1 +1,1 @@
-web: gunicorn commissariat.wsgi --log-file -
+web: gunicorn commissariat.wsgi
