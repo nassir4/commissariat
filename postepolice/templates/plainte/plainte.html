@@ -1,0 +1,21 @@
+{% extends 'base_poste.html'%}
+{% block content%}
+<div class="row">
+    <div class="col-md-3">
+        <a href="{% url 'judiciaire:save_audition' %}" class="btn btn-lg btn-secondary"> Ajouter un PV</a>
+    </div>
+    <div class="col-md-9">
+        {% for audition in listAudition %}
+        <div class="card">
+            <h5 class="card-header">Objet: {{auditon.objet}}</h5>
+            <div class="card-body">
+                <h5 class="card-title">Affaire: {{audition.affaire}} </h5>
+                <p class="card-text">Incrimination: {{audition.incrimination}}</p>
+                <a href="{% url 'judiciaire:detail_audition' pv_id=audition.id %}" class="btn btn-primary">Détail</a>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
