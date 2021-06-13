@@ -58,23 +58,23 @@ def audition(request):
     context = {
         'listAudition': listAudition
     }
-    return render(request, 'audition/audition.html',context);
+    return render(request, 'plainte/plainte.html',context);
 def detailAudition(request, pv_id):
     try:
         pv = Audition.objects.get(pk=pv_id)
     except PV.DoesNotExist:
         raise Http404("Question does not exist")
-    return render(request, 'audition/detail_audition.html', {'pv': pv})
+    return render(request, 'plainte/detail_plainte.html', {'pv': pv})
 def saveAudition(request):
     form = AuditionForm
     if request.method == 'POST':
         form = AuditionForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('judiciaire:audition')
+            return redirect('judiciaire:plainte')
     else:
         form = AuditionForm
-    return render(request, 'audition/enregistrement.html',{'form':form})
+    return render(request, 'plainte/enregistrement.html',{'form':form})
 def updateAudition(request,pv_id):
     try:
         pv = Audition.objects.get(pk=pv_id)
@@ -83,15 +83,15 @@ def updateAudition(request,pv_id):
     form = AuditionForm(request.POST or None, instance=pv)
     if form.is_valid():
         form.save()
-        return redirect('judiciaire:audition')
+        return redirect('judiciaire:plainte')
     context = {
         'form': form,
     }
-    return render(request, 'audition/enregistrement.html',context)
+    return render(request, 'plainte/enregistrement.html',context)
 def deleteAudition(request,pv_id):
     pv = Audition.objects.get(pk=pv_id)
     pv.delete()
-    return redirect('judiciaire:audition')
+    return redirect('judiciaire:plainte')
 
 """Fin Audition"""
 """Interrogatoire"""
