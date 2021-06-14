@@ -17,7 +17,7 @@ urlpatterns = [
  path('plainte/detail/<int:pv_id>/', views.detailAudition,name='detail_audition'),
  path('plainte/delete/<int:pv_id>/',views.deleteAudition,name='delete_audition'),
  path('plainte/update/<int:pv_id>/',views.updateAudition,name='update_audition'),
- path('plainte/',views.audition, name='plainte'),
+ path('audition/',views.audition, name='audition'),
  #FIN URL AUDITION
 
  #URL INTERROGATOIRE
