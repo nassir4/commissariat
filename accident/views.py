@@ -78,21 +78,21 @@ def detailAccident(request, accident_id):
         listTemoin=Temoin.objects.filter(accident=accident)
         listVictime= Victime.objects.filter(accident=accident)
         etatDesLieux=EtatDesLieux.objects.filter(accident=accident)
-        listDeclaration=[]
         listProprietaire=[]
         listEclairage = []
         listDirection = []
         listAvertisseur=[]
         listVitesse=[]
         listEssuieGlace=[]
+        listDeclaration = []
+        for conducteur in listConducteur:
+            listDeclaration.append(Declaration.objects.get(conducteur=conducteur))
         for vehicule in listVehicule:
             listConducteur.append(Conducteur.objects.get(vehicule=vehicule))
         for vehicule in listVehicule:
             listAssurance.append(Assurance.objects.get(vehicule=vehicule))
         for conducteur in listConducteur:
             listPermis.append(Permis.objects.get(conducteur=conducteur))
-        for conducteur in listConducteur:
-            listDeclaration.append(Declaration.objects.get(conducteur=conducteur))
         for vehicule in listVehicule:
             listProprietaire.append(Proprietaire.objects.get(vehicule=vehicule))
         if accident.type_accident.nom =="Accident Materiel":
@@ -108,6 +108,7 @@ def detailAccident(request, accident_id):
                 listVitesse.append(IndicateurVitesse.objects.get(vehicule=vehicule))
             for vehicule in listVehicule:
                 listEssuieGlace.append(EssuieGlace.objects.get(vehicule=vehicule))
+
         context = {
             'accidentCorporel':accidentCorporel,
             'listProprietaire':listProprietaire,
