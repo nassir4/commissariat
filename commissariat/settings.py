@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'accident',
+    'authentification',
     'postepolice',
     'policejudiciaire',
     'django.contrib.admin',
