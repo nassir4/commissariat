@@ -91,9 +91,8 @@ def detailAccident(request, accident_id):
             listAssurance.append(Assurance.objects.get(vehicule=vehicule))
         for conducteur in listConducteur:
             listPermis.append(Permis.objects.get(conducteur=conducteur))
-        if accident.type_accident == 'Accident Materiel':
-            for conducteur in listConducteur:
-                listDeclaration.append(Declaration.objects.get(conducteur=conducteur))
+        for conducteur in listConducteur:
+            listDeclaration.append(Declaration.objects.get(conducteur=conducteur))
         for vehicule in listVehicule:
             listProprietaire.append(Proprietaire.objects.get(vehicule=vehicule))
         if accident.type_accident.nom =="Accident Materiel":
@@ -109,6 +108,7 @@ def detailAccident(request, accident_id):
                 listVitesse.append(IndicateurVitesse.objects.get(vehicule=vehicule))
             for vehicule in listVehicule:
                 listEssuieGlace.append(EssuieGlace.objects.get(vehicule=vehicule))
+            print(listDeclaration[0])
         context = {
             'accidentCorporel':accidentCorporel,
             'listProprietaire':listProprietaire,
@@ -341,62 +341,6 @@ def deleteAccident(id):
     accident = Accident.objects.get(pk=id)
     accident.delete()
     return redirect('accident:list_accident')
-def deleteVehicule(id):
-    vehicule = Vehicule.objects.get(pk=id)
-    vehicule.delete()
-    return redirect('accident:list_accident')
-def deleteConducteur(id):
-    conducteur = Conducteur.objects.get(pk=id)
-    conducteur.delete()
-    return redirect('accident:list_accident')
-def deletePermis(id):
-    permis = Permis.objects.get(pk=id)
-    permis.delete()
-    return redirect('accident:list_accident')
-def deletePropprietaire(id):
-    proprietaire = Proprietaire.objects.get(pk=id)
-    proprietaire.delete()
-    return redirect('accident:list_accident')
-def deleteAssurance(id):
-    assurance = Assurance.objects.get(pk=id)
-    assurance.delete()
-    return redirect('accident:list_accident')
-def deleteVictime(id):
-    victime = Victime.objects.get(pk=id)
-    victime.delete()
-    return redirect('accident:list_accident')
-def deleteEtatDesLieux(id):
-    etatDesLieux = EtatDesLieux.objects.get(pk=id)
-    etatDesLieux.delete()
-    return redirect('accident:list_accident')
-def deleteDeclaraton(id):
-    declaration = Declaration.objects.get(pk=id)
-    declaration.delete()
-    return redirect('accident:list_accident')
-def deleteTemoin(id):
-    temoin = Temoin.objects.get(pk=id)
-    temoin.delete()
-    return redirect('accident:list_accident')
-def deleteAvertisseur(id):
-    avertisseur = Avertisseur.objects.get(pk=id)
-    avertisseur.delete()
-    return redirect('accident:list_accident')
-def deleteVitesse(id):
-    vitesse = IndicateurVitesse.objects.get(pk=id)
-    vitesse.delete()
-    return redirect('accident:list_accident')
-def deleteDirection(id):
-    direction = IndicateurDirection.objects.get(pk=id)
-    direction.delete()
-    return redirect('accident:list_accident')
-def deleteEssuieGlace(id):
-    essuieGlace = EssuieGlace.objects.get(pk=id)
-    essuieGlace.delete()
-    return redirect('accident:list_accident')
-def deleteEclairage(id):
-    eclairage = Eclairage.objects.get(pk=id)
-    eclairage.delete()
-    return redirect('accident:list_accident')
 
 ##########################################################################################################################
 ############################################ FIN ACCIDENT CORPOREL #######################################################
@@ -465,7 +409,7 @@ def vehiculeMatertielSave(request):
             permis =permis_form.save(commit=False)
             permis.conducteur=con
             permis.save()
-            return redirect('accident:list_accident')
+            return redirect('accident:detail_accident',accident_id=accident.id)
     else:
         vehicule_form = VehiculeMaterielForm
         assurance_form = AssuranceForm
@@ -529,7 +473,7 @@ def vehiculeCorporelSave(request):
             permis =permis_form.save(commit=False)
             permis.conducteur=con
             permis.save()
-            return redirect('accident:list_accident')
+            return redirect('accident:detail_accident',accident_id=accident.id)
     else:
         vehicule_form = VehiculeForm
         assurance_form = AssuranceForm
@@ -577,7 +521,7 @@ def temoinMaterielSave(request):
             temoin = form.save(commit=False)
             temoin.accident=accident
             temoin.save()
-            return redirect('accident:victime_materiel_save')
+            return redirect('accident:detail_accident',accident_id=accident.id)
     else:
         form = TemoinForm
     return render(request, 'accident_materiel/enregistrement_temoin.html', {'form': form})
@@ -589,23 +533,11 @@ def victimeMaterielSave(request):
             victime = form.save(commit=False)
             victime.accident = accident
             victime.save()
-            return redirect('accident:etat_materiel_save')
+            return redirect('accident:detail_accident',accident_id=accident.id)
     else:
         form = VictimeForm
     return render(request, 'accident_materiel/enregistrement_victime.html', {'form': form})
 
-def victimeEndSave(request):
-    accident = Accident.objects.last()
-    if request.method == 'POST':
-        form = VictimeForm(request.POST)
-        if form.is_valid():
-            victime = form.save(commit=False)
-            victime.accident = accident
-            victime.save()
-            return redirect('accident:accident_materiel_save')
-    else:
-        form = VictimeForm
-    return render(request, 'accident_materiel/enregistrement_temoin.html', {'form': form})
 def etatSave(request):
     accident = Accident.objects.last()
     if request.method == 'POST':
@@ -614,10 +546,7 @@ def etatSave(request):
             etat = form.save(commit=False)
             etat.accident = accident
             etat.save()
-            if accident.type_accident.nom =="Accident Materiel":
-                return redirect('accident:declaration_materiel_save')
-            else:
-                return redirect('accident:list_accident')
+            return redirect('accident:detail_accident',accident_id=accident.id)
     else:
         form = EtatDesLieuxForm
     return render(request, 'accident_materiel/enregistrement_etat.html', {'form': form})

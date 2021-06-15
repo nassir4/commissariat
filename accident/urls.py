@@ -40,18 +40,4 @@ urlpatterns = [
 
     #####ULR Suppression
     path('delete/<int:accident_id>', views.deleteAccident, name='delete_accident'),
-    path('delete/vehicule/<int:vehicule_id>', views.deleteVehicule, name='delete_vehicule'),
-    path('delete/conducteur/<int:conducteur_id>', views.deleteConducteur, name='delete_conducteur'),
-    path('delete/proprietaire/<int:id>', views.deletePropprietaire, name='delete_proprietaire'),
-    path('delete/permis/<int:id>', views.deletePermis, name='delete_permis'),
-    path('delete/assurance/<int:id>', views.deleteAssurance, name='delete_assurance'),
-    path('delete/victime/<int:id>', views.deleteVictime, name='delete_victime'),
-    path('delete/temoin/<int:id>', views.deleteTemoin, name='delete_temoin'),
-    path('delete/etat_des_lieux/<int:id>', views.deleteEtatDesLieux, name='delete_etat_des_lieux'),
-    path('delete/declaration/<int:id>', views.deleteDeclaraton, name='delete_declaration'),
-    path('delete/avertisseur/<int:id>', views.deleteAvertisseur, name='delete_avertisseur'),
-    path('delete/vitesse/<int:id>', views.deleteVitesse, name='delete_vitesse'),
-    path('delete/direction/<int:id>', views.deleteDirection, name='delete_direction'),
-    path('delete/eclairage/<int:id>', views.deleteEclairage, name='delete_eclairage'),
-    path('delete/essuie_glace/<int:id>', views.deleteEssuieGlace, name='delete_essuie_glace'),
-]
+    ]
