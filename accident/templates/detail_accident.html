@@ -328,7 +328,7 @@
                 {%if not etatDesLieux%}
                     <a href="{% url 'accident:etat_save'%}">Ajouter l'etat des lieux</a>
                 {% endif %}
-                <hr>
+                <hr>{% if not accidentCorporel%}
                 {% if listDeclaration %}
                     {% for declaration in listDeclaration %}
                         <h3>Declaration du conducteur du vehicule {{declaration.conducteur.vehicule}}</h3>
@@ -344,7 +344,6 @@
                         <hr>
                     {% endfor %}
                 {% endif %}
-                {% if not accidentCorporel%}
                     <a href="{% url 'accident:declaration_save'%}">Ajouter une declaration</a>
                 {%endif%}
 

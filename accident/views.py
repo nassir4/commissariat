@@ -108,7 +108,6 @@ def detailAccident(request, accident_id):
                 listVitesse.append(IndicateurVitesse.objects.get(vehicule=vehicule))
             for vehicule in listVehicule:
                 listEssuieGlace.append(EssuieGlace.objects.get(vehicule=vehicule))
-            print(listDeclaration[0])
         context = {
             'accidentCorporel':accidentCorporel,
             'listProprietaire':listProprietaire,
