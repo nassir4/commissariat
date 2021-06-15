@@ -22,97 +22,275 @@
                     <span class="text">Supprimer</span>
                 </a>
                 <hr>
-                <h3> Vehicules</h3>
-
-                {% for vehicule in listVehicule %}
+                <h3>Informations sur les vehicules</h3>
+                {% if listVehicule %}
+                    {% for vehicule in listVehicule %}
+                        <h5>Vehicule Numero: {{vehicule.numero}}</h5>
+                        <div class="row">
+                            <p class="col-md-3">Genre: {{vehicule.genre}}</p>
+                            <p class="col-md-2">Marque: {{vehicule.marque}}</p>
+                            <p class="col-md-4">Date de mise en circulation le {{vehicule.date_mise_circulation}}</p>
+                            <p class="col-md-4">Derniere visite technique le {{vehicule.derniere_visite_technique}}</p>
+                        </div>
+                        <a href="{% url 'accident:update_vehicule' vehicule_id=vehicule.id%}" class="btn btn-secondary btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-edit"></i>
+                            </span>
+                            <span class="text">Modifier</span>
+                        </a>
+                        <a href="{% url 'accident:delete_vehicule' vehicule_id=vehicule.id%}" class="btn btn-danger btn-icon-split">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-trash"></i>
+                            </span>
+                            <span class="text">Supprimer</span>
+                        </a>
+                    {% endfor%}
+                {% endif %}
+            `   {% if accidentCorporel %}
+                <hr>
+                <a href="{% url 'accident:vehicule_corporel_save'%}">Ajouter un vehicule</a>
+                <hr>
+                {% for vitesse in listVitesse %}
+                    <h5>Indicateur de vitesse du vehicule {{vitesse.vehicule}}</h5>
                     <div class="row">
-                        <p class="col-md-3">Numero: {{vehicule.numero}}</p>
-                        <p class="col-md-3">Genre: {{vehicule.genre}}</p>
-                        <p class="col-md-2">Marque: {{vehicule.marque}}</p>
-                        <p class="col-md-4">Date de mise en circulation le {{vehicule.date_mise_circulation}}</p>
-                        <p class="col-md-4">Derniere visite technique le {{vehicule.derniere_visite_technique}}</p>
+                        {%if vitesse.fonctionel%}
+                        <p class="col-md-3">Fonctionel: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Fonctionel: NON</p>
+                        {%endif%}
+                        {%if vitesse.position%}
+                        <p class="col-md-3">Position: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Position: NON</p>
+                        {%endif%}
+                       {%if vitesse.existance%}
+                        <p class="col-md-3">Existance: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Existance: NON</p>
+                        {%endif%}
                     </div>
-                    <a href="{% url 'accident:update_vehicule' vehicule_id=vehicule.id%}" class="btn btn-secondary btn-icon-split">
+                    <a href="{% url 'accident:update_vitesse' id=vitesse.id%}" class="btn btn-secondary btn-icon-split">
                         <span class="icon text-white-50">
                             <i class="fas fa-edit"></i>
                         </span>
                         <span class="text">Modifier</span>
                     </a>
-                    <a href="{% url 'accident:delete_vehicule' vehicule_id=vehicule.id%}" class="btn btn-danger btn-icon-split">
+                    <a href="{%url 'accident:delete_vitesse' id=vitesse.id%}" class="btn btn-danger btn-icon-split">
                         <span class="icon text-white-50">
                             <i class="fas fa-trash"></i>
                         </span>
                         <span class="text">Supprimer</span>
                     </a>
-
-                {% endfor%}
+                {% endfor %}
                 <hr>
-                {% for proprietaire in listProprietaire %}
-                <h5>Proprietaire du vehicule {{proprietaire.vehicule}}</h5>
-                <div class="row">
-                    <p class="col-md-3">Prenom et nom:  {{proprietaire.nom_prenom}}</p>
-                    <p class="col-md-3">Domicile: {{proprietaire.domicile}}</p>
-                </div>
-                <a href="{% url 'accident:update_proprietaire' id=proprietaire.id%}" class="btn btn-secondary btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-edit"></i>
-                    </span>
-                    <span class="text">Modifier</span>
-                </a>
-                <a href="{% url 'accident:delete_proprietaire' id=proprietaire.id %}" class="btn btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-trash"></i>
-                    </span>
-                    <span class="text">Supprimer</span>
-                </a>
-                {% endfor%}
+                {% for eclairage in listEclairage %}
+                    <h5> Eclairage du vehicule {{eclairage.vehicule}}</h5>
+                    <div class="row">
+                        {%if eclairage.fonctionel%}
+                        <p class="col-md-3">Fonctionel: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Fonctionel: NON</p>
+                        {%endif%}
+                        {%if eclairage.position%}
+                        <p class="col-md-3">Position: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Position: NON</p>
+                        {%endif%}
+                       {%if eclairage.existance%}
+                        <p class="col-md-3">Existance: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Existance: NON</p>
+                        {%endif%}
+                    </div>
+                    <a href="{% url 'accident:update_eclairage' id=eclairage.id%}" class="btn btn-secondary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Modifier</span>
+                    </a>
+                    <a href="{%url 'accident:delete_eclairage' id=eclairage.id%}" class="btn btn-danger btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                        <span class="text">Supprimer</span>
+                    </a>
+                {% endfor %}
                 <hr>
-                {% for conducteur in listConducteur %}
-                <h3>Conducteurs du vehicule {{conducteur.vehicule}}</h3>
-                <div class="row">
-                    <p class="col-md-3">Prenom et nom:   {{conducteur.nom_prenom}}</p>
-                    <p class="col-md-3">Domicile: {{conducteur.domicile}}</p>
-                    <p class="col-md-3">Date et lieu de naissance :{{conducteur.date_naissance}} à {{conducteur.lieu_naissance}}</p>
-                </div>
-                <a href="{% url 'accident:update_conducteur' conducteur_id=conducteur.id%}" class="btn btn-secondary btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-edit"></i>
-                    </span>
-                    <span class="text">Modifier</span>
-                </a>
-                <a href="{% url 'accident:delete_conducteur' conducteur_id=conducteur.id%}" class="btn btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-trash"></i>
-                    </span>
-                    <span class="text">Supprimer</span>
-                </a>
-                {% endfor%}
+                {% for avertisseur in listAvertisseur %}
+                    <h5>Avertisseur du vehicule {{avertisseur.vehicule}}</h5>
+                    <div class="row">
+                        {%if avertisseur.fonctionel%}
+                        <p class="col-md-3">Fonctionel: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Fonctionel: NON</p>
+                        {%endif%}
+                        {%if avertisseur.position%}
+                        <p class="col-md-3">Position: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Position: NON</p>
+                        {%endif%}
+                       {%if avertisseur.existance%}
+                        <p class="col-md-3">Existance: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Existance: NON</p>
+                        {%endif%}
+                    </div>
+                    <a href="{% url 'accident:update_avertisseur' id=avertisseur.id%}" class="btn btn-secondary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Modifier</span>
+                    </a>
+                    <a href="{%url 'accident:delete_avertisseur' id=avertisseur.id%}" class="btn btn-danger btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                        <span class="text">Supprimer</span>
+                    </a>
+                {% endfor %}
                 <hr>
-                {% for assurance in listAssurance %}
-                <h3>Assurance du vehicule {{assurance.vehicule}}</h3>
-                <div class="row">
-                    <p class="col-md-3"> Nom: {{assurance.nom}}</p>
-                    <p class="col-md-3">Numero Police: {{assurance.numero_police}}</p>
-                    <p class="col-md-3">Date debut: {{assurance.date_debut}}</p>
-                    <p class="col-md-3">Date d'expiration: {{assurance.date_expiration}}</p>
-                </div>
-                <a href="{% url 'accident:update_assurance' id=assurance.id%}" class="btn btn-secondary btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-edit"></i>
-                    </span>
-                    <span class="text">Modifier</span>
-                </a>
-                <a href="{% url 'accident:delete_assurance' id=assurance.id%}" class="btn btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-trash"></i>
-                    </span>
-                    <span class="text">Supprimer</span>
-                </a>
-                {% endfor%}
+                {% for direction in listDirection %}
+                    <h5>Indicateur de direction du vehicule {{direction.vehicule}}</h5>
+                    <div class="row">
+                        {%if direction.fonctionel%}
+                        <p class="col-md-3">Fonctionel: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Fonctionel: NON</p>
+                        {%endif%}
+                        {%if direction.position%}
+                        <p class="col-md-3">Position: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Position: NON</p>
+                        {%endif%}
+                       {%if direction.existance%}
+                        <p class="col-md-3">Existance: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Existance: NON</p>
+                        {%endif%}
+                    </div>
+                    <a href="{% url 'accident:update_direction' id=direction.id%}" class="btn btn-secondary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Modifier</span>
+                    </a>
+                    <a href="{%url 'accident:delete_direction' id=direction.id%}" class="btn btn-danger btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                        <span class="text">Supprimer</span>
+                    </a>
+                {% endfor %}
+                <hr>
+                {% for essuieGlace in listEssuieGlace %}
+                    <h5>Essuie glace du vehicule {{essuieGlace.vehicule}}</h5>
+                    <div class="row">
+                        {%if essuieGlace.fonctionel%}
+                        <p class="col-md-3">Fonctionel: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Fonctionel: NON</p>
+                        {%endif%}
+                        {%if essuieGlace.position%}
+                        <p class="col-md-3">Position: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Position: NON</p>
+                        {%endif%}
+                       {%if essuieGlace.existance%}
+                        <p class="col-md-3">Existance: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Existance: NON</p>
+                        {%endif%}
+                    </div>
+                    <a href="{% url 'accident:update_essuie_glace' id=essuieGlace.id%}" class="btn btn-secondary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Modifier</span>
+                    </a>
+                    <a href="{%url 'accident:delete_essuie_glace' id=essuieGlace.id%}" class="btn btn-danger btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                        <span class="text">Supprimer</span>
+                    </a>
+                {% endfor %}
+                {% endif %}
+                {% if not accidentCorporel %}
+                    <a href="{% url 'accident:vehicule_materiel_save'%}">Ajouter un vehicule</a>
+                {% endif %}
+                <hr>
+                {% if listProprietaire%}
+                    {% for proprietaire in listProprietaire %}
+                    <h5>Proprietaire du vehicule {{proprietaire.vehicule}}</h5>
+                    <div class="row">
+                        <p class="col-md-3">Prenom et nom:  {{proprietaire.nom_prenom}}</p>
+                        <p class="col-md-3">Domicile: {{proprietaire.domicile}}</p>
+                    </div>
+                    <a href="{% url 'accident:update_proprietaire' id=proprietaire.id%}" class="btn btn-secondary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Modifier</span>
+                    </a>
+                    <a href="{% url 'accident:delete_proprietaire' id=proprietaire.id %}" class="btn btn-danger btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                        <span class="text">Supprimer</span>
+                    </a>
+                    {% endfor%}
+                {% endif %}
+                <hr>
+                {% if listConducteur %}
+                    {% for conducteur in listConducteur %}
+                    <h5>Conducteurs du vehicule {{conducteur.vehicule}}</h5>
+                    <div class="row">
+                        <p class="col-md-3">Prenom et nom:   {{conducteur.nom_prenom}}</p>
+                        <p class="col-md-3">Domicile: {{conducteur.domicile}}</p>
+                        <p class="col-md-3">Date et lieu de naissance :{{conducteur.date_naissance}} à {{conducteur.lieu_naissance}}</p>
+                    </div>
+                    <a href="{% url 'accident:update_conducteur' conducteur_id=conducteur.id%}" class="btn btn-secondary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Modifier</span>
+                    </a>
+                    <a href="{% url 'accident:delete_conducteur' conducteur_id=conducteur.id%}" class="btn btn-danger btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                        <span class="text">Supprimer</span>
+                    </a>
+                    {% endfor%}
+                {% endif %}
+                <hr>
+                {% if listAssurance %}
+                    {% for assurance in listAssurance %}
+                    <h5>Assurance du vehicule {{assurance.vehicule}}</h5>
+                    <div class="row">
+                        <p class="col-md-3"> Nom: {{assurance.nom}}</p>
+                        <p class="col-md-3">Numero Police: {{assurance.numero_police}}</p>
+                        <p class="col-md-3">Date debut: {{assurance.date_debut}}</p>
+                        <p class="col-md-3">Date d'expiration: {{assurance.date_expiration}}</p>
+                    </div>
+                    <a href="{% url 'accident:update_assurance' id=assurance.id%}" class="btn btn-secondary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Modifier</span>
+                    </a>
+                    <a href="{% url 'accident:delete_assurance' id=assurance.id%}" class="btn btn-danger btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                        <span class="text">Supprimer</span>
+                    </a>
+                    {% endfor%}
+                {% endif %}
                 <hr>
                 {% if listPermis %}
                     {% for permis in listPermis %}
-                        <h3>Permis du conducteur {{permis.conducteur}}</h3>
+                        <h5>Permis du conducteur {{permis.conducteur}}</h5>
                         <div class="row">
                             <p class="col-md-3">Numero: {{permis.numero}}</p>
                             <p class="col-md-3">Délivré par: {{permis.delivre_par}}</p>
@@ -158,6 +336,8 @@
                         <hr>
                     {% endfor%}
                 {% endif%}
+                <a href="{% url 'accident:victime_save'%}">Ajouter une victime</a>
+                <hr>
                 <h3>Temoins</h3>
                 {% if listTemoin %}
                     {% for temoin in listTemoin %}
@@ -179,11 +359,14 @@
                             </span>
                             <span class="text">Supprimer</span>
                         </a>
+                        <hr>
                     {% endfor%}
                 {% endif%}
+                <a href="{% url 'accident:temoin_save'%}">Ajouter une victime</a>
                 <hr>
                 <h3>Etat des Lieux</h3>
                 {% if etatDesLieux %}
+                    {% for etatDesLieux in etatDesLieux%}
                     <div class="row">
                         <p class="col-md-3">Visibilite: {{etatDesLieux.visibilite}}</p>
                         <p class="col-md-3">Chaussée: {{etatDesLieux.chaussee}}</p>
@@ -207,6 +390,10 @@
                         </span>
                         <span class="text">Supprimer</span>
                     </a>
+                    {% endfor %}
+                {% endif %}
+                {%if not etatDesLieux%}
+                    <a href="{% url 'accident:etat_save'%}">Ajouter l'etat des lieux</a>
                 {% endif %}
                 <hr>
                 {% if listDeclaration %}
@@ -226,8 +413,13 @@
                             </span>
                             <span class="text">Supprimer</span>
                         </a>
+                        <hr>
                     {% endfor %}
                 {% endif %}
+                {% if not accidentCorporel%}
+                    <a href="{% url 'accident:declaration_save'%}">Ajouter une declaration</a>
+                {%endif%}
+
             </div>
         </div>
 {% endblock %}
