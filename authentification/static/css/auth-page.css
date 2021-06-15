@@ -1,0 +1,5 @@
+body.background-img{
+    background-image: url('../img/Police\ 1.jpg');
+    /* background-position: center; */
+    background-size: cover;
+}
