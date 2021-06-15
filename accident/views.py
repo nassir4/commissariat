@@ -97,7 +97,7 @@ def detailAccident(request, accident_id):
             listProprietaire.append(Proprietaire.objects.get(vehicule=vehicule))
         if accident.type_accident.nom =="Accident Materiel":
             accidentCorporel = False
-        if accidentCorporel:
+        if accident.type_accident.nom =="Accident Corporel":
             for vehicule in listVehicule:
                 listEclairage.append(Eclairage.objects.get(vehicule=vehicule))
             for vehicule in listVehicule:
