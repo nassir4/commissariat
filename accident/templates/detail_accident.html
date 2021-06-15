@@ -2,24 +2,27 @@
 {% block content %}
      <div class="row">
         <div class="col-md-12">
-                <h3> {{accident.type_accident}} </h3>
+                <h6 style="text-align: center;"> {{accident.type_accident}} </h3>
                 <hr>
-                <div class="row">
-                    <p class="col-md-3">Survenu le {{accident.date_accident}} à  {{accident.heure_accident}}</p>
-                    <p class="col-md-3">Lieu: {{accident.lieu_accident}}</p>
-                    <p class="col-md-3">Etabli par: l'Agent de Police: {{accident.etabli_par}}</p>
+                <div class="accident-item-box">
+                    <div class="row">
+                        <p class="col-md-3">Survenu le {{accident.date_accident}} à  {{accident.heure_accident}}</p>
+                        <p class="col-md-3">Lieu: {{accident.lieu_accident}}</p>
+                        <p class="col-md-3">Etabli par: l'Agent de Police: {{accident.etabli_par}}</p>
+                    </div>
+                    <a href="{% url 'accident:update_accident' accident_id=accident.id %}" class="btn btn-secondary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Modifier</span>
+                    </a>
                 </div>
-                <a href="{% url 'accident:update_accident' accident_id=accident.id %}" class="btn btn-secondary btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-edit"></i>
-                    </span>
-                    <span class="text">Modifier</span>
-                </a>
 
-                <hr>
                 <h3>Informations sur les vehicules</h3>
                 {% if listVehicule %}
                     {% for vehicule in listVehicule %}
+
+                    <div class="accident-item-box">
                         <h5>Vehicule Numero: {{vehicule.numero}}</h5>
                         <div class="row">
                             <p class="col-md-3">Genre: {{vehicule.genre}}</p>
@@ -255,8 +258,12 @@
 
                     {% endfor%}
                 {% endif%}
-                <hr>
+
+            </div>
+                
+            <div class="accident-item-box">
                 <h3>Victimes</h3>
+                <hr>
                 {% if listVictime %}
                     {% for victime in listVictime%}
                         <div class="row">
@@ -276,8 +283,11 @@
                     {% endfor%}
                 {% endif%}
                 <a href="{% url 'accident:victime_save'%}">Ajouter une victime</a>
-                <hr>
+            </div>
+
+            <div class="accident-item-box">
                 <h3>Temoins</h3>
+                <hr>
                 {% if listTemoin %}
                     {% for temoin in listTemoin %}
                        <div class="row">
@@ -296,9 +306,13 @@
                         <hr>
                     {% endfor%}
                 {% endif%}
-                <a href="{% url 'accident:temoin_save'%}">Ajouter une victime</a>
-                <hr>
+                <a href="{% url 'accident:temoin_save'%}">Ajouter un temoin</a>
+                
+            </div>
+
+            <div class="accident-item-box">
                 <h3>Etat des Lieux</h3>
+                <hr>
                 {% if etatDesLieux %}
                     {% for etatDesLieux in etatDesLieux%}
                     <div class="row">
@@ -324,7 +338,11 @@
                 {%if not etatDesLieux%}
                     <a href="{% url 'accident:etat_save'%}">Ajouter l'etat des lieux</a>
                 {% endif %}
-                <hr>{% if not accidentCorporel%}
+
+            </div>
+
+            <div class="accident-item-box">
+                {% if not accidentCorporel%}
                 {% if listDeclaration %}
                     {% for declaration in listDeclaration %}
                         <h3>Declaration du conducteur du vehicule {{declaration.conducteur.vehicule}}</h3>
