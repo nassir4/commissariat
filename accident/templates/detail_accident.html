@@ -37,6 +37,7 @@
                                 <i class="fas fa-edit"></i>
                             </span>
                             <span class="text">Modifier</span>
+                        </a>
                     {% endfor%}
                 {% endif %}
             `   {% if accidentCorporel %}
@@ -346,7 +347,7 @@
                 {% endif %}
                     <a href="{% url 'accident:declaration_save'%}">Ajouter une declaration</a>
                 {%endif%}
-
+                        </a>
             </div>
         </div>
 {% endblock %}
