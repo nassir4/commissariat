@@ -3,7 +3,9 @@ from django.shortcuts import render, redirect
 
 
 # Create your views here.
-def loginPage(request):
+def accueil(request):
+    return render(request,'accueil.html')
+def loginPageAccident(request):
     if request.method == 'POST':
         username=request.POST.get('username')
         password=request.POST.get('password')
@@ -11,4 +13,25 @@ def loginPage(request):
         if user is not None:
             login(request,user)
             return redirect('accident:list_accident')
-    return render(request,'base_auth.html')
+    return render(request,'auth_accident.html')
+def loginPageJudiciaire(request):
+    if request.method == 'POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user = authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('judiciaire:saisine')
+    return render(request,'auth_judiciaire.html')
+def loginPagePoste(request):
+    if request.method == 'POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user = authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('poste:plainte')
+    return render(request,'auth_poste.html')
+def logout(request):
+    logout(request)
+    return redirect('login:accueil')
