@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+{% block content%}
+ <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                <h6 style="text-align: center;" > Confrontation </h6>
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="{% url 'accident:save_confrontation' %}" class="btn btn-lg btn-secondary"> Ajouter un PV</a>
+                    </div>
+                    <div class="col-md-9">
+                        {% for confrontation in listConfrontation %}
+                        <div class="card">
+                            <h5 class="card-header">Objet: {{confrontation.objet}}</h5>
+                            <div class="card-body">
+                                <h5 class="card-title">Affaire: {{confrontation.affaire}} </h5>
+                                <p class="card-text">Incrimination: {{confrontation.incrimination}}</p>
+                                <a href="{% url 'accident:detail_confrontation' pv_id=confrontation.id %}" class="btn btn-primary">Détail</a>
+                            </div>
+                        </div>
+                        <br>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+ </div>
+{% endblock %}

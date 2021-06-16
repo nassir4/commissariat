@@ -1,13 +1,13 @@
-{% extends 'base_judiciaire.html'%}
+{% extends 'base.html'%}
 {% block content%}
  <div class="row">
         <div class="col-md-12">
             <div class="white-box">
-                <h6 style="text-align: center;" > Liste des accidents </h6>
+                <h6 style="text-align: center;" > Audition </h6>
                 <hr>
                 <div class="row">
                     <div class="col-md-3">
-                        <a href="{% url 'judiciaire:save_audition' %}" class="btn btn-lg btn-secondary"> Ajouter un PV</a>
+                        <a href="{% url 'accident:save_audition' %}" class="btn btn-lg btn-secondary"> Ajouter un PV</a>
                     </div>
                     <div class="col-md-9">
                         {% for audition in listAudition %}
@@ -16,7 +16,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Affaire: {{audition.affaire}} </h5>
                                 <p class="card-text">Incrimination: {{audition.incrimination}}</p>
-                                <a href="{% url 'judiciaire:detail_audition' pv_id=audition.id %}" class="btn btn-primary">Détail</a>
+                                <a href="{% url 'accident:detail_audition' pv_id=audition.id %}" class="btn btn-primary">Détail</a>
                             </div>
                         </div>
                         <br>

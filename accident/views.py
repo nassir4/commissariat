@@ -6,9 +6,11 @@ from accident import forms
 from accident.forms import TypeAccidentForm, AccidentForm, VehiculeForm, EclairageForm, EssuieGlaceForm, \
     RetroviseurForm, IndicateurVitesseForm, IndicateurDirectionForm, AvertisseurForm, ConducteurForm, VictimeForm, \
     TemoinForm, EtatDesLieuxForm, DeclarationForm, PermisForm, ProprietaireForm, AccidentMaterielForm, \
-    VehiculeMaterielForm, AssuranceForm
+    VehiculeMaterielForm, AssuranceForm, NotificationForm, ClotureForm, ConduiteForm, RequisitionForm, MissionForm, \
+    ConfrontationForm, InterrogatoireForm, AuditionForm, SaisineForm
 from accident.models import TypeAccident, Accident, EssuieGlace, Vehicule, Conducteur, Permis, Assurance, Victime, \
-    Temoin, EtatDesLieux, Declaration, Proprietaire, Eclairage, IndicateurDirection, Avertisseur, IndicateurVitesse
+    Temoin, EtatDesLieux, Declaration, Proprietaire, Eclairage, IndicateurDirection, Avertisseur, IndicateurVitesse, \
+    Notification, Cloture, PV, Conduite, Requisition, Mission, Confrontation, Saisine, Interrogatoire, Audition
 
 
 def index (request):
@@ -560,3 +562,384 @@ def declarationSave(request):
     else:
         form = DeclarationForm
     return render(request, 'accident_materiel/enregistrement_declaration.html', {'form': form})
+
+
+
+
+
+"""Saisine"""
+def saisine(request):
+    listSaisine = Saisine.objects.all
+    context = {
+        'listSaisine': listSaisine
+    }
+    return render(request, 'pv/saisine/saisine.html',context);
+def detailSaisine(request, pv_id):
+    try:
+        pv = Saisine.objects.get(pk=pv_id)
+    except PV.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'pv/saisine/detail_saisine.html', {'pv': pv})
+
+def save(request):
+    form = SaisineForm
+    if request.method == 'POST':
+        form = SaisineForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('accident:saisine')
+    else:
+        form = SaisineForm
+    return render(request, 'pv/saisine/enregistrement.html',{'form':form})
+def update(request,pv_id):
+    try:
+        pv = Saisine.objects.get(pk=pv_id)
+    except Saisine.DoesNotExist:
+        return redirect('accident:detail_saisine')
+    form = SaisineForm(request.POST or None, instance=pv)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:saisine')
+    context = {
+        'form': form,
+    }
+    return render(request, 'pv/saisine/enregistrement.html',context)
+def delete(request,pv_id):
+    pv = Saisine.objects.get(pk=pv_id)
+    pv.delete()
+    listSaisine = Saisine.objects.all
+    return redirect('accident:saisine')
+"""Fin Saisine"""
+"""Audition"""
+def audition(request):
+    listAudition = Audition.objects.all
+    context = {
+        'listAudition': listAudition
+    }
+    return render(request, 'pv/audition/audition.html',context);
+def detailAudition(request, pv_id):
+    try:
+        pv = Audition.objects.get(pk=pv_id)
+    except PV.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'pv/audition/detail_audition.html', {'pv': pv})
+def saveAudition(request):
+    form = AuditionForm
+    if request.method == 'POST':
+        form = AuditionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('accident:audition')
+    else:
+        form = AuditionForm
+    return render(request, 'pv/audition/enregistrement.html',{'form':form})
+def updateAudition(request,pv_id):
+    try:
+        pv = Audition.objects.get(pk=pv_id)
+    except Audition.DoesNotExist:
+        return redirect('accident:detail_audition')
+    form = AuditionForm(request.POST or None, instance=pv)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:audition')
+    context = {
+        'form': form,
+    }
+    return render(request, 'pv/audition/enregistrement.html',context)
+def deleteAudition(request,pv_id):
+    pv = Audition.objects.get(pk=pv_id)
+    pv.delete()
+    return redirect('accident:audition')
+
+"""Fin Audition"""
+"""Interrogatoire"""
+def interrogatoire(request):
+    listInterrogatoire = Interrogatoire.objects.all
+    context = {
+        'listInterrogatoire': listInterrogatoire
+    }
+    return render(request, 'pv/interrogatoire/interrogatoire.html',context);
+def detailInterrogatoire(request, pv_id):
+    try:
+        pv = Interrogatoire.objects.get(pk=pv_id)
+    except PV.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'pv/interrogatoire/detail_interrogatoire.html', {'pv': pv})
+def saveInterrogatoire(request):
+    form = InterrogatoireForm
+    if request.method == 'POST':
+        form = InterrogatoireForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('accident:interrogatoire')
+    else:
+        form = InterrogatoireForm
+    return render(request, 'pv/interrogatoire/enregistrement.html',{'form':form})
+def updateInterrogatoire(request,pv_id):
+    try:
+        pv = Interrogatoire.objects.get(pk=pv_id)
+    except Interrogatoire.DoesNotExist:
+        return redirect('accident:detail_interrogatoire')
+    form = InterrogatoireForm(request.POST or None, instance=pv)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:interrogatoire')
+    context = {
+        'form': form,
+    }
+    return render(request, 'pv/interrogatoire/enregistrement.html',context)
+def deleteInterrogatoire(request,pv_id):
+    pv = Interrogatoire.objects.get(pk=pv_id)
+    pv.delete()
+    listSaisine = Saisine.objects.all
+    return redirect('accident:interrogatoire')
+"""Confrontation"""
+def confrontation(request):
+    listConfrontation = Confrontation.objects.all
+    context = {
+        'listConfrontation': listConfrontation
+    }
+    return render(request, 'pv/confrontation/confrontation.html',context);
+def detailConfrontation(request, pv_id):
+    try:
+        pv = Confrontation.objects.get(pk=pv_id)
+    except Confrontation.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'pv/confrontation/detail_confrontation.html', {'pv': pv})
+def saveConfrontation(request):
+    form = ConfrontationForm
+    if request.method == 'POST':
+        form = ConfrontationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('accident:confrontation')
+    else:
+        form = ConfrontationForm
+    return render(request, 'pv/confrontation/enregistrement.html',{'form':form})
+def updateConfrontation(request,pv_id):
+    try:
+        pv = Confrontation.objects.get(pk=pv_id)
+    except Confrontation.DoesNotExist:
+        return redirect('accident:detail_confrontation')
+    form = ConfrontationForm(request.POST or None, instance=pv)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:confrontation')
+    context = {
+        'form': form,
+    }
+    return render(request, 'pv/confrontation/enregistrement.html',context)
+def deleteConfrontation(request,pv_id):
+    pv = Confrontation.objects.get(pk=pv_id)
+    pv.delete()
+    return redirect('accident:confrontation')
+
+"""Fin Confrontation"""
+"""Mission"""
+def mission(request):
+    listMission = Mission.objects.all
+    context = {
+        'listMission': listMission
+    }
+    return render(request, 'pv/mission/mission.html',context);
+def detailMission(request, pv_id):
+    try:
+        pv = Mission.objects.get(pk=pv_id)
+    except PV.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'pv/mission/detail_mission.html', {'pv': pv})
+def saveMission(request):
+    form = MissionForm
+    if request.method == 'POST':
+        form = MissionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('accident:mission')
+    else:
+        form = MissionForm
+    return render(request, 'pv/mission/enregistrement.html',{'form':form})
+def updateMission(request,pv_id):
+    try:
+        pv = Mission.objects.get(pk=pv_id)
+    except Mission.DoesNotExist:
+        return redirect('accident:detail_mission')
+    form = MissionForm(request.POST or None, instance=pv)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:mission')
+    context = {
+        'form': form,
+    }
+    return render(request, 'pv/mission/enregistrement.html',context)
+def deleteMission(request,pv_id):
+    pv = Mission.objects.get(pk=pv_id)
+    pv.delete()
+    return redirect('accident:mission')
+"""Fin Mission"""
+"""Requisition"""
+def requisition(request):
+    listRequisition = Requisition.objects.all
+    context = {
+        'listRequisition': listRequisition
+    }
+    return render(request, 'pv/requisition/requisition.html',context);
+def detailRequisition(request, pv_id):
+    try:
+        pv = PV.objects.get(pk=pv_id)
+    except PV.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'pv/requisition/detail_requisition.html', {'pv': pv})
+def saveRequisition(request):
+    form = RequisitionForm
+    if request.method == 'POST':
+        form = RequisitionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('accident:requisition')
+    else:
+        form = RequisitionForm
+    return render(request, 'pv/requisition/enregistrement.html',{'form':form})
+def updateRequisition(request,pv_id):
+    try:
+        pv = Requisition.objects.get(pk=pv_id)
+    except Requisition.DoesNotExist:
+        return redirect('accident:detail_requisition')
+    form = RequisitionForm(request.POST or None, instance=pv)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:requisition')
+    context = {
+        'form': form,
+    }
+    return render(request, 'pv/requisition/enregistrement.html',context)
+def deleteRequisition(request,pv_id):
+    pv = Requisition.objects.get(pk=pv_id)
+    pv.delete()
+    return redirect('accident:requisition')
+"""Fin Requisition"""
+"""Conduite"""
+def conduite(request):
+    listConduite = Conduite.objects.all
+    context = {
+        'listConduite': listConduite
+    }
+    return render(request, 'pv/conduite/conduite.html',context);
+def detailConduite(request, pv_id):
+    try:
+        pv = Conduite.objects.get(pk=pv_id)
+    except PV.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'pv/conduite/detail_conduite.html', {'pv': pv})
+def saveConduite(request):
+    form = ConduiteForm
+    if request.method == 'POST':
+        form = ConduiteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('accident:conduite')
+    else:
+        form = ConduiteForm
+    return render(request, 'pv/conduite/enregistrement.html',{'form':form})
+def updateConduite(request,pv_id):
+    try:
+        pv = Conduite.objects.get(pk=pv_id)
+    except Conduite.DoesNotExist:
+        return redirect('accident:detail_conduite')
+    form = ConduiteForm(request.POST or None, instance=pv)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:conduite')
+    context = {
+        'form': form,
+    }
+    return render(request, 'pv/conduite/enregistrement.html',context)
+def deleteConduite(request,pv_id):
+    pv = Conduite.objects.get(pk=pv_id)
+    pv.delete()
+    return redirect('accident:conduite')
+
+"""Fin Conduite"""
+"""Cloture"""
+def cloture(request):
+    listCloture = Cloture.objects.all
+    context = {
+        'listCloture': listCloture
+    }
+    return render(request, 'pv/cloture/cloture.html',context);
+def detailCloture(request, pv_id):
+    try:
+        pv = Cloture.objects.get(pk=pv_id)
+    except PV.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'pv/cloture/detail_cloture.html', {'pv': pv})
+def saveCloture(request):
+    form = ClotureForm
+    if request.method == 'POST':
+        form = ClotureForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('accident:cloture')
+    else:
+        form = ClotureForm
+    return render(request, 'pv/cloture/enregistrement.html',{'form':form})
+def updateCloture(request,pv_id):
+    try:
+        pv = Cloture.objects.get(pk=pv_id)
+    except Cloture.DoesNotExist:
+        return redirect('accident:detail_cloture')
+    form = ClotureForm(request.POST or None, instance=pv)
+    if form.is_valid():
+        form.save()
+        return redirect('accident:cloture')
+    context = {
+        'form': form,
+    }
+    return render(request, 'pv/cloture/enregistrement.html',context)
+def deleteCloture(request,pv_id):
+    pv = Cloture.objects.get(pk=pv_id)
+    pv.delete()
+    return redirect('accident:cloture')
+
+"""Fin Cloture"""
+"""Notifification à Garde à vue"""
+def notification(request):
+    listNotification = Notification.objects.all
+    context = {
+        'listNotification': listNotification
+    }
+    return render(request, 'pv/notification/notification.html',context);
+def detailNotification(request, pv_id):
+    try:
+        pv = Notification.objects.get(pk=pv_id)
+    except PV.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'pv/notification/detail_notification.html', {'pv': pv})
+def saveNotification(request):
+    form = NotificationForm
+    if request.method == 'POST':
+        form = NotificationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('accident:notification')
+    else:
+        form = NotificationForm
+    return render(request, 'pv/notification/enregistrement.html',{'form':form})
+def updateNotification(request,pv_id):
+    try:
+        pv = Notification.objects.get(pk=pv_id)
+    except Notification.DoesNotExist:
+        return redirect('accident:detail_notification')
+    form = NotificationForm(request.POST or None, instance=pv)
+    if form.is_valid():
+        form.save()
+        return redirect('accidennt:notification')
+    context = {
+        'form': form,
+    }
+    return render(request, 'pv/notification/enregistrement.html',context)
+def deleteNotification(request,pv_id):
+    pv = Notification.objects.get(pk=pv_id)
+    pv.delete()
+    return redirect('accident:notification')
+
+""" Fin Notifification à Garde à vue"""
