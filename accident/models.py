@@ -15,6 +15,9 @@ from django.contrib.auth.models import User
 # # # # # # # # # # # # # # # # # # # # #
 
 # models type accident
+from django_summernote.fields import SummernoteTextField
+
+
 class TypeAccident(models.Model):
     nom = models.CharField("Nom", max_length=200, unique=True)
     description = models.TextField("Description", blank=True)
@@ -251,46 +254,20 @@ class Declaration(models.Model):
 # MODELS PV
 
 # # # # # # # # # # # # # # # # # # # # #
-import datetime
-
-from django.db import models
-from django_summernote.fields import SummernoteTextField
-# Create your models here.
-class PV (models.Model):
+class PV(models.Model):
     numeroPv = models.IntegerField()
     objet = models.CharField(max_length=300)
     description = SummernoteTextField( blank=True, null=True)
     dateCreation = models.DateTimeField(auto_now_add=True)
+    affaire = models.CharField(max_length=200,blank=True, null=True)
+    incrimination = models.CharField(max_length=100,blank=True, null=True)
+    vuEtTransmis = models.BooleanField("Vu et Transmis", default=False,blank=True, null=True)
+    ouvertureEnquete = models.BooleanField("Ouverture Enquete", default=False,blank=True, null=True)
+    deroulementEtNotification = models.BooleanField("Deroulement et Transmission", default=False,blank=True, null=True)
+    controleEtTransmission = models.BooleanField("Controle et transmission",default=False,blank=True, null=True)
+    mentionRestitution = models.BooleanField("Mention et Restition",default=False,blank=True, null=True)
+    reference = models.CharField(max_length=200,blank=True, null=True)
     def __str__(self):
         return self.objet
-class Saisine (PV):
-    affaire = models.CharField(max_length=200)
-    incrimination = models.CharField(max_length=100)
-    vuEtTransmis = models.BooleanField("Vu et Transmis", default=True)
-    ouvertureEnquete = models.BooleanField("Ouverture Enquete",default=True)
-class Audition(PV):
-    affaire = models.CharField(max_length=200)
-    incrimination = models.CharField(max_length=100)
-class Notification(PV):
-    affaire = models.CharField(max_length=200)
-    incrimination = models.CharField(max_length=100)
-class Interrogatoire(PV):
-    affaire = models.CharField(max_length=200)
-    incrimination = models.CharField(max_length=100)
-class Conduite(PV):
-    affaire = models.CharField(max_length=200)
-    incrimination = models.CharField(max_length=100)
-class Confrontation(PV):
-    affaire = models.CharField(max_length=200)
-    incrimination = models.CharField(max_length=100)
-class Mission(PV):
-    affaire = models.CharField(max_length=200)
-    incrimination = models.CharField(max_length=100)
-class Cloture(PV):
-    affaire = models.CharField(max_length=200)
-    incrimination = models.CharField(max_length=100)
-    deroulementEtNotification = models.BooleanField(True)
-    controleEtTransmission = models.BooleanField(True)
-    mentionRestitution = models.BooleanField(True)
-class Requisition(PV):
-    reference=models.CharField(max_length=200)
+
+
