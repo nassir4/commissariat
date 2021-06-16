@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+{% block content%}
+ <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                <h6 style="text-align: center;" > Mission à agent</h6>
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="{% url 'accident:save_mission' %}" class="btn btn-lg btn-secondary"> Ajouter un PV</a>
+                    </div>
+                    <div class="col-md-9">
+                        {% for mission in listMission %}
+                        <div class="card">
+                            <h5 class="card-header">Objet: {{mission.objet}}</h5>
+                            <div class="card-body">
+                                <h5 class="card-title">Affaire: {{mission.affaire}} </h5>
+                                <p class="card-text">Incrimination: {{mission.incrimination}}</p>
+                                <a href="{% url 'accident:detail_mission' pv_id=mission.id %}" class="btn btn-primary">Détail</a>
+                            </div>
+                        </div>
+                        <br>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+ </div>
+{% endblock %}

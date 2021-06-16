@@ -69,9 +69,10 @@
         height: 2.5rem;
         width: 2.5rem;
         img {
-          height: 2.5rem;
-          width: 2.5rem;
+          height: 2rem !important;
+          width: 2rem !important;
         }
+        
         .status-indicator {
           background-color: $gray-200;
           height: 0.75rem;

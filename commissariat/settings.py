@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-import django_heroku
+# import django_heroku
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,6 +37,7 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'accident',
+    'authentification',
     'postepolice',
     'policejudiciaire',
     'django.contrib.admin',
@@ -50,7 +51,7 @@ INSTALLED_APPS = [
     'pdf_generator',
     'bootstrap4',
     'bootstrap_datepicker_plus',
-    'django_heroku'
+    # 'django_heroku'
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 BOOTSTRAP4 = {
@@ -146,4 +147,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-django_heroku.settings(locals())
+# django_heroku.settings(locals())

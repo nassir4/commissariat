@@ -8,7 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
     <title>Commissariat Central de Kaolack</title>
     {% load static %}
     <!-- Custom fonts for this template-->
@@ -31,12 +33,12 @@
         <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background:#022a3a">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center bg-white" href="#">
-                <div>
-                    <p class="text-white">lo</p>
-                </div>
+            <a class="sidebar-brand d-flex align-items-center justify-content-between bg-white" href="#">
+                <!-- <div>
+                    <p class="text-primary">lo</p>
+                </div> -->
                 <img src="{% static 'img/logo1.png'%}" class="img">
-                <p class="text-black-50">Police Nationale</p>
+                <p class="text-black-50 mdle">Police Nationale</p>
                 <img src="{% static 'img/logo2.png'%}" class="img">
             </a>
 
@@ -44,7 +46,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item ">
                 <a class="nav-link" href="{% url 'accident:list_accident'%}">
                     <i class="fas fa-fw fa-home"></i>
                     <span>Accueil</span></a>
@@ -52,7 +54,7 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-             <li class="nav-item active">
+             <li class="nav-item">
                 <a class="nav-link" href="{% url 'accident:accident_corporel_save'%}">
                     <i class="fas fa-fw fa-ambulance"></i>
                     <span>Accident Corporel</span></a>
@@ -61,7 +63,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="{% url 'accident:accident_materiel_save'%}">
                     <i class="fas fa-fw fa-car"></i>
                     <span>Accident Materiel</span></a>
@@ -70,10 +72,26 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <li class="nav-item active">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-file-archive"></i>
-                    <span>Les Proces verbaux(PV)</span></a>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Les Proces Verbaux(PV)</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{% url 'accident:saisine'%}">Saisine</a>
+                        <a class="collapse-item" href="{% url 'accident:audition'%}">audition</a>
+                        <a class="collapse-item" href="{% url 'accident:interrogatoire'%}">Interrogatoire</a>
+                        <a class="collapse-item" href="{% url 'accident:notification'%}">Notification à garde à vue</a>
+                        <a class="collapse-item" href="{% url 'accident:mission'%}">Mission à agent</a>
+                        <a class="collapse-item" href="{% url 'accident:confrontation'%}">Confrontation</a>
+                        <a class="collapse-item" href="{% url 'accident:cloture'%}">Clôture et transmission</a>
+                        <a class="collapse-item" href="{% url 'accident:requisition'%}">Requisiton</a>
+                        <a class="collapse-item" href="{% url 'accident:conduite'%}">Conduite</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->
@@ -88,7 +106,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand  topbar mb-4 static-top shadow" style="background-color:#87CEEB">
+                <nav class="navbar navbar-expand  topbar mb-4 static-top shadow bg-white">
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -97,8 +115,10 @@
 
 
 
-                    <p class="text-white d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 ">
-                        Bienvenue sur la plateforme du commissariat central de Kaolack</p>
+                    <marquee>
+                        <p class="text-dark d-none d-sm-inline-block form-inline mr-auto ml-auto my-2 my-md-0 mw-100 " style="font-weight:bold;font-size: 18px">
+                            Bienvenue sur la plateforme du commissariat central de Kaolack</p>
+                    </marquee>
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -142,11 +162,11 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid bg-white">
+                <div class="container-fluid ">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Section accident</h1>
-                    <hr>
+                    <!-- <h1 class="h3 mb-4 text-gray-800">Section accident</h1>
+                    <hr> -->
                     <div class="col-md-12">
                         {% block content%}{%endblock%}
                     </div>
@@ -158,9 +178,9 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            <footer class="sticky-footer " style="background-color: #87CEEB">
+            <footer class="sticky-footer " style="background-color: #fff;">
                 <div class="container my-auto">
-                    <div class="copyright text-center text-white my-auto">
+                    <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Your Website 2020</span>
                     </div>
                 </div>
@@ -200,6 +220,7 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+    <script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js'%}"></script>

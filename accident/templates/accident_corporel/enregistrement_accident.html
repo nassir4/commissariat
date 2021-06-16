@@ -2,7 +2,7 @@
 
 {% block content %}
         <div class="col-md-12">
-            <div class="white-box">
+            <div class="white-box m-5">
                 {% load crispy_forms_tags %}
                 {% load bootstrap4 %}
                 {% bootstrap_css %}
@@ -10,14 +10,14 @@
                 <!-- Basic Card Example -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Enregistrement accident</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary text-center">Nouvel accident corporel</h6>
                                 </div>
                                 <div class="card-body">
                                      <form action="" method="post">
                                         {% csrf_token %}
                                         {{ form|crispy }}
                                         {{form.media}}
-                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                        <button type="submit" class="btn btn-primary btn-block">Enregistrer</button>
                                     </form>
                                 </div>
                             </div>
