@@ -21,7 +21,7 @@ urlpatterns = [
  path('ecrou/delete/<int:id>/',views.deleteEcrou,name='delete_ecrou'),
  path('ecrou/update/<int:id>/',views.updateEcrou,name='update_ecrou'),
 
- path('main_courante/',views.mainCourante, name='main_courant'),
+ path('main_courante/',views.mainCourante, name='main_courante'),
  path('main_courante/enregistrement', views.saveMainCourante, name='save_main_courante'),
  path('main_courante/detail/<int:id>/', views.detailMainCourante,name='detail_main_courante'),
  path('main_courante/delete/<int:id>/',views.deleteMainCourante,name='delete_main_courante'),
