@@ -20,9 +20,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from authentification import views
-
+app_name = 'commissariat'
 urlpatterns = [
-    path('', views.accueil),
+    path('', views.accueil,name='accueil'),
     path('postepolice/', include('postepolice.urls')),
     path('policejudiciaire/', include('policejudiciaire.urls')),
     path('login/',include('authentification.urls')),

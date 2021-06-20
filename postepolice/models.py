@@ -21,7 +21,8 @@ class AgentPoste(models.Model):
     role = models.CharField("Role", max_length=100, choices=ROLES)
 
     def __str__(self):
-        return self.user
+        return self.user.username
+
 
 
 # modele brigade
@@ -38,10 +39,13 @@ class Brigade(models.Model):
     def __str__(self):
         return self.nom
 
-
-class MainCourante(models.Model):
+class Registre(models.Model):
+    nom = models.CharField("Nom",max_length=200,null=True,blank=True)
     brigade = models.ForeignKey(Brigade, on_delete=models.SET_NULL, null=True, blank=True)
     date = models.DateField("Date", auto_now_add=True)
+
+class MainCourante(models.Model):
+    registre = models.ForeignKey(Registre, on_delete=models.CASCADE,blank=True,null=True)
     numero_mention = models.IntegerField("Numero mention", null=True, blank=True)
     heure = models.TimeField("Heure", auto_now_add=False)
     motif = models.TextField("Motif")
@@ -51,8 +55,7 @@ class MainCourante(models.Model):
 
 
 class Plainte(models.Model):
-    brigade = models.ForeignKey(Brigade, on_delete=models.SET_NULL, null=True, blank=True)
-    date = models.DateField("Date", auto_now_add=True)
+    registre = models.ForeignKey(Registre, on_delete=models.CASCADE, blank=True, null=True)
     numero_mention = models.IntegerField("Numero mention", null=True, blank=True)
     heure = models.TimeField("Heure", auto_now_add=False)
     nom_prenom = models.CharField("Nom et Prenom", max_length=200)
@@ -70,8 +73,7 @@ class Plainte(models.Model):
 
 
 class Perte(models.Model):
-    brigade = models.ForeignKey(Brigade, on_delete=models.SET_NULL, null=True, blank=True)
-    date = models.DateField("Date", auto_now_add=True)
+    registre = models.ForeignKey(Registre, on_delete=models.CASCADE,blank=True,null=True)
     numero_mention = models.IntegerField("Numero mention", null=True, blank=True)
     heure = models.TimeField("Heure", auto_now_add=False)
     nom_prenom = models.CharField("Nom et Prenom", max_length=200)
@@ -96,8 +98,7 @@ class ObjectConsigne(models.Model):
 
 
 class Ecrou(models.Model):
-    brigade = models.ForeignKey(Brigade, on_delete=models.SET_NULL, null=True, blank=True)
-    date = models.DateField("Date", auto_now_add=True)
+    registre = models.ForeignKey(Registre, on_delete=models.CASCADE,blank=True,null=True)
     numero_mention = models.IntegerField("Numero mention", null=True, blank=True)
     heure = models.TimeField("Heure", auto_now_add=False)
     nom_prenom = models.CharField("Nom et Prenom", max_length=200)
@@ -110,9 +111,4 @@ class Ecrou(models.Model):
 
     def __str__(self):
         return self.numero_mention
-
-
-
-
-
 

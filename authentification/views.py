@@ -3,8 +3,12 @@ from django.shortcuts import render, redirect
 
 
 # Create your views here.
+from authentification.decorators import unauthenticated_user_accident
+
+
 def accueil(request):
     return render(request,'accueil.html')
+
 def loginPageAccident(request):
     if request.method == 'POST':
         username=request.POST.get('username')

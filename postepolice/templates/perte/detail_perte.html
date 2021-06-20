@@ -1,18 +1,60 @@
 {% extends 'base_poste.html'%}
+{% load static %}
+{% block stylesheet %}
+ <!-- Custom styles for this page -->
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css'%}" rel="stylesheet">
+{% endblock%}
 {% block content%}
-<div class="row">
-    <div class="col-md-3">
-        <p>Objet: {{plainte.objet}}</p>
+    <div class="accident-item-box">
+        <h3 style="text-align: center;">Registre de la {{registre.nom}}</h3>
         <hr>
-        <p>Numero Mention: {{plainte.numero_mention}}</p>
-        <hr>
-        <p>Heure: {{plainte.heure}}</p>
-        <hr>
-        <a href="{% url 'poste:update_plainte' pv_id=plainte.id %}" class="btn btn-info"> Modifier </a>
-        <a href="{% url 'poste:delete_plainte' pv_id=plainte.id %}" class="btn btn-danger"> Supprimer</a>
+        <p> Brigade: {{ registre.brigade}}</p>
+        <p>Chef de poste:{{ registre.brigade.chef_de_poste}}</p>
+        <p>Secretaire: {{registre.brigade.secretaire}}</p>
+        <p>Chauffeur: {{registre.brigade.chauffeur}}</p>
+        <p>Police Secours: {{registre.brigade.police_secours}}</p>
+        <div class="card  mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Date: {{registre.date}}</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Numero Mention</th>
+                                <th>Heure</th>
+                                <th>Objet</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Numero Mention</th>
+                                <th>Heure</th>
+                                <th>Objet</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                        {% for perte in listPerte %}
+                            <tr>
+                                <td>{{perte.numero_mention}}</td>
+                                <td>{{perte.heure}}</td>
+                                <td>{{perte.objet}}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-success" href="{% url 'poste:save_perte' id=registre.id %}">Ajouter une perte</a>
     </div>
-    <div class="col-md-6">
-        {{plainte.contenu|safe}}
-    </div>
-</div>
 {% endblock %}
+{% block javascript%}
+ <!-- Page level plugins -->
+    <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{% static 'js/demo/datatables-demo.js'%}"></script>
+{% endblock%}
