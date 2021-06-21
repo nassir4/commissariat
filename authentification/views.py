@@ -36,6 +36,6 @@ def loginPagePoste(request):
             login(request,user)
             return redirect('poste:plainte')
     return render(request,'auth_poste.html')
-def logout(request):
+def deconexion(request):
     logout(request)
     return redirect('login:accueil')
