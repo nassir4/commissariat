@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, redirect
 
@@ -10,7 +11,10 @@ from accident.forms import TypeAccidentForm, AccidentForm, VehiculeForm, Eclaira
 from accident.models import TypeAccident, Accident, EssuieGlace, Vehicule, Conducteur, Permis, Assurance, Victime, \
     Temoin, EtatDesLieux, Declaration, Proprietaire, Eclairage, IndicateurDirection, Avertisseur, IndicateurVitesse, \
     PV
+from authentification.decorators import allowed_user
 
+
+@login_required(login_url='login:accident')
 def index (request):
     listAccident = Accident.objects.all
     return render(request,'index.html',{'listAccident':listAccident})
@@ -61,12 +65,15 @@ def delete(request,type_id):
 ############################################## ACCIDENT CORPOREL ##########################################
 ###########################################################################################################
 ### Accident ###
+@login_required(login_url='login:accident')
+@allowed_user(allowed_roles=['accident'])
 def accident(request):
     listaccident = Accident.objects.all
     context = {
         'listAccident': listaccident
     }
     return render(request, 'accident.html',context);
+@login_required(login_url='login:accident')
 def detailAccident(request, accident_id):
     try:
         accidentCorporel = True
@@ -130,6 +137,7 @@ def detailAccident(request, accident_id):
     except Accident.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'detail_accident.html', context)
+@login_required(login_url='login:accident')
 def modifierAccident(request,accident_id):
     try:
         accident = Accident.objects.get(pk=accident_id)
@@ -145,6 +153,7 @@ def modifierAccident(request,accident_id):
     }
     return render(request, 'accident_materiel/enregistrement_accident.html', context)
 
+@login_required(login_url='login:accident')
 def modifierVehicule(request,vehicule_id):
     try:
         vehicule = Vehicule.objects.get(pk=vehicule_id)
@@ -161,6 +170,7 @@ def modifierVehicule(request,vehicule_id):
     return render(request, 'accident_materiel/enregistrement_vehicule.html', context)
 
 
+@login_required(login_url='login:accident')
 def modifierConducteur(request,conducteur_id):
     try:
         conducteur = Conducteur.objects.get(pk=conducteur_id)
@@ -176,6 +186,7 @@ def modifierConducteur(request,conducteur_id):
     }
     return render(request, 'accident_materiel/enregistrement_conducteur.html', context)
 
+@login_required(login_url='login:accident')
 def modifierAssurance(request,id):
     try:
         assurance = Assurance.objects.get(pk=id)
@@ -190,6 +201,7 @@ def modifierAssurance(request,id):
     }
     return render(request, 'accident_materiel/enregistrement_assurance.html', context)
 
+@login_required(login_url='login:accident')
 def modifierPermis(request,id):
     try:
       permis = Permis.objects.get(pk=id)
@@ -204,6 +216,7 @@ def modifierPermis(request,id):
     }
     return render(request, 'accident_materiel/enregistrement_permis.html', context)
 
+@login_required(login_url='login:accident')
 def modifierProprietaire(request,id):
     try:
         proprietaire = Proprietaire.objects.get(pk=id)
@@ -218,6 +231,7 @@ def modifierProprietaire(request,id):
     }
     return render(request, 'accident_materiel/enregistrement_proprietaire.html', context)
 
+@login_required(login_url='login:accident')
 def modifierVictime(request,id):
     try:
         victime = Victime.objects.get(pk=id)
@@ -232,6 +246,7 @@ def modifierVictime(request,id):
     }
     return render(request, 'accident_materiel/enregistrement_victime.html', context)
 
+@login_required(login_url='login:accident')
 def modifierTemoin(request,id):
     try:
         temoin = Temoin.objects.get(pk=id)
@@ -245,6 +260,7 @@ def modifierTemoin(request,id):
         'form': form,
     }
     return render(request, 'accident_materiel/enregistrement_temoin.html', context)
+@login_required(login_url='login:accident')
 def modifierEtatDesLieux(request,id):
     try:
         etatDesLieux = EtatDesLieux.objects.get(pk=id)
@@ -259,6 +275,7 @@ def modifierEtatDesLieux(request,id):
     }
     return render(request, 'accident_materiel/enregistrement_etat.html', context)
 
+@login_required(login_url='login:accident')
 def modifierDeclaration(request,id):
     try:
         declaration = Declaration.objects.get(pk=id)
@@ -272,6 +289,7 @@ def modifierDeclaration(request,id):
         'form': form,
     }
     return render(request, 'accident_materiel/enregistrement_declaration.html', context)
+@login_required(login_url='login:accident')
 def modifierVitesse(request,id):
     try:
         vitesse = IndicateurVitesse.objects.get(pk=id)
@@ -285,6 +303,7 @@ def modifierVitesse(request,id):
         'form': form,
     }
     return render(request, 'accident_corporel/enregistrement_vitesse.html', context)
+@login_required(login_url='login:accident')
 def modifierAvertisseur(request,id):
     try:
         avertisseur = Avertisseur.objects.get(pk=id)
@@ -298,6 +317,7 @@ def modifierAvertisseur(request,id):
         'form': form,
     }
     return render(request, 'accident_corporel/enregistrement_avertisseur.html', context)
+@login_required(login_url='login:accident')
 def modifierDirection(request,id):
     try:
         direction = IndicateurDirection.objects.get(pk=id)
@@ -311,6 +331,7 @@ def modifierDirection(request,id):
         'form': form,
     }
     return render(request, 'accident_corporel/enregistrement_direction.html', context)
+@login_required(login_url='login:accident')
 def modifierEclairage(request,id):
     try:
         eclairage = Eclairage.objects.get(pk=id)
@@ -324,6 +345,7 @@ def modifierEclairage(request,id):
         'form': form,
     }
     return render(request, 'accident_corporel/enregistrement_eclairage.html', context)
+@login_required(login_url='login:accident')
 def modifierEssuieGlace(request,id):
     try:
         essuieGlace = EssuieGlace.objects.get(pk=id)
@@ -337,6 +359,7 @@ def modifierEssuieGlace(request,id):
         'form': form,
     }
     return render(request, 'accident_corporel/enregistrement_essuie_glace.html', context)
+@login_required(login_url='login:accident')
 def deleteAccident(id):
     accident = Accident.objects.get(pk=id)
     accident.delete()
@@ -352,6 +375,7 @@ def deleteAccident(id):
 ##########################################################################################################################
 
 # Vue Accident Corporel
+@login_required(login_url='login:accident')
 def accidentMateriel(request):
     accident = Accident.objects.last()
     listVehicule=Vehicule.objects.filter(accident=accident)
@@ -369,6 +393,7 @@ def accidentMateriel(request):
     }
     return  render(request,'accident.html',context)
 #Fin Vue Accident Materiel
+@login_required(login_url='login:accident')
 def saveAccidentMateriel(request):
     typeAccident=TypeAccident.objects.get(nom='Accident Materiel')
     if request.method == 'POST':
@@ -382,6 +407,7 @@ def saveAccidentMateriel(request):
         form = AccidentMaterielForm
     return render(request, 'accident_materiel/enregistrement_accident.html', {'form': form})
 
+@login_required(login_url='login:accident')
 def vehiculeMatertielSave(request):
     accident = Accident.objects.last()
     if request.method == 'POST':
@@ -423,6 +449,7 @@ def vehiculeMatertielSave(request):
                                                                                 'conducteur_form': conducteur_form,
                                                                                 'permis_form': permis_form,
                                                                                 })
+@login_required(login_url='login:accident')
 def vehiculeCorporelSave(request):
     accident = Accident.objects.last()
     if request.method == 'POST':
@@ -499,6 +526,7 @@ def vehiculeCorporelSave(request):
     }
     return render(request, 'accident_corporel/enregistrement.html', context)
 
+@login_required(login_url='login:accident')
 def saveAccidentCorporel(request):
     typeAccident=TypeAccident.objects.get(nom='Accident Corporel')
     if request.method == 'POST':
@@ -513,6 +541,7 @@ def saveAccidentCorporel(request):
     return render(request, 'accident_corporel/enregistrement_accident.html', {'form': form})
 
 
+@login_required(login_url='login:accident')
 def temoinMaterielSave(request):
     accident=Accident.objects.last()
     if request.method == 'POST':
@@ -525,6 +554,7 @@ def temoinMaterielSave(request):
     else:
         form = TemoinForm
     return render(request, 'accident_materiel/enregistrement_temoin.html', {'form': form})
+@login_required(login_url='login:accident')
 def victimeMaterielSave(request):
     accident = Accident.objects.last()
     if request.method == 'POST':
@@ -538,6 +568,7 @@ def victimeMaterielSave(request):
         form = VictimeForm
     return render(request, 'accident_materiel/enregistrement_victime.html', {'form': form})
 
+@login_required(login_url='login:accident')
 def etatSave(request):
     accident = Accident.objects.last()
     if request.method == 'POST':
@@ -550,6 +581,7 @@ def etatSave(request):
     else:
         form = EtatDesLieuxForm
     return render(request, 'accident_materiel/enregistrement_etat.html', {'form': form})
+@login_required(login_url='login:accident')
 def declarationSave(request):
     if request.method == 'POST':
         form = DeclarationForm(request.POST)
@@ -566,12 +598,14 @@ def declarationSave(request):
 
 
 """Saisine"""
+@login_required(login_url='login:accident')
 def saisine(request):
     listSaisine = PV.objects.all
     context = {
         'listSaisine': listSaisine
     }
     return render(request, 'pv/saisine/saisine.html',context);
+@login_required(login_url='login:accident')
 def detailSaisine(request, pv_id):
     try:
         pv = PV.objects.get(pk=pv_id)
@@ -579,6 +613,7 @@ def detailSaisine(request, pv_id):
         raise Http404("Question does not exist")
     return render(request, 'pv/saisine/detail_saisine.html', {'pv': pv})
 
+@login_required(login_url='login:accident')
 def save(request):
     if request.method == 'POST':
         form = PVForm(request.POST)
@@ -588,6 +623,7 @@ def save(request):
     else:
         form = PVForm
     return render(request, 'pv/saisine/enregistrement.html',{'form':form})
+@login_required(login_url='login:accident')
 def update(request,pv_id):
     try:
         pv = PV.objects.get(pk=pv_id)
@@ -601,6 +637,7 @@ def update(request,pv_id):
         'form': form,
     }
     return render(request, 'pv/saisine/enregistrement.html',context)
+@login_required(login_url='login:accident')
 def delete(request,pv_id):
     pv = PV.objects.get(pk=pv_id)
     pv.delete()

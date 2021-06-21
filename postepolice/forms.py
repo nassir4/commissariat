@@ -1,7 +1,7 @@
 from bootstrap_datepicker_plus import TimePickerInput
 from django.forms import ModelForm, TimeField
 
-from postepolice.models import MainCourante, Plainte, Perte, ObjectConsigne, Ecrou
+from postepolice.models import MainCourante, Plainte, Perte, ObjectConsigne, Ecrou, Registre
 
 
 class MainCouranteForm(ModelForm):
@@ -22,13 +22,16 @@ class PerteForm(ModelForm):
     class Meta:
         model = Perte
         fields = ['numero_mention','heure','nom_prenom','adresse','ville','code_postal','objet','contenu']
+    heure = TimeField(
+        widget=TimePickerInput()
+    )
 class ObjectConsigneForm(ModelForm):
     class Meta:
         model = ObjectConsigne
         fields = '__all__'
     heure = TimeField(
             widget=TimePickerInput()
-        )
+    )
 class EcrouForm(ModelForm):
     class Meta:
         model =Ecrou
@@ -36,3 +39,7 @@ class EcrouForm(ModelForm):
     heure = TimeField(
             widget=TimePickerInput()
         )
+class RegistreForm(ModelForm):
+    class Meta:
+        model = Registre
+        fields = ['brigade']

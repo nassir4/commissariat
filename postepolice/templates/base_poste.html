@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{% static 'css/sb-admin-2.min.css'%}" rel="stylesheet">
+    <link href="{% static 'css/style1.css'%}" rel="stylesheet">
     {% block stylesheet%}{% endblock %}
 </head>
 
@@ -45,7 +46,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'poste:plainte'%}">
+                <a class="nav-link" href="{% url 'poste:liste_registre_Pl'%}">
                     <i class="fas fa-fw fa-home"></i>
                     <span>Plainte</span></a>
             </li>
@@ -53,7 +54,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
              <li class="nav-item ">
-                <a class="nav-link" href="{% url 'poste:ecrou'%}">
+                <a class="nav-link" href="{% url 'poste:liste_registre_Ec'%}">
                     <i class="fas fa-fw fa-file-archive"></i>
                     <span>Ecrou</span></a>
             </li>
@@ -62,13 +63,25 @@
             <hr class="sidebar-divider">
 
             <li class="nav-item ">
-                <a class="nav-link" href="{% url 'poste:perte'%}">
+                <a class="nav-link" href="{% url 'poste:liste_registre_Per'%}">
                     <i class="fas fa-fw fa-file-alt"></i>
                     <span>Perte</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
+             <li class="nav-item ">
+                <a class="nav-link" href="{% url 'poste:liste_registre_MC'%}">
+                    <i class="fas fa-fw fa-file-alt"></i>
+                    <span>Main Courante</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+              <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
 
         </ul>
         <!-- End of Sidebar -->
@@ -113,10 +126,10 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid bg-white">
+                <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Section Poste de Police</h1>
+                    <h6 class="h6 mb-4 text-gray-800" style="text-align: center;">Section Poste de Police</h6>
                     <hr>
                     <div class="col-md-12">
                         {% block content%}{%endblock%}

@@ -1,0 +1,21 @@
+{% extends 'base_poste.html'%}
+{% block content%}
+<div class="row">
+    <div class="col-md-3">
+        <a href="{% url 'poste:save_plainte' %}" class="btn btn-lg btn-secondary"> Ajouter une plainte</a>
+    </div>
+    <div class="col-md-9">
+        {% for plainte in listPlainte %}
+        <div class="card">
+            <h5 class="card-header">Objet: {{plainte.objet}}</h5>
+            <div class="card-body">
+                <h5 class="card-title">Numero Mention: {{plainte.numero_mention}} </h5>
+                <p class="card-text">Heure: {{plainte.heure}}</p>
+                <a href="{% url 'poste:detail_plainte' id=plainte.id %}" class="btn btn-primary">Détail</a>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

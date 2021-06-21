@@ -23,26 +23,23 @@
                         <thead>
                             <tr>
                                 <th>Numero Mention</th>
-                                <th>Prenom & Nom</th>
                                 <th>Heure</th>
-                                <th>Motif</th>
+                                <th>Objet</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>Numero Mention</th>
-                                <th>Prenom & Nom</th>
                                 <th>Heure</th>
-                                <th>Motif</th>
+                                <th>Objet</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                        {% for plainte in listPlainte %}
+                        {% for perte in listPerte %}
                             <tr>
-                                <td>{{plainte.numero_mention}}</td>
-                                <td>{{plainte.nom_prenom}}</td>
-                                <td>{{plainte.heure}}</td>
-                                <td>{{plainte.motif}}</td>
+                                <td>{{perte.numero_mention}}</td>
+                                <td>{{perte.heure}}</td>
+                                <td>{{perte.objet}}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -50,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <a class="btn btn-success" href="{% url 'poste:save_plainte' id=registre.id %}">Ajouter une main courante</a>
+        <a class="btn btn-success" href="{% url 'poste:save_perte' id=registre.id %}">Ajouter une perte</a>
     </div>
 {% endblock %}
 {% block javascript%}

@@ -1,0 +1,18 @@
+{% extends 'base_poste.html'%}
+{% block content%}
+<div class="row">
+    <div class="col-md-3">
+        <p>Objet: {{plainte.objet}}</p>
+        <hr>
+        <p>Numero Mention: {{plainte.numero_mention}}</p>
+        <hr>
+        <p>Heure: {{plainte.heure}}</p>
+        <hr>
+        <a href="{% url 'poste:update_plainte' pv_id=plainte.id %}" class="btn btn-info"> Modifier </a>
+        <a href="{% url 'poste:delete_plainte' pv_id=plainte.id %}" class="btn btn-danger"> Supprimer</a>
+    </div>
+    <div class="col-md-6">
+        {{plainte.contenu|safe}}
+    </div>
+</div>
+{% endblock %}
