@@ -80,8 +80,12 @@
             </li>
 
 
-            <!-- Divider -->
+           <!-- Divider -->
             <hr class="sidebar-divider">
+              <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
         </ul>
         <!-- End of Sidebar -->
 
@@ -176,7 +180,7 @@
                 <div class="modal-body">Voulez vous se deconnecter.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-                    <a class="btn btn-primary" href="{% url 'accueil'%}">Se deconnecter</a>
+                    <a class="btn btn-primary" href="{% url 'login:logout' %}">Se deconnecter</a>
                 </div>
             </div>
         </div>
