@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'accident',
     'authentification',
     'postepolice',
-    'policejudiciaire',
+    'judiciaire',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

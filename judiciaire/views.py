@@ -1,11 +1,11 @@
-from django.forms.forms import Form
 from django.http import Http404
 
-from policejudiciaire.models import *
+from judiciaire.models import *
 from django.shortcuts import render, redirect
-from policejudiciaire.forms import SaisineForm, InterrogatoireForm, AuditionForm, ClotureForm, ConfrontationForm, \
+from judiciaire.forms import SaisineForm, InterrogatoireForm, AuditionForm, ClotureForm, ConfrontationForm, \
     MissionForm, RequisitionForm, ConduiteForm, NotificationForm
-from django.db import transaction
+
+
 # Create your views here.
 def index (request):
     return render(request,'index.html')
