@@ -7,7 +7,6 @@
          <p>Référence: {{pv.reference}}</p>
          <hr>
          <a href="{% url 'judiciaire:update_requisition' pv_id=pv.id %}" class="btn btn-info"> Modifier </a>
-         <a href="{% url 'judiciaire:delete_requisition' pv_id=pv.id %}" class="btn btn-danger"> Supprimer</a>
      </div>
      <div class="col-md-6">
          {{pv.description|safe}}

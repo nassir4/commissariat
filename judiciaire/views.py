@@ -28,9 +28,9 @@ def save(request,id):
     if request.method == 'POST':
         form = SaisineForm(request.POST)
         if form.is_valid():
-            saisine=form.save(commit=False)
-            saisine.crime=crime
-            saisine.save()
+            pv=form.save(commit=False)
+            pv.crime=crime
+            pv.save()
             return redirect('judiciaire:detail_crime',id=crime.id)
     else:
         form = SaisineForm
@@ -43,7 +43,7 @@ def update(request,pv_id):
     form = SaisineForm(request.POST or None, instance=pv)
     if form.is_valid():
         form.save()
-        return redirect('judiciaire:detail_saisine',pv_id=saisine.id)
+        return redirect('judiciaire:detail_saisine',pv_id=pv.id)
     context = {
         'form': form,
     }
@@ -67,13 +67,15 @@ def detailAudition(request, pv_id):
     except Audition.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'audition/detail_audition.html', {'pv': pv})
-def saveAudition(request):
-    form = AuditionForm
+def saveAudition(request,id):
+    crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
         form = AuditionForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('judiciaire:audition')
+            pv = form.save(commit=False)
+            pv.crime = crime
+            pv.save()
+            return redirect('judiciaire:detail_crime', id=crime.id)
     else:
         form = AuditionForm
     return render(request, 'audition/enregistrement.html',{'form':form})
@@ -85,7 +87,7 @@ def updateAudition(request,pv_id):
     form = AuditionForm(request.POST or None, instance=pv)
     if form.is_valid():
         form.save()
-        return redirect('judiciaire:audition')
+        return redirect('judiciaire:detail_audition',pv_id=pv.id)
     context = {
         'form': form,
     }
@@ -109,13 +111,15 @@ def detailInterrogatoire(request, pv_id):
     except Interrogatoire.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'interrogatoire/detail_interrogatoire.html', {'pv': pv})
-def saveInterrogatoire(request):
-    form = InterrogatoireForm
+def saveInterrogatoire(request,id):
+    crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
         form = InterrogatoireForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('judiciaire:interrogatoire')
+            pv = form.save(commit=False)
+            pv.crime = crime
+            pv.save()
+            return redirect('judiciaire:detail_crime', id=crime.id)
     else:
         form = InterrogatoireForm
     return render(request, 'interrogatoire/enregistrement.html',{'form':form})
@@ -127,7 +131,7 @@ def updateInterrogatoire(request,pv_id):
     form = InterrogatoireForm(request.POST or None, instance=pv)
     if form.is_valid():
         form.save()
-        return redirect('judiciaire:interrogatoire')
+        return redirect('judiciaire:detail_interrogatoire',pv_id=pv.id)
     context = {
         'form': form,
     }
@@ -150,15 +154,17 @@ def detailConfrontation(request, pv_id):
     except Confrontation.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'confrontation/detail_confrontation.html', {'pv': pv})
-def saveConfrontation(request):
-    form = ConfrontationForm
+def saveConfrontation(request,id):
+    crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
         form = ConfrontationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('judiciaire:confrontation')
-    else:
-        form = ConfrontationForm
+            pv = form.save(commit=False)
+            pv.crime = crime
+            pv.save()
+            return redirect('judiciaire:detail_crime', id=crime.id)
+        else:
+            form = ConfrontationForm
     return render(request, 'confrontation/enregistrement.html',{'form':form})
 def updateConfrontation(request,pv_id):
     try:
@@ -168,7 +174,7 @@ def updateConfrontation(request,pv_id):
     form = ConfrontationForm(request.POST or None, instance=pv)
     if form.is_valid():
         form.save()
-        return redirect('judiciaire:confrontation')
+        return redirect('judiciaire:detail_confrontation',pv_id=pv.id)
     context = {
         'form': form,
     }
@@ -192,13 +198,15 @@ def detailMission(request, pv_id):
     except Interrogatoire.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'mission/detail_mission.html', {'pv': pv})
-def saveMission(request):
-    form = MissionForm
+def saveMission(request,id):
+    crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
         form = MissionForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('judiciaire:mission')
+            pv = form.save(commit=False)
+            pv.crime = crime
+            pv.save()
+            return redirect('judiciaire:detail_crime', id=crime.id)
     else:
         form = MissionForm
     return render(request, 'mission/enregistrement.html',{'form':form})
@@ -210,7 +218,7 @@ def updateMission(request,pv_id):
     form = MissionForm(request.POST or None, instance=pv)
     if form.is_valid():
         form.save()
-        return redirect('judiciaire:mission')
+        return redirect('judiciaire:detail_mission',pv_id=pv.id)
     context = {
         'form': form,
     }
@@ -233,13 +241,15 @@ def detailRequisition(request, pv_id):
     except Requisition.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'requisition/detail_requisition.html', {'pv': pv})
-def saveRequisition(request):
-    form = RequisitionForm
+def saveRequisition(request,id):
+    crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
         form = RequisitionForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('judiciaire:requisition')
+            pv = form.save(commit=False)
+            pv.crime = crime
+            pv.save()
+            return redirect('judiciaire:detail_crime', id=crime.id)
     else:
         form = RequisitionForm
     return render(request, 'requisition/enregistrement.html',{'form':form})
@@ -251,7 +261,7 @@ def updateRequisition(request,pv_id):
     form = RequisitionForm(request.POST or None, instance=pv)
     if form.is_valid():
         form.save()
-        return redirect('judiciaire:requisition')
+        return redirect('judiciaire:detail_requisition',pv_id=pv.id)
     context = {
         'form': form,
     }
@@ -274,13 +284,15 @@ def detailConduite(request, pv_id):
     except Conduite.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'conduite/detail_conduite.html', {'pv': pv})
-def saveConduite(request):
-    form = ConduiteForm
+def saveConduite(request,id):
+    crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
         form = ConduiteForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('judiciaire:conduite')
+            pv = form.save(commit=False)
+            pv.crime = crime
+            pv.save()
+            return redirect('judiciaire:detail_crime', id=crime.id)
     else:
         form = ConduiteForm
     return render(request, 'conduite/enregistrement.html',{'form':form})
@@ -292,7 +304,7 @@ def updateConduite(request,pv_id):
     form = ConduiteForm(request.POST or None, instance=pv)
     if form.is_valid():
         form.save()
-        return redirect('judiciaire:conduite')
+        return redirect('judiciaire:detail_conduite',pv_id=pv.id)
     context = {
         'form': form,
     }
@@ -316,13 +328,15 @@ def detailCloture(request, pv_id):
     except Cloture.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'cloture/detail_cloture.html', {'pv': pv})
-def saveCloture(request):
-    form = ClotureForm
+def saveCloture(request,id):
+    crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
         form = ClotureForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('judiciaire:cloture')
+            pv = form.save(commit=False)
+            pv.crime = crime
+            pv.save()
+            return redirect('judiciaire:detail_crime', id=crime.id)
     else:
         form = ClotureForm
     return render(request, 'cloture/enregistrement.html',{'form':form})
@@ -334,7 +348,7 @@ def updateCloture(request,pv_id):
     form = ClotureForm(request.POST or None, instance=pv)
     if form.is_valid():
         form.save()
-        return redirect('judiciaire:cloture')
+        return redirect('judiciaire:detail_cloture',pv_id=pv.id)
     context = {
         'form': form,
     }
@@ -358,13 +372,15 @@ def detailNotification(request, pv_id):
     except Notification.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'notification/detail_notification.html', {'pv': pv})
-def saveNotification(request):
-    form = NotificationForm
+def saveNotification(request,id):
+    crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
         form = NotificationForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('judiciaire:notification')
+            pv = form.save(commit=False)
+            pv.crime = crime
+            pv.save()
+            return redirect('judiciaire:detail_crime', id=crime.id)
     else:
         form = NotificationForm
     return render(request, 'notification/enregistrement.html',{'form':form})
@@ -376,7 +392,7 @@ def updateNotification(request,pv_id):
     form = NotificationForm(request.POST or None, instance=pv)
     if form.is_valid():
         form.save()
-        return redirect('judiciaire:notification')
+        return redirect('judiciaire:detail_notification',pv_id=pv.id)
     context = {
         'form': form,
     }
