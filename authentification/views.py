@@ -25,7 +25,7 @@ def loginPageJudiciaire(request):
         user = authenticate(request,username=username,password=password)
         if user is not None:
             login(request,user)
-            return redirect('judiciaire:saisine')
+            return redirect('judiciaire:crime')
     return render(request,'auth_judiciaire.html')
 def loginPagePoste(request):
     if request.method == 'POST':

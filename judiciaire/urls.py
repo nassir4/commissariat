@@ -4,7 +4,7 @@ app_name = 'judiciaire'
 urlpatterns = [
 
  #URL SAISINE
- path('saisine/enregistrement/', views.save, name='saisine_save'),
+ path('saisine/enregistrement/<int:id>', views.save, name='save_saisine'),
  path('saisine/detail/<int:pv_id>/', views.detailSaisine, name='detail_saisine'),
  path('saisine/delete/<int:pv_id>/', views.delete, name='delete_saisine'),
  path('saisine/update/<int:pv_id>/', views.update, name='update_saisine'),
@@ -74,5 +74,10 @@ urlpatterns = [
  path('cloture/delete/<int:pv_id>/', views.deleteCloture, name='delete_cloture'),
  path('cloture/update/<int:pv_id>/', views.updateCloture, name='update_cloture'),
  #FIN URL CLOTURE
- path('listPv/', views.listPv, name='listPv'),
+
+ path('enquete/', views.crime, name='crime'),
+ path('enquete/enregistrement', views.saveCrime, name='save_crime'),
+ path('enquete/detail/<int:id>/', views.detailCrime, name='detail_crime'),
+ path('enquete/delete/<int:id>/', views.deleteCrime, name='delete_crime'),
+ path('enquete/update/<int:id>/', views.updateCrime, name='update_crime'),
 ]
