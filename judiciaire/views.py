@@ -3,7 +3,7 @@ from django.http import Http404
 from judiciaire.models import *
 from django.shortcuts import render, redirect
 from judiciaire.forms import SaisineForm, InterrogatoireForm, AuditionForm, ClotureForm, ConfrontationForm, \
-    MissionForm, RequisitionForm, ConduiteForm, NotificationForm
+    MissionForm, RequisitionForm, ConduiteForm, NotificationForm, CrimeForm
 
 
 # Create your views here.
@@ -19,17 +19,19 @@ def saisine(request):
 def detailSaisine(request, pv_id):
     try:
         pv = Saisine.objects.get(pk=pv_id)
-    except PV.DoesNotExist:
+    except Saisine.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'saisine/detail_saisine.html', {'pv': pv})
 
-def save(request):
-    form = SaisineForm
+def save(request,id):
+    crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
         form = SaisineForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('judiciaire:saisine')
+            saisine=form.save(commit=False)
+            saisine.crime=crime
+            saisine.save()
+            return redirect('judiciaire:detail_crime',id=crime.id)
     else:
         form = SaisineForm
     return render(request, 'saisine/enregistrement.html',{'form':form})
@@ -41,7 +43,7 @@ def update(request,pv_id):
     form = SaisineForm(request.POST or None, instance=pv)
     if form.is_valid():
         form.save()
-        return redirect('judiciaire:saisine')
+        return redirect('judiciaire:detail_saisine',pv_id=saisine.id)
     context = {
         'form': form,
     }
@@ -62,7 +64,7 @@ def audition(request):
 def detailAudition(request, pv_id):
     try:
         pv = Audition.objects.get(pk=pv_id)
-    except PV.DoesNotExist:
+    except Audition.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'audition/detail_audition.html', {'pv': pv})
 def saveAudition(request):
@@ -104,7 +106,7 @@ def interrogatoire(request):
 def detailInterrogatoire(request, pv_id):
     try:
         pv = Interrogatoire.objects.get(pk=pv_id)
-    except PV.DoesNotExist:
+    except Interrogatoire.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'interrogatoire/detail_interrogatoire.html', {'pv': pv})
 def saveInterrogatoire(request):
@@ -187,7 +189,7 @@ def mission(request):
 def detailMission(request, pv_id):
     try:
         pv = Mission.objects.get(pk=pv_id)
-    except PV.DoesNotExist:
+    except Interrogatoire.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'mission/detail_mission.html', {'pv': pv})
 def saveMission(request):
@@ -227,8 +229,8 @@ def requisition(request):
     return render(request, 'requisition/requisition.html',context);
 def detailRequisition(request, pv_id):
     try:
-        pv = PV.objects.get(pk=pv_id)
-    except PV.DoesNotExist:
+        pv = Requisition.objects.get(pk=pv_id)
+    except Requisition.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'requisition/detail_requisition.html', {'pv': pv})
 def saveRequisition(request):
@@ -269,7 +271,7 @@ def conduite(request):
 def detailConduite(request, pv_id):
     try:
         pv = Conduite.objects.get(pk=pv_id)
-    except PV.DoesNotExist:
+    except Conduite.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'conduite/detail_conduite.html', {'pv': pv})
 def saveConduite(request):
@@ -311,7 +313,7 @@ def cloture(request):
 def detailCloture(request, pv_id):
     try:
         pv = Cloture.objects.get(pk=pv_id)
-    except PV.DoesNotExist:
+    except Cloture.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'cloture/detail_cloture.html', {'pv': pv})
 def saveCloture(request):
@@ -353,7 +355,7 @@ def notification(request):
 def detailNotification(request, pv_id):
     try:
         pv = Notification.objects.get(pk=pv_id)
-    except PV.DoesNotExist:
+    except Notification.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'notification/detail_notification.html', {'pv': pv})
 def saveNotification(request):
@@ -386,6 +388,64 @@ def deleteNotification(request,pv_id):
 
 """ Fin Notifification à Garde à vue"""
 
-def listPv(request):
-    listPV =PV.objects.all
-    return render(request,'accueil.html',{'listPV':listPV})
+
+def crime(request):
+    listCrime = Crime.objects.all
+    context = {
+        'listCrime': listCrime
+    }
+    return render(request, 'enquete.html',context);
+def detailCrime(request, id):
+    try:
+        crime = Crime.objects.get(pk=id)
+        listSaisine = Saisine.objects.filter(crime=crime)
+        listAudition = Audition.objects.filter(crime=crime)
+        listInterrogatoire = Interrogatoire.objects.filter(crime=crime)
+        listConfrontation = Confrontation.objects.filter(crime=crime)
+        listMission =Mission.objects.filter(crime=crime)
+        listConduite = Conduite.objects.filter(crime=crime)
+        listRequisition = Requisition.objects.filter(crime=crime)
+        listNotification = Notification.objects.filter(crime=crime)
+        listCloture = Cloture.objects.filter(crime=crime)
+        context = {
+            'crime': crime,
+            'listSaisine':listSaisine,
+            'listAudition':listAudition,
+            'listInterrogatoire':listInterrogatoire,
+            'listConfrontation':listConfrontation,
+            'listMission':listMission,
+            'listConduite': listConduite,
+            'listRequisition':listRequisition,
+            'listNotification':listNotification,
+            'listCloture':listCloture
+        }
+    except Notification.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'detail_enquete.html', context)
+def saveCrime(request):
+    if request.method == 'POST':
+        form = CrimeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            crime = Crime.objects.last()
+            return redirect('judiciaire:detail_crime',id =crime.id)
+    else:
+        form = CrimeForm
+    return render(request, 'enregistrement.html',{'form':form})
+def updateCrime(request,id):
+    try:
+        crime = Crime.objects.get(pk=id)
+    except Crime.DoesNotExist:
+        return redirect('judiciaire:detail_crime')
+    form = NotificationForm(request.POST or None, instance=crime)
+    if form.is_valid():
+        form.save()
+        return redirect('judiciaire:detail_crime',id=crime.id)
+    context = {
+        'form': form,
+    }
+    return render(request, 'enregistrement.html',context)
+def deleteCrime(id):
+    crime = Crime.objects.get(pk=id)
+    crime.delete()
+    return redirect('judiciaire:crime')

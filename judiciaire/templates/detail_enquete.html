@@ -1,0 +1,35 @@
+{% extends 'base_judiciaire.html'%}
+{% block content %}
+<div class="col-md-12">
+    <div class="accident-item-box">
+        <h3 style="text-align: center;">CRIME</h3>
+        <hr>
+        <div class="row">
+            <h5 class="col-md-6">Incrimination: {{crime.incrimination}} </h5>
+            <h5 class="col-md-6">affaire: {{crime.affaire}} </h5>
+        </div>
+    </div>
+    <div class="accident-item-box">
+        {% if listSaisine %}
+            {% for saisine in listSaisine %}
+                <div class="row">
+                    <p class="col-md-3">Numero Pv: {{saisine.numeroPv}}</p>
+                    <p class="col-md-3">Objet: {{saisine.objet}}</p>
+                    <p class="col-md-3">Vue et transmis: {{saisine.vuEtTransmis}}</p>
+                    <p class="col-md-3">Ouverture Enquête: {{saisine.ouvertureEnquete}}</p>
+                </div>
+                <a href="{% url 'judiciaire:detail_saisine' pv_id=saisine.id%}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                    <span class="text">Detail</span>
+                </a>
+            {% endfor %}
+        {% else %}
+            <a href="{%url 'judiciaire:save_saisine' id=crime.id %}">Ajouter une Saisine</a>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

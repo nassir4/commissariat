@@ -1,8 +1,12 @@
 from django.forms import ModelForm,CharField
 from .models import Saisine, Interrogatoire, Audition, Cloture, Confrontation, Mission, Requisition, Notification, \
-    Conduite
+    Conduite, Crime
 
 
+class CrimeForm(ModelForm):
+    class Meta:
+        model=Crime
+        fields="__all__"
 class SaisineForm(ModelForm):
     class Meta:
         model = Saisine

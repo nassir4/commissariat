@@ -21,6 +21,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{% static 'css/sb-admin-2.min.css'%}" rel="stylesheet">
+    <link href="{% static 'css/style1.css'%}" rel="stylesheet">
     {% block stylesheet%}{% endblock %}
 </head>
 
@@ -47,80 +48,20 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'judiciaire:saisine'%}">
+                <a class="nav-link" href="{% url 'judiciaire:crime'%}">
                     <i class="fas fa-fw fa-home"></i>
-                    <span>Pv Saisine</span></a>
+                    <span> Enquêtes Enregistrées</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
              <li class="nav-item ">
-                <a class="nav-link" href="{% url 'judiciaire:interrogatoire'%}">
+                <a class="nav-link" href="{% url 'judiciaire:save_crime'%}">
                     <i class="fas fa-fw fa-file-archive"></i>
-                    <span>Pv Interrogatoire</span></a>
+                    <span>Nouvelle Enquête</span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
 
-            <li class="nav-item ">
-                <a class="nav-link" href="{% url 'judiciaire:audition'%}">
-                    <i class="fas fa-fw fa-file-alt"></i>
-                    <span>Pv Audition</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <li class="nav-item ">
-                <a class="nav-link" href="{% url 'judiciaire:confrontation'%}">
-                    <i class="fas fa-fw fa-file"></i>
-                    <span>Pv Confrontation</span></a>
-            </li>
-
-             <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <li class="nav-item ">
-                <a class="nav-link" href="{% url 'judiciaire:notification'%}">
-                    <i class="fas fa-fw fa-file"></i>
-                    <span>Pv Notification à garde à vue</span></a>
-            </li>
-
-             <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <li class="nav-item ">
-                <a class="nav-link" href="{% url 'judiciaire:cloture'%}">
-                    <i class="fas fa-fw fa-file"></i>
-                    <span>Pv Clôture et transmission</span></a>
-            </li>
-
-             <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <li class="nav-item ">
-                <a class="nav-link" href="{% url 'judiciaire:mission'%}">
-                    <i class="fas fa-fw fa-file"></i>
-                    <span>Pv Mission à agent</span></a>
-            </li>
-
-             <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <li class="nav-item ">
-                <a class="nav-link" href="{% url 'judiciaire:conduite'%}">
-                    <i class="fas fa-fw fa-file"></i>
-                    <span>Pv Conduite</span></a>
-            </li>
-             <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'judiciaire:requisition'%}">
-                    <i class="fas fa-fw fa-file"></i>
-                    <span>Pv Requisition</span></a>
-            </li>
            <!-- Divider -->
             <hr class="sidebar-divider">
               <!-- Sidebar Toggler (Sidebar) -->
@@ -170,10 +111,10 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid bg-white">
+                <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Section Police Judiciaire</h1>
+                    <h6 class="h6 mb-4 text-gray-800" style="text-align: center;">Section Police Judiciaire</h6>
                     <hr>
                     <div class="col-md-12">
                         {% block content%}{%endblock%}

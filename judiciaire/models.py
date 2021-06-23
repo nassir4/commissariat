@@ -1,5 +1,3 @@
-import datetime
-
 from django.db import models
 from django_summernote.fields import SummernoteTextField
 # Create your models here.
