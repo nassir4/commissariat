@@ -19,7 +19,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="exemple" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>Numero Mention</th>
@@ -33,7 +33,7 @@
                                 <th>Numero Mention</th>
                                 <th>Prenom & Nom</th>
                                 <th>Heure</th>
-                                <th>Motif</th>
+                                <th>Objet</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -42,7 +42,7 @@
                                 <td>{{plainte.numero_mention}}</td>
                                 <td>{{plainte.nom_prenom}}</td>
                                 <td>{{plainte.heure}}</td>
-                                <td>{{plainte.motif}}</td>
+                                <td>{{plainte.objet}}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -54,6 +54,30 @@
     </div>
 {% endblock %}
 {% block javascript%}
+  <script type="text/javascript">
+        $(document).ready(function() {
+            $("#exemple").dataTable({
+                "pageLength": 5,
+                "responsive":true,
+                "lengthChange": false,
+                "language":{
+                    "emptyTable":"Aucun élément trouvé",
+                    "info":"",
+                    "infoEmpty":"Aucune donnée disponible",
+                    "loadingRecords":"Chargement...",
+                    "processing":"Encours...",
+                    "search":"Rechercher",
+                    "zeroRecords":"L'élément recherché n'existe pas",
+                    "paginate":{
+                        "first":"Premier",
+                        "last":"Dernier",
+                        "next":"Suivant",
+                        "previous":"Précédent"
+                    }
+                }
+            });
+        });
+    </script>
  <!-- Page level plugins -->
     <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
     <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>

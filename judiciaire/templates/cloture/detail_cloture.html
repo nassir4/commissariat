@@ -1,0 +1,29 @@
+{% extends 'base_judiciaire.html'%}
+{% block content %}
+<div class="row accident-item-box">
+    <div class="col-md-3">
+        <p>Objet: {{pv.objet}}</p>
+        <hr>
+        <p>Affaire: {{pv.crime.affaire}}</p>
+        <hr>
+        {% if pv.controleEtTransmission%}
+        <p>Vu et Transmis</p>
+        <hr>
+        {% endif %}
+        {% if pv.mentionRestitution%}
+        <p>Ouverture d'enquête</p>
+        <hr>
+        {% endif %}
+        {% if pv.deroulementEtNotification%}
+        <p>Ouverture d'enquête</p>
+        <hr>
+        {% endif %}
+        <p>Incrimination: {{pv.crime.incrimination}}</p>
+        <hr>
+        <a href="{% url 'judiciaire:update_cloture' pv_id=pv.id %}" class="btn btn-info"> Modifier </a>
+    </div>
+    <div class="col-md-6">
+        {{pv.description|safe}}
+    </div>
+</div>
+{% endblock %}

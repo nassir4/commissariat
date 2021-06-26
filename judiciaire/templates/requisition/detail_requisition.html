@@ -1,0 +1,15 @@
+{% extends 'base_judiciaire.html'%}
+{% block content %}
+<div class="row accident-item-box">
+     <div class="col-md-3">
+         <p>Objet: {{pv.objet}}</p>
+         <hr>
+         <p>Référence: {{pv.reference}}</p>
+         <hr>
+         <a href="{% url 'judiciaire:update_requisition' pv_id=pv.id %}" class="btn btn-info"> Modifier </a>
+     </div>
+     <div class="col-md-6">
+         {{pv.description|safe}}
+     </div>
+ </div>
+{% endblock %}

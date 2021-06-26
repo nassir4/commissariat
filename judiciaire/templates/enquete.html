@@ -1,0 +1,31 @@
+{% extends 'base_judiciaire.html'%}
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                {% for crime in listCrime %}
+                    <div class="col-md-6">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">{{crime.incrimination}}</h6>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Affaire {{ crime.affaire}}</h5>
+                                <p class="card-text"></p>
+                                <a href="{% url 'judiciaire:detail_crime' id=crime.id%}" class="btn btn-primary btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-eye"></i>
+                                    </span>
+                                    <span class="text">Voir plus</span>
+                                </a>
+                            </div>
+                            <div class="card-footer text-muted">
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+     </div>
+{% endblock %}
