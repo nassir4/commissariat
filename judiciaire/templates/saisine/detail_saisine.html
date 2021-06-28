@@ -17,6 +17,7 @@
         <p>Incrimination: {{pv.crime.incrimination}}</p>
         <hr>
         <a href="{% url 'judiciaire:update_saisine' pv_id=pv.id %}" class="btn btn-info"> Modifier </a>
+        <a href="{% url 'judiciaire:pdf' id=pv.id%}" class="btn btn-primary">Generer un PDF</a>
     </div>
     <div class="col-md-9">
         {{pv.description|safe}}

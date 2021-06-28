@@ -1,5 +1,7 @@
 from judiciaire import views
 from django.urls import path
+
+
 app_name = 'judiciaire'
 urlpatterns = [
 
@@ -80,4 +82,6 @@ urlpatterns = [
  path('enquete/detail/<int:id>/', views.detailCrime, name='detail_crime'),
  path('enquete/delete/<int:id>/', views.deleteCrime, name='delete_crime'),
  path('enquete/update/<int:id>/', views.updateCrime, name='update_crime'),
+
+ path('saisine/pdf/<int:id>/',views.genererPdf,name='pdf')
 ]
