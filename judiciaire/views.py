@@ -1,12 +1,18 @@
+import socket
+
 from django.http import Http404
+from django.views import View
 
 from judiciaire.models import *
 from django.shortcuts import render, redirect
 from judiciaire.forms import SaisineForm, InterrogatoireForm, AuditionForm, ClotureForm, ConfrontationForm, \
     MissionForm, RequisitionForm, ConduiteForm, NotificationForm, CrimeForm
-
+from django.http import HttpResponse
 
 # Create your views here.
+from judiciaire.utils import render_to_pdf
+
+
 def index (request):
     return render(request,'index.html')
 """Saisine"""
@@ -53,6 +59,13 @@ def delete(request,pv_id):
     pv.delete()
     listSaisine = Saisine.objects.all
     return redirect('judiciaire:saisine')
+
+def genererPdf(request,id, *args, **kwargs):
+    socket.getaddrinfo('localhost', 8080)
+    saisine = Saisine.objects.get(pk=id)
+    context = {'pv':saisine}
+    pdf = render_to_pdf('saisine/saisinePDF.html', context)
+    return HttpResponse(pdf, content_type='application/pdf')
 """Fin Saisine"""
 """Audition"""
 def audition(request):

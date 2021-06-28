@@ -23,18 +23,51 @@
 
 </head>
 
-<body class="background-img">
+<body class="">
 
-    <div class="container">
+    <div class="my-container">
 
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
+        <div class="my-card">
+            <div class="left-card">
+                <div class="home-card-login" style="background-color: green">
+                    <div class="icon-name">
+                        <i class="home-icon fas fa-desktop"></i>
+                        <h4 class="name">Poste de police</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="right-card">
+                <form class="user" action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-user"
+                            id="exampleInputText" name="username"
+                            placeholder="Donner votre login...">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control form-control-user"
+                            id="exampleInputPassword" name="password" placeholder="Password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-user btn-block my-btn-login">
+                        Se Connecter
+                    </button>
+                </form>
+            </div>
+        </div>
+
+
+
+
+
+        
+        <!-- <div class="row justify-content-center">
 
             <div class="col-xl-10 col-lg-12 col-md-9">
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
+                        
                         <div class="row">
                             <div class="col-lg-6 col-md-6 d-none d-lg-block">
                                 <img src="{% static 'img/police 2.jpg'%}" width="132%",>
@@ -70,7 +103,7 @@
 
             </div>
 
-        </div>
+        </div> -->
 
     </div>
 
