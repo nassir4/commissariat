@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+         @page {
+            size: a4 portrait;
+            @frame header_frame {           /* Static Frame */
+                -pdf-frame-content: header_content;
+                left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+            }
+            @frame content_frame {          /* Content Frame */
+                left: 50pt; width: 512pt; top: 90pt; height: 632pt;
+            }
+            @frame col1_frame { 
+                -pdf-frame-content:col1_frame;            /* Content frame 1 */
+                left: 44pt; width: 245pt; top: 90pt; height: 632pt;
+            }
+            @frame col2_frame {  
+                -pdf-frame-content:col2_frame;           /* Content frame 2 */
+                left: 270pt; width: 270pt; top: 90pt; height: 632pt;
+            }
+            @frame footer_frame {           /* Another static Frame */
+                -pdf-frame-content: footer_content;
+                left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Content for Static Frame 'header_frame' -->
+    <div id="header_content">Lyrics-R-Us</div>
+
+    <!-- Content for Static Frame 'footer_frame' -->
+    <div id="footer_content">(c) - page <pdf:pagenumber>
+        of <pdf:pagecount>
+    </div>
+    <div id="col1_frame">
+        <p>Objet: {{pv.objet}}</p>
+        <p>Affaire: {{pv.crime.affaire}}</p>
+        {% if pv.vuEtTransmis%}
+        <p>Vu et Transmis</p>
+        {% endif %}
+        {% if pv.ouvertureEnquete%}
+        <p>Ouverture d'enquête</p>
+        {% endif %}
+        <p>Incrimination: {{pv.crime.incrimination}}</p>
+    </div>
+    <div id="col2_frame">
+        {{pv.description|safe}}
+    </div>
+</body>
+</html>

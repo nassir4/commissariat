@@ -83,5 +83,5 @@ urlpatterns = [
  path('enquete/delete/<int:id>/', views.deleteCrime, name='delete_crime'),
  path('enquete/update/<int:id>/', views.updateCrime, name='update_crime'),
 
- path('saisine/pdf/<int:id>/',views.genererPdf,name='pdf')
+ path('saisine/pdf/<int:id>/',views.render_pdf_view,name='pdf')
 ]

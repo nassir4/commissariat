@@ -1,7 +1,9 @@
 import socket
 
 from django.http import Http404
+from django.template.loader import get_template
 from django.views import View
+from xhtml2pdf import pisa
 
 from judiciaire.models import *
 from django.shortcuts import render, redirect
@@ -10,7 +12,7 @@ from judiciaire.forms import SaisineForm, InterrogatoireForm, AuditionForm, Clot
 from django.http import HttpResponse
 
 # Create your views here.
-from judiciaire.utils import render_to_pdf
+from judiciaire.utils import render_to_pdf, link_callback
 
 
 def index (request):
@@ -59,6 +61,25 @@ def delete(request,pv_id):
     pv.delete()
     listSaisine = Saisine.objects.all
     return redirect('judiciaire:saisine')
+
+def render_pdf_view(request,id):
+    saisine=Saisine.objects.get(pk=id)
+    template_path = 'saisine/saisinePDF.html'
+    context = {'pv':saisine}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback)
+    # if error then show some funy view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
 
 def genererPdf(request,id, *args, **kwargs):
     socket.getaddrinfo('localhost', 8080)
