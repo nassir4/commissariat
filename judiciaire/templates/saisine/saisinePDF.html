@@ -9,20 +9,80 @@
     <style>
          @page {
             size: a4 portrait;
-            @frame header_frame {           /* Static Frame */
-                -pdf-frame-content: header_content;
-                left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+            @frame header_frame1 {           /* Static Frame */
+                -pdf-frame-content: header_content1;
+                left: 10pt; width: 150pt; top: 10pt; height: 50pt;
             }
+
+            @frame header_frame2 {           /* Static Frame */
+                -pdf-frame-content: header_content2;
+                left: 10pt; width: 150pt; top: 20pt; height: 20pt;
+            }
+            
+            @frame header_frame3 {           /* Static Frame */
+                -pdf-frame-content: header_content3;
+                left: 10pt; width: 150pt; top: 30pt; height: 20pt;
+            }
+
+            @frame header_frame4 {           /* Static Frame */
+                -pdf-frame-content: header_content4;
+                left: 10pt; width: 150pt; top: 40pt; height: 20pt;
+            }
+
+            @frame header_frame5 {           /* Static Frame */
+                -pdf-frame-content: header_content5;
+                left: 10pt; width: 150pt; top: 50pt; height: 20pt;
+            }
+
+            @frame header_frame6 {           /* Static Frame */
+                -pdf-frame-content: header_content6;
+                left: 10pt; width: 150pt; top: 60pt; height: 20pt;
+            }
+
+            @frame header_frame7 {           /* Static Frame */
+                -pdf-frame-content: header_content7;
+                left: 10pt; width: 150pt; top: 70pt; height: 20pt;
+            }
+
+            @frame header_frame8 {           /* Static Frame */
+                -pdf-frame-content: header_content8;
+                left: 10pt; width: 150pt; top: 80pt; height: 20pt;
+            }
+
+            @frame header_frame9 {           /* Static Frame */
+                -pdf-frame-content: header_content9;
+                left: 10pt; width: 200pt; top: 90pt; height: 20pt;
+            }
+
+            @frame header_frame10 {           /* Static Frame */
+                -pdf-frame-content: header_content10;
+                left: 10pt; width: 150pt; top: 100pt; height: 20pt;
+            }
+
+            @frame header_frame11 {           /* Static Frame */
+                -pdf-frame-content: header_content11;
+                left: 1pt; width: 220pt; top: 110pt; height: 20pt;
+            }
+            @frame header_frame12 {           /* Static Frame */
+                -pdf-frame-content: header_content12;
+                left: 10pt; width: 150pt; top: 120pt; height: 20pt;
+            }
+            @frame header_frame13 {           /* Static Frame */
+                -pdf-frame-content: header_content13;
+                left: 10pt; width: 150pt; top: 130pt; height: 20pt;
+            }
+
             @frame content_frame {          /* Content Frame */
                 left: 50pt; width: 512pt; top: 90pt; height: 632pt;
             }
             @frame col1_frame { 
                 -pdf-frame-content:col1_frame;            /* Content frame 1 */
-                left: 44pt; width: 245pt; top: 90pt; height: 632pt;
+                left: 10pt; width: 245pt; top: 150pt; height: 632pt;
             }
             @frame col2_frame {  
                 -pdf-frame-content:col2_frame;           /* Content frame 2 */
-                left: 270pt; width: 270pt; top: 90pt; height: 632pt;
+                left: 200pt; width: 390pt; top: 150pt; height: 632pt;
+                
             }
             @frame footer_frame {           /* Another static Frame */
                 -pdf-frame-content: footer_content;
@@ -34,8 +94,45 @@
 
 <body>
     <!-- Content for Static Frame 'header_frame' -->
-    <div id="header_content">Lyrics-R-Us</div>
-
+    <div style="text-align:center;font-weight: bold;font-size: 10pt;" id="header_content1">
+        <p>REPUBLIQUE DU SENEGAL</p>       
+    </div>
+    <div style="text-align: center;font-size: 9pt;" id="header_content2">
+        <p>UN PEUPLE-UN BUT-UNE FOI</p>
+    </div>
+    <div style="text-align: center;font-weight: bold; font-size: 10pt;" id="header_content3">
+        <p>**********</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content4">
+        <p>MINISTERE DE L’INTERIEUR</p>
+    </div>
+    <div style="text-align: center; font-weight: bold;font-size: 10pt;" id="header_content5">
+        <p>**********</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content6">
+        <p>DIRECTION GENERALE</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content7">
+        <p>DE LA POLICE NATIONALE</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content8">
+        <p>**********</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content9">
+        <p>DIRECTION DE LA SECURITE PUBLIQUE</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content10">
+        <p>**********</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content11">
+        <p>COMMISSARIAT CENTRAL DE KAOLACK</p>
+    </div>
+    <div style="text-align: center; font-weight: bold;font-size: 10pt;" id="header_content12">
+        <p>**********</p> 
+    </div>
+    <div style="text-align: center; font-weight: bold;font-size: 10pt;" id="header_content13">
+        <p>N° {{pv.numeroPv}}/DSP/ CCKL</p>
+    </div>
     <!-- Content for Static Frame 'footer_frame' -->
     <div id="footer_content">(c) - page <pdf:pagenumber>
         of <pdf:pagecount>
@@ -51,7 +148,7 @@
         {% endif %}
         <p>Incrimination: {{pv.crime.incrimination}}</p>
     </div>
-    <div id="col2_frame">
+    <div id="col2_frame" style="border-left: 5px solid black;">
         {{pv.description|safe}}
     </div>
 </body>
