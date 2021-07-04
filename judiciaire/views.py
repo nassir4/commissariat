@@ -4,7 +4,8 @@ from django.http import Http404
 from django.template.loader import get_template
 from django.views import View
 from xhtml2pdf import pisa
-
+from num2words import num2words
+from deep_translator import GoogleTranslator
 from judiciaire.models import *
 from django.shortcuts import render, redirect
 from judiciaire.forms import SaisineForm, InterrogatoireForm, AuditionForm, ClotureForm, ConfrontationForm, \
@@ -64,8 +65,15 @@ def delete(request,pv_id):
 
 def render_pdf_view(request,id):
     saisine=Saisine.objects.get(pk=id)
+    print(num2words(42, lang='fr'))
+    year = saisine.dateCreation.strftime("%Y")
+    annee =num2words(year, lang='fr')
+    day =saisine.dateCreation.strftime("%d")
+    jour = num2words(day, lang='fr')
+    month = saisine.dateCreation.strftime("%B")
+    mois = GoogleTranslator(source='auto', target='fr').translate(month)
     template_path = 'saisine/saisinePDF.html'
-    context = {'pv':saisine}
+    context = {'pv':saisine,'annee':annee,'jour':jour,'mois':mois}
     # Create a Django response object, and specify content_type as pdf
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'filename="report.pdf"'

@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'pdf_generator',
     'bootstrap4',
     'bootstrap_datepicker_plus',
+    'num2words',
+    'deep_translator'
     # 'django_heroku'
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
