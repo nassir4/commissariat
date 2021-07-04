@@ -63,15 +63,15 @@
 
             @frame header_frame11 {           /* Static Frame */
                 -pdf-frame-content: header_content11;
-                left: 1pt; width: 220pt; top: 110pt; height: 20pt;
+                left: 1pt; width: 220pt; top: 120pt; height: 20pt;
             }
             @frame header_frame12 {           /* Static Frame */
                 -pdf-frame-content: header_content12;
-                left: 10pt; width: 150pt; top: 120pt; height: 20pt;
+                left: 10pt; width: 150pt; top: 140pt; height: 20pt;
             }
             @frame header_frame13 {           /* Static Frame */
                 -pdf-frame-content: header_content13;
-                left: 10pt; width: 150pt; top: 130pt; height: 20pt;
+                left: 10pt; width: 300pt; top: 150pt; height: 50pt;
             }
             /* fin entete gauche*/
             /*entete droite*/
@@ -90,7 +90,35 @@
                 left: 425pt; width: 150pt; top: 50pt; height: 50pt;
             }
 
+            @frame header_frame17 {           /* Static Frame */
+                -pdf-frame-content: header_content17;
+                left: 300pt; width: 150pt; top: 60pt; height: 50pt;
+            }
 
+            @frame header_frame18 {           /* Static Frame */
+                -pdf-frame-content: header_content18;
+                left: 300pt; width: 230pt; top: 75pt; height: 50pt;
+            }
+
+            @frame header_frame19 {           /* Static Frame */
+                -pdf-frame-content: header_content19;
+                left: 300pt; width: 230pt; top: 90pt; height: 50pt;
+            }
+
+            @frame header_frame20 {           /* Static Frame */
+                -pdf-frame-content: header_content20;
+                left: 300pt; width: 270pt; top: 105pt; height: 50pt;
+            }
+            
+            @frame header_frame21 {           /* Static Frame */
+                -pdf-frame-content: header_content21;
+                left: 300pt; width: 230pt; top: 120pt; height: 50pt;
+            }
+
+            @frame header_frame22 {           /* Static Frame */
+                -pdf-frame-content: header_content22;
+                left: 300pt; width: 230pt; top: 150pt; height: 50pt;
+            }
             /*fin entete droite*/
 
             @frame content_frame {          /* Content Frame */
@@ -98,16 +126,16 @@
             }
             @frame col1_frame { 
                 -pdf-frame-content:col1_frame;            /* Content frame 1 */
-                left: 10pt; width: 245pt; top: 150pt; height: 632pt;
+                left: 10pt; width: 245pt; top: 200pt; height: 632pt;
             }
 
             @frame col2_frame { 
                 -pdf-frame-content:col2_frame;            /* Content frame 1 */
-                left: 195pt; width: 5pt; top: 150pt; height: 632pt;
+                left: 195pt; width: 5pt; top: 200pt; height: 800pt;
             }
             @frame col3_frame {  
                 -pdf-frame-content:col3_frame;           /* Content frame 2 */
-                left: 200pt; width: 390pt; top: 150pt; height: 632pt;
+                left: 200pt; width: 390pt; top: 200pt; height: 632pt;
                 
             }
             @frame footer_frame {           /* Another static Frame */
@@ -156,7 +184,7 @@
     <div style="text-align: center; font-weight: bold;font-size: 10pt;" id="header_content12">
         <p>**********</p> 
     </div>
-    <div style="text-align: center; font-weight: bold;font-size: 10pt;" id="header_content13">
+    <div style="font-weight: bold;font-size: 13pt;" id="header_content13">
         <p>N° {{pv.numeroPv}}/DSP/ CCKL</p>
     </div>
     <div style="text-align: center;font-weight: bold; font-size: 10pt;" id="header_content14">
@@ -167,6 +195,24 @@
     </div>
     <div style="text-align: center; font-weight: bold;font-size: 10pt;" id="header_content16">
         <p>**********</p> 
+    </div>
+    <div style="font-weight: bold; font-size: 10pt;" id="header_content17">
+        L'an {{ annee}}
+    </div>
+    <div style="font-weight: bold; font-size: 10pt;" id="header_content18">
+        Le {{ jour }} du mois de {{ mois }} à {{ heure }} heures
+    </div>
+    <div style="font-weight:bold;font-size:10pt" id="header_content19">
+        {{minutes }} minutes
+    </div>
+    <div style="font-weight:bold;font-size:10pt" id="header_content20">
+        Nous Serigne Amadou DIOP, commissaire de police
+    </div>
+    <div style="font-weight:bold;font-size:10pt" id="header_content21">
+        en résidence à Kaolack
+    </div>
+    <div style="font-weight:bold;font-size:12pt" id="header_content22" >
+        Officier de police judiciaire
     </div>
     <!-- Content for Static Frame 'footer_frame' -->
     <div id="footer_content">(c) - page <pdf:pagenumber>
@@ -188,7 +234,7 @@
         {{pv.description|safe}}
     </div>
 
-    <div id="col2_frame" style="border-left: 5px solid black; color: white;">
+    <div id="col2_frame" style="border-left: 2px solid black; color: white;">
         111111111111111111111111111111111111111111111111111111111111111111111111111111
         111111111111111111111111111111111111111111111111111111111111111111111111111111
         111111111111111111111111111111111111111111111111111111111111111111111111111111
@@ -238,7 +284,22 @@
         11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
         11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
         11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
         11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
     </div>
 </body>
 </html>
