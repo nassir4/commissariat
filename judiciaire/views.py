@@ -5,7 +5,6 @@ from django.template.loader import get_template
 from django.views import View
 from xhtml2pdf import pisa
 from num2words import num2words
-from deep_translator import GoogleTranslator
 from judiciaire.models import *
 from django.shortcuts import render, redirect
 from judiciaire.forms import SaisineForm, InterrogatoireForm, AuditionForm, ClotureForm, ConfrontationForm, \
@@ -70,8 +69,9 @@ def render_pdf_view(request,id):
     annee =num2words(year, lang='fr')
     day =saisine.dateCreation.strftime("%d")
     jour = num2words(day, lang='fr')
-    month = saisine.dateCreation.strftime("%B")
-    mois = GoogleTranslator(source='auto', target='fr').translate(month)
+    Mois=['janvier','fevrier','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','Decembre']
+    month = int(saisine.dateCreation.strftime("%m"))
+    mois = Mois[month-1]
     hour = saisine.dateCreation.strftime("%H")
     heure =num2words(hour, lang='fr')
     m=saisine.dateCreation.strftime("%M")

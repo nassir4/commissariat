@@ -124,24 +124,41 @@
             @frame content_frame {          /* Content Frame */
                 left: 50pt; width: 512pt; top: 90pt; height: 632pt;
             }
-            @frame col1_frame { 
-                -pdf-frame-content:col1_frame;            /* Content frame 1 */
-                left: 10pt; width: 245pt; top: 200pt; height: 632pt;
+            @frame col1_row1_frame { 
+                -pdf-frame-content:col1_row1_frame;            /* Content frame 1 */
+                left: 10pt; width: 100pt; top: 200pt; height: 632pt;
+            }
+
+            @frame col1_row2_frame { 
+                -pdf-frame-content:col1_row2_frame;            /* Content frame 1 */
+                left: 10pt; width: 120pt; top: 350pt; height: 632pt;
+            }
+
+            @frame col1_row3_frame { 
+                -pdf-frame-content:col1_row3_frame;            /* Content frame 1 */
+                left: 10pt; width: 100pt; top: 550pt; height: 632pt;
+            }
+
+            @frame col1_row4_frame { 
+                -pdf-frame-content:col1_row4_frame;            /* Content frame 1 */
+                left: 10pt; width: 120pt; top: 650pt; height: 632pt;
+            }
+
+            @frame col1_row5_frame { 
+                -pdf-frame-content:col1_row5_frame;            /* Content frame 1 */
+                left: 10pt; width: 120pt; top: 750pt; height: 632pt;
             }
 
             @frame col2_frame { 
                 -pdf-frame-content:col2_frame;            /* Content frame 1 */
-                left: 195pt; width: 5pt; top: 200pt; height: 800pt;
+                left: 130pt; width: 5pt; top: 200pt; height: 800pt;
             }
             @frame col3_frame {  
                 -pdf-frame-content:col3_frame;           /* Content frame 2 */
-                left: 200pt; width: 390pt; top: 200pt; height: 632pt;
+                left: 132pt; width: 450pt; top: 200pt; height: 400pt;
                 
             }
-            @frame footer_frame {           /* Another static Frame */
-                -pdf-frame-content: footer_content;
-                left: 50pt; width: 512pt; top: 772pt; height: 20pt;
-            }
+            
         }
     </style>
 </head>
@@ -214,23 +231,32 @@
     <div style="font-weight:bold;font-size:12pt" id="header_content22" >
         Officier de police judiciaire
     </div>
-    <!-- Content for Static Frame 'footer_frame' -->
-    <div id="footer_content">(c) - page <pdf:pagenumber>
-        of <pdf:pagecount>
-    </div>
-    <div id="col1_frame">
-        <p>Objet: {{pv.objet}}</p>
-        <p>Affaire: {{pv.crime.affaire}}</p>
-        {% if pv.vuEtTransmis%}
-        <p>Vu et Transmis</p>
-        {% endif %}
-        {% if pv.ouvertureEnquete%}
-        <p>Ouverture d'enquête</p>
-        {% endif %}
-        <p>Incrimination: {{pv.crime.incrimination}}</p>
-    </div>
     
-    <div id="col3_frame">
+    <div style="font-weight: bold; font-size: 13pt;font-family: 'Times New Roman', Times, serif;" id="col1_row1_frame">
+        <a style="color: black;">OBJET</a>: {{pv.objet}}
+    </div>
+    <div style="font-weight: bold; font-size: 13pt;font-family: 'Times New Roman', Times, serif;" id="col1_row2_frame">
+        <a style="color: black;">AFFAIRE</a>: {{pv.crime.affaire}}
+    </div>
+    {% if pv.vuEtTransmis%}
+    <div style="font-weight: bold; font-size: 13pt;font-family: 'Times New Roman', Times, serif;" id="col1_row3_frame">
+        <a style="color: black;">Vu et Transmis: Le commissaire central</a> 
+    </div>
+    {% endif %}
+    {% if pv.ouvertureEnquete%}
+    <div style="font-weight: bold; font-size: 13pt;font-family: 'Times New Roman', Times, serif;" id="col1_row4_frame">
+        <a style="color: black;">OUVERTURE D’ENQUETE</a> 
+    </div>
+    {% endif %}
+    <div style="font-weight: bold; font-size: 13pt;font-family: 'Times New Roman', Times, serif;" id="col1_row5_frame">
+        <a style="color: black;">INCRIMINATION:</a> {{pv.crime.incrimination}} 
+    </div>
+
+
+    
+       
+    
+    <div id="col3_frame" style="font-size: 10pt;">
         {{pv.description|safe}}
     </div>
 
