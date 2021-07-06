@@ -62,7 +62,7 @@ def delete(request,pv_id):
     listSaisine = Saisine.objects.all
     return redirect('judiciaire:saisine')
 
-def render_pdf_view(request,id):
+def render_pdf_saisine(request,id):
     saisine=Saisine.objects.get(pk=id)
     print(num2words(42, lang='fr'))
     year = saisine.dateCreation.strftime("%Y")
@@ -94,12 +94,6 @@ def render_pdf_view(request,id):
         return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
 
-def genererPdf(request,id, *args, **kwargs):
-    socket.getaddrinfo('localhost', 8080)
-    saisine = Saisine.objects.get(pk=id)
-    context = {'pv':saisine}
-    pdf = render_to_pdf('saisine/saisinePDF.html', context)
-    return HttpResponse(pdf, content_type='application/pdf')
 """Fin Saisine"""
 """Audition"""
 def audition(request):
@@ -143,6 +137,38 @@ def deleteAudition(request,pv_id):
     pv = Audition.objects.get(pk=pv_id)
     pv.delete()
     return redirect('judiciaire:audition')
+
+def render_pdf_audition(request,id):
+    audition=Audition.objects.get(pk=id)
+    print(num2words(42, lang='fr'))
+    year = audition.dateCreation.strftime("%Y")
+    annee =num2words(year, lang='fr')
+    day =audition.dateCreation.strftime("%d")
+    jour = num2words(day, lang='fr')
+    Mois=['janvier','fevrier','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','Decembre']
+    month = int(audition.dateCreation.strftime("%m"))
+    mois = Mois[month-1]
+    hour = audition.dateCreation.strftime("%H")
+    heure =num2words(hour, lang='fr')
+    m=audition.dateCreation.strftime("%M")
+    print(m)
+    minutes = num2words(m, lang='fr')
+    template_path = 'audition/auditionPDF.html'
+    context = {'pv':audition,'annee':annee,'jour':jour,'mois':mois,'heure':heure, 'minutes':minutes}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback)
+    # if error then show some funy view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
 
 """Fin Audition"""
 """Interrogatoire"""
@@ -188,6 +214,39 @@ def deleteInterrogatoire(request,pv_id):
     pv.delete()
     listSaisine = Saisine.objects.all
     return redirect('judiciaire:interrogatoire')
+
+def render_pdf_interrogatoire(request,id):
+    interrogatoire=Interrogatoire.objects.get(pk=id)
+    print(num2words(42, lang='fr'))
+    year = interrogatoire.dateCreation.strftime("%Y")
+    annee =num2words(year, lang='fr')
+    day =interrogatoire.dateCreation.strftime("%d")
+    jour = num2words(day, lang='fr')
+    Mois=['janvier','fevrier','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','Decembre']
+    month = int(interrogatoire.dateCreation.strftime("%m"))
+    mois = Mois[month-1]
+    hour = interrogatoire.dateCreation.strftime("%H")
+    heure =num2words(hour, lang='fr')
+    m=interrogatoire.dateCreation.strftime("%M")
+    print(m)
+    minutes = num2words(m, lang='fr')
+    template_path = 'interrogatoire/interrogatoirePDF.html'
+    context = {'pv':interrogatoire,'annee':annee,'jour':jour,'mois':mois,'heure':heure, 'minutes':minutes}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback)
+    # if error then show some funy view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
 """Confrontation"""
 def confrontation(request):
     listConfrontation = Confrontation.objects.all
@@ -230,6 +289,38 @@ def deleteConfrontation(request,pv_id):
     pv = Confrontation.objects.get(pk=pv_id)
     pv.delete()
     return redirect('judiciaire:confrontation')
+
+def render_pdf_confrontation(request,id):
+    confrontation=Confrontation.objects.get(pk=id)
+    print(num2words(42, lang='fr'))
+    year = confrontation.dateCreation.strftime("%Y")
+    annee =num2words(year, lang='fr')
+    day =confrontation.dateCreation.strftime("%d")
+    jour = num2words(day, lang='fr')
+    Mois=['janvier','fevrier','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','Decembre']
+    month = int(confrontation.dateCreation.strftime("%m"))
+    mois = Mois[month-1]
+    hour = confrontation.dateCreation.strftime("%H")
+    heure =num2words(hour, lang='fr')
+    m=confrontation.dateCreation.strftime("%M")
+    print(m)
+    minutes = num2words(m, lang='fr')
+    template_path = 'confrontation/confrontationPDF.html'
+    context = {'pv':confrontation,'annee':annee,'jour':jour,'mois':mois,'heure':heure, 'minutes':minutes}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback)
+    # if error then show some funy view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
 
 """Fin Confrontation"""
 """Mission"""
@@ -274,6 +365,39 @@ def deleteMission(request,pv_id):
     pv = Mission.objects.get(pk=pv_id)
     pv.delete()
     return redirect('judiciaire:mission')
+
+def render_pdf_mission(request,id):
+    mission=Mission.objects.get(pk=id)
+    print(num2words(42, lang='fr'))
+    year = mission.dateCreation.strftime("%Y")
+    annee =num2words(year, lang='fr')
+    day =mission.dateCreation.strftime("%d")
+    jour = num2words(day, lang='fr')
+    Mois=['janvier','fevrier','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','Decembre']
+    month = int(mission.dateCreation.strftime("%m"))
+    mois = Mois[month-1]
+    hour = mission.dateCreation.strftime("%H")
+    heure =num2words(hour, lang='fr')
+    m=mission.dateCreation.strftime("%M")
+    print(m)
+    minutes = num2words(m, lang='fr')
+    template_path = 'mission/missionPDF.html'
+    context = {'pv':mission,'annee':annee,'jour':jour,'mois':mois,'heure':heure, 'minutes':minutes}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback)
+    # if error then show some funy view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
 """Fin Mission"""
 """Requisition"""
 def requisition(request):
@@ -317,6 +441,39 @@ def deleteRequisition(request,pv_id):
     pv = Requisition.objects.get(pk=pv_id)
     pv.delete()
     return redirect('judiciaire:requisition')
+
+def render_pdf_requisition(request,id):
+    requisition=Requisition.objects.get(pk=id)
+    print(num2words(42, lang='fr'))
+    year = requisition.dateCreation.strftime("%Y")
+    annee =num2words(year, lang='fr')
+    day =requisition.dateCreation.strftime("%d")
+    jour = num2words(day, lang='fr')
+    Mois=['janvier','fevrier','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','Decembre']
+    month = int(requisition.dateCreation.strftime("%m"))
+    mois = Mois[month-1]
+    hour = requisition.dateCreation.strftime("%H")
+    heure =num2words(hour, lang='fr')
+    m=requisition.dateCreation.strftime("%M")
+    print(m)
+    minutes = num2words(m, lang='fr')
+    template_path = 'requisition/requisitionPDF.html'
+    context = {'pv':requisition,'annee':annee,'jour':jour,'mois':mois,'heure':heure, 'minutes':minutes}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback)
+    # if error then show some funy view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
 """Fin Requisition"""
 """Conduite"""
 def conduite(request):
@@ -360,6 +517,39 @@ def deleteConduite(request,pv_id):
     pv = Conduite.objects.get(pk=pv_id)
     pv.delete()
     return redirect('judiciaire:conduite')
+
+
+def render_pdf_conduite(request,id):
+    conduite=Conduite.objects.get(pk=id)
+    print(num2words(42, lang='fr'))
+    year = conduite.dateCreation.strftime("%Y")
+    annee =num2words(year, lang='fr')
+    day =conduite.dateCreation.strftime("%d")
+    jour = num2words(day, lang='fr')
+    Mois=['janvier','fevrier','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','Decembre']
+    month = int(conduite.dateCreation.strftime("%m"))
+    mois = Mois[month-1]
+    hour = conduite.dateCreation.strftime("%H")
+    heure =num2words(hour, lang='fr')
+    m=conduite.dateCreation.strftime("%M")
+    print(m)
+    minutes = num2words(m, lang='fr')
+    template_path = 'conduite/conduitePDF.html'
+    context = {'pv':conduite,'annee':annee,'jour':jour,'mois':mois,'heure':heure, 'minutes':minutes}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback)
+    # if error then show some funy view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
 
 """Fin Conduite"""
 """Cloture"""
@@ -405,6 +595,38 @@ def deleteCloture(request,pv_id):
     pv.delete()
     return redirect('judiciaire:cloture')
 
+def render_pdf_cloture(request,id):
+    cloture=Cloture.objects.get(pk=id)
+    print(num2words(42, lang='fr'))
+    year = cloture.dateCreation.strftime("%Y")
+    annee =num2words(year, lang='fr')
+    day =cloture.dateCreation.strftime("%d")
+    jour = num2words(day, lang='fr')
+    Mois=['janvier','fevrier','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','Decembre']
+    month = int(cloture.dateCreation.strftime("%m"))
+    mois = Mois[month-1]
+    hour = cloture.dateCreation.strftime("%H")
+    heure =num2words(hour, lang='fr')
+    m=cloture.dateCreation.strftime("%M")
+    print(m)
+    minutes = num2words(m, lang='fr')
+    template_path = 'cloture/cloturePDF.html'
+    context = {'pv':cloture,'annee':annee,'jour':jour,'mois':mois,'heure':heure, 'minutes':minutes}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback)
+    # if error then show some funy view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
 """Fin Cloture"""
 """Notifification à Garde à vue"""
 def notification(request):
@@ -448,6 +670,38 @@ def deleteNotification(request,pv_id):
     pv = Notification.objects.get(pk=pv_id)
     pv.delete()
     return redirect('judiciaire:notification')
+
+def render_pdf_notification(request,id):
+    notification=Notification.objects.get(pk=id)
+    print(num2words(42, lang='fr'))
+    year = notification.dateCreation.strftime("%Y")
+    annee =num2words(year, lang='fr')
+    day =notification.dateCreation.strftime("%d")
+    jour = num2words(day, lang='fr')
+    Mois=['janvier','fevrier','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','Decembre']
+    month = int(notification.dateCreation.strftime("%m"))
+    mois = Mois[month-1]
+    hour = notification.dateCreation.strftime("%H")
+    heure =num2words(hour, lang='fr')
+    m=notification.dateCreation.strftime("%M")
+    print(m)
+    minutes = num2words(m, lang='fr')
+    template_path = 'notification/notificationPDF.html'
+    context = {'pv':notification,'annee':annee,'jour':jour,'mois':mois,'heure':heure, 'minutes':minutes}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback)
+    # if error then show some funy view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
 
 """ Fin Notifification à Garde à vue"""
 
