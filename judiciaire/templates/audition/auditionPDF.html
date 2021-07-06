@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {% load static %}
-    <title>Pv saisine</title>
+    <title>Pv audition</title>
     <style>
          @page {
             size: a4 portrait;
@@ -20,7 +20,7 @@
                 -pdf-frame-content: header_content2;
                 left: 10pt; width: 150pt; top: 20pt; height: 20pt;
             }
-            
+
             @frame header_frame3 {           /* Static Frame */
                 -pdf-frame-content: header_content3;
                 left: 10pt; width: 150pt; top: 35pt; height: 20pt;
@@ -109,7 +109,7 @@
                 -pdf-frame-content: header_content20;
                 left: 300pt; width: 270pt; top: 105pt; height: 50pt;
             }
-            
+
             @frame header_frame21 {           /* Static Frame */
                 -pdf-frame-content: header_content21;
                 left: 300pt; width: 230pt; top: 120pt; height: 50pt;
@@ -124,41 +124,41 @@
             @frame content_frame {          /* Content Frame */
                 left: 50pt; width: 512pt; top: 90pt; height: 632pt;
             }
-            @frame col1_row1_frame { 
+            @frame col1_row1_frame {
                 -pdf-frame-content:col1_row1_frame;            /* Content frame 1 */
                 left: 10pt; width: 100pt; top: 200pt; height: 632pt;
             }
 
-            @frame col1_row2_frame { 
+            @frame col1_row2_frame {
                 -pdf-frame-content:col1_row2_frame;            /* Content frame 1 */
                 left: 10pt; width: 120pt; top: 350pt; height: 632pt;
             }
 
-            @frame col1_row3_frame { 
+            @frame col1_row3_frame {
                 -pdf-frame-content:col1_row3_frame;            /* Content frame 1 */
                 left: 10pt; width: 100pt; top: 550pt; height: 632pt;
             }
 
-            @frame col1_row4_frame { 
+            @frame col1_row4_frame {
                 -pdf-frame-content:col1_row4_frame;            /* Content frame 1 */
                 left: 10pt; width: 120pt; top: 650pt; height: 632pt;
             }
 
-            @frame col1_row5_frame { 
+            @frame col1_row5_frame {
                 -pdf-frame-content:col1_row5_frame;            /* Content frame 1 */
                 left: 10pt; width: 120pt; top: 750pt; height: 632pt;
             }
 
-            @frame col2_frame { 
+            @frame col2_frame {
                 -pdf-frame-content:col2_frame;            /* Content frame 1 */
                 left: 130pt; width: 5pt; top: 200pt; height: 800pt;
             }
-            @frame col3_frame {  
+            @frame col3_frame {
                 -pdf-frame-content:col3_frame;           /* Content frame 2 */
-                left: 132pt; width: 450pt; top: 200pt; height: 400pt;
-                
+                left: 132pt; width: 450pt; top: 200pt; height: 800pt;
+
             }
-            
+
         }
     </style>
 </head>
@@ -166,7 +166,7 @@
 <body>
     <!-- Content for Static Frame 'header_frame' -->
     <div style="text-align:center;font-weight: bold;font-size: 10pt;" id="header_content1">
-        <p>REPUBLIQUE DU SENEGAL</p>       
+        <p>REPUBLIQUE DU SENEGAL</p>
     </div>
     <div style="text-align: center;font-size: 9pt;" id="header_content2">
         <p>UN PEUPLE-UN BUT-UNE FOI</p>
@@ -199,19 +199,19 @@
         <p>COMMISSARIAT CENTRAL DE KAOLACK</p>
     </div>
     <div style="text-align: center; font-weight: bold;font-size: 10pt;" id="header_content12">
-        <p>**********</p> 
+        <p>**********</p>
     </div>
     <div style="font-weight: bold;font-size: 13pt;" id="header_content13">
         <p>N° {{pv.numeroPv}}/DSP/ CCKL</p>
     </div>
-    <div style="text-align: center;font-weight: bold; font-size: 10pt;" id="header_content14">
+    <div style="text-align: center;font-weight: bold; font-size: 10pt; font-family:'Cooper Black' " id="header_content14">
         <p>PROCES-VERBAL</p>
     </div>
     <div id="header_content15">
         <img src="img/police.png" style="height: 60pt; width: 350pt;">
     </div>
     <div style="text-align: center; font-weight: bold;font-size: 10pt;" id="header_content16">
-        <p>**********</p> 
+        <p>**********</p>
     </div>
     <div style="font-weight: bold; font-size: 10pt;" id="header_content17">
         L'an {{ annee}}
@@ -231,7 +231,7 @@
     <div style="font-weight:bold;font-size:12pt" id="header_content22" >
         Officier de police judiciaire
     </div>
-    
+
     <div style="font-weight: bold; font-size: 13pt;font-family: 'Times New Roman', Times, serif;" id="col1_row1_frame">
         <a style="color: black;">OBJET</a>: {{pv.objet}}
     </div>
@@ -240,22 +240,22 @@
     </div>
     {% if pv.vuEtTransmis%}
     <div style="font-weight: bold; font-size: 13pt;font-family: 'Times New Roman', Times, serif;" id="col1_row3_frame">
-        <a style="color: black;">Vu et Transmis: Le commissaire central</a> 
+        <a style="color: black;">Vu et Transmis: Le commissaire central</a>
     </div>
     {% endif %}
     {% if pv.ouvertureEnquete%}
     <div style="font-weight: bold; font-size: 13pt;font-family: 'Times New Roman', Times, serif;" id="col1_row4_frame">
-        <a style="color: black;">OUVERTURE D’ENQUETE</a> 
+        <a style="color: black;">OUVERTURE D’ENQUETE</a>
     </div>
     {% endif %}
     <div style="font-weight: bold; font-size: 13pt;font-family: 'Times New Roman', Times, serif;" id="col1_row5_frame">
-        <a style="color: black;">INCRIMINATION:</a> {{pv.crime.incrimination}} 
+        <a style="color: black;">INCRIMINATION:</a> {{pv.crime.incrimination}}
     </div>
 
 
-    
-       
-    
+
+
+
     <div id="col3_frame" style="font-size: 10pt;">
         {{pv.description|safe}}
     </div>
