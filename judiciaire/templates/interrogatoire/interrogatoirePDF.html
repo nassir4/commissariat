@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <title>Pv interrogatoire</title>
+    <style>
+         @page {
+            size: a4 portrait;
+            /* entete gauche */
+            @frame header_frame1 {           /* Static Frame */
+                -pdf-frame-content: header_content1;
+                left: 10pt; width: 150pt; top: 10pt; height: 50pt;
+            }
+
+            @frame header_frame2 {           /* Static Frame */
+                -pdf-frame-content: header_content2;
+                left: 10pt; width: 150pt; top: 20pt; height: 20pt;
+            }
+
+            @frame header_frame3 {           /* Static Frame */
+                -pdf-frame-content: header_content3;
+                left: 10pt; width: 150pt; top: 35pt; height: 20pt;
+            }
+
+            @frame header_frame4 {           /* Static Frame */
+                -pdf-frame-content: header_content4;
+                left: 10pt; width: 150pt; top: 40pt; height: 20pt;
+            }
+
+            @frame header_frame5 {           /* Static Frame */
+                -pdf-frame-content: header_content5;
+                left: 10pt; width: 150pt; top: 50pt; height: 20pt;
+            }
+
+            @frame header_frame6 {           /* Static Frame */
+                -pdf-frame-content: header_content6;
+                left: 10pt; width: 150pt; top: 60pt; height: 20pt;
+            }
+
+            @frame header_frame7 {           /* Static Frame */
+                -pdf-frame-content: header_content7;
+                left: 10pt; width: 150pt; top: 70pt; height: 20pt;
+            }
+
+            @frame header_frame8 {           /* Static Frame */
+                -pdf-frame-content: header_content8;
+                left: 10pt; width: 150pt; top: 80pt; height: 20pt;
+            }
+
+            @frame header_frame9 {           /* Static Frame */
+                -pdf-frame-content: header_content9;
+                left: 10pt; width: 200pt; top: 90pt; height: 20pt;
+            }
+
+            @frame header_frame10 {           /* Static Frame */
+                -pdf-frame-content: header_content10;
+                left: 10pt; width: 150pt; top: 100pt; height: 20pt;
+            }
+
+            @frame header_frame11 {           /* Static Frame */
+                -pdf-frame-content: header_content11;
+                left: 1pt; width: 220pt; top: 120pt; height: 20pt;
+            }
+            @frame header_frame12 {           /* Static Frame */
+                -pdf-frame-content: header_content12;
+                left: 10pt; width: 150pt; top: 140pt; height: 20pt;
+            }
+            @frame header_frame13 {           /* Static Frame */
+                -pdf-frame-content: header_content13;
+                left: 10pt; width: 300pt; top: 150pt; height: 50pt;
+            }
+            /* fin entete gauche*/
+            /*entete droite*/
+
+            @frame header_frame14 {           /* Static Frame */
+                -pdf-frame-content: header_content14;
+                left: 425pt; width: 150pt; top: 10pt; height: 50pt;
+            }
+            @frame header_frame15 {           /* Static Frame */
+                -pdf-frame-content: header_content15;
+                left: 400pt; width: 200pt; top: 15pt; height: 100pt;
+            }
+
+            @frame header_frame16 {           /* Static Frame */
+                -pdf-frame-content: header_content16;
+                left: 425pt; width: 150pt; top: 50pt; height: 50pt;
+            }
+
+            @frame header_frame17 {           /* Static Frame */
+                -pdf-frame-content: header_content17;
+                left: 300pt; width: 150pt; top: 60pt; height: 50pt;
+            }
+
+            @frame header_frame18 {           /* Static Frame */
+                -pdf-frame-content: header_content18;
+                left: 300pt; width: 230pt; top: 75pt; height: 50pt;
+            }
+
+            @frame header_frame19 {           /* Static Frame */
+                -pdf-frame-content: header_content19;
+                left: 300pt; width: 230pt; top: 90pt; height: 50pt;
+            }
+
+            @frame header_frame20 {           /* Static Frame */
+                -pdf-frame-content: header_content20;
+                left: 300pt; width: 270pt; top: 105pt; height: 50pt;
+            }
+
+            @frame header_frame21 {           /* Static Frame */
+                -pdf-frame-content: header_content21;
+                left: 300pt; width: 230pt; top: 120pt; height: 50pt;
+            }
+
+            @frame header_frame22 {           /* Static Frame */
+                -pdf-frame-content: header_content22;
+                left: 300pt; width: 230pt; top: 150pt; height: 50pt;
+            }
+            /*fin entete droite*/
+
+            @frame content_frame {          /* Content Frame */
+                left: 50pt; width: 512pt; top: 90pt; height: 632pt;
+            }
+            @frame col1_row1_frame {
+                -pdf-frame-content:col1_row1_frame;            /* Content frame 1 */
+                left: 10pt; width: 100pt; top: 200pt; height: 632pt;
+            }
+
+            @frame col1_row2_frame {
+                -pdf-frame-content:col1_row2_frame;            /* Content frame 1 */
+                left: 10pt; width: 120pt; top: 350pt; height: 632pt;
+            }
+
+            @frame col1_row3_frame {
+                -pdf-frame-content:col1_row3_frame;            /* Content frame 1 */
+                left: 10pt; width: 100pt; top: 550pt; height: 632pt;
+            }
+
+            @frame col1_row4_frame {
+                -pdf-frame-content:col1_row4_frame;            /* Content frame 1 */
+                left: 10pt; width: 120pt; top: 650pt; height: 632pt;
+            }
+
+            @frame col1_row5_frame {
+                -pdf-frame-content:col1_row5_frame;            /* Content frame 1 */
+                left: 10pt; width: 120pt; top: 750pt; height: 632pt;
+            }
+
+            @frame col2_frame {
+                -pdf-frame-content:col2_frame;            /* Content frame 1 */
+                left: 130pt; width: 5pt; top: 200pt; height: 800pt;
+            }
+            @frame col3_frame {
+                -pdf-frame-content:col3_frame;           /* Content frame 2 */
+                left: 132pt; width: 450pt; top: 200pt; height: 400pt;
+
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Content for Static Frame 'header_frame' -->
+    <div style="text-align:center;font-weight: bold;font-size: 10pt;" id="header_content1">
+        <p>REPUBLIQUE DU SENEGAL</p>
+    </div>
+    <div style="text-align: center;font-size: 9pt;" id="header_content2">
+        <p>UN PEUPLE-UN BUT-UNE FOI</p>
+    </div>
+    <div style="text-align: center;font-weight: bold; font-size: 10pt;" id="header_content3">
+        <p>**********</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content4">
+        <p>MINISTERE DE L’INTERIEUR</p>
+    </div>
+    <div style="text-align: center; font-weight: bold;font-size: 10pt;" id="header_content5">
+        <p>**********</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content6">
+        <p>DIRECTION GENERALE</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content7">
+        <p>DE LA POLICE NATIONALE</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content8">
+        <p>**********</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content9">
+        <p>DIRECTION DE LA SECURITE PUBLIQUE</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content10">
+        <p>**********</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content11">
+        <p>COMMISSARIAT CENTRAL DE KAOLACK</p>
+    </div>
+    <div style="text-align: center; font-weight: bold;font-size: 10pt;" id="header_content12">
+        <p>**********</p>
+    </div>
+    <div style="font-weight: bold;font-size: 13pt;" id="header_content13">
+        <p>N° {{pv.numeroPv}}/DSP/ CCKL</p>
+    </div>
+    <div style="text-align: center;font-weight: bold; font-size: 10pt;" id="header_content14">
+        <p>PROCES-VERBAL</p>
+    </div>
+    <div id="header_content15">
+        <img src="img/police.png" style="height: 60pt; width: 350pt;">
+    </div>
+    <div style="text-align: center; font-weight: bold;font-size: 10pt;" id="header_content16">
+        <p>**********</p>
+    </div>
+    <div style="font-weight: bold; font-size: 10pt;" id="header_content17">
+        L'an {{ annee}}
+    </div>
+    <div style="font-weight: bold; font-size: 10pt;" id="header_content18">
+        Le {{ jour }} du mois de {{ mois }} à {{ heure }} heures
+    </div>
+    <div style="font-weight:bold;font-size:10pt" id="header_content19">
+        {{minutes }} minutes
+    </div>
+    <div style="font-weight:bold;font-size:10pt" id="header_content20">
+        Nous Serigne Amadou DIOP, commissaire de police
+    </div>
+    <div style="font-weight:bold;font-size:10pt" id="header_content21">
+        en résidence à Kaolack
+    </div>
+    <div style="font-weight:bold;font-size:12pt" id="header_content22" >
+        Officier de police judiciaire
+    </div>
+
+    <div style="font-weight: bold; font-size: 13pt;font-family: 'Times New Roman', Times, serif;" id="col1_row1_frame">
+        <a style="color: black;">OBJET</a>: {{pv.objet}}
+    </div>
+    <div style="font-weight: bold; font-size: 13pt;font-family: 'Times New Roman', Times, serif;" id="col1_row2_frame">
+        <a style="color: black;">AFFAIRE</a>: {{pv.crime.affaire}}
+    </div>
+    {% if pv.vuEtTransmis%}
+    <div style="font-weight: bold; font-size: 13pt;font-family: 'Times New Roman', Times, serif;" id="col1_row3_frame">
+        <a style="color: black;">Vu et Transmis: Le commissaire central</a>
+    </div>
+    {% endif %}
+    {% if pv.ouvertureEnquete%}
+    <div style="font-weight: bold; font-size: 13pt;font-family: 'Times New Roman', Times, serif;" id="col1_row4_frame">
+        <a style="color: black;">OUVERTURE D’ENQUETE</a>
+    </div>
+    {% endif %}
+    <div style="font-weight: bold; font-size: 13pt;font-family: 'Times New Roman', Times, serif;" id="col1_row5_frame">
+        <a style="color: black;">INCRIMINATION:</a> {{pv.crime.incrimination}}
+    </div>
+
+
+
+
+
+    <div id="col3_frame" style="font-size: 10pt;">
+        {{pv.description|safe}}
+    </div>
+
+    <div id="col2_frame" style="border-left: 2px solid black; color: white;">
+        111111111111111111111111111111111111111111111111111111111111111111111111111111
+        111111111111111111111111111111111111111111111111111111111111111111111111111111
+        111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+    </div>
+</body>
+</html>
