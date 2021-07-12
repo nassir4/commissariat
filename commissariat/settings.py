@@ -52,6 +52,9 @@ INSTALLED_APPS = [
     'bootstrap4',
     'bootstrap_datepicker_plus',
     'num2words',
+    'chartjs',
+    'secretariat',
+    'rest_framework',
     # 'django_heroku'
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -90,6 +93,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'commissariat.wsgi.application'
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
