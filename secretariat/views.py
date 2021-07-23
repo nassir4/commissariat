@@ -39,3 +39,18 @@ class ChartData(APIView):
             "default":default_items
         }
         return Response(data)
+
+class ChartPie(APIView):
+    authentification=[]
+    permission_classes = []
+
+    def get(self,request,format=None):
+        materiel =Accident.objects.filter(type_accident=1).count()
+        corporel =Accident.objects.filter(type_accident=2).count()
+        labels =["Accident Materiel","Accident Corporel"]
+        default_items = [materiel,corporel]
+        data={
+            "labels":labels,
+            "default":default_items
+        }
+        return Response(data)

@@ -1,9 +1,26 @@
 from django.db import models
 from django_summernote.fields import SummernoteTextField
 # Create your models here.
+class Incrimination(models.Model):
+    CDCCP = 'CRIMES ET DELITS CONTRE LA CHOSE PUBLIQUE'
+    ATAA = 'ACTES DE TERRORISME ET ASSIMILES'
+    CDCP = 'CRIMES ET DELITS CONTRE LES PARTICULIERS'
+    ILTIC='INFRACTIONS LIEES AUX TIC'
+    ILS= 'INFRACTIONS A LA LEGISLATION SUR LES STUPEFIANTS'
+    TYPE = [
+        (CDCCP, ('CRIMES ET DELITS CONTRE LA CHOSE PUBLIQUE')),
+        (ATAA,('ACTES DE TERRORISME ET ASSIMILES')),
+        (CDCP, ('CRIMES ET DELITS CONTRE LES PARTICULIERS')),
+        (ILTIC, ('INFRACTIONS LIEES AUX TIC')),
+        (ILS, ('INFRACTIONS A LA LEGISLATION SUR LES STUPEFIANTS')),
+    ]
+    nom = models.CharField("Nom Infraction", max_length=200)
+    typeInfraction = models.CharField("Type Infraction", choices=TYPE, default=CDCCP, max_length=500)
+    def __str__(self):
+        return self.nom
 class Crime(models.Model):
     affaire = models.CharField(max_length=200)
-    incrimination = models.CharField(max_length=100)
+    incrimination = models.ForeignKey(Incrimination,on_delete=models.CASCADE,blank=True,null=True)
     def __str__(self):
         return self.affaire
 class Saisine (models.Model):
