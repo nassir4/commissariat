@@ -28,3 +28,5 @@ whitenoise==5.2.0
 django-heroku==0.3.1
 xhtml2pdf==0.2.5
 num2words==0.5.10
+djangorestframework==3.12.4
+django_chartjs==2.2.1

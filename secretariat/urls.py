@@ -1,7 +1,7 @@
 from django.urls import path
 
 from secretariat import views
-from secretariat.views import line_chart_json, ChartData
+from secretariat.views import  ChartData
 
 app_name='secretariat'
 urlpatterns = [
