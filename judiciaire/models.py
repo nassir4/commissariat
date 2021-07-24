@@ -7,15 +7,8 @@ class Incrimination(models.Model):
     CDCP = 'CRIMES ET DELITS CONTRE LES PARTICULIERS'
     ILTIC='INFRACTIONS LIEES AUX TIC'
     ILS= 'INFRACTIONS A LA LEGISLATION SUR LES STUPEFIANTS'
-    TYPE = [
-        (CDCCP, ('CRIMES ET DELITS CONTRE LA CHOSE PUBLIQUE')),
-        (ATAA,('ACTES DE TERRORISME ET ASSIMILES')),
-        (CDCP, ('CRIMES ET DELITS CONTRE LES PARTICULIERS')),
-        (ILTIC, ('INFRACTIONS LIEES AUX TIC')),
-        (ILS, ('INFRACTIONS A LA LEGISLATION SUR LES STUPEFIANTS')),
-    ]
+
     nom = models.CharField("Nom Infraction", max_length=200)
-    typeInfraction = models.CharField("Type Infraction", choices=TYPE, default=CDCCP, max_length=500)
     def __str__(self):
         return self.nom
 class Crime(models.Model):
