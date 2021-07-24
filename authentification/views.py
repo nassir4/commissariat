@@ -1,13 +1,13 @@
 from django.contrib.auth import authenticate,login, logout
 from django.shortcuts import render, redirect
 
-
-# Create your views here.
-from authentification.decorators import unauthenticated_user_accident
+from authentification.decorators import unauthenticated_user_accident, unauthenticated_user_secretariat, \
+    unauthenticated_user_poste, unauthenticated_user_judiciaire
 
 
 def accueil(request):
     return render(request,'accueil.html')
+@unauthenticated_user_secretariat
 def loginPageSecretaire(request):
     if request.method == 'POST':
         username=request.POST.get('username')
@@ -17,6 +17,7 @@ def loginPageSecretaire(request):
             login(request,user)
             return redirect('secretariat:index')
     return render(request,'auth_secretariat.html')
+@unauthenticated_user_accident
 def loginPageAccident(request):
     if request.method == 'POST':
         username=request.POST.get('username')
@@ -26,6 +27,7 @@ def loginPageAccident(request):
             login(request,user)
             return redirect('accident:list_accident')
     return render(request,'auth_accident.html')
+@unauthenticated_user_judiciaire
 def loginPageJudiciaire(request):
     if request.method == 'POST':
         username=request.POST.get('username')
@@ -35,6 +37,7 @@ def loginPageJudiciaire(request):
             login(request,user)
             return redirect('judiciaire:crime')
     return render(request,'auth_judiciaire.html')
+@unauthenticated_user_poste
 def loginPagePoste(request):
     if request.method == 'POST':
         username=request.POST.get('username')
