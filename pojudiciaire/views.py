@@ -1,19 +1,16 @@
-import socket
-
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.template.loader import get_template
-from django.views import View
 from xhtml2pdf import pisa
 from num2words import num2words
-from judiciaire.models import *
+from pojudiciaire.models import *
 from django.shortcuts import render, redirect
-from judiciaire.forms import SaisineForm, InterrogatoireForm, AuditionForm, ClotureForm, ConfrontationForm, \
+from pojudiciaire.forms import SaisineForm, InterrogatoireForm, AuditionForm, ClotureForm, ConfrontationForm, \
     MissionForm, RequisitionForm, ConduiteForm, NotificationForm, CrimeForm
 from django.http import HttpResponse
 
 # Create your views here.
-from judiciaire.utils import render_to_pdf, link_callback
+from pojudiciaire.utils import link_callback
 
 @login_required(login_url='login:judiciaire')
 def index (request):
