@@ -9,6 +9,27 @@ def unauthenticated_user_accident(view_func):
         else:
             return view_func(request,*args,**kwargs)
     return wrapper_func
+def unauthenticated_user_poste(view_func):
+    def wrapper_func(request,*args,**kwargs):
+        if request.user.is_authenticated:
+            return redirect('poste:plainte')
+        else:
+            return view_func(request,*args,**kwargs)
+    return wrapper_func
+def unauthenticated_user_judiciaire(view_func):
+    def wrapper_func(request,*args,**kwargs):
+        if request.user.is_authenticated:
+            return redirect('judiciaire:crime')
+        else:
+            return view_func(request,*args,**kwargs)
+    return wrapper_func
+def unauthenticated_user_secretariat(view_func):
+    def wrapper_func(request,*args,**kwargs):
+        if request.user.is_authenticated:
+            return redirect('secretariat:index')
+        else:
+            return view_func(request,*args,**kwargs)
+    return wrapper_func
 def allowed_user(allowed_roles=[]):
     def decorator(view_func):
         def wrapper_func(request,*args,**kwargs):

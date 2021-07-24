@@ -1,4 +1,5 @@
 from chartjs.views.lines import BaseLineChartView
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render
 
@@ -10,14 +11,16 @@ from accident.models import Accident
 from judiciaire.models import Crime
 from postepolice.models import Registre
 
-
+@login_required(login_url='login:secretariat')
 def index (request):
-    listAccident =Accident.objects.all
+    listAccidentCorporel =Accident.objects.filter(type_accident=1)
+    listAccidentMateriel = Accident.objects.filter(type_accident=2)
     listCrime = Crime.objects.all
     listRegistre=Registre.objects.all
     listUser =User.objects.all
     context ={
-        'listAccident':listAccident,
+        'listAccidentCorporel':listAccidentCorporel,
+        'listAccidentMateriel':listAccidentMateriel,
         'listCrime':listCrime,
         'listUser':listUser,
         'listRegistre':listRegistre
