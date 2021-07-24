@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from accident.models import Accident
-from judiciaire.models import Crime
+from judiciaire.models import Crime, Incrimination
 from postepolice.models import Registre
 
 @login_required(login_url='login:secretariat')
@@ -18,6 +18,7 @@ def index (request):
     listCrime = Crime.objects.all
     listRegistre=Registre.objects.all
     listUser =User.objects.all
+
     context ={
         'listAccidentCorporel':listAccidentCorporel,
         'listAccidentMateriel':listAccidentMateriel,
