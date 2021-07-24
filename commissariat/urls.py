@@ -25,7 +25,7 @@ urlpatterns = [
     path('secretariat/',include('secretariat.urls')),
     path('', views.accueil,name='accueil'),
     path('postepolice/', include('postepolice.urls')),
-    path('policejudiciaire/', include('judiciaire.urls')),
+    path('policejudiciaire/', include('pojudiciaire.urls')),
     path('login/',include('authentification.urls')),
     path('accident/', include('accident.urls')),
     path('admin/', admin.site.urls),

@@ -1,4 +1,4 @@
-from judiciaire import views
+from pojudiciaire import views
 from django.urls import path
 
 
@@ -83,13 +83,13 @@ urlpatterns = [
  path('enquete/delete/<int:id>/', views.deleteCrime, name='delete_crime'),
  path('enquete/update/<int:id>/', views.updateCrime, name='update_crime'),
 
- path('saisine/pdf/<int:id>/',views.render_pdf_saisine,name='pdf_saisine'),
- path('interrogatoire/pdf/<int:id>/',views.render_pdf_interrogatoire,name='pdf_interrogatoire'),
- path('audition/pdf/<int:id>/',views.render_pdf_audition,name='pdf_audition'),
- path('confrontation/pdf/<int:id>/',views.render_pdf_confrontation,name='pdf_confrontation'),
- path('conduite/pdf/<int:id>/',views.render_pdf_conduite,name='pdf_conduite'),
- path('mission/pdf/<int:id>/',views.render_pdf_mission,name='pdf_mission'),
- path('cloture/pdf/<int:id>/',views.render_pdf_cloture,name='pdf_cloture'),
- path('notification/pdf/<int:id>/',views.render_pdf_notification,name='pdf_notification'),
- path('requisition/pdf/<int:id>/',views.render_pdf_requisition,name='pdf_requisition'),
+ path('saisine/pdf/<int:id>/', views.render_pdf_saisine, name='pdf_saisine'),
+ path('interrogatoire/pdf/<int:id>/', views.render_pdf_interrogatoire, name='pdf_interrogatoire'),
+ path('audition/pdf/<int:id>/', views.render_pdf_audition, name='pdf_audition'),
+ path('confrontation/pdf/<int:id>/', views.render_pdf_confrontation, name='pdf_confrontation'),
+ path('conduite/pdf/<int:id>/', views.render_pdf_conduite, name='pdf_conduite'),
+ path('mission/pdf/<int:id>/', views.render_pdf_mission, name='pdf_mission'),
+ path('cloture/pdf/<int:id>/', views.render_pdf_cloture, name='pdf_cloture'),
+ path('notification/pdf/<int:id>/', views.render_pdf_notification, name='pdf_notification'),
+ path('requisition/pdf/<int:id>/', views.render_pdf_requisition, name='pdf_requisition'),
 ]
