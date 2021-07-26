@@ -1,5 +1,4 @@
 from django.urls import path
-
 from authentification import views
 app_name = 'login'
 urlpatterns = [
@@ -8,5 +7,7 @@ urlpatterns = [
     path('accident/',views.loginPageAccident, name='accident'),
     path('policejudiciare/',views.loginPageJudiciaire,name='judiciaire'),
     path('secretariat/',views.loginPageSecretaire,name='secretariat'),
-    path('logout/',views.deconexion,name='logout')
+    path('logout/',views.deconexion,name='logout'),
+
+
 ]
