@@ -12,7 +12,6 @@ from pojudiciaire.models import Crime
 from postepolice.models import Registre
 
 @login_required(login_url='login:secretariat')
-@allowed_user(allowed_roles=['secretariat'])
 def index (request):
     listAccidentCorporel =Accident.objects.filter(type_accident=1)
     listAccidentMateriel = Accident.objects.filter(type_accident=2)
