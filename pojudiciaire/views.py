@@ -15,11 +15,11 @@ from django.http import HttpResponse
 from pojudiciaire.utils import link_callback
 
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def index (request):
     return render(request,'index.html')
 """Saisine"""
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 @login_required(login_url='login:judiciaire')
 def saisine(request):
     listSaisine = Saisine.objects.all
@@ -28,7 +28,7 @@ def saisine(request):
     }
     return render(request, 'saisine/saisine.html',context);
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def detailSaisine(request, pv_id):
     try:
         pv = Saisine.objects.get(pk=pv_id)
@@ -36,7 +36,7 @@ def detailSaisine(request, pv_id):
         raise Http404("Question does not exist")
     return render(request, 'saisine/detail_saisine.html', {'pv': pv})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def save(request,id):
     crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
@@ -50,7 +50,7 @@ def save(request,id):
         form = SaisineForm
     return render(request, 'saisine/enregistrement.html',{'form':form})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def update(request,pv_id):
     try:
         pv = Saisine.objects.get(pk=pv_id)
@@ -65,14 +65,14 @@ def update(request,pv_id):
     }
     return render(request, 'saisine/enregistrement.html',context)
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def delete(request,pv_id):
     pv = Saisine.objects.get(pk=pv_id)
     pv.delete()
     listSaisine = Saisine.objects.all
     return redirect('judiciaire:saisine')
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def render_pdf_saisine(request,id):
     saisine=Saisine.objects.get(pk=id)
     print(num2words(42, lang='fr'))
@@ -108,7 +108,7 @@ def render_pdf_saisine(request,id):
 """Fin Saisine"""
 """Audition"""
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def audition(request):
     listAudition = Audition.objects.all
     context = {
@@ -116,7 +116,7 @@ def audition(request):
     }
     return render(request, 'audition/audition.html',context);
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def detailAudition(request, pv_id):
     try:
         pv = Audition.objects.get(pk=pv_id)
@@ -124,7 +124,7 @@ def detailAudition(request, pv_id):
         raise Http404("Question does not exist")
     return render(request, 'audition/detail_audition.html', {'pv': pv})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def saveAudition(request,id):
     crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
@@ -138,7 +138,7 @@ def saveAudition(request,id):
         form = AuditionForm
     return render(request, 'audition/enregistrement.html',{'form':form})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def updateAudition(request,pv_id):
     try:
         pv = Audition.objects.get(pk=pv_id)
@@ -153,13 +153,13 @@ def updateAudition(request,pv_id):
     }
     return render(request, 'audition/enregistrement.html',context)
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def deleteAudition(request,pv_id):
     pv = Audition.objects.get(pk=pv_id)
     pv.delete()
     return redirect('judiciaire:audition')
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def render_pdf_audition(request,id):
     audition=Audition.objects.get(pk=id)
     print(num2words(42, lang='fr'))
@@ -195,7 +195,7 @@ def render_pdf_audition(request,id):
 """Fin Audition"""
 """Interrogatoire"""
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def interrogatoire(request):
     listInterrogatoire = Interrogatoire.objects.all
     context = {
@@ -203,7 +203,7 @@ def interrogatoire(request):
     }
     return render(request, 'interrogatoire/interrogatoire.html',context);
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def detailInterrogatoire(request, pv_id):
     try:
         pv = Interrogatoire.objects.get(pk=pv_id)
@@ -211,7 +211,7 @@ def detailInterrogatoire(request, pv_id):
         raise Http404("Question does not exist")
     return render(request, 'interrogatoire/detail_interrogatoire.html', {'pv': pv})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def saveInterrogatoire(request,id):
     crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
@@ -225,7 +225,7 @@ def saveInterrogatoire(request,id):
         form = InterrogatoireForm
     return render(request, 'interrogatoire/enregistrement.html',{'form':form})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def updateInterrogatoire(request,pv_id):
     try:
         pv = Interrogatoire.objects.get(pk=pv_id)
@@ -240,14 +240,14 @@ def updateInterrogatoire(request,pv_id):
     }
     return render(request, 'interrogatoire/enregistrement.html',context)
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def deleteInterrogatoire(request,pv_id):
     pv = Interrogatoire.objects.get(pk=pv_id)
     pv.delete()
     listSaisine = Saisine.objects.all
     return redirect('judiciaire:interrogatoire')
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def render_pdf_interrogatoire(request,id):
     interrogatoire=Interrogatoire.objects.get(pk=id)
     print(num2words(42, lang='fr'))
@@ -282,7 +282,7 @@ def render_pdf_interrogatoire(request,id):
 
 """Confrontation"""
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def confrontation(request):
     listConfrontation = Confrontation.objects.all
     context = {
@@ -290,6 +290,7 @@ def confrontation(request):
     }
     return render(request, 'confrontation/confrontation.html',context);
 @login_required(login_url='login:judiciaire')
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def detailConfrontation(request, pv_id):
     try:
         pv = Confrontation.objects.get(pk=pv_id)
@@ -297,7 +298,7 @@ def detailConfrontation(request, pv_id):
         raise Http404("Question does not exist")
     return render(request, 'confrontation/detail_confrontation.html', {'pv': pv})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def saveConfrontation(request,id):
     crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
@@ -311,7 +312,7 @@ def saveConfrontation(request,id):
             form = ConfrontationForm
     return render(request, 'confrontation/enregistrement.html',{'form':form})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def updateConfrontation(request,pv_id):
     try:
         pv = Confrontation.objects.get(pk=pv_id)
@@ -326,13 +327,13 @@ def updateConfrontation(request,pv_id):
     }
     return render(request, 'confrontation/enregistrement.html',context)
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def deleteConfrontation(request,pv_id):
     pv = Confrontation.objects.get(pk=pv_id)
     pv.delete()
     return redirect('judiciaire:confrontation')
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def render_pdf_confrontation(request,id):
     confrontation=Confrontation.objects.get(pk=id)
     print(num2words(42, lang='fr'))
@@ -368,7 +369,7 @@ def render_pdf_confrontation(request,id):
 """Fin Confrontation"""
 """Mission"""
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def mission(request):
     listMission = Mission.objects.all
     context = {
@@ -376,7 +377,7 @@ def mission(request):
     }
     return render(request, 'mission/mission.html',context);
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def detailMission(request, pv_id):
     try:
         pv = Mission.objects.get(pk=pv_id)
@@ -384,7 +385,7 @@ def detailMission(request, pv_id):
         raise Http404("Question does not exist")
     return render(request, 'mission/detail_mission.html', {'pv': pv})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def saveMission(request,id):
     crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
@@ -398,7 +399,7 @@ def saveMission(request,id):
         form = MissionForm
     return render(request, 'mission/enregistrement.html',{'form':form})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def updateMission(request,pv_id):
     try:
         pv = Mission.objects.get(pk=pv_id)
@@ -413,13 +414,13 @@ def updateMission(request,pv_id):
     }
     return render(request, 'mission/enregistrement.html',context)
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def deleteMission(request,pv_id):
     pv = Mission.objects.get(pk=pv_id)
     pv.delete()
     return redirect('judiciaire:mission')
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def render_pdf_mission(request,id):
     mission=Mission.objects.get(pk=id)
     print(num2words(42, lang='fr'))
@@ -455,7 +456,7 @@ def render_pdf_mission(request,id):
 """Fin Mission"""
 """Requisition"""
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def requisition(request):
     listRequisition = Requisition.objects.all
     context = {
@@ -463,7 +464,7 @@ def requisition(request):
     }
     return render(request, 'requisition/requisition.html',context);
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def detailRequisition(request, pv_id):
     try:
         pv = Requisition.objects.get(pk=pv_id)
@@ -471,7 +472,7 @@ def detailRequisition(request, pv_id):
         raise Http404("Question does not exist")
     return render(request, 'requisition/detail_requisition.html', {'pv': pv})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def saveRequisition(request,id):
     crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
@@ -485,7 +486,7 @@ def saveRequisition(request,id):
         form = RequisitionForm
     return render(request, 'requisition/enregistrement.html',{'form':form})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def updateRequisition(request,pv_id):
     try:
         pv = Requisition.objects.get(pk=pv_id)
@@ -500,13 +501,13 @@ def updateRequisition(request,pv_id):
     }
     return render(request, 'requisition/enregistrement.html',context)
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def deleteRequisition(request,pv_id):
     pv = Requisition.objects.get(pk=pv_id)
     pv.delete()
     return redirect('judiciaire:requisition')
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def render_pdf_requisition(request,id):
     requisition=Requisition.objects.get(pk=id)
     print(num2words(42, lang='fr'))
@@ -542,7 +543,7 @@ def render_pdf_requisition(request,id):
 """Fin Requisition"""
 """Conduite"""
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def conduite(request):
     listConduite = Conduite.objects.all
     context = {
@@ -550,7 +551,7 @@ def conduite(request):
     }
     return render(request, 'conduite/conduite.html',context);
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def detailConduite(request, pv_id):
     try:
         pv = Conduite.objects.get(pk=pv_id)
@@ -558,7 +559,7 @@ def detailConduite(request, pv_id):
         raise Http404("Question does not exist")
     return render(request, 'conduite/detail_conduite.html', {'pv': pv})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def saveConduite(request,id):
     crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
@@ -572,7 +573,7 @@ def saveConduite(request,id):
         form = ConduiteForm
     return render(request, 'conduite/enregistrement.html',{'form':form})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def updateConduite(request,pv_id):
     try:
         pv = Conduite.objects.get(pk=pv_id)
@@ -587,14 +588,14 @@ def updateConduite(request,pv_id):
     }
     return render(request, 'conduite/enregistrement.html',context)
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def deleteConduite(request,pv_id):
     pv = Conduite.objects.get(pk=pv_id)
     pv.delete()
     return redirect('judiciaire:conduite')
 
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def render_pdf_conduite(request,id):
     conduite=Conduite.objects.get(pk=id)
     print(num2words(42, lang='fr'))
@@ -630,7 +631,7 @@ def render_pdf_conduite(request,id):
 """Fin Conduite"""
 """Cloture"""
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def cloture(request):
     listCloture = Cloture.objects.all
     context = {
@@ -638,7 +639,7 @@ def cloture(request):
     }
     return render(request, 'cloture/cloture.html',context);
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def detailCloture(request, pv_id):
     try:
         pv = Cloture.objects.get(pk=pv_id)
@@ -646,7 +647,7 @@ def detailCloture(request, pv_id):
         raise Http404("Question does not exist")
     return render(request, 'cloture/detail_cloture.html', {'pv': pv})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def saveCloture(request,id):
     crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
@@ -660,7 +661,7 @@ def saveCloture(request,id):
         form = ClotureForm
     return render(request, 'cloture/enregistrement.html',{'form':form})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def updateCloture(request,pv_id):
     try:
         pv = Cloture.objects.get(pk=pv_id)
@@ -675,13 +676,13 @@ def updateCloture(request,pv_id):
     }
     return render(request, 'cloture/enregistrement.html',context)
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def deleteCloture(request,pv_id):
     pv = Cloture.objects.get(pk=pv_id)
     pv.delete()
     return redirect('judiciaire:cloture')
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def render_pdf_cloture(request,id):
     cloture=Cloture.objects.get(pk=id)
     print(num2words(42, lang='fr'))
@@ -717,7 +718,7 @@ def render_pdf_cloture(request,id):
 """Fin Cloture"""
 """Notifification à Garde à vue"""
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def notification(request):
     listNotification = Notification.objects.all
     context = {
@@ -725,7 +726,7 @@ def notification(request):
     }
     return render(request, 'notification/notification.html',context);
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def detailNotification(request, pv_id):
     try:
         pv = Notification.objects.get(pk=pv_id)
@@ -733,7 +734,7 @@ def detailNotification(request, pv_id):
         raise Http404("Question does not exist")
     return render(request, 'notification/detail_notification.html', {'pv': pv})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def saveNotification(request,id):
     crime = Crime.objects.get(pk=id)
     if request.method == 'POST':
@@ -747,7 +748,7 @@ def saveNotification(request,id):
         form = NotificationForm
     return render(request, 'notification/enregistrement.html',{'form':form})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def updateNotification(request,pv_id):
     try:
         pv = Notification.objects.get(pk=pv_id)
@@ -762,13 +763,13 @@ def updateNotification(request,pv_id):
     }
     return render(request, 'notification/enregistrement.html',context)
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def deleteNotification(request,pv_id):
     pv = Notification.objects.get(pk=pv_id)
     pv.delete()
     return redirect('judiciaire:notification')
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def render_pdf_notification(request,id):
     notification=Notification.objects.get(pk=id)
     print(num2words(42, lang='fr'))
@@ -804,7 +805,7 @@ def render_pdf_notification(request,id):
 """ Fin Notifification à Garde à vue"""
 
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def crime(request):
     listCrime = Crime.objects.all
     context = {
@@ -812,7 +813,7 @@ def crime(request):
     }
     return render(request, 'enquete.html',context);
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def detailCrime(request, id):
     try:
         crime = Crime.objects.get(pk=id)
@@ -841,7 +842,7 @@ def detailCrime(request, id):
         raise Http404("Question does not exist")
     return render(request, 'detail_enquete.html', context)
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def saveCrime(request):
     if request.method == 'POST':
         form = CrimeForm(request.POST)
@@ -853,7 +854,7 @@ def saveCrime(request):
         form = CrimeForm
     return render(request, 'enregistrement.html',{'form':form})
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def updateCrime(request,id):
     try:
         crime = Crime.objects.get(pk=id)
@@ -868,7 +869,7 @@ def updateCrime(request,id):
     }
     return render(request, 'enregistrement.html',context)
 @login_required(login_url='login:judiciaire')
-@allowed_user(allowed_roles=['police judiciaire'])
+@allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def deleteCrime(id):
     crime = Crime.objects.get(pk=id)
     crime.delete()

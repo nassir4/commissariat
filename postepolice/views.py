@@ -9,7 +9,7 @@ from postepolice.forms import PlainteForm, PerteForm, EcrouForm, ObjectConsigneF
 from postepolice.models import Plainte, Perte, Ecrou, ObjectConsigne, MainCourante, Brigade, AgentPoste, Registre
 
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def plainte(request):
     listPlainte = Plainte.objects.all
     context = {
@@ -17,7 +17,7 @@ def plainte(request):
     }
     return render(request, 'plainte/plainte.html',context);
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def detailPlainte(request, id):
     try:
         plainte = Plainte.objects.get(pk=id)
@@ -25,7 +25,7 @@ def detailPlainte(request, id):
         raise Http404("Question does not exist")
     return render(request, 'plainte/detail_plainte.html', {'plainte': plainte})
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def savePlainte(request,id):
     registre = Registre.objects.get(pk=id)
     if request.method == 'POST':
@@ -39,7 +39,7 @@ def savePlainte(request,id):
         form = PlainteForm
     return render(request, 'plainte/enregistrement.html',{'form':form})
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def updatePlainte(request,id):
     try:
         plainte = Plainte.objects.get(pk=id)
@@ -54,7 +54,7 @@ def updatePlainte(request,id):
     }
     return render(request, 'plainte/enregistrement.html',context)
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def deletePlainte(id):
     plainte = Plainte.objects.get(pk=id)
     plainte.delete()
@@ -64,7 +64,7 @@ def deletePlainte(id):
 
 
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def perte(request):
     listPerte = Perte.objects.all
     context = {
@@ -72,7 +72,7 @@ def perte(request):
     }
     return render(request, 'perte/perte.html',context);
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def detailPerte(request, id):
     try:
         pv = Perte.objects.get(pk=id)
@@ -80,7 +80,7 @@ def detailPerte(request, id):
         raise Http404("Question does not exist")
     return render(request, 'perte/detail_perte.html', {'perte': perte})
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def savePerte(request,id):
     registre = Registre.objects.get(pk=id)
     if request.method == 'POST':
@@ -94,7 +94,7 @@ def savePerte(request,id):
         form = PerteForm
     return render(request, 'perte/enregistrement.html',{'form':form})
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def updatePerte(request,id):
     try:
         perte =Perte.objects.get(pk=id)
@@ -109,7 +109,7 @@ def updatePerte(request,id):
     }
     return render(request, 'perte/enregistrement.html',context)
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def deletePerte(id):
     perte = Perte.objects.get(pk=id)
     perte.delete()
@@ -118,7 +118,7 @@ def deletePerte(id):
 
 
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def ecrou(request):
     listEcrou = Ecrou.objects.all
     context = {
@@ -126,7 +126,7 @@ def ecrou(request):
     }
     return render(request, 'ecrou/ecrou.html',context);
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def detailEcrou(request,id):
     try:
         ecrou=Ecrou.objects.get(pk=id)
@@ -134,7 +134,7 @@ def detailEcrou(request,id):
         raise Http404("Question does not exist")
     return render(request, 'ecrou/detail_ecrou.html', {'ecrou':ecrou})
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def saveEcrou(request,id):
     registre = Registre.objects.get(pk=id)
     if request.method == 'POST':
@@ -148,7 +148,7 @@ def saveEcrou(request,id):
         form = EcrouForm
     return render(request, 'ecrou/enregistrement.html',{'form':form})
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def updateEcrou(request,id):
     try:
         ecrou=Ecrou.objects.get(pk=id)
@@ -163,7 +163,7 @@ def updateEcrou(request,id):
     }
     return render(request, 'ecrou/enregistrement.html',context)
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def deleteEcrou(id):
     ecrou =Ecrou.objects.get(pk=id)
     ecrou.delete()
@@ -172,7 +172,7 @@ def deleteEcrou(id):
 
 
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def objetConsigne(request):
     listObjectConsigne = ObjectConsigne.objects.all
     context = {
@@ -188,7 +188,7 @@ def detailObjetConsigne(request, id):
         raise Http404("Question does not exist")
     return render(request, 'consigne/detail_consigne.html', {'objetConsigne': objetConsigne})
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def saveObjetConsigne(request):
     if request.method == 'POST':
         form = ObjectConsigneForm(request.POST)
@@ -199,7 +199,7 @@ def saveObjetConsigne(request):
         form = ObjectConsigneForm
     return render(request, 'consigne/enregistrement.html',{'form':form})
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def updateObjetConsigne(request,id):
     try:
         objetConsigne=ObjectConsigne.objects.get(pk=id)
@@ -214,7 +214,7 @@ def updateObjetConsigne(request,id):
     }
     return render(request, 'consigne/enregistrement.html',context)
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def deleteObjetConsigne(id):
     objetConsigne=ObjectConsigne.objects.get(pk=id)
     objetConsigne.delete()
@@ -223,7 +223,7 @@ def deleteObjetConsigne(id):
 
 
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def mainCourante(request):
     listMainCourante = MainCourante.objects.all
     context = {
@@ -231,7 +231,7 @@ def mainCourante(request):
     }
     return render(request, 'courante/courante.html',context);
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def detailMainCourante(request, id):
     try:
         mainCourante =MainCourante.objects.get(pk=id)
@@ -239,7 +239,7 @@ def detailMainCourante(request, id):
         raise Http404("Question does not exist")
     return render(request, 'courante/detail_courante.html', {'mainCourante': mainCourante})
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def saveMainCourante(request,id):
     registre = Registre.objects.get(pk=id)
     if request.method == 'POST':
@@ -253,7 +253,7 @@ def saveMainCourante(request,id):
         form = MainCouranteForm
     return render(request, 'courante/enregistrement.html',{'form':form})
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def updateMainCourante(request,id):
     try:
         mainCourante=MainCourante.objects.get(pk=id)
@@ -268,13 +268,13 @@ def updateMainCourante(request,id):
     }
     return render(request, 'courante/enregistrement.html',context)
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def deleteMainCourante(id):
     mainCourante=MainCourante.objects.get(pk=id)
     mainCourante.delete()
     return redirect('poste:main_courante')
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def listRegistreMC(request):
     listRegistre = Registre.objects.filter(nom="Main Courante")
     context = {
@@ -282,7 +282,7 @@ def listRegistreMC(request):
     }
     return render(request, 'courante/courante.html',context)
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def listRegistrePl(request):
     listRegistre = Registre.objects.filter(nom="Plainte")
     context = {
@@ -290,7 +290,7 @@ def listRegistrePl(request):
     }
     return render(request, 'plainte/plainte.html',context)
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def listRegistreEc(request):
     listRegistre = Registre.objects.filter(nom="Ecrou")
     context = {
@@ -298,7 +298,7 @@ def listRegistreEc(request):
     }
     return render(request, 'ecrou/ecrou.html',context)
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def listRegistrePer(request):
     listRegistre = Registre.objects.filter(nom="Perte")
     context = {
@@ -306,7 +306,7 @@ def listRegistrePer(request):
     }
     return render(request, 'perte/perte.html',context)
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def detailRegistreMC(request,id):
     registre = Registre.objects.get(pk=id)
     listMainCourante = MainCourante.objects.filter(registre=registre)
@@ -316,7 +316,7 @@ def detailRegistreMC(request,id):
     }
     return render(request, 'courante/detail_courante.html',context)
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def detailRegistrePl(request,id):
     registre = Registre.objects.get(pk=id)
     listPlainte = Plainte.objects.filter(registre=registre)
@@ -326,7 +326,7 @@ def detailRegistrePl(request,id):
     }
     return render(request, 'plainte/detail_plainte.html',context)
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def detailRegistrePer(request,id):
     registre = Registre.objects.get(pk=id)
     listPerte = Perte.objects.filter(registre=registre)
@@ -336,7 +336,7 @@ def detailRegistrePer(request,id):
     }
     return render(request, 'perte/detail_perte.html',context)
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def detailRegistreEc(request,id):
     registre = Registre.objects.get(pk=id)
     listEcrou = Ecrou.objects.filter(registre=registre)
@@ -347,7 +347,7 @@ def detailRegistreEc(request,id):
     return render(request, 'ecrou/detail_ecrou.html',context)
 
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def saveRegistreMC(request):
     if request.method == 'POST':
         form = RegistreForm(request.POST)
@@ -361,7 +361,7 @@ def saveRegistreMC(request):
         form = RegistreForm
     return render(request, 'courante/enregistrement.html',{'form':form})
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def saveRegistrePl(request):
     if request.method == 'POST':
         form = RegistreForm(request.POST)
@@ -375,7 +375,7 @@ def saveRegistrePl(request):
         form = RegistreForm
     return render(request, 'plainte/enregistrement.html',{'form':form})
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def saveRegistreEc(request):
     if request.method == 'POST':
         form = RegistreForm(request.POST)
@@ -389,7 +389,7 @@ def saveRegistreEc(request):
         form = RegistreForm
     return render(request, 'ecrou/enregistrement.html',{'form':form})
 @login_required(login_url='login:poste')
-@allowed_user(allowed_roles=['poste de police'])
+@allowed_user(allowed_roles=['poste de police','secretariat'])
 def saveRegistrePer(request):
     if request.method == 'POST':
         form = RegistreForm(request.POST)
