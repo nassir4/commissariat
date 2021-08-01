@@ -438,8 +438,8 @@ def saveAccidentMateriel(request):
 
 @login_required(login_url='login:accident')
 @allowed_user(allowed_roles=['accident','secretariat'])
-def vehiculeMatertielSave(request):
-    accident = Accident.objects.last()
+def vehiculeMatertielSave(request,id):
+    accident = Accident.objects.get(pk=id)
     if request.method == 'POST':
         vehicule_form = VehiculeMaterielForm(request.POST)
         assurance_form = AssuranceForm(request.POST)
@@ -481,8 +481,8 @@ def vehiculeMatertielSave(request):
                                                                                 })
 @login_required(login_url='login:accident')
 @allowed_user(allowed_roles=['accident','secretariat'])
-def vehiculeCorporelSave(request):
-    accident = Accident.objects.last()
+def vehiculeCorporelSave(request,id):
+    accident = Accident.objects.get(pk=id)
     if request.method == 'POST':
         vehicule_form = VehiculeForm(request.POST)
         assurance_form = AssuranceForm(request.POST)

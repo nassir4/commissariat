@@ -40,7 +40,7 @@
                 {% endif %}
             `   {% if accidentCorporel %}
                 <hr>
-                <a href="{% url 'accident:vehicule_corporel_save'%}">Ajouter un vehicule</a>
+                <a href="{% url 'accident:vehicule_corporel_save' id=accident.id %}">Ajouter un vehicule</a>
                 <hr>
                 {% for vitesse in listVitesse %}
                     <h5>Indicateur de vitesse du vehicule {{vitesse.vehicule}}</h5>
@@ -183,7 +183,7 @@
                 {% endfor %}
                 {% endif %}
                 {% if not accidentCorporel %}
-                    <a href="{% url 'accident:vehicule_materiel_save'%}">Ajouter un vehicule</a>
+                    <a href="{% url 'accident:vehicule_materiel_save' id=accident.id%}">Ajouter un vehicule</a>
                 {% endif %}
                 <hr>
                 {% if listProprietaire%}
