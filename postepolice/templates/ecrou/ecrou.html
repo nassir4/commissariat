@@ -3,12 +3,12 @@
 <div class="row">
 
     <div class="col-md-3">
-        <a href="{% url 'poste:save_registre_mc' %}" class="btn btn-lg btn-secondary"> Ajouter un nouveau registre</a>
+        <a href="{% url 'poste:save_registre_ec' %}" class="btn btn-lg btn-secondary"> Ajouter un nouveau registre</a>
     </div>
     <div class="col-md-9">
         {% for registre in listRegistre %}
         <div class="card shadow mb-4">
-            <h5 class="card-header font-weight-bold text-primary">Registre de la {{registre.nom}} du {{registre.date}}</h5>
+            <h5 class="card-header font-weight-bold text-primary">Registre de l'{{registre.nom}} du {{registre.date}}</h5>
             <div class="card-body">
                 <h4 class="card-title">{{registre.brigade}}</h4>
                 <h5 class="card-title">Chef de poste: {{registre.brigade.chef_de_poste}} </h5>
