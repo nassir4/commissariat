@@ -336,7 +336,7 @@
                     {% endfor %}
                 {% endif %}
                 {%if not etatDesLieux%}
-                    <a href="{% url 'accident:etat_save'%}">Ajouter l'etat des lieux</a>
+                    <a href="{% url 'accident:etat_save' id=accident.id%}">Ajouter l'etat des lieux</a>
                 {% endif %}
 
             </div>
