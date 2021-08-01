@@ -14,14 +14,14 @@ class MainCouranteForm(ModelForm):
 class PlainteForm(ModelForm):
     class Meta:
         model = Plainte
-        fields = ['numero_mention','heure','nom_prenom','adresse','ville','telephone','code_postal','objet','contenu']
+        fields = ['numero_mention','heure','motif']
     heure = TimeField(
             widget=TimePickerInput()
         )
 class PerteForm(ModelForm):
     class Meta:
         model = Perte
-        fields = ['numero_mention','heure','nom_prenom','adresse','ville','telephone','code_postal','objet','contenu']
+        fields = ['numero_mention','heure','motif']
     heure = TimeField(
         widget=TimePickerInput()
     )
