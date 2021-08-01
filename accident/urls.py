@@ -13,11 +13,11 @@ urlpatterns = [
 ################################### URL ACCIDENT MATERIEL ###################################################################
 #############################################################################################################################
     path('corporel/enregistrement',views.saveAccidentCorporel,name='accident_corporel_save'),
-    path('corporel/vehicule',views.vehiculeCorporelSave,name='vehicule_corporel_save'),
+    path('accident/<int:id>/corporel/vehicule',views.vehiculeCorporelSave,name='vehicule_corporel_save'),
     path('materiel/enregistrement',views.saveAccidentMateriel,name='accident_materiel_save'),
     path('materiel/vehicule',views.vehiculeMatertielSave,name='vehicule_materiel_save'),
-    path('temoin',views.temoinMaterielSave,name='temoin_save'),
-    path('victime',views.victimeMaterielSave,name='victime_save'),
+    path('accident/<int:id>/temoin',views.temoinMaterielSave,name='temoin_save'),
+    path('accident/<int:id>/victime',views.victimeMaterielSave,name='victime_save'),
     path('etat/',views.etatSave,name='etat_save'),
     path('declaration/', views.declarationSave, name='declaration_save'),
     path('liste_accident/', views.accident,name='list_accident'),

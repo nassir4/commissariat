@@ -575,8 +575,8 @@ def saveAccidentCorporel(request):
 
 @login_required(login_url='login:accident')
 @allowed_user(allowed_roles=['accident','secretariat'])
-def temoinMaterielSave(request):
-    accident=Accident.objects.last()
+def temoinMaterielSave(request,id):
+    accident=Accident.objects.get(pk=id)
     if request.method == 'POST':
         form =TemoinForm(request.POST)
         if form.is_valid():
@@ -589,8 +589,8 @@ def temoinMaterielSave(request):
     return render(request, 'accident_materiel/enregistrement_temoin.html', {'form': form})
 @login_required(login_url='login:accident')
 @allowed_user(allowed_roles=['accident','secretariat'])
-def victimeMaterielSave(request):
-    accident = Accident.objects.last()
+def victimeMaterielSave(request,id):
+    accident = Accident.objects.get(pk=id)
     if request.method == 'POST':
         form = VictimeForm(request.POST)
         if form.is_valid():
@@ -604,8 +604,8 @@ def victimeMaterielSave(request):
 
 @login_required(login_url='login:accident')
 @allowed_user(allowed_roles=['accident','secretariat'])
-def etatSave(request):
-    accident = Accident.objects.last()
+def etatSave(request,id):
+    accident = Accident.objects.get(pk=id)
     if request.method == 'POST':
         form = EtatDesLieuxForm(request.POST)
         if form.is_valid():
