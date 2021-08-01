@@ -55,7 +55,7 @@
 {% block content %}
 <div class= xmlns="http://www.w3.org/1999/html">
 
-            <form id="regForm" action="{% url 'accident:vehicule_materiel_save'%}" method="post">
+            <form id="regForm" action="{% url 'accident:vehicule_materiel_save' id=id%}" method="post">
                 {% load crispy_forms_tags %}
                 {% load crispy_forms_field %}
                 {% load bootstrap4 %}

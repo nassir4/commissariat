@@ -1,8 +1,12 @@
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from django.template.loader import get_template
+from num2words import num2words
+from xhtml2pdf import pisa
+
 from accident import forms
 from accident.forms import TypeAccidentForm, AccidentForm, VehiculeForm, EclairageForm, EssuieGlaceForm, \
     RetroviseurForm, IndicateurVitesseForm, IndicateurDirectionForm, AvertisseurForm, ConducteurForm, VictimeForm, \
@@ -12,6 +16,7 @@ from accident.models import TypeAccident, Accident, EssuieGlace, Vehicule, Condu
     Temoin, EtatDesLieux, Declaration, Proprietaire, Eclairage, IndicateurDirection, Avertisseur, IndicateurVitesse, \
     PV
 from authentification.decorators import allowed_user
+from pojudiciaire.utils import link_callback
 
 
 @login_required(login_url='login:accident')
@@ -438,8 +443,8 @@ def saveAccidentMateriel(request):
 
 @login_required(login_url='login:accident')
 @allowed_user(allowed_roles=['accident','secretariat'])
-def vehiculeMatertielSave(request):
-    accident = Accident.objects.last()
+def vehiculeMatertielSave(request,id):
+    accident = Accident.objects.get(pk=id)
     if request.method == 'POST':
         vehicule_form = VehiculeMaterielForm(request.POST)
         assurance_form = AssuranceForm(request.POST)
@@ -478,11 +483,12 @@ def vehiculeMatertielSave(request):
                                                                                 'proprietaire_form': proprietaire_form,
                                                                                 'conducteur_form': conducteur_form,
                                                                                 'permis_form': permis_form,
+                                                                                'id':accident.id
                                                                                 })
 @login_required(login_url='login:accident')
 @allowed_user(allowed_roles=['accident','secretariat'])
-def vehiculeCorporelSave(request):
-    accident = Accident.objects.last()
+def vehiculeCorporelSave(request,id):
+    accident = Accident.objects.get(pk=id)
     if request.method == 'POST':
         vehicule_form = VehiculeForm(request.POST)
         assurance_form = AssuranceForm(request.POST)
@@ -554,6 +560,7 @@ def vehiculeCorporelSave(request):
         'direction_form':direction_form,
         'essuieGlace_form':essuieGlace_form,
         'avertisseur_form':avertisseur_form,
+        'id':accident.id
     }
     return render(request, 'accident_corporel/enregistrement.html', context)
 
@@ -684,4 +691,39 @@ def delete(request,pv_id):
     pv = PV.objects.get(pk=pv_id)
     pv.delete()
     return redirect('accident:saisine')
+
+@login_required(login_url='login:accident')
+@allowed_user(allowed_roles=['accident','secretariat'])
+def render_pdf_saisine(request,id):
+    saisine=PV.objects.get(pk=id)
+    print(num2words(42, lang='fr'))
+    year = saisine.dateCreation.strftime("%Y")
+    annee =num2words(year, lang='fr')
+    day =saisine.dateCreation.strftime("%d")
+    jour = num2words(day, lang='fr')
+    Mois=['janvier','fevrier','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','Decembre']
+    month = int(saisine.dateCreation.strftime("%m"))
+    mois = Mois[month-1]
+    hour = saisine.dateCreation.strftime("%H")
+    heure =num2words(hour, lang='fr')
+    m=saisine.dateCreation.strftime("%M")
+    print(m)
+    minutes = num2words(m, lang='fr')
+    template_path = 'pv/saisinePDF.html'
+    context = {'pv':saisine,'annee':annee,'jour':jour,'mois':mois,'heure':heure, 'minutes':minutes}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback)
+    # if error then show some funy view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
 """Fin Saisine"""

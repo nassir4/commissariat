@@ -58,7 +58,7 @@
         <div class="white-box row">
             <h3 class="box-title">Accident Materiel</h3>
             <hr>
-            <form id="regForm" action="{% url 'accident:vehicule_corporel_save'%}" method="post">
+            <form id="regForm" action="{% url 'accident:vehicule_corporel_save' id=id %}" method="post">
                 {% load crispy_forms_tags %}
                 {% load crispy_forms_field %}
                 {% load bootstrap4 %}

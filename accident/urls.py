@@ -15,10 +15,10 @@ urlpatterns = [
     path('corporel/enregistrement',views.saveAccidentCorporel,name='accident_corporel_save'),
     path('accident/<int:id>/corporel/vehicule',views.vehiculeCorporelSave,name='vehicule_corporel_save'),
     path('materiel/enregistrement',views.saveAccidentMateriel,name='accident_materiel_save'),
-    path('materiel/vehicule',views.vehiculeMatertielSave,name='vehicule_materiel_save'),
+    path('accident/<int:id>/materiel/vehicule',views.vehiculeMatertielSave,name='vehicule_materiel_save'),
     path('accident/<int:id>/temoin',views.temoinMaterielSave,name='temoin_save'),
     path('accident/<int:id>/victime',views.victimeMaterielSave,name='victime_save'),
-    path('etat/',views.etatSave,name='etat_save'),
+    path('accident/<int:id>/etat/',views.etatSave,name='etat_save'),
     path('declaration/', views.declarationSave, name='declaration_save'),
     path('liste_accident/', views.accident,name='list_accident'),
     path('detail/<int:accident_id>',views.detailAccident, name='detail_accident'),
@@ -47,6 +47,8 @@ urlpatterns = [
     path('pv/delete/<int:pv_id>/', views.delete, name='delete_saisine'),
     path('pv/update/<int:pv_id>/', views.update, name='update_saisine'),
     path('pv/', views.saisine, name='saisine'),
+    path('pv/pdf/<int:id>/', views.render_pdf_saisine, name='pdf_saisine'),
+
     # FIN URL SAISINE
 
 
