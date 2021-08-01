@@ -47,6 +47,8 @@ urlpatterns = [
     path('pv/delete/<int:pv_id>/', views.delete, name='delete_saisine'),
     path('pv/update/<int:pv_id>/', views.update, name='update_saisine'),
     path('pv/', views.saisine, name='saisine'),
+    path('pv/pdf/<int:id>/', views.render_pdf_saisine, name='pdf_saisine'),
+
     # FIN URL SAISINE
 
 
