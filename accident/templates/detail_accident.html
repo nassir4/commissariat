@@ -282,7 +282,7 @@
                         <hr>
                     {% endfor%}
                 {% endif%}
-                <a href="{% url 'accident:victime_save'%}">Ajouter une victime</a>
+                <a href="{% url 'accident:victime_save' id=accident.id%}">Ajouter une victime</a>
             </div>
 
             <div class="accident-item-box">
@@ -306,7 +306,7 @@
                         <hr>
                     {% endfor%}
                 {% endif%}
-                <a href="{% url 'accident:temoin_save'%}">Ajouter un temoin</a>
+                <a href="{% url 'accident:temoin_save' id=accident.id%}">Ajouter un temoin</a>
                 
             </div>
 
