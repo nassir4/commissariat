@@ -35,7 +35,7 @@ class ObjectConsigneForm(ModelForm):
 class EcrouForm(ModelForm):
     class Meta:
         model =Ecrou
-        fields = ['numero_mention','heure','nom_prenom','adresse','telephone','ville','code_postal','objects_consignes']
+        fields = ['numero_mention','heure','petite_identite','objects_consignes']
     heure = TimeField(
             widget=TimePickerInput()
         )
