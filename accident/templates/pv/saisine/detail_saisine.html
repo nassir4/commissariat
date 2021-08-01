@@ -1,6 +1,6 @@
 {% extends 'base.html'%}
 {% block content%}
-<div class="row">
+<div class="row accident-item-box" style="color:black" >
     <div class="col-md-3">
         <p>Objet: {{pv.objet}}</p>
         <hr>
@@ -16,7 +16,13 @@
         {% endif %}
         <p>Incrimination: {{pv.incrimination}}</p>
         <hr>
-        <a href="{% url 'accident:update_saisine' pv_id=pv.id %}" class="btn btn-info"> Modifier </a>
+        <a href="{% url 'accident:update_saisine' pv_id=pv.id%}" class="btn btn-primary btn-icon-split">
+            <span class="icon text-white-50">
+                <i class="fas fa-edit"></i>
+            </span>
+            <span class="text">Modifier </span>
+        </a>
+        <br>
         <br>
          <a href="{% url 'accident:pdf_saisine' id=pv.id%}" class="btn btn-danger btn-icon-split">
             <span class="icon text-white-50">

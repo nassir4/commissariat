@@ -709,7 +709,7 @@ def render_pdf_saisine(request,id):
     m=saisine.dateCreation.strftime("%M")
     print(m)
     minutes = num2words(m, lang='fr')
-    template_path = 'pv/saisinePDF.html'
+    template_path = 'pv/saisine/saisinePDF.html'
     context = {'pv':saisine,'annee':annee,'jour':jour,'mois':mois,'heure':heure, 'minutes':minutes}
     # Create a Django response object, and specify content_type as pdf
     response = HttpResponse(content_type='application/pdf')

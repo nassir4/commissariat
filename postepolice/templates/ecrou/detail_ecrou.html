@@ -6,7 +6,7 @@
 {% endblock%}
 {% block content%}
     <div class="accident-item-box">
-        <h3 style="text-align: center;">Registre de la {{registre.nom}}</h3>
+        <h3 style="text-align: center;">Registre de l'{{registre.nom}}</h3>
         <hr>
         <p> Brigade: {{ registre.brigade}}</p>
         <p>Chef de poste:{{ registre.brigade.chef_de_poste}}</p>
@@ -35,11 +35,11 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                        {% for mainCourante in listMainCourante %}
+                        {% for ecrou in listEcrou %}
                             <tr>
-                                <td>{{mainCourante.numero_mention}}</td>
-                                <td>{{mainCourante.heure}}</td>
-                                <td>{{mainCourante.motif}}</td>
+                                <td>{{ecrou.numero_mention}}</td>
+                                <td>{{ecrou.heure}}</td>
+                                <td>{{ecrou.motif}}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </div>
-        <a class="btn btn-success" href="{% url 'poste:save_main_courante' id=registre.id %}">Ajouter une main courante</a>
+        <a class="btn btn-success" href="{% url 'poste:save_ecrou' id=registre.id %}">Ajouter un ecrou</a>
     </div>
 {% endblock %}
 {% block javascript%}

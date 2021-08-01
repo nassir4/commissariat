@@ -14,14 +14,14 @@ class MainCouranteForm(ModelForm):
 class PlainteForm(ModelForm):
     class Meta:
         model = Plainte
-        fields = ['numero_mention','heure','nom_prenom','adresse','ville','code_postal','objet','contenu']
+        fields = ['numero_mention','heure','nom_prenom','adresse','ville','telephone','code_postal','objet','contenu']
     heure = TimeField(
             widget=TimePickerInput()
         )
 class PerteForm(ModelForm):
     class Meta:
         model = Perte
-        fields = ['numero_mention','heure','nom_prenom','adresse','ville','code_postal','objet','contenu']
+        fields = ['numero_mention','heure','nom_prenom','adresse','ville','telephone','code_postal','objet','contenu']
     heure = TimeField(
         widget=TimePickerInput()
     )
@@ -35,7 +35,7 @@ class ObjectConsigneForm(ModelForm):
 class EcrouForm(ModelForm):
     class Meta:
         model =Ecrou
-        fields = ['numero_mention','heure','nom_prenom','adresse','ville','code_postal','objects_consignes']
+        fields = ['numero_mention','heure','nom_prenom','adresse','telephone','ville','code_postal','objects_consignes']
     heure = TimeField(
             widget=TimePickerInput()
         )
