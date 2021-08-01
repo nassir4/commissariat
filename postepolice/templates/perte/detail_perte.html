@@ -24,14 +24,14 @@
                             <tr>
                                 <th>Numero Mention</th>
                                 <th>Heure</th>
-                                <th>Objet</th>
+                                <th>Motif</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>Numero Mention</th>
                                 <th>Heure</th>
-                                <th>Objet</th>
+                                <th>Motif</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -39,7 +39,7 @@
                             <tr>
                                 <td>{{perte.numero_mention}}</td>
                                 <td>{{perte.heure}}</td>
-                                <td>{{perte.objet}}</td>
+                                <td>{{perte.motif|safe}}</td>
                             </tr>
                         {% endfor %}
                         </tbody>

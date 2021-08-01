@@ -23,7 +23,6 @@
                         <thead>
                             <tr>
                                 <th>Numero Mention</th>
-                                <th>Prenom & Nom</th>
                                 <th>Heure</th>
                                 <th>Motif</th>
                             </tr>
@@ -31,18 +30,16 @@
                         <tfoot>
                             <tr>
                                 <th>Numero Mention</th>
-                                <th>Prenom & Nom</th>
                                 <th>Heure</th>
-                                <th>Objet</th>
+                                <th>Motif</th>
                             </tr>
                         </tfoot>
                         <tbody>
                         {% for plainte in listPlainte %}
                             <tr>
                                 <td>{{plainte.numero_mention}}</td>
-                                <td>{{plainte.nom_prenom}}</td>
                                 <td>{{plainte.heure}}</td>
-                                <td>{{plainte.objet}}</td>
+                                <td>{{plainte.motif|safe}}</td>
                             </tr>
                         {% endfor %}
                         </tbody>

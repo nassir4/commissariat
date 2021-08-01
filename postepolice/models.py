@@ -48,7 +48,7 @@ class MainCourante(models.Model):
     registre = models.ForeignKey(Registre, on_delete=models.CASCADE,blank=True,null=True)
     numero_mention = models.IntegerField("Numero mention", null=True, blank=True)
     heure = models.TimeField("Heure", auto_now_add=False)
-    motif = models.TextField("Motif")
+    motif = SummernoteTextField("Motif")
 
     def __str__(self):
         return self.numero_mention
@@ -58,13 +58,7 @@ class Plainte(models.Model):
     registre = models.ForeignKey(Registre, on_delete=models.CASCADE, blank=True, null=True)
     numero_mention = models.IntegerField("Numero mention", null=True, blank=True)
     heure = models.TimeField("Heure", auto_now_add=False)
-    nom_prenom = models.CharField("Nom et Prenom", max_length=200)
-    adresse = models.CharField("Adresse", max_length=200)
-    telephone = models.CharField("telephone", max_length=15, unique=True)
-    code_postal = models.CharField("Code postal", max_length=5, blank=True, null=True)
-    ville = models.CharField("Ville", max_length=200, blank=True, null=True)
-    objet = models.TextField("Objet")
-    contenu = SummernoteTextField("Contenu")
+    motif = SummernoteTextField("Contenu")
     # signature
     status = models.BooleanField("Status", default=False)
 
@@ -76,13 +70,7 @@ class Perte(models.Model):
     registre = models.ForeignKey(Registre, on_delete=models.CASCADE,blank=True,null=True)
     numero_mention = models.IntegerField("Numero mention", null=True, blank=True)
     heure = models.TimeField("Heure", auto_now_add=False)
-    nom_prenom = models.CharField("Nom et Prenom", max_length=200)
-    adresse = models.CharField("Adresse", max_length=200)
-    telephone = models.CharField("telephone", max_length=15, unique=True)
-    code_postal = models.CharField("Code postal", max_length=5, blank=True, null=True)
-    ville = models.CharField("Ville", max_length=200, blank=True, null=True)
-    objet = models.TextField("Objet")
-    contenu = SummernoteTextField("Contenu")
+    motif = SummernoteTextField("Contenu")
     status = models.BooleanField("Status", default=False)
 
     def __str__(self):
@@ -101,12 +89,8 @@ class Ecrou(models.Model):
     registre = models.ForeignKey(Registre, on_delete=models.CASCADE,blank=True,null=True)
     numero_mention = models.IntegerField("Numero mention", null=True, blank=True)
     heure = models.TimeField("Heure", auto_now_add=False)
-    nom_prenom = models.CharField("Nom et Prenom", max_length=200)
-    adresse = models.CharField("Adresse", max_length=200)
-    telephone = models.CharField("telephone", max_length=15, unique=True)
-    code_postal = models.CharField("Code postal", max_length=5, blank=True, null=True)
-    ville = models.CharField("Ville", max_length=200, blank=True, null=True)
-    objects_consignes = models.ForeignKey(ObjectConsigne, on_delete=models.CASCADE)
+    petite_identite = SummernoteTextField("Petite identité")
+    objects_consignes = models.CharField("Objet consigné",max_length=400, blank=True,null=True)
     status = models.BooleanField("Status", default=False)
 
     def __str__(self):

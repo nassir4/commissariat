@@ -39,7 +39,7 @@
                             <tr>
                                 <td>{{mainCourante.numero_mention}}</td>
                                 <td>{{mainCourante.heure}}</td>
-                                <td>{{mainCourante.motif}}</td>
+                                <td>{{mainCourante.motif|safe}}</td>
                             </tr>
                         {% endfor %}
                         </tbody>
