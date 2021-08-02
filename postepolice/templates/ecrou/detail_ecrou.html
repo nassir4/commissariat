@@ -41,8 +41,8 @@
                             <tr>
                                 <td>{{ecrou.numero_mention}}</td>
                                 <td>{{ecrou.heure}}</td>
-                                <td>{{ecrou.petite_identite}}</td>
-                                <td>{{eccrou.objects_consignes}}</td>
+                                <td>{{ecrou.petite_identite|safe}}</td>
+                                <td>{{ecrou.objects_consignes}}</td>
                             </tr>
                         {% endfor %}
                         </tbody>

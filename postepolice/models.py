@@ -43,6 +43,8 @@ class Registre(models.Model):
     nom = models.CharField("Nom",max_length=200,null=True,blank=True)
     brigade = models.ForeignKey(Brigade, on_delete=models.SET_NULL, null=True, blank=True)
     date = models.DateField("Date", auto_now_add=True)
+    def __str__(self):
+        return self.nom
 
 class MainCourante(models.Model):
     registre = models.ForeignKey(Registre, on_delete=models.CASCADE,blank=True,null=True)
