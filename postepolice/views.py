@@ -5,8 +5,11 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from authentification.decorators import allowed_user
 from authentification.models import Agent
-from postepolice.forms import PlainteForm, PerteForm, EcrouForm, ObjectConsigneForm, MainCouranteForm, RegistreForm
-from postepolice.models import Plainte, Perte, Ecrou, ObjectConsigne, MainCourante, Brigade, AgentPoste, Registre
+from postepolice.forms import PlainteForm, PerteForm, EcrouForm, ObjectConsigneForm, MainCouranteForm, RegistreForm, \
+    GardeAVueIdentite, GardeAVueMotif, GardeAVueDecision, GardeAVueDeroul, gardeAVueProl, GardeAVueObser
+from postepolice.models import Plainte, Perte, Ecrou, ObjectConsigne, MainCourante, Brigade, AgentPoste, Registre, \
+    GardeAVue
+
 
 @login_required(login_url='login:poste')
 @allowed_user(allowed_roles=['poste de police','secretariat'])
@@ -305,6 +308,16 @@ def listRegistrePer(request):
         'listRegistre' : listRegistre,
     }
     return render(request, 'perte/perte.html',context)
+
+@login_required(login_url='login:poste')
+@allowed_user(allowed_roles=['poste de police','secretariat'])
+def listRegistreGarde(request):
+    listRegistre = Registre.objects.filter(nom="Garde à vue")
+    context = {
+        'listRegistre' : listRegistre,
+    }
+    return render(request, 'gardeAvue/garde_a_vue.html',context)
+
 @login_required(login_url='login:poste')
 @allowed_user(allowed_roles=['poste de police','secretariat'])
 def detailRegistreMC(request,id):
@@ -315,6 +328,17 @@ def detailRegistreMC(request,id):
         'listMainCourante':listMainCourante
     }
     return render(request, 'courante/detail_courante.html',context)
+@login_required(login_url='login:poste')
+@allowed_user(allowed_roles=['poste de police','secretariat'])
+def detailRegistreGarde(request,id):
+    registre = Registre.objects.get(pk=id)
+    listGarde = GardeAVue.objects.filter(registre=registre)
+    context = {
+        'registre':registre,
+        'listGarde':listGarde
+    }
+    return render(request, 'gardeAVue/detail_registre.html',context)
+
 @login_required(login_url='login:poste')
 @allowed_user(allowed_roles=['poste de police','secretariat'])
 def detailRegistrePl(request,id):
@@ -402,3 +426,135 @@ def saveRegistrePer(request):
     else:
         form = RegistreForm
     return render(request, 'perte/enregistrement.html',{'form':form})
+@login_required(login_url='login:poste')
+@allowed_user(allowed_roles=['poste de police','secretariat'])
+def saveRegistreGarde(request):
+    if request.method == 'POST':
+        form = RegistreForm(request.POST)
+        if form.is_valid():
+            registre = form.save(commit=False)
+            registre.nom = "Garde à vue"
+            registre.save()
+            registre = Registre.objects.last()
+            return redirect('poste:detail_registre_Garde', id=registre.id)
+    else:
+        form = RegistreForm
+    return render(request, 'gardeAVue/enregistrement.html',{'form':form})
+
+@login_required(login_url='login:poste')
+@allowed_user(allowed_roles=['poste de police','secretariat'])
+def saveGardeAVue(request,id):
+    registre = Registre.objects.get(pk=id)
+    if request.method == 'POST':
+        form = GardeAVueIdentite(request.POST)
+        if form.is_valid():
+            gardeAVue=form.save(commit=False)
+            gardeAVue.registre = registre
+            gardeAVue.save()
+            return redirect('poste:detail_registre_Garde',id=registre.id)
+    else:
+        form = GardeAVueIdentite
+    return render(request, 'gardeAVue/enregistrement.html',{'form':form})
+
+@login_required(login_url='login:poste')
+@allowed_user(allowed_roles=['poste de police','secretariat'])
+def updateGardeAVue(request,id):
+    try:
+        garde=GardeAVue.objects.get(pk=id)
+    except GardeAVue.DoesNotExist:
+        return redirect('poste:detail_garde')
+    form = GardeAVueIdentite(request.POST or None, instance=garde)
+    if form.is_valid():
+        form.save()
+        return redirect('poste:detail_garde')
+    context = {
+        'form': form,
+    }
+    return render(request, 'gardeAVue/enregistrement.html',context)
+@login_required(login_url='login:poste')
+@allowed_user(allowed_roles=['poste de police','secretariat'])
+def detailGardeAVue(request, id):
+    try:
+        garde =GardeAVue.objects.get(pk=id)
+    except GardeAVue.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'gardeAVue/detail_garde.html', {'garde': garde})
+@login_required(login_url='login:poste')
+@allowed_user(allowed_roles=['poste de police','secretariat'])
+def saveGardeAVueMotif(request,id):
+    try:
+        garde=GardeAVue.objects.get(pk=id)
+    except GardeAVue.DoesNotExist:
+        return redirect('poste:detail_garde')
+    form = GardeAVueMotif(request.POST or None, instance=garde)
+    if form.is_valid():
+        form.save()
+        return redirect('poste:detail_garde', id = garde.id)
+    context = {
+        'form': form,
+    }
+    return render(request, 'gardeAVue/enregistrement.html',context)
+
+@login_required(login_url='login:poste')
+@allowed_user(allowed_roles=['poste de police','secretariat'])
+def saveGardeAVueDecision(request,id):
+    try:
+        garde=GardeAVue.objects.get(pk=id)
+    except GardeAVue.DoesNotExist:
+        return redirect('poste:detail_garde')
+    form = GardeAVueDecision(request.POST or None, instance=garde)
+    if form.is_valid():
+        form.save()
+        return redirect('poste:detail_garde', id = garde.id)
+    context = {
+        'form': form,
+    }
+    return render(request, 'gardeAVue/enregistrement.html',context)
+
+@login_required(login_url='login:poste')
+@allowed_user(allowed_roles=['poste de police','secretariat'])
+def saveGardeAVueDeroulement(request,id):
+    try:
+        garde=GardeAVue.objects.get(pk=id)
+    except GardeAVue.DoesNotExist:
+        return redirect('poste:detail_garde')
+    form = GardeAVueDeroul(request.POST or None, instance=garde)
+    if form.is_valid():
+        form.save()
+        return redirect('poste:detail_garde', id = garde.id)
+    context = {
+        'form': form,
+    }
+    return render(request, 'gardeAVue/enregistrement.html',context)
+
+@login_required(login_url='login:poste')
+@allowed_user(allowed_roles=['poste de police','secretariat'])
+def saveGardeAVueProl(request,id):
+    try:
+        garde=GardeAVue.objects.get(pk=id)
+    except GardeAVue.DoesNotExist:
+        return redirect('poste:detail_garde')
+    form = gardeAVueProl(request.POST or None, instance=garde)
+    if form.is_valid():
+        form.save()
+        return redirect('poste:detail_garde', id = garde.id)
+    context = {
+        'form': form,
+    }
+    return render(request, 'gardeAVue/enregistrement.html',context)
+
+@login_required(login_url='login:poste')
+@allowed_user(allowed_roles=['poste de police','secretariat'])
+def saveGardeAVueObservation(request,id):
+    try:
+        garde=GardeAVue.objects.get(pk=id)
+    except GardeAVue.DoesNotExist:
+        return redirect('poste:detail_garde')
+    form = GardeAVueObser(request.POST or None, instance=garde)
+    if form.is_valid():
+        form.save()
+        return redirect('poste:detail_garde', id = garde.id)
+    context = {
+        'form': form,
+    }
+    return render(request, 'gardeAVue/enregistrement.html',context)
