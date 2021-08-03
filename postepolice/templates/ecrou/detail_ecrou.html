@@ -52,7 +52,7 @@
                                     {% if ecrou.suite %}
                                     {{ecrou.suite}}
                                     {% else %}
-                                    <a class="btn btn-primary" href="{% url 'poste:update_ecrou_suite'%}"> Ajouter une suite</a>
+                                    <a class="btn btn-primary" href="{% url 'poste:update_ecrou_suite' id=ecrou.id%}"> Ajouter une suite</a>
                                     {% endif %}
                                 </td>
                             </tr>
