@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from authentification.decorators import allowed_user
 from authentification.models import Agent
 from postepolice.forms import PlainteForm, PerteForm, EcrouForm, ObjectConsigneForm, MainCouranteForm, RegistreForm, \
-    GardeAVueIdentite, GardeAVueMotif, GardeAVueDecision, GardeAVueDeroul, gardeAVueProl, GardeAVueObser
+    GardeAVueIdentite, GardeAVueMotif, GardeAVueDecision, GardeAVueDeroul, gardeAVueProl, GardeAVueObser, EcrouSuite
 from postepolice.models import Plainte, Perte, Ecrou, ObjectConsigne, MainCourante, Brigade, AgentPoste, Registre, \
     GardeAVue
 
@@ -165,6 +165,23 @@ def updateEcrou(request,id):
         'form': form,
     }
     return render(request, 'ecrou/enregistrement.html',context)
+
+@login_required(login_url='login:poste')
+@allowed_user(allowed_roles=['poste de police','secretariat'])
+def updateEcrouSuite(request,id):
+    try:
+        ecrou=Ecrou.objects.get(pk=id)
+    except Ecrou.DoesNotExist:
+        return redirect('poste:detail_ecrou')
+    form = EcrouSuite(request.POST or None, instance=ecrou)
+    if form.is_valid():
+        form.save()
+        return redirect('poste:ecrou')
+    context = {
+        'form': form,
+    }
+    return render(request, 'ecrou/enregistrement.html',context)
+
 @login_required(login_url='login:poste')
 @allowed_user(allowed_roles=['poste de police','secretariat'])
 def deleteEcrou(id):
@@ -316,7 +333,7 @@ def listRegistreGarde(request):
     context = {
         'listRegistre' : listRegistre,
     }
-    return render(request, 'gardeAvue/garde_a_vue.html',context)
+    return render(request, 'garde/garde_a_vue.html',context)
 
 @login_required(login_url='login:poste')
 @allowed_user(allowed_roles=['poste de police','secretariat'])
@@ -337,7 +354,7 @@ def detailRegistreGarde(request,id):
         'registre':registre,
         'listGarde':listGarde
     }
-    return render(request, 'gardeAVue/detail_registre.html',context)
+    return render(request, 'garde/detail_registre.html',context)
 
 @login_required(login_url='login:poste')
 @allowed_user(allowed_roles=['poste de police','secretariat'])
@@ -439,7 +456,7 @@ def saveRegistreGarde(request):
             return redirect('poste:detail_registre_Garde', id=registre.id)
     else:
         form = RegistreForm
-    return render(request, 'gardeAVue/enregistrement.html',{'form':form})
+    return render(request, 'garde/enregistrement.html',{'form':form})
 
 @login_required(login_url='login:poste')
 @allowed_user(allowed_roles=['poste de police','secretariat'])
@@ -454,7 +471,7 @@ def saveGardeAVue(request,id):
             return redirect('poste:detail_registre_Garde',id=registre.id)
     else:
         form = GardeAVueIdentite
-    return render(request, 'gardeAVue/enregistrement.html',{'form':form})
+    return render(request, 'garde/enregistrement.html',{'form':form})
 
 @login_required(login_url='login:poste')
 @allowed_user(allowed_roles=['poste de police','secretariat'])
@@ -470,7 +487,7 @@ def updateGardeAVue(request,id):
     context = {
         'form': form,
     }
-    return render(request, 'gardeAVue/enregistrement.html',context)
+    return render(request, 'garde/enregistrement.html',context)
 @login_required(login_url='login:poste')
 @allowed_user(allowed_roles=['poste de police','secretariat'])
 def detailGardeAVue(request, id):
@@ -478,7 +495,7 @@ def detailGardeAVue(request, id):
         garde =GardeAVue.objects.get(pk=id)
     except GardeAVue.DoesNotExist:
         raise Http404("Question does not exist")
-    return render(request, 'gardeAVue/detail_garde.html', {'garde': garde})
+    return render(request, 'garde/detail_garde.html', {'garde': garde})
 @login_required(login_url='login:poste')
 @allowed_user(allowed_roles=['poste de police','secretariat'])
 def saveGardeAVueMotif(request,id):
@@ -493,7 +510,7 @@ def saveGardeAVueMotif(request,id):
     context = {
         'form': form,
     }
-    return render(request, 'gardeAVue/enregistrement.html',context)
+    return render(request, 'garde/enregistrement.html',context)
 
 @login_required(login_url='login:poste')
 @allowed_user(allowed_roles=['poste de police','secretariat'])
@@ -509,7 +526,7 @@ def saveGardeAVueDecision(request,id):
     context = {
         'form': form,
     }
-    return render(request, 'gardeAVue/enregistrement.html',context)
+    return render(request, 'garde/enregistrement.html',context)
 
 @login_required(login_url='login:poste')
 @allowed_user(allowed_roles=['poste de police','secretariat'])
@@ -525,7 +542,7 @@ def saveGardeAVueDeroulement(request,id):
     context = {
         'form': form,
     }
-    return render(request, 'gardeAVue/enregistrement.html',context)
+    return render(request, 'garde/enregistrement.html',context)
 
 @login_required(login_url='login:poste')
 @allowed_user(allowed_roles=['poste de police','secretariat'])
@@ -541,7 +558,7 @@ def saveGardeAVueProl(request,id):
     context = {
         'form': form,
     }
-    return render(request, 'gardeAVue/enregistrement.html',context)
+    return render(request, 'garde/enregistrement.html',context)
 
 @login_required(login_url='login:poste')
 @allowed_user(allowed_roles=['poste de police','secretariat'])
@@ -557,4 +574,4 @@ def saveGardeAVueObservation(request,id):
     context = {
         'form': form,
     }
-    return render(request, 'gardeAVue/enregistrement.html',context)
+    return render(request, 'garde/enregistrement.html',context)

@@ -20,6 +20,7 @@ urlpatterns = [
  path('ecrou/detail/<int:id>/', views.detailEcrou,name='detail_ecrou'),
  path('ecrou/delete/<int:id>/',views.deleteEcrou,name='delete_ecrou'),
  path('ecrou/update/<int:id>/',views.updateEcrou,name='update_ecrou'),
+ path('ecrou/update/suite/<int:id>/', views.updateEcrouSuite, name='update_ecrou_suite'),
 
  path('main_courante/',views.mainCourante, name='main_courante'),
  path('main_courante/enregistrement/<int:id>/', views.saveMainCourante, name='save_main_courante'),

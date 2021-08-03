@@ -26,6 +26,8 @@
                                 <th>Heure</th>
                                <th>Petite identité</th>
                                 <th>Objets consignés</th>
+                                <th>Motif garde à vue</th>
+                                <th>Suite</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -34,6 +36,8 @@
                                 <th>Heure</th>
                                 <th>Petite identité</th>
                                 <th>Objets consignés</th>
+                                <th>Motif garde à vue</th>
+                                <th>Suite</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -43,6 +47,14 @@
                                 <td>{{ecrou.heure}}</td>
                                 <td>{{ecrou.petite_identite|safe}}</td>
                                 <td>{{ecrou.objects_consignes}}</td>
+                                <td>{{ecrou.motif_garde_vue}}</td>
+                                <td>
+                                    {% if ecrou.suite %}
+                                    {{ecrou.suite}}
+                                    {% else %}
+                                    <a class="btn btn-primary" href="{% url 'poste:update_ecrou_suite' id=ecrou.id%}"> Ajouter une suite</a>
+                                    {% endif %}
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>

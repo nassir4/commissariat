@@ -19,7 +19,6 @@ ROLES = (
     ('Police de secours', '3')
 )
 
-fs = FileSystemStorage(location='/media/photos')
 
 # modele agent poste
 class AgentPoste(models.Model):
@@ -67,13 +66,13 @@ class Plainte(models.Model):
     numero_mention = models.IntegerField("Numero mention", null=True, blank=True)
     heure = models.TimeField("Heure", auto_now_add=False)
     motif = SummernoteTextField("Contenu")
-    photo1 = models.ImageField(storage=fs)
-    photo2= models.ImageField(storage=fs)
+    photo1 = models.ImageField(upload_to='images/')
+    photo2= models.ImageField(upload_to='images/')
     # signature
     status = models.BooleanField("Status", default=False)
 
     def __str__(self):
-        return self.numero_mention
+        return f'{self.numero_mention}'
 
 
 class Perte(models.Model):
