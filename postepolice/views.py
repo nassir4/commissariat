@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from authentification.decorators import allowed_user
 from authentification.models import Agent
 from postepolice.forms import PlainteForm, PerteForm, EcrouForm, ObjectConsigneForm, MainCouranteForm, RegistreForm, \
-    GardeAVueIdentite, GardeAVueMotif, GardeAVueDecision, GardeAVueDeroul, gardeAVueProl, GardeAVueObser
+    GardeAVueIdentite, GardeAVueMotif, GardeAVueDecision, GardeAVueDeroul, gardeAVueProl, GardeAVueObser, EcrouSuite
 from postepolice.models import Plainte, Perte, Ecrou, ObjectConsigne, MainCourante, Brigade, AgentPoste, Registre, \
     GardeAVue
 
@@ -165,6 +165,23 @@ def updateEcrou(request,id):
         'form': form,
     }
     return render(request, 'ecrou/enregistrement.html',context)
+
+@login_required(login_url='login:poste')
+@allowed_user(allowed_roles=['poste de police','secretariat'])
+def updateEcrouSuite(request,id):
+    try:
+        ecrou=Ecrou.objects.get(pk=id)
+    except Ecrou.DoesNotExist:
+        return redirect('poste:detail_ecrou')
+    form = EcrouSuite(request.POST or None, instance=ecrou)
+    if form.is_valid():
+        form.save()
+        return redirect('poste:ecrou')
+    context = {
+        'form': form,
+    }
+    return render(request, 'ecrou/enregistrement.html',context)
+
 @login_required(login_url='login:poste')
 @allowed_user(allowed_roles=['poste de police','secretariat'])
 def deleteEcrou(id):
