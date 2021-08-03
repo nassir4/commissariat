@@ -1,0 +1,71 @@
+{% extends 'base_poste.html'%}
+{% block content %}
+<div class="col-md-12">
+    <div class="accident-item-box" style="color: black">
+        <h4 class="h4" style="text-align: center;">INDENTITE DE LA PERSONNE GARDE A VUE</h4>
+        <hr>
+        <div class="row">
+            <h5 class="col-md-6">Nom: {{garde.nom}} </h5>
+            <h5 class="col-md-6">Prénom: {{garde.prenom}} </h5>
+        </div>
+        <h5>Date et lieu de naissance: {{ garde.date_naissance}} {{garde.lieu_naissance}}</h5>
+        <h5>Professsion: {{garde.profession}}</h5>
+        <h5>Domicile: à {{garde.domicile}}</h5>
+        <hr>
+        <h4 class="h4" style="text-align: center;">MOTIF DE LA GARDE A VUE</h4>
+        {% if garde.motif %}
+            <h5>{{garde.motif }}</h5>
+        {% else %}
+            <a href="{% url 'poste:motif_garde' id=garde.id %}">Donner le motif de la garde à vue</a>
+        {% endif %}
+        <hr>
+        <h4 class="h4" style="text-align: center;">DECISION DE LA GARDE A VUE</h4>
+        {% if garde.prise_par %}
+            <h5>{{garde.prise_par }}</h5>
+        {% else %}
+            <a href="{% url 'poste:decision_garde' id=garde.id %}">Donner la decision la garde à vue</a>
+        {% endif %}
+        <hr>
+        <h4 class="h4" style="text-align: center;">DEROULEMENT DE LA GARDE A VUE</h4>
+        {% if garde.date_debut %}
+            <h5 class="h5">Date de debut: {{garde.date_debut}} à heures: {{garde.heure_debut}}</h5>
+            <div class="row">
+                <h5 class=" col-md-6 h5">AUDITION de {{garde.heure_debut_audition}} à {{garde.heure_fin_audition}}</h5>
+                <h5 class=" col-md-6 h5">DUREE: {{garde.duree_audition}}</h5>
+
+            </div>
+             <div class="row">
+                <h5 class=" col-md-6 h5">REPOS de {{garde.heure_debut_repos}} à {{garde.heure_fin_repos}}</h5>
+                <h5 class=" col-md-6 h5">DUREE: {{garde.duree_repos}}</h5>
+
+            </div>
+            {% if garde.liberte %}
+            <h5>Liberté: {{garde.liberte}}</h5>
+            {% endif %}
+            <h5 class="h5">Conduite: {{garde.date_conduite}} à {{garde.heure_conduite}} {% if garde.devant %} Devant {{ garde.devant }} {% endif %}</h5>
+            <h5 class="h5"> P.V.N° {{garde.numero_pv}} du {{garde.date_pv}}</h5>
+            <div>
+                 {% if garde.date_prolongation %}
+                <h5 class="h5">Eventuelle prolongation de garde à vue solliciter le {{garde.date_prolongation}}</h5>
+                <h5 class="h5">à {{garde.heure_prolongation}} heures, auprès de {{garde.aupres_de}}</h5>
+                <h5 class="h5">Décision du magistrat {{garde.decision_magistrat}}</h5>
+                 {% else %}
+                 <a href="{% url 'poste:prolongation_garde' id=garde.id %}">Eventuelle prolongation de garde à vue</a>
+                {% endif %}
+             </div>
+        {% else %}
+            <a href="{% url 'poste:deroulement_garde' id=garde.id %}">Donner le déroulement de la garde à vue</a>
+        {% endif %}
+
+         <hr>
+        <h4 class="h4" style="text-align: center;">OBSERVATIONS</h4>
+        {% if garde.observations %}
+        <h5 class="h5">{{garde.observations}}</h5>
+        {% else %}
+            <a href="{% url 'poste:observation_garde' id=garde.id %}">Donner une observation</a>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

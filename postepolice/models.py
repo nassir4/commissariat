@@ -117,7 +117,7 @@ class GardeAVue(models.Model):
     lieu_naissance = models.CharField("Lieu de naissance", max_length=255,blank=True,null=True)
     profession = models.CharField("Profession", max_length=255,blank=True,null=True)
     domicile = models.CharField("Domicile",max_length=255,blank=True,null=True)
-    motif = SummernoteTextField("Motif de la garde à vue",blank=True,null=True)
+    motif = models.TextField("Motif de la garde à vue",blank=True,null=True)
     prise_par = models.CharField("Prise par", max_length=255,blank=True,null=True)
     date_debut = models.DateField("Date de debut",auto_now=False,blank=True,null=True)
     heure_debut = models.TimeField("Heure",auto_now=False,blank=True,null=True)

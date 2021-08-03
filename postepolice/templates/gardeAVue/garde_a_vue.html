@@ -1,0 +1,23 @@
+{% extends 'base_poste.html'%}
+{% block content%}
+<div class="row">
+
+    <div class="col-md-3">
+        <a href="{% url 'poste:save_registre_garde' %}" class="btn btn-lg btn-secondary"> Ajouter un nouveau registre à garde à vue</a>
+    </div>
+    <div class="col-md-9">
+        {% for registre in listRegistre %}
+        <div class="card shadow mb-4">
+            <h5 class="card-header font-weight-bold text-primary">Registre de la {{registre.nom}} du {{registre.date}}</h5>
+            <div class="card-body">
+                <h4 class="card-title">{{registre.brigade}}</h4>
+                <h5 class="card-title">Chef de poste: {{registre.brigade.chef_de_poste}} </h5>
+                <p class="card-text">Secretaire: {{registre.brigade.secretaire}}</p>
+                <a href="{% url 'poste:detail_registre_Garde' id=registre.id%}" class="btn btn-primary">Détail</a>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

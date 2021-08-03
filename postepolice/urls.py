@@ -33,18 +33,33 @@ urlpatterns = [
  path('objet_consigne/delete/<int:id>/',views.deleteObjetConsigne,name='delete_objet_consigne'),
  path('objet_consigne/update/<int:id>/',views.updateObjetConsigne,name='update_objet_consigne'),
 
+ path('garde_a_vue/',views.objetConsigne, name='garde'),
+ path('garde_a_vue/enregistrement/<int:id>', views.saveGardeAVue, name='save_garde'),
+ path('garde_a_vue/detail/<int:id>/', views.detailGardeAVue,name='detail_garde'),
+ path('garde_a_vue/update/<int:id>/',views.updateGardeAVue,name='update_garde'),
+ path('garde_a_vue/motif/<int:id>/', views.saveGardeAVueMotif, name='motif_garde'),
+ path('garde_a_vue/decision/<int:id>/', views.saveGardeAVueDecision, name='decision_garde'),
+ path('garde_a_vue/deroulement/<int:id>/', views.saveGardeAVueDeroulement, name='deroulement_garde'),
+ path('garde_a_vue/prolongation/<int:id>/', views.saveGardeAVueProl, name='prolongation_garde'),
+ path('garde_a_vue/observation/<int:id>/', views.saveGardeAVueObservation, name='observation_garde'),
+
  path('main_courante/liste_registre/',views.listRegistreMC, name='liste_registre_MC'),
  path('ecrou/liste_registre/',views.listRegistreEc, name='liste_registre_Ec'),
  path('plainte/liste_registre/',views.listRegistrePl, name='liste_registre_Pl'),
  path('perte/liste_registre/',views.listRegistrePer, name='liste_registre_Per'),
+ path('garde_a_vue/liste_registre/', views.listRegistreGarde, name='liste_registre_Garde'),
 
  path('main_courante/registre',views.saveRegistreMC,name='save_registre_mc'),
  path('ecrou/registre',views.saveRegistreEc,name='save_registre_ec'),
  path('plainte/registre',views.saveRegistrePl,name='save_registre_pl'),
  path('perte/registre',views.saveRegistrePer,name='save_registre_per'),
+ path('garde_a_vue/registre',views.saveRegistreGarde,name='save_registre_garde'),
+
 
  path('main_courante/registre/detail/<int:id>/', views.detailRegistreMC, name='detail_registre_MC'),
  path('plainte/registre/detail/<int:id>/', views.detailRegistrePl, name='detail_registre_Pl'),
  path('perte/registre/detail/<int:id>/', views.detailRegistrePer, name='detail_registre_Per'),
  path('ecrou/registre/detail/<int:id>/', views.detailRegistreEc, name='detail_registre_Ec'),
+ path('garde_a_vue/registre/detail/<int:id>/', views.detailRegistreGarde, name='detail_registre_Garde'),
+
 ]
