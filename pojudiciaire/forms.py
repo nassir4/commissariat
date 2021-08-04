@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.forms import ModelForm,CharField
 from .models import Saisine, Interrogatoire, Audition, Cloture, Confrontation, Mission, Requisition, Notification, \
     Conduite, Crime
@@ -6,7 +7,12 @@ from .models import Saisine, Interrogatoire, Audition, Cloture, Confrontation, M
 class CrimeForm(ModelForm):
     class Meta:
         model=Crime
-        fields="__all__"
+        fields=['affaire','typeInfraction','incrimination']
+class CrimeSecretariat(ModelForm):
+    class Meta:
+        model=Crime
+        fields=['affaire','typeInfraction','incrimination','user']
+
 class SaisineForm(ModelForm):
     class Meta:
         model = Saisine

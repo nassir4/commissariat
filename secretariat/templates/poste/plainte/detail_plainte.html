@@ -1,0 +1,28 @@
+{% extends 'poste/base_poste.html'%}
+{% block content %}
+<div class="col-md-12">
+    <div class="accident-item-box" style="color: black">
+        <h4 class="h4" style="text-align: center;">PLAINTE</h4>
+        <hr>
+        <div class="row">
+            <h5 class="col-md-6">Numéro mention: {{plainte.numero_mention}} </h5>
+            <h5 class="col-md-6">heure: {{plainte.heure}} </h5>
+        </div>
+        <hr>
+        <div style="text-align: center;">
+            <h5 class="h5">Motif</h5>
+            <p class="p">{{plainte.motif|safe}}</p>
+        </div>
+        <hr>
+        <h5 class="h5" style="text-align: center;">Pièces jointes</h5>
+        <div class="row">
+            <a class="col-md-6 img-responsive" href="{{plainte.photo1.url}}"><img style="width:500px" class="shadow" src="{{plainte.photo1.url}}" alt=""></a>
+            <a class="col-md-6 img-responsive" href="{{plainte.photo2.url}}"><img style="width:500px" class="shadow" src="{{plainte.photo2.url}}" alt=""></a>
+        </div>
+        <br>
+        <a href="{% url 'secretariat:save_crime'%}" class="btn btn-outline-success align-content-lg-end shadow">Ouvrir une enquête</a>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django_summernote.fields import SummernoteTextField
 # Create your models here.
@@ -15,6 +16,14 @@ class Crime(models.Model):
     affaire = models.CharField(max_length=200)
     typeInfraction = models.ForeignKey(TypeInfraction, on_delete=models.CASCADE)
     incrimination = models.CharField("Incrimination",max_length=200, blank=True,null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL,
+                    blank=True, null=True, verbose_name='Agent',
+                    limit_choices_to={'groups__name': 'police judiciaire'},)
+    ETAT_TYPE =(
+        ("EC","En cours"),
+        ("TE","Terminée"),
+    )
+    etat = models.CharField("Etat",choices=ETAT_TYPE, default='EC', max_length=255)
     def __str__(self):
         return self.affaire
 class Saisine (models.Model):

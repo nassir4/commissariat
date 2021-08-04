@@ -1,0 +1,20 @@
+{% extends 'base_judiciaire.html'%}
+{%block content%}
+ <div class="row">
+     <div class="col-md-3">
+         <a href="{% url 'judiciaire:save_requisition' %}" class="btn btn-lg btn-secondary"> Ajouter un PV</a>
+     </div>
+     <div class="col-md-9">
+         {% for requisition in listRequisition %}
+         <div class="card">
+             <h5 class="card-header">Objet: {{requisition.objet}}</h5>
+             <div class="card-body">
+                 <h5 class="card-title">Affaire: {{requisition.reference}} </h5>
+                 <a href="{% url 'judiciaire:detail_requisition' pv_id=requisition.id %}" class="btn btn-primary">Détail</a>
+             </div>
+         </div>
+         <br>
+         {% endfor %}
+     </div>
+ </div>
+ {% endblock %}
