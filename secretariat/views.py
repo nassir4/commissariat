@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+import secretariat
 from accident.models import Accident
 from authentification.decorators import allowed_user
 from pojudiciaire.forms import CrimeForm, CrimeSecretariat
@@ -302,3 +303,84 @@ def detailCrime(request, id):
     except Crime.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'judiciaire/detail_enquete.html', context)
+
+@login_required(login_url='login:secretariat')
+@allowed_user(allowed_roles=['secretariat'])
+def detailSaisine(request, pv_id):
+    try:
+        pv = Saisine.objects.get(pk=pv_id)
+    except Saisine.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'judiciaire/saisine/detail_saisine.html', {'pv': pv})
+@login_required(login_url='login:secretariat')
+@allowed_user(allowed_roles=['secretariat'])
+def detailAudition(request, pv_id):
+    try:
+        pv = Audition.objects.get(pk=pv_id)
+    except Audition.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'judiciaire/audition/detail_audition.html', {'pv': pv})
+
+@login_required(login_url='login:secretaire')
+@allowed_user(allowed_roles=['secretariat'])
+def detailInterrogatoire(request, pv_id):
+    try:
+        pv = Interrogatoire.objects.get(pk=pv_id)
+    except Interrogatoire.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'judiciaire/interrogatoire/detail_interrogatoire.html', {'pv': pv})
+
+@login_required(login_url='login:secretariat')
+@allowed_user(allowed_roles=['secretariat'])
+def detailConfrontation(request, pv_id):
+    try:
+        pv = Confrontation.objects.get(pk=pv_id)
+    except Confrontation.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'judiciaire/confrontation/detail_confrontation.html', {'pv': pv})
+
+@login_required(login_url='login:secretariat')
+@allowed_user(allowed_roles=['secretariat'])
+def detailMission(request, pv_id):
+    try:
+        pv = Mission.objects.get(pk=pv_id)
+    except Interrogatoire.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'judiciaire/mission/detail_mission.html', {'pv': pv})
+
+@login_required(login_url='login:secretariat')
+@allowed_user(allowed_roles=['secretariat'])
+def detailRequisition(request, pv_id):
+    try:
+        pv = Requisition.objects.get(pk=pv_id)
+    except Requisition.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'judiciaire/requisition/detail_requisition.html', {'pv': pv})
+
+@login_required(login_url='login:secretariat')
+@allowed_user(allowed_roles=['secretariat'])
+def detailConduite(request, pv_id):
+    try:
+        pv = Conduite.objects.get(pk=pv_id)
+    except Conduite.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'judiciaire/conduite/detail_conduite.html', {'pv': pv})
+
+@login_required(login_url='login:secretariat')
+@allowed_user(allowed_roles=['secretariat'])
+def detailCloture(request, pv_id):
+    try:
+        pv = Cloture.objects.get(pk=pv_id)
+    except Cloture.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'judiciaire/cloture/detail_cloture.html', {'pv': pv})
+@login_required(login_url='login:secretariat')
+@allowed_user(allowed_roles=['secretariat'])
+def detailNotification(request, pv_id):
+    try:
+        pv = Notification.objects.get(pk=pv_id)
+    except Notification.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'judiciaire/notification/detail_notification.html', {'pv': pv})
+
+

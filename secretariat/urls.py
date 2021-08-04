@@ -33,4 +33,15 @@ urlpatterns = [
     path('enquete/enregistrement/', views.saveCrime, name='save_crime'),
     path('enquete/', views.crime, name='crime'),
     path('enquete/detail/<int:id>/', views.detailCrime, name='detail_crime'),
+
+    path('saisine/detail/<int:pv_id>/', views.detailSaisine, name='detail_saisine'),
+    path('audition/detail/<int:pv_id>/', views.detailAudition, name='detail_audition'),
+    path('interrogatoire/detail/<int:pv_id>/', views.detailInterrogatoire, name='detail_interrogatoire'),
+    path('confrontation/detail/<int:pv_id>/', views.detailConfrontation, name='detail_confrontation'),
+    path('mission/detail/<int:pv_id>/', views.detailMission, name='detail_mission'),
+    path('requisition/detail/<int:pv_id>/', views.detailRequisition, name='detail_requisition'),
+    path('conduite/detail/<int:pv_id>/', views.detailConduite, name='detail_conduite'),
+    path('notification/detail/<int:pv_id>/', views.detailNotification, name='detail_notification'),
+    path('cloture/detail/<int:pv_id>/', views.detailCloture, name='detail_cloture'),
+
 ]
