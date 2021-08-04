@@ -308,9 +308,9 @@ def saveConfrontation(request,id):
             pv.crime = crime
             pv.save()
             return redirect('judiciaire:detail_crime', id=crime.id)
-        else:
-            form = ConfrontationForm
-    return render(request, 'confrontation/enregistrement.html',{'form':form})
+    else:
+        form = ConfrontationForm
+    return render(request, 'confrontation/enregistrement.html', {'form': form})
 @login_required(login_url='login:judiciaire')
 @allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def updateConfrontation(request,pv_id):

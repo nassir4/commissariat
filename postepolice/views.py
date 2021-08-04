@@ -32,7 +32,7 @@ def detailPlainte(request, id):
 def savePlainte(request,id):
     registre = Registre.objects.get(pk=id)
     if request.method == 'POST':
-        form = PlainteForm(request.POST)
+        form = PlainteForm(request.POST,request.FILES)
         if form.is_valid():
             plainte=form.save(commit=False)
             plainte.registre = registre
