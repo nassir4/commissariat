@@ -30,4 +30,7 @@ urlpatterns = [
     path('ecrou/registre/detail/<int:id>/', views.detailRegistreEc, name='detail_registre_Ec'),
     path('garde_a_vue/registre/detail/<int:id>/', views.detailRegistreGarde, name='detail_registre_Garde'),
 
+    path('enquete/enregistrement/', views.saveCrime, name='save_crime'),
+    path('enquete/', views.crime, name='crime'),
+    path('enquete/detail/<int:id>/', views.detailCrime, name='detail_crime'),
 ]

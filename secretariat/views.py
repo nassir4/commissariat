@@ -9,7 +9,9 @@ from rest_framework.views import APIView
 
 from accident.models import Accident
 from authentification.decorators import allowed_user
-from pojudiciaire.models import Crime
+from pojudiciaire.forms import CrimeForm, CrimeSecretariat
+from pojudiciaire.models import Crime, Notification, Cloture, Requisition, Conduite, Mission, Confrontation, \
+    Interrogatoire, Audition, Saisine
 from postepolice.forms import RegistreForm
 from postepolice.models import Registre, Plainte, Perte, Ecrou, MainCourante, GardeAVue
 
@@ -218,7 +220,7 @@ def detailRegistrePl(request,id):
         'registre':registre,
         'listPlainte':listPlainte
     }
-    return render(request, 'poste/plainte/detail_plainte.html',context)
+    return render(request, 'poste/plainte/detail_registre.html',context)
 @login_required(login_url='login:secretariat')
 @allowed_user(allowed_roles=['secretariat'])
 def detailRegistrePer(request,id):
@@ -249,3 +251,54 @@ def detailGardeAVue(request, id):
     except GardeAVue.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'poste/garde/detail_garde.html', {'garde': garde})
+
+@login_required(login_url='login:secretariat')
+@allowed_user(allowed_roles=['secretariat'])
+def saveCrime(request):
+    if request.method == 'POST':
+        form = CrimeSecretariat(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('secretariat:crime')
+    else:
+        form = CrimeSecretariat
+    return render(request, 'enregistrement_enquete.html',{'form':form})
+
+@login_required(login_url='login:secretariat')
+@allowed_user(allowed_roles=['secretariat'])
+def crime(request):
+    listCrime = Crime.objects.all
+    context = {
+        'listCrime': listCrime
+    }
+    return render(request, 'judiciaire/enquete.html',context);
+
+@login_required(login_url='login:secretariat')
+@allowed_user(allowed_roles=['secretariat'])
+def detailCrime(request, id):
+    try:
+        crime = Crime.objects.get(pk=id)
+        listSaisine = Saisine.objects.filter(crime=crime)
+        listAudition = Audition.objects.filter(crime=crime)
+        listInterrogatoire = Interrogatoire.objects.filter(crime=crime)
+        listConfrontation = Confrontation.objects.filter(crime=crime)
+        listMission =Mission.objects.filter(crime=crime)
+        listConduite = Conduite.objects.filter(crime=crime)
+        listRequisition = Requisition.objects.filter(crime=crime)
+        listNotification = Notification.objects.filter(crime=crime)
+        listCloture = Cloture.objects.filter(crime=crime)
+        context = {
+            'crime': crime,
+            'listSaisine':listSaisine,
+            'listAudition':listAudition,
+            'listInterrogatoire':listInterrogatoire,
+            'listConfrontation':listConfrontation,
+            'listMission':listMission,
+            'listConduite': listConduite,
+            'listRequisition':listRequisition,
+            'listNotification':listNotification,
+            'listCloture':listCloture
+        }
+    except Crime.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'judiciaire/detail_enquete.html', context)

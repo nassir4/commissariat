@@ -1,83 +1,28 @@
 {% extends 'poste/base_poste.html'%}
-{% load static %}
-{% block stylesheet %}
- <!-- Custom styles for this page -->
-    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css'%}" rel="stylesheet">
-{% endblock%}
-{% block content%}
-    <div class="accident-item-box">
-        <h3 style="text-align: center;">Registre de la {{registre.nom}}</h3>
+{% block content %}
+<div class="col-md-12">
+    <div class="accident-item-box" style="color: black">
+        <h4 class="h4" style="text-align: center;">PLAINTE</h4>
         <hr>
-        <p> Brigade: {{ registre.brigade}}</p>
-        <p>Chef de poste:{{ registre.brigade.chef_de_poste}}</p>
-        <p>Secretaire: {{registre.brigade.secretaire}}</p>
-        <p>Chauffeur: {{registre.brigade.chauffeur}}</p>
-        <p>Police Secours: {{registre.brigade.police_secours}}</p>
-        <div class="card  mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Date: {{registre.date}}</h6>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="exemple" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Numero Mention</th>
-                                <th>Heure</th>
-                                <th>Motif</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Numero Mention</th>
-                                <th>Heure</th>
-                                <th>Motif</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                        {% for plainte in listPlainte %}
-                            <tr>
-                                <td>{{plainte.numero_mention}}</td>
-                                <td>{{plainte.heure}}</td>
-                                <td>{{plainte.motif|safe}}</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div class="row">
+            <h5 class="col-md-6">Numéro mention: {{plainte.numero_mention}} </h5>
+            <h5 class="col-md-6">heure: {{plainte.heure}} </h5>
         </div>
+        <hr>
+        <div style="text-align: center;">
+            <h5 class="h5">Motif</h5>
+            <p class="p">{{plainte.motif|safe}}</p>
+        </div>
+        <hr>
+        <h5 class="h5" style="text-align: center;">Pièces jointes</h5>
+        <div class="row">
+            <a class="col-md-6 img-responsive" href="{{plainte.photo1.url}}"><img style="width:500px" class="shadow" src="{{plainte.photo1.url}}" alt=""></a>
+            <a class="col-md-6 img-responsive" href="{{plainte.photo2.url}}"><img style="width:500px" class="shadow" src="{{plainte.photo2.url}}" alt=""></a>
+        </div>
+        <br>
+        <a href="{% url 'secretariat:save_crime'%}" class="btn btn-outline-success align-content-lg-end shadow">Ouvrir une enquête</a>
     </div>
-{% endblock %}
-{% block javascript%}
-  <script type="text/javascript">
-        $(document).ready(function() {
-            $("#exemple").dataTable({
-                "pageLength": 5,
-                "responsive":true,
-                "lengthChange": false,
-                "language":{
-                    "emptyTable":"Aucun élément trouvé",
-                    "info":"",
-                    "infoEmpty":"Aucune donnée disponible",
-                    "loadingRecords":"Chargement...",
-                    "processing":"Encours...",
-                    "search":"Rechercher",
-                    "zeroRecords":"L'élément recherché n'existe pas",
-                    "paginate":{
-                        "first":"Premier",
-                        "last":"Dernier",
-                        "next":"Suivant",
-                        "previous":"Précédent"
-                    }
-                }
-            });
-        });
-    </script>
- <!-- Page level plugins -->
-    <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
-    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
+</div>
 
-    <!-- Page level custom scripts -->
-    <script src="{% static 'js/demo/datatables-demo.js'%}"></script>
-{% endblock%}
+
+{% endblock %}

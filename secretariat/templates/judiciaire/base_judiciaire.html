@@ -48,43 +48,34 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url 'secretariat:index'%}">
                     <i class="fas fa-fw fa-home"></i>
-                    <span>Accueil</span></a>
+                    <span> Accueil</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-             <li class="nav-item ">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-car-crash"></i>
-                    <span>Section Accident </span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <li class="nav-item ">
+            <li class="nav-item">
                 <a class="nav-link" href="{% url 'secretariat:crime'%}">
                     <i class="fas fa-fw fa-balance-scale"></i>
-                    <span>Poste Judiciaire</span></a>
+                    <span> Enquêtes Enregistrées</span></a>
             </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
              <li class="nav-item ">
-                <a class="nav-link" href="{% url 'secretariat:plainte'%}">
-                    <i class="fas fa-fw fa-desktop"></i>
-                    <span>Poste de Police</span></a>
+                <a class="nav-link" href="{% url 'secretariat:save_crime'%}">
+                    <i class="fas fa-fw fa-file-archive"></i>
+                    <span>Nouvelle Enquête</span></a>
             </li>
 
-            <!-- Divider -->
+
+           <!-- Divider -->
             <hr class="sidebar-divider">
               <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
         </ul>
         <!-- End of Sidebar -->
 
@@ -95,7 +86,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                <nav class="navbar navbar-expand  topbar mb-4 static-top shadow bg-white">
+                <nav class="navbar navbar-expand  topbar mb-4 static-top shadow bg-white" >
 
                     <!-- Sidebar Toggle (Topbar) -->
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -114,9 +105,9 @@
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
-                         <!-- Nav Item - User Information -->
+                        <!-- Nav Item - User Information -->
                          <li class="nav-item  no-arrow">
-                             <a class="dropdown-item" href="{% url 'login:logout' %}">
+                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Deconnexion
                              </a>
@@ -128,9 +119,17 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
+                <div class="container-fluid">
 
-                {% block content%}{%endblock%}
+                    <!-- Page Heading -->
+                    <h6 class="h6 mb-4 text-gray-800" style="text-align: center;">Section Police Judiciaire</h6>
+                    <hr>
+                    <div class="col-md-12">
+                        {% block content%}{%endblock%}
+                    </div>
 
+                </div>
+                <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
@@ -138,7 +137,7 @@
             <!-- Footer -->
             <footer class="sticky-footer " style="background-color: #fff">
                 <div class="container my-auto">
-                    <div class="copyright text-center  my-auto">
+                    <div class="copyright text-center my-auto">
                         <span>Copyright &copy; Your Website 2020</span>
                     </div>
                 </div>
@@ -177,6 +176,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
+    <script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
 
     <!-- Core plugin JavaScript-->
@@ -184,138 +184,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{% static 'js/sb-admin-2.min.js'%}"></script>
-     <!-- Page level plugins -->
-    <script src="{% static 'vendor/chart.js/Chart.min.js'%}"></script>
-
-    <!-- Page level custom scripts -->
-
-    <script type="text/javascript">
-        var endpoint = '{% url "secretariat:line_chart_json" %}'
-        var defaultData = []
-        var labels =[];
-        $.ajax({
-            method:"GET",
-            url:endpoint,
-            success: function(data){
-                labels = data.labels
-                defaultData = data.default
-                setChart()
-            },
-            error: function(error_data){
-                console.log("Erreur")
-                console.log(error_data)
-            }
-        })
-        function setChart() {
-            var ctx = document.getElementById("myChart");
-            var myChart = new Chart(ctx,{
-                type:'bar',
-                data:{
-                    labels:labels,
-                    datasets:[{
-                        label:'#Type Accident',
-                        data:defaultData,
-                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }],
-                },
-                options: {
-                    scales: {
-                        yAxes:[ {
-                            ticks: {
-                                beginAtZero: true,
-                            }
-
-                        }]
-                    }
-                }
-            })
-        }
-
-    </script>
-
-    <script type="text/javascript">
-        var endpoint = '{% url "secretariat:bar_chart_json" %}'
-        var defaultData = []
-        var labels =[];
-        $.ajax({
-            method:"GET",
-            url:endpoint,
-            success: function(data){
-                labels = data.labels
-                defaultData = data.default
-                barChart()
-            },
-            error: function(error_data){
-                console.log("Erreur")
-                console.log(error_data)
-            }
-        })
-        function barChart() {
-            var ctx = document.getElementById("myChart2");
-            var myChart = new Chart(ctx,{
-                type:'bar',
-                data:{
-                    labels:labels,
-                    datasets:[{
-                        label:'#Type d\'infraction',
-                        data:defaultData,
-                         backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }],
-                },
-                options: {
-                    scales: {
-                        yAxes:[ {
-                            ticks: {
-                                beginAtZero: true,
-                            }
-
-                        }]
-                    }
-                }
-            })
-        }
-
-    </script>
-     <!--<script type="text/javascript">
-            $.get('{% url "secretariat:line_chart_json" %}', function(data) {
-                var ctx = $("#myChart").get(0).getContext("2d");
-                new Chart(ctx, {
-                    type: 'bar', data: data
-                });
-            });
-        </script>-->
     {% block javascript%}{% endblock%}
 
 </body>

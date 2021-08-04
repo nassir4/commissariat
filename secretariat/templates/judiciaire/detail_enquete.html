@@ -1,0 +1,165 @@
+{% extends 'judiciaire/base_judiciaire.html'%}
+{% block content %}
+<div class="col-md-12">
+    <div class="accident-item-box">
+        <h3 class="h3" style="text-align: center;">INFRACTION</h3>
+        <hr>
+        <div class="row">
+            <h5 class="col-md-6">Incrimination: {{crime.incrimination}} </h5>
+            <h5 class="col-md-6">affaire: {{crime.affaire}} </h5>
+        </div>
+    </div>
+    <div class="accident-item-box">
+        <h4 style="text-align: center;">Les procès verbaux</h4>
+        <hr>
+        {% if listSaisine %}
+            <h5 class="text-primary" style="text-align: center;">Saisine</h5>
+            {% for saisine in listSaisine %}
+                <div class="row">
+                    <p class="col-md-3">Numero Pv: {{saisine.numeroPv}}</p>
+                    <p class="col-md-3">Objet: {{saisine.objet}}</p>
+                    <p class="col-md-3">Vue et transmis: {{saisine.vuEtTransmis}}</p>
+                    <p class="col-md-3">Ouverture Enquête: {{saisine.ouvertureEnquete}}</p>
+                </div>
+                <a href="{% url 'secretariat:detail_saisine' pv_id=saisine.id%}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                    <span class="text">Detail</span>
+                </a>
+            {% endfor %}
+
+        {% endif %}
+        <hr>
+        {% if listAudition %}
+            <h5 class="text-primary" style="text-align: center;">Audition</h5>
+            {% for audition in listAudition %}
+                <div class="row">
+                    <p class="col-md-3">Numero Pv: {{audition.numeroPv}}</p>
+                    <p class="col-md-3">Objet: {{audition.objet}}</p>
+                </div>
+                <a href="{% url 'secretariat:detail_audition' pv_id=audition.id%}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                    <span class="text">Detail</span>
+                </a>
+            {% endfor %}
+        {% endif %}
+        <hr>
+        {% if listInterrogatoire %}
+            <h5 class="text-primary" style="text-align: center;">Interrogatoire</h5>
+            {% for interrogatoire in listInterrogatoire %}
+                <div class="row">
+                    <p class="col-md-3">Numero Pv: {{interrogatoire.numeroPv}}</p>
+                    <p class="col-md-3">Objet: {{interrogatoire.objet}}</p>
+                </div>
+                <a href="{% url 'secretariat:detail_interrogatoire' pv_id=interrogatoire.id%}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                    <span class="text">Detail</span>
+                </a>
+            {% endfor %}
+        {% endif %}
+        <hr>
+        {% if listConfrontation %}
+            <h5 class="text-primary" style="text-align: center;">Confrontation</h5>
+            {% for confrontation in listConfrontation %}
+                <div class="row">
+                    <p class="col-md-3">Numero Pv: {{confrontation.numeroPv}}</p>
+                    <p class="col-md-3">Objet: {{confrontation.objet}}</p>
+                </div>
+                <a href="{% url 'secretariat:detail_confrontation' pv_id=confrontation.id%}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                    <span class="text">Detail</span>
+                </a>
+            {% endfor %}
+        {% endif %}
+        <hr>
+        {% if listConduite %}
+            <h5 class="text-primary" style="text-align: center;">Conduite</h5>
+            {% for conduite in listConduite %}
+                <div class="row">
+                    <p class="col-md-3">Numero Pv: {{conduite.numeroPv}}</p>
+                    <p class="col-md-3">Objet: {{conduite.objet}}</p>
+                </div>
+                <a href="{% url 'secretariat:detail_conduite' pv_id=conduite.id%}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                    <span class="text">Detail</span>
+                </a>
+            {% endfor %}
+        {% endif %}
+        <hr>
+        {% if listMission %}
+            <h5 class="text-primary" style="text-align: center;">Mission à agent</h5>
+            {% for mission in listMission %}
+                <div class="row">
+                    <p class="col-md-3">Numero Pv: {{mission.numeroPv}}</p>
+                    <p class="col-md-3">Objet: {{mission.objet}}</p>
+                </div>
+                <a href="{% url 'secretariat:detail_mission' pv_id=mission.id%}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                    <span class="text">Detail</span>
+                </a>
+            {% endfor %}
+        % endif %}
+        <hr>
+        {% if listNotification %}
+            <h5 class="text-primary" style="text-align: center;">Notification à garde à vue</h5>
+            {% for notification in listNotification %}
+                <div class="row">
+                    <p class="col-md-3">Numero Pv: {{notification.numeroPv}}</p>
+                    <p class="col-md-3">Objet: {{notification.objet}}</p>
+                </div>
+                <a href="{% url 'secretariat:detail_notification' pv_id=notification.id%}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                    <span class="text">Detail</span>
+                </a>
+            {% endfor %}
+        {% endif %}
+        <hr>
+        {% if listCloture %}
+            <h5 class="text-primary" style="text-align: center;">Clôture et transmission</h5>
+            {% for audition in listCloture %}
+                <div class="row">
+                    <p class="col-md-3">Numero Pv: {{cloture.numeroPv}}</p>
+                    <p class="col-md-3">Objet: {{cloture.objet}}</p>
+                </div>
+                <a href="{% url 'secretariat:detail_cloture' pv_id=cloture.id%}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                    <span class="text">Detail</span>
+                </a>
+            {% endfor %}
+        {% endif %}
+        <hr>
+        {% if listRequisition %}
+            <h5 class="text-primary" style="text-align: center;">Requisition</h5>
+            {% for requisition in listRequisition %}
+                <div class="row">
+                    <p class="col-md-3">Numero Pv: {{requisition.numeroPv}}</p>
+                    <p class="col-md-3">Objet: {{requisition.objet}}</p>
+                </div>
+                <a href="{% url 'secretariat:detail_requisition' pv_id=requisition.id%}" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                    <span class="text">Detail</span>
+                </a>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}
