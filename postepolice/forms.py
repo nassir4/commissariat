@@ -18,6 +18,10 @@ class PlainteForm(ModelForm):
     heure = TimeField(
             widget=TimePickerInput()
         )
+class PlainteAffecte(ModelForm):
+    class Meta:
+        model = Plainte
+        fields = ['affecte']
 class PerteForm(ModelForm):
     class Meta:
         model = Perte

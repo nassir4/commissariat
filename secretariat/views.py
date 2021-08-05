@@ -10,10 +10,9 @@ from rest_framework.views import APIView
 import secretariat
 from accident.models import Accident
 from authentification.decorators import allowed_user
-from pojudiciaire.forms import CrimeForm, CrimeSecretariat
 from pojudiciaire.models import Crime, Notification, Cloture, Requisition, Conduite, Mission, Confrontation, \
     Interrogatoire, Audition, Saisine
-from postepolice.forms import RegistreForm
+from postepolice.forms import RegistreForm, PlainteAffecte
 from postepolice.models import Registre, Plainte, Perte, Ecrou, MainCourante, GardeAVue
 
 
@@ -255,15 +254,19 @@ def detailGardeAVue(request, id):
 
 @login_required(login_url='login:secretariat')
 @allowed_user(allowed_roles=['secretariat'])
-def saveCrime(request):
-    if request.method == 'POST':
-        form = CrimeSecretariat(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('secretariat:crime')
-    else:
-        form = CrimeSecretariat
-    return render(request, 'enregistrement_enquete.html',{'form':form})
+def plainteAffecte(request,id):
+    try:
+        plainte=Plainte.objects.get(pk=id)
+    except Plainte.DoesNotExist:
+        return redirect('poste:detail_objet_consigne')
+    form = PlainteAffecte(request.POST or None, instance=plainte)
+    if form.is_valid():
+        form.save()
+        return redirect('secretariat:detail_registre_Pl', id=plainte.registre.id)
+    context = {
+        'form': form,
+    }
+    return render(request, 'poste/plainte/enregistrement.html',context)
 
 @login_required(login_url='login:secretariat')
 @allowed_user(allowed_roles=['secretariat'])

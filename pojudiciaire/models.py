@@ -16,9 +16,7 @@ class Crime(models.Model):
     affaire = models.CharField(max_length=200)
     typeInfraction = models.ForeignKey(TypeInfraction, on_delete=models.CASCADE)
     incrimination = models.CharField("Incrimination",max_length=200, blank=True,null=True)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL,
-                    blank=True, null=True, verbose_name='Agent',
-                    limit_choices_to={'groups__name': 'police judiciaire'},)
+
     ETAT_TYPE =(
         ("EC","En cours"),
         ("TE","Terminée"),
