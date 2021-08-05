@@ -25,6 +25,8 @@
                                 <th>Numero Mention</th>
                                 <th>Heure</th>
                                 <th>Motif</th>
+                                <th>Vu</th>
+                                <th>Affectée</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -32,6 +34,8 @@
                                 <th>Numero Mention</th>
                                 <th>Heure</th>
                                 <th>Motif</th>
+                                <th>Vu</th>
+                                <th>Affectée</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -40,6 +44,20 @@
                                 <td>{{mainCourante.numero_mention}}</td>
                                 <td>{{mainCourante.heure}}</td>
                                 <td>{{mainCourante.motif|safe}}</td>
+                                <td>
+                                    {% if mainCourante.vue%}
+                                    {{mainCourante.vue}}
+                                    {%else%}
+                                    <a href="{% url 'secretariat:vue_main_courante' id=mainCourante.id %}" class="btn btn-outline-success">Vu</a>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if mainCourante.affecte%}
+                                    {{mainCourante.affecte}}
+                                    {%else%}
+                                    <a href="{% url 'secretariat:affecte_main_courante' id=mainCourante.id %}" class="btn btn-outline-primary">Affectée</a>
+                                    {% endif %}
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>

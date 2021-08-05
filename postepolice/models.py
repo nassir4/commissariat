@@ -56,6 +56,10 @@ class MainCourante(models.Model):
     numero_mention = models.IntegerField("Numero mention", null=True, blank=True)
     heure = models.TimeField("Heure", auto_now_add=False)
     motif = SummernoteTextField("Motif")
+    vue = models.CharField("Vue",null=True, blank=True, max_length=255)
+    affecte = models.ForeignKey(User, on_delete=models.SET_NULL,
+                                blank=True, null=True, verbose_name='Affectée à',
+                                limit_choices_to={'groups__name': 'police judiciaire'},)
 
     def __str__(self):
         return self.numero_mention

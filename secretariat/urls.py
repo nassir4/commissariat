@@ -44,4 +44,7 @@ urlpatterns = [
     path('notification/detail/<int:pv_id>/', views.detailNotification, name='detail_notification'),
     path('cloture/detail/<int:pv_id>/', views.detailCloture, name='detail_cloture'),
 
+    path('main_courante/<int:id>/affecte/', views.mainCouranteAffecte, name='affecte_main_courante'),
+    path('main_courante/<int:id>/vue/', views.mainCouranteVue, name='vue_main_courante'),
+
 ]
