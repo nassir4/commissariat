@@ -1,4 +1,4 @@
-{% extends 'poste/base_poste.html'%}
+{% extends 'base_judiciaire.html'%}
 {% load static %}
 {% block stylesheet %}
  <!-- Custom styles for this page -->
@@ -47,15 +47,11 @@
                                 <td>
                                     {% if mainCourante.vue%}
                                     {{mainCourante.vue}}
-                                    {%else%}
-                                    <a href="{% url 'secretariat:vue_main_courante' id=mainCourante.id %}" class="btn btn-outline-success">Vu</a>
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if mainCourante.affecte%}
                                     {{mainCourante.affecte}}
-                                    {%else%}
-                                    <a href="{% url 'secretariat:affecte_main_courante' id=mainCourante.id %}" class="btn btn-outline-primary">Affectée</a>
                                     {% endif %}
                                 </td>
                             </tr>

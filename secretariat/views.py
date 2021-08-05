@@ -12,7 +12,7 @@ from accident.models import Accident
 from authentification.decorators import allowed_user
 from pojudiciaire.models import Crime, Notification, Cloture, Requisition, Conduite, Mission, Confrontation, \
     Interrogatoire, Audition, Saisine
-from postepolice.forms import RegistreForm, PlainteAffecte
+from postepolice.forms import RegistreForm, PlainteAffecte, MainCouranteAffecte, MainCouranteVue
 from postepolice.models import Registre, Plainte, Perte, Ecrou, MainCourante, GardeAVue
 
 
@@ -267,6 +267,38 @@ def plainteAffecte(request,id):
         'form': form,
     }
     return render(request, 'poste/plainte/enregistrement.html',context)
+
+@login_required(login_url='login:secretariat')
+@allowed_user(allowed_roles=['secretariat'])
+def mainCouranteAffecte(request,id):
+    try:
+        mainCourante=MainCourante.objects.get(pk=id)
+    except MainCourante.DoesNotExist:
+        return redirect('poste:detail_objet_consigne')
+    form = MainCouranteAffecte(request.POST or None, instance=mainCourante)
+    if form.is_valid():
+        form.save()
+        return redirect('secretariat:detail_registre_MC', id=mainCourante.registre.id)
+    context = {
+        'form': form,
+    }
+    return render(request, 'poste/courante/enregistrement.html',context)
+
+@login_required(login_url='login:secretariat')
+@allowed_user(allowed_roles=['secretariat'])
+def mainCouranteVue(request,id):
+    try:
+        mainCourante=MainCourante.objects.get(pk=id)
+    except MainCourante.DoesNotExist:
+        return redirect('poste:detail_objet_consigne')
+    form = MainCouranteVue(request.POST or None, instance=mainCourante)
+    if form.is_valid():
+        form.save()
+        return redirect('secretariat:detail_registre_MC', id=mainCourante.registre.id)
+    context = {
+        'form': form,
+    }
+    return render(request, 'poste/courante/enregistrement.html',context)
 
 @login_required(login_url='login:secretariat')
 @allowed_user(allowed_roles=['secretariat'])

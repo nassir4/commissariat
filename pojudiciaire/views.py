@@ -13,6 +13,8 @@ from django.http import HttpResponse
 
 # Create your views here.
 from pojudiciaire.utils import link_callback
+from postepolice.models import Registre, MainCourante, GardeAVue, Plainte
+
 
 @login_required(login_url='login:judiciaire')
 @allowed_user(allowed_roles=['police judiciaire','secretariat'])
@@ -874,3 +876,63 @@ def deleteCrime(id):
     crime = Crime.objects.get(pk=id)
     crime.delete()
     return redirect('judiciaire:crime')
+
+
+@login_required(login_url='login:judiciaire')
+@allowed_user(allowed_roles=['secretariat','police judiciaire'])
+def detailRegistreMC(request,id):
+    registre = Registre.objects.get(pk=id)
+    listMainCourante = MainCourante.objects.filter(registre=registre)
+    context = {
+        'registre':registre,
+        'listMainCourante':listMainCourante
+    }
+    return render(request, 'postejudi//courante/detail_courante.html',context)
+
+@login_required(login_url='login:judiciaire')
+@allowed_user(allowed_roles=['secretariat','police judiciaire'])
+def detailRegistrePl(request,id):
+    registre = Registre.objects.get(pk=id)
+    listPlainte = Plainte.objects.filter(registre=registre)
+    context = {
+        'registre':registre,
+        'listPlainte':listPlainte
+    }
+    return render(request, 'postejudi/plainte/detail_registre.html',context)
+
+@login_required(login_url='login:judiciaire')
+@allowed_user(allowed_roles=['secretariat','police judiciaire'])
+def listRegistrePl(request):
+    listRegistre = Registre.objects.filter(nom="Plainte")
+    context = {
+        'listRegistre' : listRegistre,
+    }
+    return render(request, 'postejudi/plainte/plainte.html',context)
+@login_required(login_url='login:judiciaire')
+@allowed_user(allowed_roles=['secretariat','police judiciaire'])
+def detailPlainte(request, id):
+    try:
+        plainte = Plainte.objects.get(pk=id)
+    except Plainte.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'postejudi/plainte/detail_plainte.html', {'plainte': plainte})
+
+
+@login_required(login_url='login:judiciaire')
+@allowed_user(allowed_roles=['secretariat', 'police judiciaire'])
+def listRegistreMC(request):
+    listRegistre = Registre.objects.filter(nom="Main Courante")
+    context = {
+        'listRegistre' : listRegistre,
+    }
+    return render(request, 'postejudi/courante/courante.html',context)
+@login_required(login_url='login:judiciaire')
+@allowed_user(allowed_roles=['secretariat', 'police judiciaire'])
+def listRegistrePl(request):
+    listRegistre = Registre.objects.filter(nom="Plainte")
+    context = {
+        'listRegistre' : listRegistre,
+    }
+    return render(request, 'postejudi/plainte/plainte.html',context)
+
+

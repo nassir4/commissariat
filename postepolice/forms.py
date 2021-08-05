@@ -11,6 +11,14 @@ class MainCouranteForm(ModelForm):
     heure = TimeField(
             widget=TimePickerInput()
         )
+class MainCouranteAffecte(ModelForm):
+    class Meta:
+        model = MainCourante
+        fields = ['affecte']
+class MainCouranteVue(ModelForm):
+    class Meta:
+        model = MainCourante
+        fields = ['vue']
 class PlainteForm(ModelForm):
     class Meta:
         model = Plainte
