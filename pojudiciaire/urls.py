@@ -92,4 +92,12 @@ urlpatterns = [
  path('cloture/pdf/<int:id>/', views.render_pdf_cloture, name='pdf_cloture'),
  path('notification/pdf/<int:id>/', views.render_pdf_notification, name='pdf_notification'),
  path('requisition/pdf/<int:id>/', views.render_pdf_requisition, name='pdf_requisition'),
+
+ path('main_courante/registre/detail/<int:id>/', views.detailRegistreMC, name='detail_registre_MC'),
+ path('plainte/registre/detail/<int:id>/', views.detailRegistrePl, name='detail_registre_Pl'),
+ path('plainte/detail/<int:id>/', views.detailPlainte, name='detail_plainte'),
+
+ path('main_courante/liste_registre/', views.listRegistreMC, name='liste_registre_MC'),
+ path('plainte/liste_registre/', views.listRegistrePl, name='liste_registre_Pl'),
+
 ]

@@ -1,0 +1,89 @@
+{% extends 'base_judiciaire.html'%}
+{% load static %}
+{% block stylesheet %}
+ <!-- Custom styles for this page -->
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css'%}" rel="stylesheet">
+{% endblock%}
+{% block content%}
+    <div class="accident-item-box">
+        <h3 style="text-align: center;">Registre de la {{registre.nom}}</h3>
+        <hr>
+        <p> Brigade: {{ registre.brigade}}</p>
+        <p>Chef de poste:{{ registre.brigade.chef_de_poste}}</p>
+        <p>Secretaire: {{registre.brigade.secretaire}}</p>
+        <p>Chauffeur: {{registre.brigade.chauffeur}}</p>
+        <p>Police Secours: {{registre.brigade.police_secours}}</p>
+        <div class="card  mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Date: {{registre.date}}</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="exemple" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Numero Mention</th>
+                                <th>Heure</th>
+                                <th>Motif</th>
+                                 <th>Affectée à</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Numero Mention</th>
+                                <th>Heure</th>
+                                <th>Motif</th>
+                                <th>Affectée à</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                        {% for plainte in listPlainte %}
+                            <tr>
+                                <td>{{plainte.numero_mention}}</td>
+                                <td>{{plainte.heure}}</td>
+                                <td>{{plainte.motif|safe}}</td>
+                                <td>{{plainte.affecte.username}}</td>
+                                <td><a href="{% url 'judiciaire:detail_plainte' id=plainte.id %}" class="btn btn-primary shadow-sm">Detail</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript%}
+  <script type="text/javascript">
+        $(document).ready(function() {
+            $("#exemple").dataTable({
+                "pageLength": 5,
+                "responsive":true,
+                "lengthChange": false,
+                "language":{
+                    "emptyTable":"Aucun élément trouvé",
+                    "info":"",
+                    "infoEmpty":"Aucune donnée disponible",
+                    "loadingRecords":"Chargement...",
+                    "processing":"Encours...",
+                    "search":"Rechercher",
+                    "zeroRecords":"L'élément recherché n'existe pas",
+                    "paginate":{
+                        "first":"Premier",
+                        "last":"Dernier",
+                        "next":"Suivant",
+                        "previous":"Précédent"
+                    }
+                }
+            });
+        });
+    </script>
+ <!-- Page level plugins -->
+    <script src="{% static 'vendor/datatables/jquery.dataTables.min.js'%}"></script>
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{% static 'js/demo/datatables-demo.js'%}"></script>
+{% endblock%}
