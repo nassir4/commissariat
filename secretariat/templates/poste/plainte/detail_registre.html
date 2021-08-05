@@ -25,6 +25,7 @@
                                 <th>Numero Mention</th>
                                 <th>Heure</th>
                                 <th>Motif</th>
+                                 <th>Affectée à</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -33,6 +34,7 @@
                                 <th>Numero Mention</th>
                                 <th>Heure</th>
                                 <th>Motif</th>
+                                <th>Affectée à</th>
                                 <th></th>
                             </tr>
                         </tfoot>
@@ -42,6 +44,7 @@
                                 <td>{{plainte.numero_mention}}</td>
                                 <td>{{plainte.heure}}</td>
                                 <td>{{plainte.motif|safe}}</td>
+                                <td>{{plainte.affecte.username}}</td>
                                 <td><a href="{% url 'secretariat:detail_plainte' id=plainte.id %}" class="btn btn-primary shadow-sm">Detail</a></td>
                             </tr>
                         {% endfor %}

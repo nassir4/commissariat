@@ -68,6 +68,9 @@ class Plainte(models.Model):
     motif = SummernoteTextField("Contenu")
     photo1 = models.ImageField(upload_to='images/')
     photo2= models.ImageField(upload_to='images/')
+    affecte= models.ForeignKey(User, on_delete=models.SET_NULL,
+                             blank=True, null=True, verbose_name='Affectée à',
+                             limit_choices_to={'groups__name': 'police judiciaire'}, )
     # signature
     status = models.BooleanField("Status", default=False)
 

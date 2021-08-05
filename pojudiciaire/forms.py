@@ -8,10 +8,6 @@ class CrimeForm(ModelForm):
     class Meta:
         model=Crime
         fields=['affaire','typeInfraction','incrimination']
-class CrimeSecretariat(ModelForm):
-    class Meta:
-        model=Crime
-        fields=['affaire','typeInfraction','incrimination','user']
 
 class SaisineForm(ModelForm):
     class Meta:

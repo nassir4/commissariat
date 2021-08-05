@@ -20,7 +20,7 @@
             <a class="col-md-6 img-responsive" href="{{plainte.photo2.url}}"><img style="width:500px" class="shadow" src="{{plainte.photo2.url}}" alt=""></a>
         </div>
         <br>
-        <a href="{% url 'secretariat:save_crime'%}" class="btn btn-outline-success align-content-lg-end shadow">Ouvrir une enquête</a>
+        <a href="{% url 'secretariat:affecte_plainte' id=plainte.id%}" class="btn btn-outline-success align-content-lg-end shadow">Affectation</a>
     </div>
 </div>
 

@@ -48,8 +48,16 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'secretariat:liste_registre_Pl'%}">
+                <a class="nav-link" href="{% url 'secretariat:index'%}">
                     <i class="fas fa-fw fa-home"></i>
+                    <span>Accueil</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'secretariat:liste_registre_Pl'%}">
+                    <i class="fas fa-fw fa-desktop"></i>
                     <span>Plainte</span></a>
             </li>
 
