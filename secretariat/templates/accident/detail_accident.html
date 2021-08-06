@@ -272,7 +272,13 @@
                         <span class="icon text-white-50">
                             <i class="fas fa-edit"></i>
                         </span>
-                        <span class="text">Générer un PDF</span>
+                        <span class="text">Générer la première page</span>
+            </a>
+             <a href="{% url 'secretariat:pdf_accident2' id=accident.id %}" target="_blank" class="btn btn-secondary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Générer la deuxième page</span>
             </a>
         </div>
      </div>
