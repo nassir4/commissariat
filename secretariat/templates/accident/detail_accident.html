@@ -1,0 +1,279 @@
+{% extends 'base_secretariat.html'%}
+{% block content %}
+     <div class="row">
+        <div class="col-md-12">
+                <h6 style="text-align: center;"> {{accident.type_accident}} </h6>
+                <hr>
+                <div class="accident-item-box">
+                    <div class="row">
+                        <p class="col-md-3">Survenu le {{accident.date_accident}} à  {{accident.heure_accident}}</p>
+                        <p class="col-md-3">Lieu: {{accident.lieu_accident}}</p>
+                        <p class="col-md-3">Etabli par: l'Agent de Police: {{accident.etabli_par}}</p>
+                    </div>
+
+                </div>
+
+                <h3>Informations sur les vehicules</h3>
+                {% if listVehicule %}
+                    {% for vehicule in listVehicule %}
+
+                    <div class="accident-item-box">
+                        <h5>Vehicule Numero: {{vehicule.numero}}</h5>
+                        <div class="row">
+                            <p class="col-md-3">Genre: {{vehicule.genre}}</p>
+                            <p class="col-md-2">Marque: {{vehicule.marque}}</p>
+                            <p class="col-md-4">Date de mise en circulation le {{vehicule.date_mise_circulation}}</p>
+                            <p class="col-md-4">Derniere visite technique le {{vehicule.derniere_visite_technique}}</p>
+                        </div>
+                    {% endfor%}
+                {% endif %}
+            `   {% if accidentCorporel %}
+                <hr>
+                {% for vitesse in listVitesse %}
+                    <h5>Indicateur de vitesse du vehicule {{vitesse.vehicule}}</h5>
+                    <div class="row">
+                        {%if vitesse.fonctionel%}
+                        <p class="col-md-3">Fonctionel: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Fonctionel: NON</p>
+                        {%endif%}
+                        {%if vitesse.position%}
+                        <p class="col-md-3">Position: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Position: NON</p>
+                        {%endif%}
+                       {%if vitesse.existance%}
+                        <p class="col-md-3">Existance: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Existance: NON</p>
+                        {%endif%}
+                    </div>
+
+
+                {% endfor %}
+                <hr>
+                {% for eclairage in listEclairage %}
+                    <h5> Eclairage du vehicule {{eclairage.vehicule}}</h5>
+                    <div class="row">
+                        {%if eclairage.fonctionel%}
+                        <p class="col-md-3">Fonctionel: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Fonctionel: NON</p>
+                        {%endif%}
+                        {%if eclairage.position%}
+                        <p class="col-md-3">Position: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Position: NON</p>
+                        {%endif%}
+                       {%if eclairage.existance%}
+                        <p class="col-md-3">Existance: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Existance: NON</p>
+                        {%endif%}
+                    </div>
+
+
+                {% endfor %}
+                <hr>
+                {% for avertisseur in listAvertisseur %}
+                    <h5>Avertisseur du vehicule {{avertisseur.vehicule}}</h5>
+                    <div class="row">
+                        {%if avertisseur.fonctionel%}
+                        <p class="col-md-3">Fonctionel: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Fonctionel: NON</p>
+                        {%endif%}
+                        {%if avertisseur.position%}
+                        <p class="col-md-3">Position: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Position: NON</p>
+                        {%endif%}
+                       {%if avertisseur.existance%}
+                        <p class="col-md-3">Existance: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Existance: NON</p>
+                        {%endif%}
+                    </div>
+
+
+                {% endfor %}
+                <hr>
+                {% for direction in listDirection %}
+                    <h5>Indicateur de direction du vehicule {{direction.vehicule}}</h5>
+                    <div class="row">
+                        {%if direction.fonctionel%}
+                        <p class="col-md-3">Fonctionel: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Fonctionel: NON</p>
+                        {%endif%}
+                        {%if direction.position%}
+                        <p class="col-md-3">Position: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Position: NON</p>
+                        {%endif%}
+                       {%if direction.existance%}
+                        <p class="col-md-3">Existance: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Existance: NON</p>
+                        {%endif%}
+                    </div>
+
+
+                {% endfor %}
+                <hr>
+                {% for essuieGlace in listEssuieGlace %}
+                    <h5>Essuie glace du vehicule {{essuieGlace.vehicule}}</h5>
+                    <div class="row">
+                        {%if essuieGlace.fonctionel%}
+                        <p class="col-md-3">Fonctionel: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Fonctionel: NON</p>
+                        {%endif%}
+                        {%if essuieGlace.position%}
+                        <p class="col-md-3">Position: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Position: NON</p>
+                        {%endif%}
+                       {%if essuieGlace.existance%}
+                        <p class="col-md-3">Existance: OUI</p>
+                        {%else%}
+                        <p class="col-md-3">Existance: NON</p>
+                        {%endif%}
+                    </div>
+
+
+                {% endfor %}
+                {% endif %}
+                <hr>
+                {% if listProprietaire%}
+                    {% for proprietaire in listProprietaire %}
+                    <h5>Proprietaire du vehicule {{proprietaire.vehicule}}</h5>
+                    <div class="row">
+                        <p class="col-md-3">Prenom et nom:  {{proprietaire.nom_prenom}}</p>
+                        <p class="col-md-3">Domicile: {{proprietaire.domicile}}</p>
+                    </div>
+
+
+                    {% endfor%}
+                {% endif %}
+                <hr>
+                {% if listConducteur %}
+                    {% for conducteur in listConducteur %}
+                    <h5>Conducteurs du vehicule {{conducteur.vehicule}}</h5>
+                    <div class="row">
+                        <p class="col-md-3">Prenom et nom:   {{conducteur.nom_prenom}}</p>
+                        <p class="col-md-3">Domicile: {{conducteur.domicile}}</p>
+                        <p class="col-md-3">Date et lieu de naissance :{{conducteur.date_naissance}} à {{conducteur.lieu_naissance}}</p>
+                    </div>
+
+
+                    {% endfor%}
+                {% endif %}
+                <hr>
+                {% if listAssurance %}
+                    {% for assurance in listAssurance %}
+                    <h5>Assurance du vehicule {{assurance.vehicule}}</h5>
+                    <div class="row">
+                        <p class="col-md-3"> Nom: {{assurance.nom}}</p>
+                        <p class="col-md-3">Numero Police: {{assurance.numero_police}}</p>
+                        <p class="col-md-3">Date debut: {{assurance.date_debut}}</p>
+                        <p class="col-md-3">Date d'expiration: {{assurance.date_expiration}}</p>
+                    </div>
+
+
+                    {% endfor%}
+                {% endif %}
+                <hr>
+                {% if listPermis %}
+                    {% for permis in listPermis %}
+                        <h5>Permis du conducteur {{permis.conducteur}}</h5>
+                        <div class="row">
+                            <p class="col-md-3">Numero: {{permis.numero}}</p>
+                            <p class="col-md-3">Délivré par: {{permis.delivre_par}}</p>
+                            <p class="col-md-3">Délivré le: {{permis.delivre_le}}</p>
+                            <p class="col-md-3">Lieu: {{permis.lieu}}
+                        </div>
+
+
+                    {% endfor%}
+                {% endif%}
+
+            </div>
+                
+            <div class="accident-item-box">
+                <h3>Victimes</h3>
+                <hr>
+                {% if listVictime %}
+                    {% for victime in listVictime%}
+                        <div class="row">
+                            <p class="col-md-3">Prenom et nom: {{victime.nom_prenom}}</p>
+                            <p class="col-md-3">Adresse: {{victime.adresse}}</p>
+                            <p class="col-md-3">Position au moment de l'accident: {{victime.position_moment_accident}}</p>
+                            <p class="col-md-3">Nature des blessures: {{victime.nature_des_blessures}}</p>
+                        </div>
+
+                        <hr>
+                    {% endfor%}
+                {% endif%}
+            </div>
+
+            <div class="accident-item-box">
+                <h3>Temoins</h3>
+                <hr>
+                {% if listTemoin %}
+                    {% for temoin in listTemoin %}
+                       <div class="row">
+                            <p class="col-md-3">Prenom et nom: {{temoin.nom_prenom}}</p>
+                            <p class="col-md-3">Adresse: {{temoin.adresse}}</p>
+                            <p class="col-md-3">Position au moment de l'accident: {{temoin.position_moment_accident}}</p>
+                            <p class="col-md-3">Profession: {{temoin.profession}}</p>
+                        </div>
+                    {% endfor%}
+                {% endif%}
+
+            </div>
+
+            <div class="accident-item-box">
+                <h3>Etat des Lieux</h3>
+                <hr>
+                {% if etatDesLieux %}
+                    {% for etatDesLieux in etatDesLieux%}
+                    <div class="row">
+                        <p class="col-md-3">Visibilite: {{etatDesLieux.visibilite}}</p>
+                        <p class="col-md-3">Chaussée: {{etatDesLieux.chaussee}}</p>
+                        <p class="col-md-3">Largeur: {{etatDesLieux.largeur}}</p>
+                        <p class="col-md-3">Eclairage:{{etatDesLieux.eclairage}}</p>
+                        <p class="col-md-3">Traces Freinages: {{etatDesLieux.tracesFreinage}}</p>
+                        <p class="col-md-3">Trace Pneu: {{etatDesLieux.tracePneu}}</p>
+                        <p class="col-md-3">Traces Sang: {{etatDesLieux.tracesSang}}</p>
+                        <p class="col-md-3">Passage Pieton: {{etatDesLieux.passagePieton}}</p>
+                        <p class="col-md-3">Conditions atmospheriques: {{etatDesLieux.conditions_atmospherique}}</p>
+                    </div>
+
+
+                    {% endfor %}
+                {% endif %}
+
+
+            </div>
+
+            <div class="accident-item-box">
+                {% if not accidentCorporel%}
+                {% if listDeclaration %}
+                    {% for declaration in listDeclaration %}
+                        <h3>Declaration du conducteur du vehicule {{declaration.conducteur.vehicule}}</h3>
+                        <p>Declaration: {{declaration.declaration}}</p>
+                        <p>Infraction: {{declaration.infraction}}</p>
+                    {% endfor %}
+                {%endif%}
+                {%endif%}
+            </div>
+            <a href="{% url 'secretariat:pdf_accident' id=accident.id %}" target="_blank" class="btn btn-secondary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span class="text">Générer un PDF</span>
+            </a>
+        </div>
+     </div>
+{% endblock %}

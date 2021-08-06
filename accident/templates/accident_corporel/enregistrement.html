@@ -106,6 +106,12 @@
                             {{avertisseur_form |crispy }}
                             {{avertisseur_form.media}}
                          </div>
+                         <div class="col-md-4">
+                             <h6>Retroviseur</h6>
+                            {% csrf_token %}
+                            {{retroviseur_form |crispy }}
+                            {{retroviseur_form.media}}
+                         </div>
                     </div>
                 </div>
                 <div class="tab">

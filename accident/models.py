@@ -156,6 +156,7 @@ class Conducteur(models.Model):
 class Proprietaire(models.Model):
     nom_prenom = models.CharField("Nom & Prenom", max_length=255)
     domicile = models.CharField("Domicile", max_length=255)
+    telephone = models.CharField("Telephone",blank=True, max_length=15)
     vehicule = models.OneToOneField(Vehicule, on_delete=models.CASCADE,blank=True,null=True)
 
     def __str__(self):

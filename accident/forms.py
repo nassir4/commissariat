@@ -97,7 +97,7 @@ class EtatDesLieuxForm(ModelForm):
 class ProprietaireForm(ModelForm):
     class Meta:
         model = Proprietaire
-        fields = ['nom_prenom','domicile']
+        fields = ['nom_prenom','domicile','telephone']
 
 class PermisForm(ModelForm):
     class Meta:

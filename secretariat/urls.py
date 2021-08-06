@@ -47,4 +47,8 @@ urlpatterns = [
     path('main_courante/<int:id>/affecte/', views.mainCouranteAffecte, name='affecte_main_courante'),
     path('main_courante/<int:id>/vue/', views.mainCouranteVue, name='vue_main_courante'),
 
+    path('liste_accident/', views.accident, name='list_accident'),
+    path('detail/<int:accident_id>', views.detailAccident, name='detail_accident'),
+    path('accident/pdf/<int:id>/', views.render_pdf_accident, name='pdf_accident'),
+
 ]
