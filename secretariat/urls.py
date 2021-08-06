@@ -50,5 +50,6 @@ urlpatterns = [
     path('liste_accident/', views.accident, name='list_accident'),
     path('detail/<int:accident_id>', views.detailAccident, name='detail_accident'),
     path('accident/pdf/<int:id>/', views.render_pdf_accident, name='pdf_accident'),
+    path('accident2/pdf/<int:id>/', views.render_pdf_accident2, name='pdf_accident2'),
 
 ]

@@ -596,3 +596,99 @@ def render_pdf_accident(request,id):
     if pisa_status.err:
         return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+@login_required(login_url='login:secretariat')
+@allowed_user(allowed_roles=['secretariat'])
+def render_pdf_accident2(request,id):
+    accident=Accident.objects.get(pk=id)
+    print(num2words(42, lang='fr'))
+    year = accident.date_accident.strftime("%Y")
+    annee =num2words(year, lang='fr')
+    day =accident.date_accident.strftime("%d")
+    jour = num2words(day, lang='fr')
+    Mois=['janvier','fevrier','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','Decembre']
+    month = int(accident.date_accident.strftime("%m"))
+    mois = Mois[month-1]
+    hour = accident.date_accident.strftime("%H")
+    heure =num2words(hour, lang='fr')
+    m=accident.date_accident.strftime("%M")
+    print(m)
+    minutes = num2words(m, lang='fr')
+    template_path = 'accident/accidentPDF2.html'
+    listVehicule = Vehicule.objects.filter(accident=accident)
+    listConducteur = []
+    listAssurance = []
+    listPermis = []
+    listTemoin = Temoin.objects.filter(accident=accident)
+    listVictime = Victime.objects.filter(accident=accident)
+    etatDesLieux = EtatDesLieux.objects.filter(accident=accident)
+    listProprietaire = []
+    listEclairage = []
+    listDirection = []
+    listAvertisseur = []
+    listVitesse = []
+    listEssuieGlace = []
+    listRetroviseur =[]
+    listDeclaration = []
+    for conducteur in listConducteur:
+        listDeclaration.append(Declaration.objects.get(conducteur=conducteur))
+    for vehicule in listVehicule:
+        listConducteur.append(Conducteur.objects.get(vehicule=vehicule))
+    for vehicule in listVehicule:
+        listAssurance.append(Assurance.objects.get(vehicule=vehicule))
+    for conducteur in listConducteur:
+        listPermis.append(Permis.objects.get(conducteur=conducteur))
+    for vehicule in listVehicule:
+        listProprietaire.append(Proprietaire.objects.get(vehicule=vehicule))
+    if accident.type_accident.nom == "Accident Materiel":
+        accidentCorporel = False
+    if accident.type_accident.nom == "Accident Corporel":
+        accidentCorporel = True
+        for vehicule in listVehicule:
+            listEclairage.append(Eclairage.objects.get(vehicule=vehicule))
+        for vehicule in listVehicule:
+            listDirection.append(IndicateurDirection.objects.get(vehicule=vehicule))
+        for vehicule in listVehicule:
+            listAvertisseur.append(Avertisseur.objects.get(vehicule=vehicule))
+        for vehicule in listVehicule:
+            listVitesse.append(IndicateurVitesse.objects.get(vehicule=vehicule))
+        for vehicule in listVehicule:
+            listEssuieGlace.append(EssuieGlace.objects.get(vehicule=vehicule))
+        for vehicule in listVehicule:
+            listRetroviseur.append(Retroviseur.objects.get(vehicule=vehicule))
+
+    context = {
+        'accidentCorporel': accidentCorporel,
+        'listProprietaire': listProprietaire,
+        'listDeclaration': listDeclaration,
+        'listTemoin': listTemoin,
+        'listVictime': listVictime,
+        'listPermis': listPermis,
+        'listAssurance': listAssurance,
+        'listConducteur': listConducteur,
+        'accident': accident,
+        'listVehicule': listVehicule,
+        'etatDesLieux': etatDesLieux,
+        'listVitesse': listVitesse,
+        'listDirection': listDirection,
+        'listAvertisseur': listAvertisseur,
+        'listEclairage': listEclairage,
+        'listEssuieGlace': listEssuieGlace,
+        'listRetroviseur':listRetroviseur,
+        'annee':annee,'jour':jour,
+        'mois':mois,
+        'heure':heure,
+        'minutes':minutes}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="Constat.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response, link_callback=link_callback)
+    # if error then show some funy view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response

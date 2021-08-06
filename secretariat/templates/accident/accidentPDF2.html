@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <title>Pv saisine</title>
+    <style>
+         @page {
+            size: a4 portrait;
+
+            /* entete gauche */
+            @frame header_frame1 {           /* Static Frame */
+                -pdf-frame-content: header_content1;
+                left: 10pt; width: 500pt; top: 10pt; height: 1000pt;
+            }
+
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div style=" line-height: 0; font-size: 10pt;  font-family: 'Times New Roman', Times, serif; " id="header_content1">
+        {% if accidentCorporel %}
+            {% for vehicule in listVehicule %}
+            <p>Etat des pneus avant: {{ vehicule.etat_pneus_avant}}</p>
+            <p>Etat des pneus avant: {{ vehicule.etat_pneus_arriere}}</p>
+            <p>Etat du parebrise: {{ vehicule.etat_parebrise}}</p>
+            <p>Position du levier de changement  de vitesse: {{ vehicule.position_levier_vitesse}}</p>
+            <p>Présence d'un poste radion: {{ vehicule.presence_poste_radio}}</p>
+            {% endfor %}
+            <p style="font-weight: bold;font-size: 13pt;">Liste des victimes</p>
+            {% for victime in listVictime%}
+            <p>Prénom & nom: {{ victime.nom_prenom}},&nbsp;&nbsp;Filiation complète: {{ victime.filiation_complete}},&nbsp;&nbsp;Adresse:{{victime.adresse}}</p>
+            <p> Nature des blessures: {{victime.nature_des_blessures}}</p>
+            <p> Position au moment de l'accident:{{victime.position_moment_accident}}</p>
+            <hr>
+            {% endfor %}
+            <p style="text-align: center;">Mesures prises: {{accident.mesures_prises}}</p>
+            <p style="font-weight: bold;font-size: 13pt;">Liste des temoins</p>
+            {% for temoin in listTemoin %}
+            <p>Prénom & nom: {{ temoin.nom_prenom}},&nbsp;&nbsp;Professsion: {{ temoin.profession}},&nbsp;&nbsp;Adresse:{{temoin.adresse}}</p>
+            <p> Position au moment de l'accident:{{temoin.position_moment_accident}}</p>
+            <hr>
+            {%endfor%}
+            <p style="font-weight: bold; font-size: 13pt;">Etat des lieux</p>
+            {% for etatDesLieux in etatDesLieux%}
+            <p>Visibilite: {{etatDesLieux.visibilite}}&nbsp;&nbsp;&nbsp;&nbsp;chaussée:{{etatDesLieux.chaussee}}</p>
+            <p>Largeur:{{etatDesLieux.largeur}}&nbsp;&nbsp;&nbsp;&nbsp;éclairage:{{etatDesLieux.eclairage}}</p>
+            <p>Traces de sang:{{etatDesLieux.tracesSang}}&nbsp;&nbsp;&nbsp;&nbsp;traces de pneu:{{etatDesLieux.tracePneu}}&nbsp;&nbsp;&nbsp;&nbsp;traces de freinage:{{etatDesLieux.tracesFreinage}}</p>
+            <p>Passage pour piéton:{{etatDesLieux.passagePieton}}</p>
+            <p>CONDITIONS ATMOSPHERIQUE: {{etatDesLieux.condition_atmospherique}}</p>
+            {%endfor%}
+            <p style="font-weight: bold;font-size: 13pt;"> CIRCONSTANCES</p>
+            <p>{{accident.circonstances}}</p>
+        {% else %}
+            <p style="font-weight: bold;font-size: 13pt; text-decoration: underline">A)-AUTRES DOMMAGES CAUSES PAR L'ACCIDENT:</p>
+            {% if accident.autres_dommages %}
+                <p>{{accident.autres_dommages}}</p>
+            {% else %}
+                <p style="font-weight: bold;font-size: 10pt;">Néant</p>
+            {%endif%}
+             <p style="font-weight: bold;font-size: 13pt; text-decoration: underline">B)-VICTIMES:</p>
+            {% if listVictime %}
+                {% for victime in listVictime %}
+                <p>Prénom & nom: {{ victime.nom_prenom}},&nbsp;&nbsp;Filiation complète: {{ victime.filiation_complete}},&nbsp;&nbsp;Adresse:{{victime.adresse}}</p>
+                <p> Nature des blessures: {{victime.nature_des_blessures}}</p>
+                <p> Position au moment de l'accident:{{victime.position_moment_accident}}</p>
+                <hr>
+                {% endfor%}
+            {% else %}
+                <p style="font-weight: bold;font-size: 10pt;">Néant</p>
+            {%endif%}
+             <p style="font-weight: bold;font-size: 13pt; text-decoration: underline">C)-TEMOINS:</p>
+            {% if listTemoin %}
+                {% for temoin in listTemoin %}
+                <p>Prénom & nom: {{ temoin.nom_prenom}},&nbsp;&nbsp;Professsion: {{ temoin.profession}},&nbsp;&nbsp;Adresse:{{temoin.adresse}}</p>
+                <p> Position au moment de l'accident:{{temoin.position_moment_accident}}</p>
+                <hr>
+                {% endfor%}
+            {% else %}
+                <p style="font-weight: bold;font-size: 10pt;">Néant</p>
+            {%endif%}
+             <p style="font-weight: bold;font-size: 13pt; text-decoration: underline">D)-ETATS DES LIEUX:</p>
+            {% if etatDesLieux %}
+                {% for etatDesLieux in etatDesLieux %}
+                <p>Visibilite: {{ etatDesLieux.visibilite}}</p>
+                <p>Chaussée:{{etatDesLieux.chaussée}}</p>
+                <p>Largeur: {{etatDesLieux.largeur}}</p>
+                <p>Traces Relevées sur la chaussée:</p>
+                {% endfor%}
+            {% else %}
+                <p style="font-weight: bold;font-size: 10pt;">Néant</p>
+            {%endif%}
+            <p style="font-weight: bold;font-size: 13pt; text-decoration: underline">E)-PERSONNE BLESSES DANS L'ACCIDENT:</p>
+            <p>Néant</p>
+             <p style="font-weight: bold;font-size: 13pt; text-decoration: underline">F)-CIRCONSTANCES:</p>
+            <p>Néant</p>
+
+        {% endif %}
+    </div>
+</body>
+</html>
