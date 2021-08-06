@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <title>Pv saisine</title>
+    <style>
+         @page {
+            size: a4 portrait;
+
+            /* entete gauche */
+            @frame header_frame1 {           /* Static Frame */
+                -pdf-frame-content: header_content1;
+                left: 10pt; width: 150pt; top: 10pt; height: 50pt;
+            }
+
+            @frame header_frame2 {           /* Static Frame */
+                -pdf-frame-content: header_content2;
+                left: 10pt; width: 150pt; top: 20pt; height: 20pt;
+            }
+
+            @frame header_frame3 {           /* Static Frame */
+                -pdf-frame-content: header_content3;
+                left: 10pt; width: 150pt; top: 35pt; height: 20pt;
+            }
+
+            @frame header_frame4 {           /* Static Frame */
+                -pdf-frame-content: header_content4;
+                left: 10pt; width: 150pt; top: 40pt; height: 20pt;
+            }
+
+            @frame header_frame5 {           /* Static Frame */
+                -pdf-frame-content: header_content5;
+                left: 10pt; width: 150pt; top: 50pt; height: 20pt;
+            }
+
+            @frame header_frame6 {           /* Static Frame */
+                -pdf-frame-content: header_content6;
+                left: 10pt; width: 150pt; top: 60pt; height: 20pt;
+            }
+
+            @frame header_frame7 {           /* Static Frame */
+                -pdf-frame-content: header_content7;
+                left: 10pt; width: 150pt; top: 70pt; height: 20pt;
+            }
+
+            @frame header_frame8 {           /* Static Frame */
+                -pdf-frame-content: header_content8;
+                left: 10pt; width: 150pt; top: 80pt; height: 20pt;
+            }
+
+            @frame header_frame9 {           /* Static Frame */
+                -pdf-frame-content: header_content9;
+                left: 10pt; width: 200pt; top: 90pt; height: 20pt;
+            }
+
+            @frame header_frame10 {           /* Static Frame */
+                -pdf-frame-content: header_content10;
+                left: 10pt; width: 300pt; top: 100pt; height: 30pt;
+            }
+
+            @frame header_frame11 {           /* Static Frame */
+                -pdf-frame-content: header_content11;
+                left: 10pt; width: 220pt; top: 115pt; height: 20pt;
+            }
+            @frame header_frame12 {           /* Static Frame */
+                -pdf-frame-content: header_content12;
+                left: 50pt; width: 150pt; top: 125pt; height: 20pt;
+            }
+            @frame header_frame13 {           /* Static Frame */
+                -pdf-frame-content: header_content13;
+                left: 10pt; width: 300pt; top: 150pt; height: 50pt;
+            }
+            /* fin entete gauche*/
+            /*entete droite*/
+
+            @frame header_frame14 {           /* Static Frame */
+                -pdf-frame-content: header_content14;
+                left: 425pt; width: 150pt; top: 10pt; height: 50pt;
+            }
+            @frame header_frame15 {           /* Static Frame */
+                -pdf-frame-content: header_content15;
+                left: 300pt; width: 200pt; top: 40pt; height: 100pt;
+            }
+
+            @frame header_frame16 {           /* Static Frame */
+                -pdf-frame-content: header_content16;
+                left: 300pt; width: 150pt; top: 50pt; height: 50pt;
+            }
+
+            @frame header_frame17 {           /* Static Frame */
+                -pdf-frame-content: header_content17;
+                left: 300pt; width: 250pt; top: 120pt; height: 50pt;
+            }
+
+            @frame header_frame18 {           /* Static Frame */
+                -pdf-frame-content: header_content18;
+                left: 300pt; width: 230pt; top: 135pt; height: 50pt;
+            }
+
+            @frame header_frame19 {           /* Static Frame */
+                -pdf-frame-content: header_content19;
+                left: 300pt; width: 300pt; top: 150pt; height: 50pt;
+            }
+
+            @frame header_frame20 {           /* Static Frame */
+                -pdf-frame-content: header_content20;
+                left: 300pt; width: 270pt; top: 165pt; height: 50pt;
+            }
+
+            @frame header_frame21 {           /* Static Frame */
+                -pdf-frame-content: header_content21;
+                left: 300pt; width: 230pt; top: 185pt; height: 50pt;
+            }
+
+            @frame header_frame22 {           /* Static Frame */
+                -pdf-frame-content: header_content22;
+                left: 300pt; width: 230pt; top: 150pt; height: 50pt;
+            }
+            /*fin entete droite*/
+
+            @frame content_frame {          /* Content Frame */
+                left: 50pt; width: 512pt; top: 90pt; height: 632pt;
+            }
+            @frame col1_row1_frame {
+                -pdf-frame-content:col1_row1_frame;            /* Content frame 1 */
+                left: 10pt; width: 400pt; top: 200pt; height: 632pt;
+            }
+
+            @frame col1_row2_frame {
+                -pdf-frame-content:col1_row2_frame;            /* Content frame 1 */
+                left: 10pt; width: 400pt; top: 220pt; height: 632pt;
+            }
+
+            @frame col1_row3_frame {
+                -pdf-frame-content:col1_row3_frame;            /* Content frame 1 */
+                left: 10pt; width: 100pt; top: 550pt; height: 632pt;
+            }
+
+            @frame col1_row4_frame {
+                -pdf-frame-content:col1_row4_frame;            /* Content frame 1 */
+                left: 10pt; width: 120pt; top: 650pt; height: 632pt;
+            }
+
+            @frame col1_row5_frame {
+                -pdf-frame-content:col1_row5_frame;            /* Content frame 1 */
+                left: 10pt; width: 120pt; top: 750pt; height: 632pt;
+            }
+
+            @frame col2_frame {
+                -pdf-frame-content:col2_frame;            /* Content frame 1 */
+                left: 130pt; width: 5pt; top: 200pt; height: 800pt;
+                -pdf-keep-with-next: false;
+            }
+            @frame col3_frame {
+                -pdf-frame-content:col3_frame;           /* Content frame 2 */
+                left: 132pt; width: 450pt; top: 200pt; height: 1000pt;
+                -pdf-keep-with-next: false;
+
+            }
+
+
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- Content for Static Frame 'header_frame' -->
+    <div style="text-align:center;font-size: 10pt;" id="header_content1">
+        <p>REPUBLIQUE DU SENEGAL</p>
+    </div>
+    <div style="text-align: center;font-size: 9pt;" id="header_content2">
+        <p>--------------------</p>
+    </div>
+    <div style="text-align: center;font-weight: bold; font-size: 10pt;" id="header_content3">
+        <p>MINISTERE DE L’INTERIEUR</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content4">
+        <p></p>
+    </div>
+    <div style="text-align: center; font-weight: bold;font-size: 10pt;" id="header_content5">
+        <p>-----------------------</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content6">
+        <p>DIRECTION GENERALE</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content7">
+        <p>DE LA SURETE NATIONALE</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content8">
+        <hr>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content9">
+        <p>DIRECTION DE LA SECURITE PUBLIQUE</p>
+    </div>
+    <div style="font-size: 13pt;" id="header_content10">
+        <p>Commissariat Central de Kaolack</p>
+    </div>
+    <div style="text-align: center; font-size: 10pt;" id="header_content11">
+        <p>SECTION DES ACCIDENTS</p>
+    </div>
+    <div style="text-align: center;font-weight: bold;font-size: 10pt;" id="header_content12">
+        <p>------------------------</p>
+    </div>
+    <div style="text-align: center;font-weight: bold; font-size: 10pt;" id="header_content14">
+        <p>N°-{{accident.numero_accident}}/ S.A/.C.C/K.L</p>
+    </div>
+    <div id="header_content15">
+        {% if  accidentCorporel %}
+        <p style="font-weight: bold;font-size: 10pt;">
+            CONSTAT D'ACCIDENT CORPOREL
+            DE LA CIRCULATION ROUTIERE
+        </p>
+        {% else %}
+        <p style="font-weight: bold;font-size: 10pt;">
+            CONSTAT D'ACCIDENT MATERIEL
+            DE LA CIRCULATION ROUTIERE
+        </p>
+        {%endif %}
+    </div>
+    <div style="font-weight: bold; font-size: 10pt;" id="header_content17">
+        Survenu le {{ accident.date_accident }} à {{accident.heure_accident}}
+    </div>
+    <div style="font-weight: bold; font-size: 10pt;" id="header_content18">
+        Lieu: {{accident.lieu_accident}}
+    </div>
+    <div style="font-weight:bold;font-size:10pt" id="header_content19">
+        Etabli par: l'Agent de Police: {{accident.etabli_par.first_name}} {{accident.etabli_par.last_name}}
+    </div>
+
+    <div style=" line-height: 0; font-size: 10pt;  font-family: 'Times New Roman', Times, serif; " id="col1_row1_frame">
+        <p style="text-decoration: underline;font-weight: bold; font-size: 13pt">A)VEHICULES ET PARTIES EN CAUSE</p>
+        {% for vehicule in listVehicule %}
+        <p style="font-weight: bold;text-decoration: underline">VEHICULE:{{vehicule.numero}}</p>
+        <p>Numero: {{vehicule.numero}}  &nbsp;&nbsp;&nbsp;&nbsp;  Genre: {{vehicule.genre}} &nbsp;&nbsp;&nbsp;&nbsp; Marque:{{vehicule.marque}}</p>
+        <p>Date de première mise en circulation: le  {{vehicule.date_mise_circulation}}</p>
+        <p>Dernière visite technique: le {{vehicule.derniere_visite_technique}}</p>
+            {% for conducteur in listConducteur %}
+                {% if conducteur.vehicule.numero == vehicule.numero %}
+                    <p> Conducteur: {{conducteur.nom_prenom}} &nbsp;&nbsp;&nbsp;&nbsp; Profession:{{conducteur.profession}} </p>
+                    {% for permis in listPermis %}
+                        {% if permis.conducteur.id == conducteur.id%}
+                           <p> P.C n°: {{permis.numero}} &nbsp;&nbsp;&nbsp;&nbsp; Délivré par:{{permis.delivre_par}} &nbsp;&nbsp;&nbsp;&nbsp; le:{{permis.delivre_le}}</p>
+                        {% endif %}
+                    {% endfor %}
+                    <p>Domicile : {{conducteur.domicile}} &nbsp;&nbsp;&nbsp;&nbsp; Tel:{{conducteur.telephone}}</p>
+                {% endif %}
+            {% endfor%}
+            {% for proprietaire in listProprietaire %}
+                {% if proprietaire.vehicule.id == vehicule.id%}
+                    <p>Propriétaire: {{proprietaire.nom_prenom}}</p>
+                    <p>Domicile: {{proprietaire.domicile}} &nbsp;&nbsp;&nbsp;&nbsp;Tel:{{proprietaire.telephone}}</p>
+                {% endif%}
+            {% endfor %}
+            {% for assurance in listAssurance %}
+                {% if assurance.vehicule.id == vehicule.id %}
+                    <p>Assurance:{{assurance.nom}}</p>
+                    <p>Police numéro:{{assurance.numero_police}} &nbsp;&nbsp;&nbsp;&nbsp; valable du {{assurance.date_debut}} au {{assurance.date_expiration}}</p>
+                {% endif %}
+            {% endfor %}
+            <p>Dégats apparents: {{vehicule.degats_materiels}}</p>
+            {% for conducteur in listConducteur %}
+                {% if conducteur.vehicule.numero == vehicule.numero %}
+                    <p> Comportement du conducteur:{{conducteur.comportement}}</p>
+                {% endif %}
+            {% endfor %}
+            {% if accidentCorporel%}
+                <p style="font-weight: bold;font-size: 10pt;">CARACTERISTIQUES ET EXAMEN DU VEHICULE</p>
+                <p>Puissance:{{vehicule.puissance}}</p>
+                <p>Total en charge:{{vehicule.charge_total}}</p>
+                <p>Dimensions:{{vehicule.dimension}}</p>
+                <p>Date de mise en circulation: {{vehicule.date_mise_circulation}}</p>
+                <p>Dernière visite technique: {{vehicule.derniere_visite_technique}}</p>
+                <p>Kilometrage: {{vehicule.kilometrage}}</p>
+                <p>Etat général: {{vehicule.etat_general}}</p>
+                <p>Valeur du système de freinage: {{vehicule.valeur_systeme_freinage}}</p>
+                <p style="font-weight: bold;font-size: 10pt;">Existence,fonctionnement et position des accessoires réglementaires </p>
+                {% for avertisseur in listAvertisseur %}
+                    {% if avertisseur.vehicule.id == vehicule.id %}
+                        <p>Avertisseur: {{avertisseur.existance}},&nbsp;&nbsp;&nbsp;&nbsp;{{avertisseur.fonctionel}},&nbsp;&nbsp;&nbsp;&nbsp;{{avertisseur.position}}</p>
+                    {% endif %}
+                {% endfor %}
+                {% for eclairage in listEclairage %}
+                    {% if eclairage.vehicule.id == vehicule.id %}
+                        <p>eclairage: {{eclairage.existance}},&nbsp;&nbsp;&nbsp;&nbsp;{{eclairage.fonctionel}},&nbsp;&nbsp;&nbsp;&nbsp;{{eclairage.position}}</p>
+                    {% endif %}
+                {% endfor %}
+                {% for direction in listDirection %}
+                    {% if direction.vehicule.id == vehicule.id %}
+                        <p>Indicateur de direction: {{direction.existance}},&nbsp;&nbsp;&nbsp;&nbsp;{{direction.fonctionel}},&nbsp;&nbsp;&nbsp;&nbsp;{{direction.position}}</p>
+                    {% endif %}
+                {% endfor %}
+                {% for vitesse in listVitesse %}
+                    {% if vitesse.vehicule.id == vehicule.id %}
+                        <p>Indicateur de vitesse: {{vitesse.existance}},&nbsp;&nbsp;&nbsp;&nbsp;{{vitesse.fonctionel}},&nbsp;&nbsp;&nbsp;&nbsp;{{vitesse.position}}</p>
+                    {% endif %}
+                {% endfor %}
+                {% for essuieGlace in listEssuieGlace %}
+                    {% if essuieGlace.vehicule.id == vehicule.id %}
+                        <p>Essuie glace: {{essuieGlace.existance}},&nbsp;&nbsp;&nbsp;&nbsp;{{essuieGlace.fonctionel}},&nbsp;&nbsp;&nbsp;&nbsp;{{essuieGlace.position}}</p>
+                    {% endif %}
+                {% endfor %}
+                {% if listRetroviseur %}
+                {% for retroviseur in listRetroviseur %}
+                    {% if retroviseur.vehicule.id == vehicule.id %}
+                        <p>Retroviseur: {{retroviseur.existance}},&nbsp;&nbsp;&nbsp;&nbsp;{{retroviseur.fonctionel}},&nbsp;&nbsp;&nbsp;&nbsp;{{retroviseur.position}}</p>
+                    {% endif %}
+                {% endfor %}
+                {% endif %}
+
+
+
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</body>
+</html>

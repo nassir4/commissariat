@@ -500,11 +500,11 @@ def vehiculeCorporelSave(request,id):
         direction_form =IndicateurDirectionForm(request.POST)
         essuieGlace_form=EssuieGlaceForm(request.POST)
         avertisseur_form=AvertisseurForm(request.POST)
-
+        retroviseur_form = RetroviseurForm(request.POST)
         if (vehicule_form.is_valid() and assurance_form.is_valid() and proprietaire_form.is_valid()
                 and conducteur_form.is_valid() and permis_form.is_valid() and eclairage_form.is_valid() and
                 vitesse_form.is_valid() and direction_form.is_valid() and essuieGlace_form.is_valid() and
-                avertisseur_form.is_valid):
+                avertisseur_form.is_valid and retroviseur_form.is_valid):
             vehicule = vehicule_form.save(commit=False)
             vehicule.accident = accident
             vehicule.save()
@@ -524,6 +524,9 @@ def vehiculeCorporelSave(request,id):
             vitesse = vitesse_form.save(commit=False)
             vitesse.vehicule = ve
             vitesse.save()
+            retroviseur = retroviseur_form.save(commit=False)
+            retroviseur.vehicule = ve
+            retroviseur.save()
             assurance = assurance_form.save(commit=False)
             assurance.vehicule= ve
             assurance.save()
@@ -549,6 +552,7 @@ def vehiculeCorporelSave(request,id):
         direction_form = IndicateurDirectionForm
         essuieGlace_form = EssuieGlaceForm
         avertisseur_form = AvertisseurForm
+        retroviseur_form = RetroviseurForm
     context = {
         'vehicule_form': vehicule_form,
         'assurance_form': assurance_form,
@@ -560,6 +564,7 @@ def vehiculeCorporelSave(request,id):
         'direction_form':direction_form,
         'essuieGlace_form':essuieGlace_form,
         'avertisseur_form':avertisseur_form,
+        'retroviseur_form':retroviseur_form,
         'id':accident.id
     }
     return render(request, 'accident_corporel/enregistrement.html', context)

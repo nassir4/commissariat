@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from accident.models import TypeAccident, Accident, Vehicule, Conducteur, Proprietaire, Permis, Victime, Temoin, \
-    Declaration, Assurance, EtatDesLieux
+    Declaration, Assurance, EtatDesLieux, Retroviseur
 
 admin.site.register(TypeAccident)
 admin.site.register(Accident)
@@ -15,3 +15,4 @@ admin.site.register(Temoin)
 admin.site.register(Declaration)
 admin.site.register(Assurance)
 admin.site.register(EtatDesLieux)
+admin.site.register(Retroviseur)
