@@ -1,0 +1,28 @@
+{% extends 'base_secretariat.html'%}
+{% block content%}
+<!-- Carousel wrapper -->
+      <div class="container">
+        <a href="{% url 'secretariat:gallerie_save'%}" class="btn btn-outline-success">Ajouter une gallerie</a>
+        <div class="row">
+          {% for gallerie in listGallerie %}
+          <div class="col-lg-4">
+            <div class="card">
+              <img
+                src="{{gallerie.image.url}}"
+                class="card-img-top"
+                alt="..."
+              />
+              <div class="card-body">
+                <h5 class="card-title">{{gallerie.titre}}</h5>
+                <p class="card-text">
+                  {{gallerie.description}}
+                </p>
+                <a href="{% url 'secretariat:detail_gallerie' id=gallerie.id%}" class="btn btn-primary">Button</a>
+              </div>
+            </div>
+          </div>
+          {%endfor%}
+        </div>
+      </div>
+
+{% endblock %}
