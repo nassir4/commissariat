@@ -20,6 +20,8 @@ from pojudiciaire.models import Crime, Notification, Cloture, Requisition, Condu
 from pojudiciaire.utils import link_callback
 from postepolice.forms import RegistreForm, PlainteAffecte, MainCouranteAffecte, MainCouranteVue
 from postepolice.models import Registre, Plainte, Perte, Ecrou, MainCourante, GardeAVue
+from secretariat.form import GallerieForm, ImagePotForm
+from secretariat.models import Gallerie, ImagePot
 
 
 @login_required(login_url='login:secretariat')
@@ -692,3 +694,31 @@ def render_pdf_accident2(request,id):
     if pisa_status.err:
         return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+def saveGallerie(request):
+    if request.method == 'POST':
+        form = GallerieForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            gallerie = Gallerie.objects.last()
+            return redirect('secretariat:detail_gallerie',id=gallerie.id)
+    else:
+        form = GallerieForm
+    return render(request, 'enregistrement_gal.html',{'form':form})
+def saveImagePot(request,id):
+    gallerie = Gallerie.objects.get(pk=id)
+    if request.method == 'POST':
+        form = ImagePotForm(request.POST,request.FILES)
+        if form.is_valid():
+            imagePot = form.save(commit=False)
+            imagePot.gallerie = gallerie
+            imagePot.save()
+            listImage = ImagePot.objects.all().order_by('id').reverse()
+    else:
+        form = ImagePotForm
+    return render(request, 'gallerie_detail.html',{'form':form,'listImage':listImage})
+def gallerieDetail(request,id):
+    gallerie = Gallerie.objects.get(pk=id)
+    return render(request, 'gallerie_detail.html',{'gallerie',gallerie})
+def listGalerie(request):
+    listGallerie = Gallerie.objects.all().order_by('id').reverse()
+    return render(request, 'gallerie.html',{'listGallerie':listGallerie})
