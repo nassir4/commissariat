@@ -15,6 +15,8 @@ class TypeInfraction(models.Model):
 class Crime(models.Model):
     affaire = models.CharField(max_length=200)
     typeInfraction = models.ForeignKey(TypeInfraction, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Agent", blank=True,null=True,
+                             limit_choices_to={'groups__name': 'police judiciaire'},)
     incrimination = models.CharField("Incrimination",max_length=200, blank=True,null=True)
 
     ETAT_TYPE =(

@@ -809,7 +809,7 @@ def render_pdf_notification(request,id):
 @login_required(login_url='login:judiciaire')
 @allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def crime(request):
-    listCrime = Crime.objects.all
+    listCrime = Crime.objects.filter(user=request.user)
     context = {
         'listCrime': listCrime
     }
@@ -849,7 +849,9 @@ def saveCrime(request):
     if request.method == 'POST':
         form = CrimeForm(request.POST)
         if form.is_valid():
-            form.save()
+            c=form.save(commit=False)
+            c.user = request.user
+            c.save()
             crime = Crime.objects.last()
             return redirect('judiciaire:detail_crime',id =crime.id)
     else:

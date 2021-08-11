@@ -83,7 +83,7 @@ def delete(request,type_id):
 @login_required(login_url='login:accident')
 @allowed_user(allowed_roles=['accident','secretariat'])
 def accident(request):
-    listaccident = Accident.objects.all
+    listaccident = Accident.objects.all().order_by('id').reverse()
     context = {
         'listAccident': listaccident
     }
@@ -435,6 +435,7 @@ def saveAccidentMateriel(request):
         if form.is_valid():
             accident = form.save(commit=False)
             accident.type_accident=typeAccident
+            accident.etabli_par=request.user
             accident.save()
             return redirect('accident:detail_accident', accident_id=accident.id)
     else:
@@ -578,6 +579,7 @@ def saveAccidentCorporel(request):
         if form.is_valid():
             accident = form.save(commit=False)
             accident.type_accident=typeAccident
+            accident.etabli_par = request.user
             accident.save()
             return redirect('accident:detail_accident',accident_id=accident.id)
     else:

@@ -704,21 +704,19 @@ def saveGallerie(request):
     else:
         form = GallerieForm
     return render(request, 'enregistrement_gal.html',{'form':form})
-def saveImagePot(request,id):
+def gallerieDetail(request,id):
     gallerie = Gallerie.objects.get(pk=id)
+    listImage=ImagePot.objects.filter(gallerie=gallerie)
     if request.method == 'POST':
         form = ImagePotForm(request.POST,request.FILES)
         if form.is_valid():
             imagePot = form.save(commit=False)
             imagePot.gallerie = gallerie
             imagePot.save()
-            listImage = ImagePot.objects.all().order_by('id').reverse()
+            listImage = ImagePot.objects.filter(gallerie=gallerie).order_by('id').reverse()
     else:
         form = ImagePotForm
-    return render(request, 'gallerie_detail.html',{'form':form,'listImage':listImage})
-def gallerieDetail(request,id):
-    gallerie = Gallerie.objects.get(pk=id)
-    return render(request, 'gallerie_detail.html',{'gallerie',gallerie})
+    return render(request, 'gallerie_detail.html',{'form':form,'gallerie':gallerie,'listImage':listImage,})
 def listGalerie(request):
     listGallerie = Gallerie.objects.all().order_by('id').reverse()
     return render(request, 'gallerie.html',{'listGallerie':listGallerie})
