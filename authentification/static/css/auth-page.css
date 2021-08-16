@@ -35,6 +35,7 @@ body.background-img{
     flex-basis: 50%;
     
     height: 565px;
+    width:300px;
 }
 
 .home-box .left img{

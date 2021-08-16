@@ -8,6 +8,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+from django.db.models import ForeignKey
 from django_summernote.fields import SummernoteTextField
 
 from accident.views import modifierDeclaration
@@ -26,7 +27,7 @@ class AgentPoste(models.Model):
     role = models.CharField("Role", max_length=100, choices=ROLES)
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.first_name} {self.user.last_name}'
 
 
 
@@ -35,11 +36,10 @@ class Brigade(models.Model):
     nom = models.CharField("Nom", max_length=200, unique=True)
     chef_de_poste = models.OneToOneField(AgentPoste, on_delete=models.SET_NULL,
                                          null=True, blank=True, related_name="is_chef_de_poste")
-    secretaire = models.OneToOneField(AgentPoste, on_delete=models.SET_NULL,
+    secretaire = models.ManyToManyField(AgentPoste,
                                       null=True, blank=True, related_name="is_secretaire")
-    chauffeur = models.OneToOneField(AgentPoste, on_delete=models.SET_NULL,
+    chauffeur = models.ManyToManyField(AgentPoste,
                                      null=True, blank=True, related_name="is_chauffeur")
-    police_secours = models.ManyToManyField(AgentPoste)
 
     def __str__(self):
         return self.nom
@@ -148,3 +148,11 @@ class GardeAVue(models.Model):
     )
     decision_magistrat = models.CharField("Décision du magistrat", default='AC', choices=Decision_choice, max_length=255,blank=True,null=True)
     observations = models.CharField("Observations", max_length=255,blank=True,null=True)
+
+class PoliceSecours(models.Model):
+    prenom = models.CharField("Prénom", max_length=255,blank=True,null=True)
+    nom = models.CharField("Nom", max_length=255, blank=True,null=True)
+    registre = ForeignKey(Registre, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.prenom} {self.nom}'

@@ -18,8 +18,8 @@ from authentification.decorators import allowed_user
 from pojudiciaire.models import Crime, Notification, Cloture, Requisition, Conduite, Mission, Confrontation, \
     Interrogatoire, Audition, Saisine
 from pojudiciaire.utils import link_callback
-from postepolice.forms import RegistreForm, PlainteAffecte, MainCouranteAffecte, MainCouranteVue
-from postepolice.models import Registre, Plainte, Perte, Ecrou, MainCourante, GardeAVue
+from postepolice.forms import PlainteAffecte, MainCouranteAffecte, MainCouranteVue, PoliceSecoursForm
+from postepolice.models import Registre, Plainte, Perte, Ecrou, MainCourante, GardeAVue, PoliceSecours
 from secretariat.form import GallerieForm, ImagePotForm
 from secretariat.models import Gallerie, ImagePot
 
@@ -203,7 +203,24 @@ def listRegistreGarde(request):
 def detailRegistreMC(request,id):
     registre = Registre.objects.get(pk=id)
     listMainCourante = MainCourante.objects.filter(registre=registre)
+    listSecretaire = registre.brigade.secretaire.all
+    listChauffeur = registre.brigade.chauffeur.all
+    listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+    if request.method == 'POST':
+        form = PoliceSecoursForm(request.POST)
+        if form.is_valid():
+            police = form.save(commit=False)
+            police.registre = registre
+            police.save()
+            listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+            form = PoliceSecoursForm
+    else:
+        form = PoliceSecoursForm
     context = {
+        'form': form,
+        'listSecretaire': listSecretaire,
+        'listChauffeur': listChauffeur,
+        'listPoliceSecours': listPoliceSecours,
         'registre':registre,
         'listMainCourante':listMainCourante
     }
@@ -213,7 +230,24 @@ def detailRegistreMC(request,id):
 def detailRegistreGarde(request,id):
     registre = Registre.objects.get(pk=id)
     listGarde = GardeAVue.objects.filter(registre=registre)
+    listSecretaire = registre.brigade.secretaire.all
+    listChauffeur = registre.brigade.chauffeur.all
+    listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+    if request.method == 'POST':
+        form = PoliceSecoursForm(request.POST)
+        if form.is_valid():
+            police = form.save(commit=False)
+            police.registre = registre
+            police.save()
+            listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+            form = PoliceSecoursForm
+    else:
+        form = PoliceSecoursForm
     context = {
+        'form': form,
+        'listSecretaire': listSecretaire,
+        'listChauffeur': listChauffeur,
+        'listPoliceSecours': listPoliceSecours,
         'registre':registre,
         'listGarde':listGarde
     }
@@ -224,7 +258,24 @@ def detailRegistreGarde(request,id):
 def detailRegistrePl(request,id):
     registre = Registre.objects.get(pk=id)
     listPlainte = Plainte.objects.filter(registre=registre)
+    listSecretaire = registre.brigade.secretaire.all
+    listChauffeur = registre.brigade.chauffeur.all
+    listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+    if request.method == 'POST':
+        form = PoliceSecoursForm(request.POST)
+        if form.is_valid():
+            police = form.save(commit=False)
+            police.registre = registre
+            police.save()
+            listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+            form = PoliceSecoursForm
+    else:
+        form = PoliceSecoursForm
     context = {
+        'form': form,
+        'listSecretaire': listSecretaire,
+        'listChauffeur': listChauffeur,
+        'listPoliceSecours': listPoliceSecours,
         'registre':registre,
         'listPlainte':listPlainte
     }
@@ -234,7 +285,24 @@ def detailRegistrePl(request,id):
 def detailRegistrePer(request,id):
     registre = Registre.objects.get(pk=id)
     listPerte = Perte.objects.filter(registre=registre)
+    listSecretaire = registre.brigade.secretaire.all
+    listChauffeur = registre.brigade.chauffeur.all
+    listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+    if request.method == 'POST':
+        form = PoliceSecoursForm(request.POST)
+        if form.is_valid():
+            police = form.save(commit=False)
+            police.registre = registre
+            police.save()
+            listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+            form = PoliceSecoursForm
+    else:
+        form = PoliceSecoursForm
     context = {
+        'form': form,
+        'listSecretaire': listSecretaire,
+        'listChauffeur': listChauffeur,
+        'listPoliceSecours': listPoliceSecours,
         'registre':registre,
         'listPerte':listPerte
     }
@@ -244,7 +312,24 @@ def detailRegistrePer(request,id):
 def detailRegistreEc(request,id):
     registre = Registre.objects.get(pk=id)
     listEcrou = Ecrou.objects.filter(registre=registre)
+    listSecretaire = registre.brigade.secretaire.all
+    listChauffeur = registre.brigade.chauffeur.all
+    listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+    if request.method == 'POST':
+        form = PoliceSecoursForm(request.POST)
+        if form.is_valid():
+            police = form.save(commit=False)
+            police.registre = registre
+            police.save()
+            listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+            form = PoliceSecoursForm
+    else:
+        form = PoliceSecoursForm
     context = {
+        'form': form,
+        'listSecretaire': listSecretaire,
+        'listChauffeur': listChauffeur,
+        'listPoliceSecours': listPoliceSecours,
         'registre':registre,
         'listEcrou':listEcrou
     }
@@ -704,21 +789,19 @@ def saveGallerie(request):
     else:
         form = GallerieForm
     return render(request, 'enregistrement_gal.html',{'form':form})
-def saveImagePot(request,id):
+def gallerieDetail(request,id):
     gallerie = Gallerie.objects.get(pk=id)
+    listImage=ImagePot.objects.filter(gallerie=gallerie)
     if request.method == 'POST':
         form = ImagePotForm(request.POST,request.FILES)
         if form.is_valid():
             imagePot = form.save(commit=False)
             imagePot.gallerie = gallerie
             imagePot.save()
-            listImage = ImagePot.objects.all().order_by('id').reverse()
+            listImage = ImagePot.objects.filter(gallerie=gallerie).order_by('id').reverse()
     else:
         form = ImagePotForm
-    return render(request, 'gallerie_detail.html',{'form':form,'listImage':listImage})
-def gallerieDetail(request,id):
-    gallerie = Gallerie.objects.get(pk=id)
-    return render(request, 'gallerie_detail.html',{'gallerie',gallerie})
+    return render(request, 'gallerie_detail.html',{'form':form,'gallerie':gallerie,'listImage':listImage,})
 def listGalerie(request):
     listGallerie = Gallerie.objects.all().order_by('id').reverse()
     return render(request, 'gallerie.html',{'listGallerie':listGallerie})

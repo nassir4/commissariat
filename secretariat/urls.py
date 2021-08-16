@@ -52,7 +52,6 @@ urlpatterns = [
     path('accident/pdf/<int:id>/', views.render_pdf_accident, name='pdf_accident'),
     path('accident2/pdf/<int:id>/', views.render_pdf_accident2, name='pdf_accident2'),
     path('gallerie/save', views.saveGallerie, name='gallerie_save'),
-    path('gallerie/<int:id>/image/save',views.saveImagePot, name="image_save"),
     path('gallerie/list', views.listGalerie, name="list_gallerie"),
     path('gallerie/detail/<int:id>', views.gallerieDetail, name="detail_gallerie"),
 

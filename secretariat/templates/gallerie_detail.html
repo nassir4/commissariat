@@ -1,4 +1,26 @@
 {% extends 'base_secretariat.html'%}
 {% block content%}
+<div class="container">
+    <div class="accident-item-box">
+        <div class="py-5 text-center bg-secondary text-white rounded">
+            <h1 class="mb-3">Ajouter une image</h1>
 
+            <form  method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form}}
+                <input type="submit" class="btn btn-danger" value="Enregistrer">
+            </form>
+        </div>
+        <br>
+        <div class="row">
+            {% for image in listImage %}
+                <div class="col-sm-4">
+                    <div class="card">
+                        <a href="{{image.image.url}}"><img src="{{image.image.url}}" alt="" class="card-img-top" height="200px"></a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 {% endblock %}

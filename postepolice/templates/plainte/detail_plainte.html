@@ -8,11 +8,42 @@
     <div class="accident-item-box">
         <h3 style="text-align: center;">Registre de la {{registre.nom}}</h3>
         <hr>
-        <p> Brigade: {{ registre.brigade}}</p>
-        <p>Chef de poste:{{ registre.brigade.chef_de_poste}}</p>
-        <p>Secretaire: {{registre.brigade.secretaire}}</p>
-        <p>Chauffeur: {{registre.brigade.chauffeur}}</p>
-        <p>Police Secours: {{registre.brigade.police_secours}}</p>
+        <h5 class="h5 text-center"> Brigade: {{ registre.brigade}}</h5>
+        <div class="row text-center border rounded">
+            <div class="col-md-3 border-right">
+                <h5>Chef de poste:</h5>
+                <p>{{ registre.brigade.chef_de_poste}}</p>
+            </div>
+            <div class="col-md-3 border-right">
+                {% if registre.brigade.secretaire%}
+                <h5>Secretaire:</h5></h5> {% for secretaire in  listSecretaire%}
+                <p> {{secretaire}}</p>
+                {%endfor%}
+                {% endif%}
+            </div>
+            <div class="col-md-3 border-right">
+                <h5>Chauffeur:</h5>
+                {% for chauffeur in listChauffeur %}
+                    <p>{{chauffeur}}</p>
+                {% endfor %}
+            </div>
+            <div class="col-md-3">
+                <h5>Police Secours:</h5>
+                {% for policeSecours in listPoliceSecours %}
+                    <p> {{policeSecours}} </p>
+                {% endfor %}
+            </div>
+            <div class="col-md-12 border rounded bg-dark text-white">
+                <br>
+                <form  method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form }}
+                    <input type="submit" class="btn btn-sm btn-danger" value="Enregistrer">
+                </form>
+                <br>
+            </div>
+            <br>
+        </div>
         <div class="card  mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Date: {{registre.date}}</h6>

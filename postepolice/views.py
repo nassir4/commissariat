@@ -6,9 +6,10 @@ from django.shortcuts import render, redirect
 from authentification.decorators import allowed_user
 from authentification.models import Agent
 from postepolice.forms import PlainteForm, PerteForm, EcrouForm, ObjectConsigneForm, MainCouranteForm, RegistreForm, \
-    GardeAVueIdentite, GardeAVueMotif, GardeAVueDecision, GardeAVueDeroul, gardeAVueProl, GardeAVueObser, EcrouSuite
+    GardeAVueIdentite, GardeAVueMotif, GardeAVueDecision, GardeAVueDeroul, gardeAVueProl, GardeAVueObser, EcrouSuite, \
+    PoliceSecoursForm
 from postepolice.models import Plainte, Perte, Ecrou, ObjectConsigne, MainCourante, Brigade, AgentPoste, Registre, \
-    GardeAVue
+    GardeAVue, PoliceSecours
 
 
 @login_required(login_url='login:poste')
@@ -340,7 +341,24 @@ def listRegistreGarde(request):
 def detailRegistreMC(request,id):
     registre = Registre.objects.get(pk=id)
     listMainCourante = MainCourante.objects.filter(registre=registre)
+    listSecretaire = registre.brigade.secretaire.all
+    listChauffeur = registre.brigade.chauffeur.all
+    listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+    if request.method == 'POST':
+        form = PoliceSecoursForm(request.POST)
+        if form.is_valid():
+            police = form.save(commit=False)
+            police.registre = registre
+            police.save()
+            listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+            form = PoliceSecoursForm
+    else:
+        form = PoliceSecoursForm
     context = {
+        'form': form,
+        'listSecretaire': listSecretaire,
+        'listChauffeur': listChauffeur,
+        'listPoliceSecours': listPoliceSecours,
         'registre':registre,
         'listMainCourante':listMainCourante
     }
@@ -350,7 +368,24 @@ def detailRegistreMC(request,id):
 def detailRegistreGarde(request,id):
     registre = Registre.objects.get(pk=id)
     listGarde = GardeAVue.objects.filter(registre=registre)
+    listSecretaire = registre.brigade.secretaire.all
+    listChauffeur = registre.brigade.chauffeur.all
+    listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+    if request.method == 'POST':
+        form = PoliceSecoursForm(request.POST)
+        if form.is_valid():
+            police = form.save(commit=False)
+            police.registre = registre
+            police.save()
+            listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+            form = PoliceSecoursForm
+    else:
+        form = PoliceSecoursForm
     context = {
+        'form': form,
+        'listSecretaire': listSecretaire,
+        'listChauffeur': listChauffeur,
+        'listPoliceSecours': listPoliceSecours,
         'registre':registre,
         'listGarde':listGarde
     }
@@ -361,7 +396,24 @@ def detailRegistreGarde(request,id):
 def detailRegistrePl(request,id):
     registre = Registre.objects.get(pk=id)
     listPlainte = Plainte.objects.filter(registre=registre)
+    listSecretaire = registre.brigade.secretaire.all
+    listChauffeur = registre.brigade.chauffeur.all
+    listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+    if request.method == 'POST':
+        form = PoliceSecoursForm(request.POST)
+        if form.is_valid():
+            police = form.save(commit=False)
+            police.registre = registre
+            police.save()
+            listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+            form = PoliceSecoursForm
+    else:
+        form = PoliceSecoursForm
     context = {
+        'form': form,
+        'listSecretaire': listSecretaire,
+        'listChauffeur': listChauffeur,
+        'listPoliceSecours': listPoliceSecours,
         'registre':registre,
         'listPlainte':listPlainte
     }
@@ -371,7 +423,24 @@ def detailRegistrePl(request,id):
 def detailRegistrePer(request,id):
     registre = Registre.objects.get(pk=id)
     listPerte = Perte.objects.filter(registre=registre)
+    listSecretaire = registre.brigade.secretaire.all
+    listChauffeur = registre.brigade.chauffeur.all
+    listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+    if request.method == 'POST':
+        form = PoliceSecoursForm(request.POST)
+        if form.is_valid():
+            police = form.save(commit=False)
+            police.registre = registre
+            police.save()
+            listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+            form = PoliceSecoursForm
+    else:
+        form = PoliceSecoursForm
     context = {
+        'form': form,
+        'listSecretaire': listSecretaire,
+        'listChauffeur': listChauffeur,
+        'listPoliceSecours': listPoliceSecours,
         'registre':registre,
         'listPerte':listPerte
     }
@@ -381,9 +450,27 @@ def detailRegistrePer(request,id):
 def detailRegistreEc(request,id):
     registre = Registre.objects.get(pk=id)
     listEcrou = Ecrou.objects.filter(registre=registre)
+    listSecretaire = registre.brigade.secretaire.all
+    listChauffeur = registre.brigade.chauffeur.all
+    listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+    if request.method == 'POST':
+        form = PoliceSecoursForm(request.POST)
+        if form.is_valid():
+            police = form.save(commit=False)
+            police.registre = registre
+            police.save()
+            listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+            form = PoliceSecoursForm
+    else:
+        form = PoliceSecoursForm
     context = {
+        'form': form,
+        'listSecretaire': listSecretaire,
+        'listChauffeur': listChauffeur,
+        'listPoliceSecours': listPoliceSecours,
         'registre':registre,
-        'listEcrou':listEcrou
+        'listEcrou':listEcrou,
+
     }
     return render(request, 'ecrou/detail_ecrou.html',context)
 
@@ -575,3 +662,5 @@ def saveGardeAVueObservation(request,id):
         'form': form,
     }
     return render(request, 'garde/enregistrement.html',context)
+
+

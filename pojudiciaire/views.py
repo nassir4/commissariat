@@ -13,7 +13,8 @@ from django.http import HttpResponse
 
 # Create your views here.
 from pojudiciaire.utils import link_callback
-from postepolice.models import Registre, MainCourante, GardeAVue, Plainte
+from postepolice.forms import PoliceSecoursForm
+from postepolice.models import Registre, MainCourante, GardeAVue, Plainte, PoliceSecours
 
 
 @login_required(login_url='login:judiciaire')
@@ -809,7 +810,7 @@ def render_pdf_notification(request,id):
 @login_required(login_url='login:judiciaire')
 @allowed_user(allowed_roles=['police judiciaire','secretariat'])
 def crime(request):
-    listCrime = Crime.objects.all
+    listCrime = Crime.objects.filter(user=request.user)
     context = {
         'listCrime': listCrime
     }
@@ -849,7 +850,9 @@ def saveCrime(request):
     if request.method == 'POST':
         form = CrimeForm(request.POST)
         if form.is_valid():
-            form.save()
+            c=form.save(commit=False)
+            c.user = request.user
+            c.save()
             crime = Crime.objects.last()
             return redirect('judiciaire:detail_crime',id =crime.id)
     else:
@@ -883,7 +886,24 @@ def deleteCrime(id):
 def detailRegistreMC(request,id):
     registre = Registre.objects.get(pk=id)
     listMainCourante = MainCourante.objects.filter(registre=registre)
+    listSecretaire = registre.brigade.secretaire.all
+    listChauffeur = registre.brigade.chauffeur.all
+    listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+    if request.method == 'POST':
+        form = PoliceSecoursForm(request.POST)
+        if form.is_valid():
+            police = form.save(commit=False)
+            police.registre = registre
+            police.save()
+            listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+            form = PoliceSecoursForm
+    else:
+        form = PoliceSecoursForm
     context = {
+        'form': form,
+        'listSecretaire': listSecretaire,
+        'listChauffeur': listChauffeur,
+        'listPoliceSecours': listPoliceSecours,
         'registre':registre,
         'listMainCourante':listMainCourante
     }
@@ -894,7 +914,24 @@ def detailRegistreMC(request,id):
 def detailRegistrePl(request,id):
     registre = Registre.objects.get(pk=id)
     listPlainte = Plainte.objects.filter(registre=registre)
+    listSecretaire = registre.brigade.secretaire.all
+    listChauffeur = registre.brigade.chauffeur.all
+    listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+    if request.method == 'POST':
+        form = PoliceSecoursForm(request.POST)
+        if form.is_valid():
+            police = form.save(commit=False)
+            police.registre = registre
+            police.save()
+            listPoliceSecours = PoliceSecours.objects.filter(registre=registre)
+            form = PoliceSecoursForm
+    else:
+        form = PoliceSecoursForm
     context = {
+        'form': form,
+        'listSecretaire': listSecretaire,
+        'listChauffeur': listChauffeur,
+        'listPoliceSecours': listPoliceSecours,
         'registre':registre,
         'listPlainte':listPlainte
     }

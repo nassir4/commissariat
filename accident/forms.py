@@ -18,7 +18,7 @@ class TypeAccidentForm(ModelForm):
 class AccidentForm(ModelForm):
         class Meta:
             model = Accident
-            fields= ['numero_accident','lieu_accident','date_accident','heure_accident','etabli_par','assiste_de','circonstances','infractions_relevees','mesures_prises','derniere_mesures_prises','autres_dommages']
+            fields= ['numero_accident','lieu_accident','date_accident','heure_accident','assiste_de','circonstances','infractions_relevees','mesures_prises','derniere_mesures_prises','autres_dommages']
 
         date_accident = DateField(
             widget=DatePickerInput(format='%d/%m/%Y'),
@@ -135,7 +135,7 @@ class AccidentMaterielForm(ModelForm):
     class Meta:
         model = Accident
         fields = ['numero_accident','date_accident','heure_accident',
-                    'lieu_accident','etabli_par','assiste_de','autres_dommages']
+                    'lieu_accident','assiste_de','autres_dommages']
 
     date_accident = DateField(
         widget=DatePickerInput(format='%d/%m/%Y'),
