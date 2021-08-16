@@ -7,7 +7,7 @@ from authentification.decorators import allowed_user
 from authentification.models import Agent
 from postepolice.forms import PlainteForm, PerteForm, EcrouForm, ObjectConsigneForm, MainCouranteForm, RegistreForm, \
     GardeAVueIdentite, GardeAVueMotif, GardeAVueDecision, GardeAVueDeroul, gardeAVueProl, GardeAVueObser, EcrouSuite, \
-    PoliceSecoursForm
+    PoliceSecoursForm, MainCouranteStatus
 from postepolice.models import Plainte, Perte, Ecrou, ObjectConsigne, MainCourante, Brigade, AgentPoste, Registre, \
     GardeAVue, PoliceSecours
 
@@ -663,4 +663,10 @@ def saveGardeAVueObservation(request,id):
     }
     return render(request, 'garde/enregistrement.html',context)
 
-
+def statusMC(request,id):
+    registre = Registre.objects.get(pk=id)
+    form = MainCouranteStatus(request.POST or None, instance=registre)
+    c=form.save(commit=False)
+    c.status = True
+    c.save()
+    return redirect('poste:liste_registre_MC')

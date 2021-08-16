@@ -131,3 +131,7 @@ class PoliceSecoursForm(ModelForm):
     class Meta:
         model = PoliceSecours
         fields = ['prenom','nom']
+class MainCouranteStatus(ModelForm):
+    class Meta:
+        model= Registre
+        fields = ['status']

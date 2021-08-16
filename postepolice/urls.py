@@ -62,5 +62,5 @@ urlpatterns = [
  path('perte/registre/detail/<int:id>/', views.detailRegistrePer, name='detail_registre_Per'),
  path('ecrou/registre/detail/<int:id>/', views.detailRegistreEc, name='detail_registre_Ec'),
  path('garde_a_vue/registre/detail/<int:id>/', views.detailRegistreGarde, name='detail_registre_Garde'),
-
+ path('main_courante/registre/terminer/<int:id>', views.statusMC,name='status')
 ]
