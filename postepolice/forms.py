@@ -1,7 +1,7 @@
 from bootstrap_datepicker_plus import TimePickerInput, DatePickerInput
 from django.forms import ModelForm, TimeField, DateField
 
-from postepolice.models import MainCourante, Plainte, Perte, ObjectConsigne, Ecrou, Registre, GardeAVue
+from postepolice.models import MainCourante, Plainte, Perte, ObjectConsigne, Ecrou, Registre, GardeAVue, PoliceSecours
 
 
 class MainCouranteForm(ModelForm):
@@ -127,3 +127,7 @@ class EcrouSuite(ModelForm):
     class Meta:
         model = Ecrou
         fields = ['suite']
+class PoliceSecoursForm(ModelForm):
+    class Meta:
+        model = PoliceSecours
+        fields = ['prenom','nom']
