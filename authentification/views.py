@@ -45,7 +45,7 @@ def loginPagePoste(request):
         user = authenticate(request,username=username,password=password)
         if user is not None:
             login(request,user)
-            return redirect('poste:plainte')
+            return redirect('poste:liste_registre_Pl')
     return render(request,'auth_poste.html')
 def deconexion(request):
     logout(request)

@@ -48,6 +48,8 @@ class Registre(models.Model):
     nom = models.CharField("Nom",max_length=200,null=True,blank=True)
     brigade = models.ForeignKey(Brigade, on_delete=models.SET_NULL, null=True, blank=True)
     date = models.DateField("Date", auto_now_add=True)
+    status = models.BooleanField("Status", default=False)
+
     def __str__(self):
         return self.nom
 
@@ -60,7 +62,6 @@ class MainCourante(models.Model):
     affecte = models.ForeignKey(User, on_delete=models.SET_NULL,
                                 blank=True, null=True, verbose_name='Affectée à',
                                 limit_choices_to={'groups__name': 'police judiciaire'},)
-
     def __str__(self):
         return self.numero_mention
 
